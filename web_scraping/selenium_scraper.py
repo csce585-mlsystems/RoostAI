@@ -98,7 +98,7 @@ def main():
         'answer': answers
     })
 
-    df.to_csv('faq_pairs.csv', index=False)
+    df.to_csv('data/faq_pairs.csv', index=False)
 
 
 if __name__ == "__main__":
