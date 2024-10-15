@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "roostai"
+version = "0.1.0"
+description = "Univeristy-Centered Chatbot"
+authors = ["Vansh Nagpal <2002vansh@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
