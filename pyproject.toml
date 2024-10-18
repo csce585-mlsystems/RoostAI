@@ -1,10 +1,9 @@
 [tool.poetry]
 name = "roostai"
 version = "0.1.0"
-description = "Univeristy-Centered Chatbot"
+description = "University-Centered Chatbot"
 authors = ["Vansh Nagpal <2002vansh@gmail.com>"]
 readme = "README.md"
-package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.11"

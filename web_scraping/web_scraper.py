@@ -13,7 +13,7 @@ from pathlib import Path
 import hashlib
 import re
 
-abs_data_path = Path("C:/Users/2002v/Desktop/Fall2024/CSCE585/scraped_data")
+abs_data_path = Path("/home/cc/scraped_data")
 
 class WebScraper:
     def __init__(self, start_url):
