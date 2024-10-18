@@ -24,9 +24,18 @@ class WebScraper:
         
         # Set up Selenium WebDriver
         chrome_options = Options()
-        chrome_options.add_argument("--headless")  # Run in headless mode
-        chrome_options.add_argument('--disable-gpu')
-        self.driver = webdriver.Chrome(options=chrome_options)
+        chrome_options.add_argument("--headless")  # Run in headless mode (no GUI)
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+
+        # Use Chromium instead of Chrome
+        chrome_options.binary_location = "/usr/bin/chromium-browser"  # Adjust if necessary
+
+        # ChromeDriver path (you may need to download this separately)
+        service = Service('/path/to/chromedriver')  # Update this path
+
+        self.driver = webdriver.Chrome(service=service, options=chrome_options)
+        
 
 
     def is_valid(self, url):
