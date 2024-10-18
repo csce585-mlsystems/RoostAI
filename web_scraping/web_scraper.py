@@ -34,7 +34,7 @@ class WebScraper:
         chrome_driver_path = "/usr/bin/chromedriver"  # Update this path
         service = Service(chrome_driver_path)
         
-        self.driver = webdriver.Chrome(service=service, executable_path='/usr/bin/chromedriver', options=chrome_options)
+        self.driver = webdriver.Chrome(service=service,options=chrome_options)
         
 
     def is_valid(self, url):
