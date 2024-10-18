@@ -56,7 +56,10 @@ class WebScraper:
         """
         if self.is_unique(content, self.html_hashes):
           # parsed = urlparse(url)
-          url = url.split('https://')[1]
+          if 'https' in url:
+            url = url.split('https://')[1]
+          elif 'http' in url:
+            url = url.split('http://')[1]
           url = '/'.join(url.split('#'))
           url = Path(url.replace('//', '/'))
           save_path = abs_data_path / url
