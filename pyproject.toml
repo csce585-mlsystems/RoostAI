@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "roostai"
+name = "RoostAI"
 version = "0.1.0"
 description = "University-Centered Chatbot"
 authors = ["Vansh Nagpal <2002vansh@gmail.com>"]
