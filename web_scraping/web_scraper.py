@@ -27,15 +27,18 @@ class WebScraper:
         chrome_options.add_argument("--headless")  # Run in headless mode (no GUI)
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--disable-gpu")  # Disable GPU acceleration (optional)
+        chrome_options.add_argument("--remote-debugging-port=9222")  # Fix DevTools issue
 
         # Use Chromium instead of Chrome
         chrome_options.binary_location = "/usr/bin/chromium-browser"  # Adjust if necessary
 
-        chrome_driver_path = "/usr/bin/chromedriver"  # Update this path
+        # Path to chromedriver
+        chrome_driver_path = "/usr/lib/chromium-browser/chromedriver"  # Adjust this path
+
         service = Service(chrome_driver_path)
-        
-        self.driver = webdriver.Chrome(service=service,options=chrome_options)
-        
+        self.driver = webdriver.Chrome(service=service, options=chrome_options)
+
 
     def is_valid(self, url):
         """
