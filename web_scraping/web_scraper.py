@@ -31,7 +31,7 @@ class WebScraper:
         # Use Chromium instead of Chrome
         chrome_options.binary_location = "/usr/bin/chromium-browser"  # Adjust if necessary
 
-        self.driver = webdriver.Chrome(options=chrome_options)
+        self.driver = webdriver.Chrome(executable_path='/usr/bin/chromedriver', options=chrome_options)
         
 
 
