@@ -7,10 +7,9 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-numpy = "^2.1.2"
 selenium = "^4.25.0"
 bs4 = "^0.0.2"
-pandas = "^2.2.3"
+llama-index-embeddings-openai = "^0.2.5"
 
 
 [build-system]
