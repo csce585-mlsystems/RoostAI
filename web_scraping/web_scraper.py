@@ -16,8 +16,8 @@ import re
 abs_data_path = Path("/home/cc/scraped_data")
 
 class WebScraper:
-    def __init__(self, start_url):
-        self.start_url = start_url
+    def __init__(self, start_urls):
+        self.start_urls = start_urls
         self.domain = urlparse(start_url).netloc
         self.visited = set()
         self.html_hashes = set()
@@ -113,7 +113,8 @@ class WebScraper:
         Start the scraping process from the initial URL.
         """
         try:
-            self.scrape(self.start_url)
+            for url in self.start_urls:
+              self.scrape(self.start_url)
         finally:
             self.driver.quit()  # Ensure the browser is closed when we're done
 
@@ -150,6 +151,6 @@ class WebScraper:
         return True
    
 if __name__ == "__main__":
-    start_url = "https://sc.edu"  # Replace with your university's URL
-    scraper = WebScraper(start_url)
+    start_urls = ["https://sc.edu"]  # Replace with your university's URL
+    scraper = WebScraper(start_urls)
     scraper.start()
