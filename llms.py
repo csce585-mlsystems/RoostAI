@@ -1,11 +1,23 @@
 from abc import ABC, abstractmethod
 
+import time
 import pandas as pd
 
 import google.generativeai as genai
 from huggingface_hub import InferenceClient
 from openai import OpenAI
 from anthropic import Anthropic
+
+
+def _get_column_average(df: pd.DataFrame, column: str) -> float:
+    """
+    Get the average length of the strings in a column.
+    In other words, for all the sentences in the column, get the average number of characters.
+    @param df: The DataFrame.
+    @param column: The column to get the average length of.
+    @return: The average length of the strings in the column.
+    """
+    return df[column].apply(len).mean()
 
 
 class LLM(ABC):
@@ -15,11 +27,13 @@ class LLM(ABC):
         @param name: The name of the LLM.
         @param token: The token for the API.
         @param df: The DataFrame of questions and answers.
-        @param system_prompt: The system prompt for the LLM.
         """
         self.name: str = name
         self.token: str = token
         self.df: pd.DataFrame = df
+
+        avg_question_length: int = round(_get_column_average(df, "question"))
+
         self.system_prompt: str = ("You are a chatbot specifically designed to provide information about the "
                                    "University of South Carolina (USC). Your knowledge encompasses USC's "
                                    "history, academics, campus life, athletics, notable alumni, and current events "
@@ -29,20 +43,20 @@ class LLM(ABC):
                                    "that reflects the spirit of the Trojan community. If you're unsure about any "
                                    "USC-specific information, state that you don't have that particular detail rather "
                                    "than guessing. Your purpose is to assist students, faculty, alumni, and anyone "
-                                   "interested in learning more about USC.")
+                                   "interested in learning more about USC.\n\n"
+                                   f"Please limit your responses to {avg_question_length} words or less.")
 
     @abstractmethod
     def get_response(self, question: str) -> str:
         pass  # Leave for subclasses
 
-    def get_responses(self):
+    def get_responses(self) -> pd.Series:
         """
         Get all responses for each question in the DataFrame.
         Add as a new column in the DataFrame with the name of the LLM.
-        @return: The DataFrame with the responses.
+        @return: The Pandas Series of responses.
         """
-        self.df[self.name] = self.df["question"].apply(self.get_response)
-        return self.df
+        return self.df["question"].apply(self.get_response)
 
 
 class phi_3_5_mini_ins(LLM):
@@ -186,6 +200,10 @@ class claude_sonnet(LLM):
             model="claude-3-5-sonnet-20240620",
         )
 
+        # To avoid overloading the API, sleep
+        print(f"Sleeping for 30 seconds to avoid overloading the API...")
+        time.sleep(30)
+
         return message.content[0].text
 
 
@@ -213,6 +231,10 @@ class gpt_4o(LLM):
             ]
         )
 
+        # To avoid overloading the API, sleep
+        # print(f"Sleeping for 5 seconds to avoid overloading the API...")
+        # time.sleep(5)
+
         return completion.choices[0].message.content
 
 
@@ -239,5 +261,9 @@ class gpt_4o_mini(LLM):
                 {"role": "user", "content": question}
             ]
         )
+
+        # To avoid overloading the API, sleep
+        print(f"Sleeping for 5 seconds to avoid overloading the API...")
+        time.sleep(5)
 
         return completion.choices[0].message.content
