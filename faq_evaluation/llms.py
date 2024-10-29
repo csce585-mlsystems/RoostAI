@@ -11,13 +11,13 @@ from anthropic import Anthropic
 
 def _get_column_average(df: pd.DataFrame, column: str) -> float:
     """
-    Get the average length of the strings in a column.
-    In other words, for all the sentences in the column, get the average number of characters.
+    Get the average word count of the strings in a column.
+    In other words, for all the sentences in the column, get the average number of words.
     @param df: The DataFrame.
     @param column: The column to get the average length of.
     @return: The average length of the strings in the column.
     """
-    return df[column].apply(len).mean()
+    return df[column].apply(lambda x: len(x.split())).mean()
 
 
 class LLM(ABC):
@@ -32,7 +32,9 @@ class LLM(ABC):
         self.token: str = token
         self.df: pd.DataFrame = df
 
-        avg_question_length: int = round(_get_column_average(df, "question"))
+        # Get the average length of the questions and answers. Round to the nearest 10
+        avg_question_length: int = round(_get_column_average(df, "answer")) // 10 * 10
+        self.prompt_addition: str = f"Please limit your question to {avg_question_length} words or less."
 
         self.system_prompt: str = ("You are a chatbot specifically designed to provide information about the "
                                    "University of South Carolina (USC). Your knowledge encompasses USC's "
@@ -40,11 +42,10 @@ class LLM(ABC):
                                    "related to the university. When answering questions, always assume they are in "
                                    "the context of USC unless explicitly stated otherwise. Provide accurate and "
                                    "up-to-date information about USC, maintaining a friendly and enthusiastic tone "
-                                   "that reflects the spirit of the Trojan community. If you're unsure about any "
+                                   "that reflects the spirit of the community. If you're unsure about any "
                                    "USC-specific information, state that you don't have that particular detail rather "
                                    "than guessing. Your purpose is to assist students, faculty, alumni, and anyone "
-                                   "interested in learning more about USC.\n\n"
-                                   f"Please limit your responses to {avg_question_length} words or less.")
+                                   "interested in learning more about USC.")
 
     @abstractmethod
     def get_response(self, question: str) -> str:
@@ -73,6 +74,8 @@ class phi_3_5_mini_ins(LLM):
         @param question: The question to send to the LLM.
         @return: The response from the LLM.
         """
+        question = question + " " + self.prompt_addition
+
         client = InferenceClient("microsoft/Phi-3.5-mini-instruct", token=self.token)
 
         return_str: str = ""
@@ -104,6 +107,8 @@ class llama_3_8b_ins(LLM):
         @param question: The question to send to the LLM.
         @return: The response from the LLM.
         """
+        question = question + " " + self.prompt_addition
+
         client = InferenceClient("meta-llama/Meta-Llama-3-8B-Instruct", token=self.token)
 
         return_str: str = ""
@@ -135,6 +140,8 @@ class gemini_flash(LLM):
         @param question: The question to send to the LLM.
         @return: The response from the LLM.
         """
+        question = question + " " + self.prompt_addition
+
         genai.configure(api_key=self.token)
         model = genai.GenerativeModel('gemini-1.5-flash', system_instruction=self.system_prompt)
 
@@ -155,6 +162,8 @@ class mixtral_8x7b_ins(LLM):
         @param question: The question to send to the LLM.
         @return: The response from the LLM.
         """
+        question = question + " " + self.prompt_addition
+
         client = InferenceClient("mistralai/Mixtral-8x7B-Instruct-v0.1", token=self.token)
 
         return_str: str = ""
@@ -186,6 +195,8 @@ class claude_sonnet(LLM):
         @param question: The question to send to the LLM.
         @return: The response from the LLM.
         """
+        question = question + " " + self.prompt_addition
+
         client = Anthropic()
 
         message = client.messages.create(
@@ -201,8 +212,8 @@ class claude_sonnet(LLM):
         )
 
         # To avoid overloading the API, sleep
-        print(f"Sleeping for 30 seconds to avoid overloading the API...")
-        time.sleep(30)
+        print(f"Sleeping for 10 seconds to avoid overloading the API...")
+        time.sleep(10)
 
         return message.content[0].text
 
@@ -221,6 +232,8 @@ class gpt_4o(LLM):
         @param question: The question to send to the LLM.
         @return: The response from the LLM.
         """
+        question = question + " " + self.prompt_addition
+
         client = OpenAI()
 
         completion = client.chat.completions.create(
@@ -252,6 +265,8 @@ class gpt_4o_mini(LLM):
         @param question: The question to send to the LLM.
         @return: The response from the LLM.
         """
+        question = question + " " + self.prompt_addition
+
         client = OpenAI()
 
         completion = client.chat.completions.create(

@@ -4,6 +4,11 @@ import pandas as pd
 from llms import phi_3_5_mini_ins, llama_3_8b_ins, gemini_flash, mixtral_8x7b_ins, claude_sonnet, gpt_4o
 
 
+def save_temp_df(df: pd.DataFrame, out_file: str):
+    print(f"Writing to file {out_file}")
+    df.to_csv(out_file, index=False)
+
+
 def main():
     load_dotenv()
 
@@ -30,9 +35,9 @@ def main():
     print('Getting Mixtral responses...')
     bank_df["mixtral"] = mixtral_8x7b_ins(bank_df, hf_api_key).get_responses().values
 
-    # print('Getting Claude responses...')
-    # bank_df["claude"] = claude_sonnet(bank_df, anthropic_api_key).get_responses().values
-    
+    print('Getting Claude responses...')
+    bank_df["claude"] = claude_sonnet(bank_df, anthropic_api_key).get_responses().values
+
     print('Getting GPT-4o responses...')
     bank_df["gpt"] = gpt_4o(bank_df, openai_api_key).get_responses().values
 
