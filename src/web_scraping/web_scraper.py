@@ -121,7 +121,7 @@ class WebScraper:
         """
         try:
             for url in self.start_urls:
-              self.scrape(self.start_url)
+              self.scrape(url)
         finally:
             self.driver.quit()  # Ensure the browser is closed when we're done
 
