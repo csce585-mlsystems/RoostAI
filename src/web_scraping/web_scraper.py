@@ -75,10 +75,10 @@ class WebScraper:
               f.write(content)
           
           # writing down useful metadata of html file path
-          print(url)
-          with open(os.path.join(save_path, 'metadata.json'), 'w') as f:
-            metadata = {'source_url': url}
-            json.dump(metadata, f)
+          # print(url)
+          # with open(os.path.join(save_path, 'metadata.json'), 'w') as f:
+          #     metadata = {'source_url': url}
+          #     json.dump(metadata, f)
 
 
     def scrape(self, url):
