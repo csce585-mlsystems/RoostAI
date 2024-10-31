@@ -13,13 +13,16 @@ def collect_html_files(source_dir, destination_dir):
     counter = 1
     for root, _, files in os.walk(source_dir):
         for file in files:
-            if file.endswith(".html"):
+            if file.endswith(".html") or file.endswith('.json'):
                 # source file path
                 source_file_path = os.path.join(root, file)
                 
                 # dest file path
-                destination_file_path = os.path.join(destination_dir, f"scraped_html_{counter}")
-                
+                if file.endswith(".html"):
+                  destination_file_path = os.path.join(destination_dir, f"scraped_html_{counter}.html")
+                else:
+                  destination_file_path = os.path.join(destination_dir, f"metadata_{counter}.json")
+                 
                 # Copy the file to the new location
                 shutil.copy2(source_file_path, destination_file_path)
 

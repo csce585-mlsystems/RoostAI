@@ -12,6 +12,7 @@ import time
 from pathlib import Path
 import hashlib
 import re
+import json
 
 abs_data_path = Path("/home/cc/scraped_data")
 
@@ -66,11 +67,16 @@ class WebScraper:
 
           print(f'Saving to this path {str(save_path.absolute)}')
           
-          # # Create directory structure if it doesn't exist
+          # Create directory structure if it doesn't exist
           os.makedirs(save_path, exist_ok=True)
-          # # Write content to file
+          # Write content to file
           with open(os.path.join(save_path, 'scraped_data.html'), 'w', encoding='utf-8') as f:
               f.write(content)
+          
+          # writing down useful metadata of html file path
+          with open(os.path.join(save_path, 'metadata.json'), 'w') as f:
+            metadata = {'source_url': url}
+            json.dump(metadata, f)
 
 
     def scrape(self, url):

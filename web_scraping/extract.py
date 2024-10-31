@@ -21,7 +21,8 @@ def process_html_files(input_dir, output_dir):
 
     for i, file_name in enumerate(os.listdir(input_dir), 1):
         input_file_path = os.path.join(input_dir, file_name)
-        output_file_path = os.path.join(output_dir, f'main_text_{i}.txt')
+        file_name_without_extension, = file_name.split('.')
+        output_file_path = os.path.join(output_dir, f'{file_name_without_extension}.txt')
 
         with open(input_file_path, 'r', encoding='utf-8') as html_file:
             html_content = html_file.read()
