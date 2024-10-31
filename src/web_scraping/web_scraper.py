@@ -19,7 +19,8 @@ abs_data_path = Path("/home/cc/scraped_data")
 class WebScraper:
     def __init__(self, start_urls):
         self.start_urls = start_urls
-        self.domain = urlparse(start_url).netloc
+        
+        self.domains = [urlparse(start_url).netloc for start_url in self.start_urls]
         self.visited = set()
         self.html_hashes = set()
         
@@ -46,7 +47,7 @@ class WebScraper:
         Check if a URL is valid and belongs to the same domain as the start URL.
         """
         parsed = urlparse(url)
-        return bool(parsed.netloc) and parsed.netloc.endswith(self.domain)
+        return bool(parsed.netloc) and parsed.netloc.endswith(tuple(self.domains))
 
 
     def save_html(self, url, content: str):
