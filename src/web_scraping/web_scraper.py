@@ -77,7 +77,7 @@ class WebScraper:
           # writing down useful metadata of html file path
           # print(url)
           with open(os.path.join(save_path, 'metadata.json'), 'w') as f:
-              metadata = {'source_url': str(url)}
+              metadata = {'source_url': f'https://{str(url)}'}
               json.dump(metadata, f)
 
 
