@@ -114,11 +114,6 @@ class WebScraper:
 
         # save path on disc
         save_path = self.get_url_save_path(url)
-
-        # if we've already saved the data and metadata, don't scrape again
-        if os.path.exists(os.path.join(save_path, 'scraped_data.html')) and os.path.exists(os.path.join(save_path, 'metadata.json')):
-          print(f'Already scraped data from {url},  saved at {save_path}')
-          return
         
         # Load the page with Selenium
         self.driver.get(url)  
