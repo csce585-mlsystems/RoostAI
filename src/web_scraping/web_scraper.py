@@ -10,6 +10,7 @@ from urllib.parse import urljoin, urlparse
 import threading
 from queue import Queue
 from concurrent.futures import ThreadPoolExecutor
+import platform
 
 # Third-party imports
 from bs4 import BeautifulSoup
@@ -38,14 +39,14 @@ class WebScraper:
         self.semaphore = threading.Semaphore(max_concurrent)
         self.lock = threading.Lock()  # For thread-safe operations on sets
 
-        # Set up Selenium WebDriver
-        self.chrome_options = Options()
-        self.chrome_options.add_argument("--headless")  # Run in headless mode (no GUI)
-        self.chrome_options.add_argument("--no-sandbox")
-        self.chrome_options.add_argument("--disable-dev-shm-usage")
-        self.chrome_options.add_argument("--disable-gpu")  # Disable GPU acceleration (optional)
-        self.chrome_options.add_argument("--remote-debugging-port=9222")  # Fix DevTools issue
-        self.chrome_options.binary_location = "/usr/bin/chromium-browser"  # Use Chromium instead of Chrome
+        # # Set up Selenium WebDriver
+        # self.chrome_options = Options()
+        # self.chrome_options.add_argument("--headless")  # Run in headless mode (no GUI)
+        # self.chrome_options.add_argument("--no-sandbox")
+        # self.chrome_options.add_argument("--disable-dev-shm-usage")
+        # self.chrome_options.add_argument("--disable-gpu")  # Disable GPU acceleration (optional)
+        # self.chrome_options.add_argument("--remote-debugging-port=9222")  # Fix DevTools issue
+        # self.chrome_options.binary_location = "/usr/bin/chromium-browser"  # Use Chromium instead of Chrome
         
         self.chrome_driver_path = "/usr/lib/chromium-browser/chromedriver"  # Path to chromedriver
 
@@ -141,48 +142,87 @@ class WebScraper:
                     self.scrape(full_url)
 
     
-    def scrape_url(self, url):
+    def scrape_url(self, url, max_retries=3, retry_delay=5):
         """
-        Scrape a single URL with its own browser instance
+        Scrape a single URL with retries and improved error handling
         """
-        with self.semaphore:  # Limit concurrent browsers
-            try:
-                service = Service(self.chrome_driver_path)
-                driver = webdriver.Chrome(service=service, options=self.chrome_options)
-                
+        for attempt in range(max_retries):
+            with self.semaphore:  # Limit concurrent browsers
+                driver = None
                 try:
-                    driver.get(url)
-                    WebDriverWait(driver, 10).until(
-                        EC.presence_of_element_located((By.TAG_NAME, "body"))
+                    # Enhanced Chrome options
+                    chrome_options = Options()
+                    chrome_options.add_argument("--headless")
+                    chrome_options.add_argument("--no-sandbox")
+                    chrome_options.add_argument("--disable-dev-shm-usage")
+                    chrome_options.add_argument("--disable-gpu")
+                    chrome_options.add_argument("--disable-software-rasterizer")
+                    chrome_options.add_argument("--disable-extensions")
+                    chrome_options.add_argument("--single-process")
+                    chrome_options.add_argument("--disable-setuid-sandbox")
+                    chrome_options.add_argument("--window-size=1920,1080")
+                    chrome_options.add_argument("--disable-infobars")
+                    chrome_options.add_argument("--disable-features=VizDisplayCompositor")
+                    chrome_options.add_argument("--ignore-certificate-errors")
+                    chrome_options.binary_location = "/usr/bin/chromium-browser"
+
+                    service = Service(
+                        self.chrome_driver_path,
+                        service_args=['--verbose']
                     )
-                    time.sleep(2)
                     
-                    html_content = driver.page_source
-                    print(f'Visiting {url}')
-                    self.save_html(url, html_content)
+                    driver = webdriver.Chrome(service=service, options=chrome_options)
+                    driver.set_page_load_timeout(30)  # Set page load timeout
                     
-                    # Extract new URLs
-                    soup = BeautifulSoup(html_content, 'html.parser')
-                    new_urls = []
-                    for link in soup.find_all('a'):
-                        href = link.get('href')
-                        if href:
-                            full_url = urljoin(url, href)
-                            with self.lock:  # Thread-safe check of visited set
-                                if self.is_valid(full_url) and full_url not in self.visited:
-                                    self.visited.add(full_url)
-                                    new_urls.append(full_url)
-                    
-                    return new_urls
+                    try:
+                        driver.get(url)
+                        WebDriverWait(driver, 15).until(
+                            EC.presence_of_element_located((By.TAG_NAME, "body"))
+                        )
+                        
+                        html_content = driver.page_source
+                        print(f'Successfully visited {url} on attempt {attempt + 1}')
+                        self.save_html(url, html_content)
+                        
+                        # Extract new URLs
+                        soup = BeautifulSoup(html_content, 'html.parser')
+                        new_urls = []
+                        for link in soup.find_all('a'):
+                            href = link.get('href')
+                            if href:
+                                full_url = urljoin(url, href)
+                                with self.lock:
+                                    if self.is_valid(full_url) and full_url not in self.visited:
+                                        self.visited.add(full_url)
+                                        new_urls.append(full_url)
+                        
+                        return new_urls
+                        
+                    except Exception as e:
+                        print(f"Attempt {attempt + 1} failed for {url}: {str(e)}")
+                        if attempt < max_retries - 1:
+                            print(f"Retrying in {retry_delay} seconds...")
+                            time.sleep(retry_delay)
+                        continue
+                        
+                except Exception as e:
+                    print(f"Browser creation failed on attempt {attempt + 1} for {url}: {str(e)}")
+                    if attempt < max_retries - 1:
+                        print(f"Retrying in {retry_delay} seconds...")
+                        time.sleep(retry_delay)
+                    continue
                     
                 finally:
-                    driver.quit()
+                    if driver:
+                        try:
+                            driver.quit()
+                        except Exception:
+                            pass  # Ignore errors during cleanup
                     
-            except Exception as e:
-                print(f"Error scraping {url}: {e}")
-                return []
+        print(f"Failed to scrape {url} after {max_retries} attempts")
+        return []  
     
-    
+        
     def start(self):
             """
             Start the scraping process using a thread pool
@@ -249,9 +289,34 @@ class WebScraper:
             
             existing_hashes.add(content_hash)
             return True
+          
+          
+    def cleanup_chrome_processes(self):
+        """
+        Clean up any lingering chrome processes
+        """
+        try:
+            if platform.system() == "Linux":
+                os.system("pkill -f chromium")
+                os.system("pkill -f chrome")
+            elif platform.system() == "Windows":
+                os.system("taskkill /f /im chrome.exe")
+                os.system("taskkill /f /im chromedriver.exe")
+        except Exception as e:
+            print(f"Error during cleanup: {e}")
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.cleanup_chrome_processes()
 
 if __name__ == "__main__":
-    start_urls = ["https://sc.edu"]  # Replace with your university's URL
-    scraper = WebScraper(start_urls)
-    scraper.start()
+    start_urls = ["https://sc.edu"]
+    with WebScraper(start_urls, max_concurrent=2) as scraper:  # Reduced concurrent browsers
+        try:
+            scraper.start()
+        except KeyboardInterrupt:
+            print("Scraping interrupted by user")
+        except Exception as e:
+            print(f"Scraping error: {e}")
