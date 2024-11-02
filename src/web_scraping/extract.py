@@ -20,6 +20,9 @@ def process_html_files(input_dir, output_dir):
         os.makedirs(output_dir)
 
     for i, file_name in enumerate(os.listdir(input_dir), 1):
+        if not file_name.endswith('html'):
+           continue
+        
         input_file_path = os.path.join(input_dir, file_name)
         file_name_without_extension, = file_name.split('.')
         output_file_path = os.path.join(output_dir, f'{file_name_without_extension}.txt')

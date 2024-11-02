@@ -39,7 +39,7 @@ def process_files_with_metadata(directory_path: str, chunk_size: int = 512) -> D
     
     for main_file in main_files:
         # Extract document ID from filename
-        doc_id = re.search(r'main_(\d+)\.txt', main_file.name).group(1)
+        doc_id = re.search(r'scraped_html_(\d+)\.txt', main_file.name).group(1)
         
         # Construct metadata filename
         metadata_file = directory / f"metadata_{doc_id}.json"
