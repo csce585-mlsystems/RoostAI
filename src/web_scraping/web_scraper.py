@@ -1,18 +1,26 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from bs4 import BeautifulSoup
-from bs4.element import Comment
-from urllib.parse import urljoin, urlparse
+# Standard library imports
+import hashlib
+import json
 import os
+import re
+import sys
 import time
 from pathlib import Path
-import hashlib
-import re
-import json
+from urllib.parse import urljoin, urlparse
+
+
+# Third-party imports
+from bs4 import BeautifulSoup
+from bs4.element import Comment
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+
+# increased recursion limit for web scraping
+sys.setrecursionlimit(5000)
 
 abs_data_path = Path("/home/cc/scraped_data")
 
@@ -42,6 +50,15 @@ class WebScraper:
         self.driver = webdriver.Chrome(service=service, options=chrome_options)
 
 
+    def get_url_save_path(self, url):
+      """
+      Returns the disc save path for a given url path
+      """
+      url = '/'.join(url.split('#'))
+      url = Path(url.replace('//', '/'))
+      return abs_data_path / url
+
+   
     def is_valid(self, url):
         """
         Check if a URL is valid and belongs to the same domain as the start URL.
@@ -57,15 +74,16 @@ class WebScraper:
         @param content: HTML content of the page
         """
         if self.is_unique(content, self.html_hashes):
-          # parsed = urlparse(url)
           if 'https' in url:
             url = url.split('https://')[1]
           elif 'http' in url:
             url = url.split('http://')[1]
-          url = '/'.join(url.split('#'))
-          url = Path(url.replace('//', '/'))
-          save_path = abs_data_path / url
-
+          
+          save_path = self.get_url_save_path(url)
+          
+          if os.path.exists(os.path.join(save_path, 'scraped_data.html')) and os.path.exists(os.path.join(save_path, 'metadata.json')):
+            
+            ...
           print(f'Saving to this path {str(save_path.absolute)}')
           
           # Create directory structure if it doesn't exist
@@ -89,20 +107,37 @@ class WebScraper:
             return  # Skip if we've already visited this URL
         self.visited.add(url)
 
-        self.driver.get(url)  # Load the page with Selenium
+        if 'https' in url:
+          url = url.split('https://')[1]
+        elif 'http' in url:
+          url = url.split('http://')[1]
 
-        # Wait for the page to load (adjust timeout as needed)
+        # save path on disc
+        save_path = self.get_url_save_path(url)
+
+        # if we've already saved the data and metadata, don't scrape again
+        if os.path.exists(os.path.join(save_path, 'scraped_data.html')) and os.path.exists(os.path.join(save_path, 'metadata.json')):
+          print(f'Already scraped data from {url},  saved at {save_path}')
+          return
+        
+        # Load the page with Selenium
+        self.driver.get(url)  
+
+        # Wait for the page to load
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.TAG_NAME, "body"))
         )
 
         # Allow some time for JavaScript to execute
-        time.sleep(2)  # Adjust this delay as needed
+        time.sleep(2)  
 
         # Get the rendered HTML
         html_content = self.driver.page_source
+        
         print(f'Visiting {url}')
-        self.save_html(url, html_content)
+        
+        if self.is_unique(html_content, self.html_hashes):
+            self.save_html(url, html_content)
 
         # Parse HTML with beautiful soup to extract all embedded reference links
         # And recursively scrape them
@@ -157,7 +192,8 @@ class WebScraper:
         
         existing_hashes.add(content_hash)
         return True
-   
+
+
 if __name__ == "__main__":
     start_urls = ["https://sc.edu"]  # Replace with your university's URL
     scraper = WebScraper(start_urls)
