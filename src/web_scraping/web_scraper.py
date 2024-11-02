@@ -106,18 +106,10 @@ class WebScraper:
         if url in self.visited:
             return  # Skip if we've already visited this URL
         self.visited.add(url)
-
-        if 'https' in url:
-          url = url.split('https://')[1]
-        elif 'http' in url:
-          url = url.split('http://')[1]
-
-        # save path on disc
-        save_path = self.get_url_save_path(url)
         
         # Load the page with Selenium
         self.driver.get(url)  
-
+      
         # Wait for the page to load
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.TAG_NAME, "body"))
@@ -125,7 +117,7 @@ class WebScraper:
 
         # Allow some time for JavaScript to execute
         time.sleep(2)  
-
+        
         # Get the rendered HTML
         html_content = self.driver.page_source
         
