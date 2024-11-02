@@ -254,3 +254,4 @@ class WebScraper:
 if __name__ == "__main__":
     start_urls = ["https://sc.edu"]  # Replace with your university's URL
     scraper = WebScraper(start_urls)
+    scraper.start()
