@@ -3,3 +3,5 @@
 .venv/
 .env
 *.pyc
+own/
+/src/back-end/data
