@@ -1,6 +1,6 @@
 from llama_index.core import SimpleDirectoryReader
 from llama_index.core.node_parser import SemanticSplitterNodeParser
-from llama_index.core.embeddings import HuggingFaceEmbedding
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from typing import Dict, Any
 from pathlib import Path
 import json
