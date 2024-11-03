@@ -1,0 +1,6 @@
+nohup: ignoring input
+The currently activated Python version 3.8.10 is not supported by the project (^3.10).
+Trying to find and use a compatible version. 
+Using python3 (3.10.15)
+2024-11-02 18:56:13,640 - INFO - Successfully scraped https://sc.edu on attempt 1
+2024-11-02 18:57:11,096 - ERROR - Error processing future: 
