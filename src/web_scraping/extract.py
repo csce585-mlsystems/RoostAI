@@ -24,6 +24,9 @@ def process_html_files(input_dir, output_dir):
            continue
         
         input_file_path = os.path.join(input_dir, file_name)
+        
+        print(file_name.split('.'))
+        exit()
         file_name_without_extension, = file_name.split('.')
         output_file_path = os.path.join(output_dir, f'{file_name_without_extension}.txt')
 
