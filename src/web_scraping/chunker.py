@@ -37,6 +37,8 @@ def process_files_with_metadata(directory_path: str, chunk_size: int = 512) -> D
     directory = Path(directory_path)
     main_files = list(directory.glob("scraped_html_*.txt"))
     
+    # counts files with empty main text
+    dud_file_counter = 0
     for main_file in main_files:
         # Extract document ID from filename
         doc_id = re.search(r'scraped_html_(\d+)\.txt', main_file.name).group(1)
@@ -49,31 +51,35 @@ def process_files_with_metadata(directory_path: str, chunk_size: int = 512) -> D
             continue
             
         try:
-            # Read and process main text file
-            reader = SimpleDirectoryReader(
-                input_files=[str(main_file)],
-                filename_as_id=True
-            )
-            documents = reader.load_data()
-            
-            # Get chunks for the document
-            nodes = splitter.get_nodes_from_documents(documents)
-            chunks = [node.text for node in nodes]
-            
-            # Read metadata
-            with open(metadata_file, 'r') as f:
-                metadata = json.load(f)
-            
-            # Store in result dictionary
             with open(main_file, 'r') as f:
-              result[doc_id] = {
-                  "main_text": f.read(),
-                  "chunks": chunks,
-                  "metadata": metadata
-              }
-            
-            print(f"Processed document {doc_id}: {len(chunks)} chunks")
-            
+              main_text = f.read()
+              if main_text:       
+                # Read and process main text file
+                reader = SimpleDirectoryReader(
+                    input_files=[str(main_file)],
+                    filename_as_id=True
+                )
+                documents = reader.load_data()
+                
+                # Get chunks for the document
+                nodes = splitter.get_nodes_from_documents(documents)
+                chunks = [node.text for node in nodes]
+                
+                # Read metadata
+                with open(metadata_file, 'r') as f:
+                    metadata = json.load(f)
+                
+                # Store in result dictionary
+                result[doc_id] = {
+                    "main_text": main_text,
+                    "chunks": chunks,
+                    "metadata": metadata
+                }
+                
+                print(f"Processed document {doc_id}: {len(chunks)} chunks")
+              else:
+                dud_file_counter += 1
+                print(f'Dud file # {dud_file_counter}')
         except Exception as e:
             print(f"Error processing document {doc_id}: {str(e)}")
             continue
