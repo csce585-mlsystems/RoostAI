@@ -65,10 +65,12 @@ def process_files_with_metadata(directory_path: str, chunk_size: int = 512) -> D
                 metadata = json.load(f)
             
             # Store in result dictionary
-            result[doc_id] = {
-                "chunks": chunks,
-                "metadata": metadata
-            }
+            with open(main_file, 'r') as f:
+              result[doc_id] = {
+                  "main_text": f.read(),
+                  "chunks": chunks,
+                  "metadata": metadata
+              }
             
             print(f"Processed document {doc_id}: {len(chunks)} chunks")
             
@@ -93,7 +95,7 @@ def save_processed_data(processed_data: Dict[str, Dict[str, Any]], output_file: 
 # Example usage
 if __name__ == "__main__":
     DIRECTORY_PATH = '/home/cc/scraped_data_main_text'
-    OUTPUT_FILE = "chunks_and_metadata.json"
+    OUTPUT_FILE = "/home/cc/chunks_and_metadata.json"
     
     try:
         # Process all files
