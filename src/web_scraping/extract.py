@@ -1,5 +1,6 @@
 import os
 from bs4 import BeautifulSoup
+import shutil
 
 def extract_main_text(html_content):
     soup = BeautifulSoup(html_content, 'html.parser')
@@ -21,13 +22,14 @@ def process_html_files(input_dir, output_dir):
 
     for i, file_name in enumerate(os.listdir(input_dir), 1):
         if not file_name.endswith('html'):
-           continue
+          source_file = os.path.join(input_dir, file_name)
+          dest_file = os.path.join(output_dir, file_name)
+          shutil.copy2(source_file, dest_file) 
+          continue
         
         input_file_path = os.path.join(input_dir, file_name)
         
-        print(file_name.split('.'))
-        exit()
-        file_name_without_extension, = file_name.split('.')
+        file_name_without_extension, _= file_name.split('.')
         output_file_path = os.path.join(output_dir, f'{file_name_without_extension}.txt')
 
         with open(input_file_path, 'r', encoding='utf-8') as html_file:
