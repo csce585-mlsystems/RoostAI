@@ -12,6 +12,7 @@ def collect_html_files(source_dir, destination_dir):
     # os.walk is DFS traversal of a directory
     counter = 1
     for root, _, files in os.walk(source_dir):
+        print(list(files))
         for file in files:
             if file.endswith(".html") or file.endswith('.json'):
                 # source file path
