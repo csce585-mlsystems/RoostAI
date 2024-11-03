@@ -1,4 +1,4 @@
-from llama_index.readers import SimpleDirectoryReader
+from llama_index.core import SimpleDirectoryReader
 from llama_index.node_parser import SemanticSplitterNodeParser
 from llama_index.embeddings import HuggingFaceEmbedding
 from typing import Dict, Any
