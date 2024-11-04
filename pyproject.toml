@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "RoostAI"
+name = "roostai"
 version = "0.1.0"
 description = "University-Centered Chatbot"
 authors = [
@@ -9,7 +9,7 @@ authors = [
 readme = "README.md"
 
 [tool.poetry.dependencies]  # main dependency group
-python = "^3.10"
+python = ">=3.9,<3.13"  # Specify Python version range
 selenium = "^4.25.0"
 bs4 = "^0.0.2"
 llama-index-embeddings-openai = "^0.2.5"
@@ -21,6 +21,9 @@ huggingface-hub = "^0.26.0"
 anthropic = "^0.36.2"
 llama-index-embeddings-huggingface = "^0.3.1"
 
+# Might need the following command if running into `protobuf` errors
+# `poetry run pip install "protobuf==3.20.*"`
+
 # The backend dependency group
 # `poetry add <name-of-package> --group backend` to add a package to this group
 [tool.poetry.group.backend.dependencies]
@@ -30,7 +33,9 @@ sentence-transformers = "^3.2.1"
 transformers = "^4.46.1"
 chromadb = "^0.5.17"
 
-
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+roostai = "roostai.front_end.cli:cli"

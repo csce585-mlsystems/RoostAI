@@ -3,6 +3,7 @@ import logging
 from typing import List
 
 import chromadb
+from chromadb import Settings
 from chromadb.errors import InvalidCollectionException
 
 from .types import Document
@@ -12,7 +13,7 @@ class VectorStore:
     def __init__(self, collection_name: str):
         self.logger = logging.getLogger(__name__)
         try:
-            self.client = chromadb.PersistentClient(path="./data")
+            self.client = chromadb.PersistentClient(path="./roostai/front_end/data", settings=Settings(allow_reset=True))
             try:
                 self.collection = self.client.get_collection(collection_name)
                 self.logger.info(f"Connected to existing collection: {collection_name}")
@@ -41,13 +42,13 @@ class VectorStore:
             )
 
             documents = []
-            if results and results['documents'] and len(results['documents']) > 0:
+            if results and results['documents'] and len(results['documents'][0]):
                 for idx, (content, metadata, distance) in enumerate(zip(
                         results['documents'][0],
                         results['metadatas'][0],
                         results['distances'][0]
                 )):
-                    # Convert distance to similarity score (1 - distance)
+                    # Convert distance to similarity score (1 - normalized distance)
                     similarity_score = 1.0 - float(distance)
                     documents.append(Document(
                         content=content,
@@ -113,3 +114,32 @@ class VectorStore:
     async def get_document_count(self) -> int:
         """Get the total number of documents in the collection."""
         return self.collection.count()
+
+    def _initialize_store(self):
+        """Initialize the vector store connection."""
+        try:
+            self.client = chromadb.PersistentClient(path="./roostai/front_end/data", settings=Settings(allow_reset=True))
+            try:
+                self.collection = self.client.get_collection(self.collection_name)
+                self.logger.info(f"Connected to existing collection: {self.collection_name}")
+            except InvalidCollectionException:
+                self.collection = self.client.create_collection(
+                    name=self.collection_name,
+                    metadata={"description": "University documents collection"}
+                )
+                self.logger.info(f"Created new collection: {self.collection_name}")
+        except Exception as e:
+            self.logger.error(f"Failed to initialize vector store: {e}")
+            raise
+
+    async def close(self):
+        """Close the vector store connection."""
+        try:
+            if self.client:
+                self.client.reset()
+                self.client = None
+                self.collection = None
+                self.logger.info("Vector store connection closed successfully")
+        except Exception as e:
+            self.logger.error(f"Error closing vector store connection: {e}")
+            raise

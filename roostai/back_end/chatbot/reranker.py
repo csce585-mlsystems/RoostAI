@@ -20,6 +20,10 @@ class Reranker:
     ) -> List[Document]:
         """Rerank documents using cross-encoder and filter by threshold."""
         try:
+            if not documents:
+                self.logger.warning("No documents to rerank")
+                return []
+
             # Prepare pairs for cross-encoder
             pairs = [[query, doc.content] for doc in documents]
 
@@ -35,6 +39,11 @@ class Reranker:
 
             # Sort by score descending
             scored_docs.sort(key=lambda x: x.score, reverse=True)
+
+            if not scored_docs:
+                self.logger.warning(
+                    f"No documents passed threshold {threshold}. Best score was {max(scores) if scores else 'N/A'}"
+                )
 
             return scored_docs
 

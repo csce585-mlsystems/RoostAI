@@ -1,0 +1,14 @@
+- content: "The USC Computer Science program requires a minimum GPA of 3.0 for admission."
+  metadata:
+    department: "Computer Science"
+    type: "admission_requirements"
+
+- content: "USC's main campus is located in Columbia, South Carolina."
+  metadata:
+    type: "general_info"
+    category: "campus"
+
+- content: "The Gamecock football team plays their home games at Williams-Brice Stadium."
+  metadata:
+    type: "athletics"
+    sport: "football"

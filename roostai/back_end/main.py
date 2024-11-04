@@ -3,13 +3,13 @@ import logging
 import os
 from typing import List
 
-from chatbot.llm_manager import LLMManager
-from chatbot.quality_checker import QualityChecker
-from chatbot.query_processor import QueryProcessor
-from chatbot.reranker import Reranker
-from chatbot.types import Document
-from chatbot.vector_store import VectorStore
-from chatbot.config import Config
+from roostai.back_end.chatbot.llm_manager import LLMManager
+from roostai.back_end.chatbot.quality_checker import QualityChecker
+from roostai.back_end.chatbot.query_processor import QueryProcessor
+from roostai.back_end.chatbot.reranker import Reranker
+from roostai.back_end.chatbot.types import Document
+from roostai.back_end.chatbot.vector_store import VectorStore
+from roostai.back_end.chatbot.config import Config
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -83,6 +83,24 @@ class UniversityChatbot:
         except Exception as e:
             logger.error(f"Failed to add documents: {e}")
             return False
+
+    async def get_document_count(self) -> int:
+        """Get the total number of documents in the system."""
+        return await self.vector_store.get_document_count()
+
+    async def cleanup(self):
+        """Cleanup all resources."""
+        pass
+        tasks = []
+        if hasattr(self, 'vector_store'):
+            tasks.append(self.vector_store.close())
+        if hasattr(self, 'llm_manager'):
+            tasks.append(self.llm_manager.close())
+        if hasattr(self, 'query_processor'):
+            self.query_processor.clear_cache()
+
+        if tasks:
+            await asyncio.gather(*tasks)
 
 
 async def main():

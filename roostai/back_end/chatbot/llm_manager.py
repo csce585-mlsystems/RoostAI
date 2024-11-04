@@ -1,3 +1,4 @@
+import asyncio
 import logging
 import os
 from typing import Optional
@@ -5,8 +6,8 @@ from typing import Optional
 from dotenv import load_dotenv
 from huggingface_hub import InferenceClient
 
-from .types import QueryResult
 from .config import LLMConfig
+from .types import QueryResult
 
 
 class LLMManager:
@@ -19,6 +20,13 @@ class LLMManager:
         self.api_token = os.getenv("HF_API_KEY")
         if not self.api_token:
             raise ValueError("HF_API_KEY environment variable not set")
+
+        # Initialize client with timeout
+        self.client = InferenceClient(
+            token=self.api_token,
+            timeout=30  # 30 seconds timeout
+        )
+
 
         self.client = InferenceClient(token=self.api_token)
         # self.model = "mistralai/Mixtral-8x7B-v0.1"
@@ -63,17 +71,39 @@ Please provide a helpful response based on the context above.
 
             prompt = self.generate_prompt(query, result)
 
-            response = self.client.text_generation(
-                prompt,
-                model=self.model_name,
-                max_new_tokens=self.config.max_length,
-                temperature=self.config.temperature,
-                top_p=self.config.top_p,
-                repetition_penalty=self.config.repetition_penalty
+            # Use asyncio.wait_for to add timeout
+            response = await asyncio.wait_for(
+                self._generate_response(prompt),
+                timeout=15.0  # 15 seconds timeout
             )
 
             return response
 
+        except asyncio.TimeoutError:
+            self.logger.error("LLM response generation timed out")
+            return "I apologize, but the response is taking too long. Please try again."
         except Exception as e:
             self.logger.error(f"LLM response generation failed: {e}")
-            return None
+            return "I apologize, but I encountered an error generating the response."
+
+    async def _generate_response(self, prompt: str) -> str:
+        """Separate method for actual response generation to allow for timeout."""
+        return self.client.text_generation(
+            prompt,
+            model=self.model_name,
+            max_new_tokens=self.config.max_length,
+            temperature=self.config.temperature,
+            top_p=self.config.top_p,
+            repetition_penalty=self.config.repetition_penalty
+        )
+
+    async def close(self):
+        """Close LLM connections and clean up resources."""
+        try:
+            if hasattr(self, 'client'):
+                # Close any active sessions
+                self.client = None
+            self.logger.info("LLM manager cleaned up successfully")
+        except Exception as e:
+            self.logger.error(f"Error during LLM cleanup: {e}")
+            raise

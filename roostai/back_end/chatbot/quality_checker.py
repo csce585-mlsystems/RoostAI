@@ -24,19 +24,23 @@ class QualityChecker:
 
             # Calculate average score of top documents
             top_docs = documents[:self.min_docs]
-            scores = [doc.score for doc in top_docs]
-            avg_score = sum(scores) / len(scores)
+            if len(top_docs) < self.min_docs:
+                self.logger.warning(
+                    f"Insufficient number of documents: {len(top_docs)} < {self.min_docs}"
+                )
+                return QueryResult(documents=documents, quality_score=0.0)
 
-            # Calculate overall quality score
+            scores = [doc.score for doc in top_docs if doc.score is not None]
+            if not scores:
+                self.logger.warning("No valid scores found in documents")
+                return QueryResult(documents=documents, quality_score=0.0)
+
+            avg_score = sum(scores) / len(scores)
             quality_score = avg_score if len(top_docs) >= self.min_docs else 0.0
 
             self.logger.info(f"Quality check completed. Score: {quality_score:.2f}")
-            self.logger.info(f"Number of documents: {len(documents)}")
-            self.logger.info(f"Top document scores: {scores}")
-
-            # Log document contents for debugging
-            for i, doc in enumerate(top_docs):
-                self.logger.debug(f"Document {i} content: {doc.content[:100]}...")
+            self.logger.debug(f"Number of documents: {len(documents)}")
+            self.logger.debug(f"Top document scores: {scores}")
 
             return QueryResult(
                 documents=documents,
