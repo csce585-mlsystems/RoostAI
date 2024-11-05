@@ -16,4 +16,6 @@ for file_ in metadata_files:
       print(f'{url} already visited')
       exit(0)
     url_hash.add(url)
+
+print('All unique urls!')
     
