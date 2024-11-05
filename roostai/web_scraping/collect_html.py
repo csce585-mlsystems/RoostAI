@@ -12,11 +12,11 @@ def collect_html_files(source_dir, destination_dir):
     # os.walk is DFS traversal of a directory
     counter = 1
     for root, _, files in os.walk(source_dir):
-        if 'metadata.json' not in files:
+        if 'metadata.json' not in files and files:
           print('Metadata not found')
           print(root)
           print(files)
-        if 'scraped_data.html' not in files:
+        if 'scraped_data.html' not in files and files:
           print('HTML not found')
           print(root)
           print(files)
