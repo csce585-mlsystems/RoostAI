@@ -14,8 +14,12 @@ def collect_html_files(source_dir, destination_dir):
     for root, _, files in os.walk(source_dir):
         if 'metadata.json' not in files:
           print('Metadata not found')
+          print(root)
+          print(files)
         elif 'scraped_data.html' not in files:
           print('HTML not found')
+          print(root)
+          print(files)
           
         for file in files:
             if file.endswith(".html") or file.endswith('.json'):
@@ -31,7 +35,7 @@ def collect_html_files(source_dir, destination_dir):
                 # Copy the file to the new location
                 shutil.copy2(source_file_path, destination_file_path)
 
-                print(f"Copied: {source_file_path} -> {destination_file_path}")
+                # print(f"Copied: {source_file_path} -> {destination_file_path}")
         counter +=1
 
 
