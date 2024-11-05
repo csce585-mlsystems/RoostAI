@@ -41,6 +41,6 @@ def process_html_files(input_dir, output_dir):
         print(f"Processed {file_name} and saved to {output_file_path}")
 
 # Example usage
-input_directory = '/home/cc/scraped_data2'
+input_directory = '/home/cc/collected_data'
 output_directory = '/home/cc/scraped_data_main_text'
 process_html_files(input_directory, output_directory)

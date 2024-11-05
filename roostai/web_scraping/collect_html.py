@@ -12,6 +12,11 @@ def collect_html_files(source_dir, destination_dir):
     # os.walk is DFS traversal of a directory
     counter = 1
     for root, _, files in os.walk(source_dir):
+        if 'metadata.json' not in files:
+          print('Metadata not found')
+        elif 'scraped_data.html' not in files:
+          print('HTML not found')
+          
         for file in files:
             if file.endswith(".html") or file.endswith('.json'):
                 # source file path
@@ -32,6 +37,6 @@ def collect_html_files(source_dir, destination_dir):
 
 if __name__ == "__main__":
     source_directory = "/home/cc/scraped_data"  # Replace with your source directory
-    destination_directory = "/home/cc/scraped_data2"  # Replace with your destination directory
+    destination_directory = "/home/cc/collected_data"  # Replace with your destination directory
 
     collect_html_files(source_directory, destination_directory)
