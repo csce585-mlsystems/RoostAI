@@ -48,7 +48,7 @@ def process_files_with_metadata(directory_path: str, chunk_size: int = 512) -> D
         metadata_file = directory / f"metadata_{doc_id}.json"
         
         if not metadata_file.exists():
-            print(f"Warning: No metadata file found for document {doc_id}")
+            # print(f"Warning: No metadata file found for document {doc_id}")
             continue
             
         try:
@@ -87,8 +87,9 @@ def process_files_with_metadata(directory_path: str, chunk_size: int = 512) -> D
               urls.add(url)
             else:
               dud_file_counter += 1
-              print(f'Dud file # {dud_file_counter}.')
-              print(metadata['source_url'])
+              if 'pdf' not in metadata['source_url']:
+                print(f'Dud file # {dud_file_counter}.')
+                print(metadata['source_url'])
               # exit(0)
                 
         except Exception as e:
