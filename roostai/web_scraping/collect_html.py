@@ -35,8 +35,9 @@ def collect_html_files(source_dir, destination_dir):
                 # Copy the file to the new location
                 shutil.copy2(source_file_path, destination_file_path)
 
-                # print(f"Copied: {source_file_path} -> {destination_file_path}")
+                #
         if files:
+          print(f"Copied HTML and metadata from {root}")
           counter +=1
 
 
