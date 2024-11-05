@@ -26,8 +26,7 @@ def process_files_with_metadata(directory_path: str, chunk_size: int = 512) -> D
     splitter = SemanticSplitterNodeParser(
         buffer_size=1,
         breakpoint_percentile_threshold=95,
-        embed_model=embed_model,
-        chunk_size=chunk_size
+        embed_model=embed_model
     )
     
     # Initialize result dictionary
@@ -40,7 +39,10 @@ def process_files_with_metadata(directory_path: str, chunk_size: int = 512) -> D
     # counts files with empty main text
     dud_file_counter = 0
     urls = set()
-    for main_file in main_files:
+    for i, main_file in enumerate(main_files):
+        percentage_complete = (i / len(main_files)) * 100
+        if (int(percentage_complete) % 5) == 0:
+          print(f'{percentage_complete}% of files chunked')
         # Extract document ID from filename
         doc_id = re.search(r'scraped_html_(\d+)\.txt', main_file.name).group(1)
         
@@ -69,9 +71,8 @@ def process_files_with_metadata(directory_path: str, chunk_size: int = 512) -> D
               
               # Get chunks for the document
               nodes = splitter.get_nodes_from_documents(documents)
-              chunks = [node.text for node in nodes]
+              chunks = [' '.join(node.text.split()) for node in nodes]
               
-
               # Store in result dictionary
               result[doc_id] = {
                   "main_text": main_text,
