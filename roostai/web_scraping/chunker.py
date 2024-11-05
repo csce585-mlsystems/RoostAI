@@ -54,38 +54,43 @@ def process_files_with_metadata(directory_path: str, chunk_size: int = 512) -> D
         try:
             with open(main_file, 'r') as f:
               main_text = f.read()
-              if main_text:       
-                # Read and process main text file
-                reader = SimpleDirectoryReader(
-                    input_files=[str(main_file)],
-                    filename_as_id=True
-                )
-                documents = reader.load_data()
+            
+            with open(metadata_file, 'r') as f:
+              metadata = json.load(f)
                 
-                # Get chunks for the document
-                nodes = splitter.get_nodes_from_documents(documents)
-                chunks = [node.text for node in nodes]
+
+            if main_text:       
+              # Read and process main text file
+              reader = SimpleDirectoryReader(
+                  input_files=[str(main_file)],
+                  filename_as_id=True
+              )
+              documents = reader.load_data()
+              
+              # Get chunks for the document
+              nodes = splitter.get_nodes_from_documents(documents)
+              chunks = [node.text for node in nodes]
+              
+
+              # Store in result dictionary
+              result[doc_id] = {
+                  "main_text": main_text,
+                  "chunks": chunks,
+                  "metadata": metadata
+              }
+              
+              # print(f"Processed document {doc_id}: {len(chunks)} chunks")
+              url = metadata['source_url']
+              if metadata['source_url'] in urls:
+                print('url already visited')
+                exit(0)
+              urls.add(url)
+            else:
+              dud_file_counter += 1
+              print(f'Dud file # {dud_file_counter}.')
+              print(metadata['source_url'])
+              exit(0)
                 
-                # Read metadata
-                with open(metadata_file, 'r') as f:
-                    metadata = json.load(f)
-                
-                # Store in result dictionary
-                result[doc_id] = {
-                    "main_text": main_text,
-                    "chunks": chunks,
-                    "metadata": metadata
-                }
-                
-                # print(f"Processed document {doc_id}: {len(chunks)} chunks")
-                url = metadata['source_url']
-                if metadata['source_url'] in urls:
-                  print('url already visited')
-                  exit(0)
-                urls.add(url)
-              else:
-                dud_file_counter += 1
-                print(f'Dud file # {dud_file_counter}.')
         except Exception as e:
             print(f"Error processing document {doc_id}: {str(e)}")
             continue
