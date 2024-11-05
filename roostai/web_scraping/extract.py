@@ -4,13 +4,23 @@ import shutil
 
 def extract_main_text(html_content):
     soup = BeautifulSoup(html_content, 'html.parser')
-    main_tag = soup.find('main')
     
-    # Extract the text within the <main> tag
-    if main_tag:
-        return main_tag.get_text(separator=' ', strip=True)
-    else:
-        return ""  # Return empty string if <main> tag is not found
+    # Remove unwanted elements like scripts, styles, and comments
+    for element in soup(["script", "style", "comment"]):
+        element.extract()
+    
+    # Extract the text content, excluding boilerplate elements
+    relevant_text = soup.get_text(strip=True)
+    
+    return relevant_text
+  
+    # main_tag = soup.find('main')
+    
+    # # Extract the text within the <main> tag                      
+    # if main_tag:
+    #     return main_tag.get_text(separator=' ', strip=True)
+    # else:
+    #     return ""  # Return empty string if <main> tag is not found
 
 def save_text_to_file(text, output_file):
     with open(output_file, 'w', encoding='utf-8') as file:
