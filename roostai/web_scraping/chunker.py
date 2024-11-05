@@ -77,14 +77,15 @@ def process_files_with_metadata(directory_path: str, chunk_size: int = 512) -> D
                     "metadata": metadata
                 }
                 
-                print(f"Processed document {doc_id}: {len(chunks)} chunks")
-              else:
+                # print(f"Processed document {doc_id}: {len(chunks)} chunks")
                 url = metadata['source_url']
-                dud_file_counter += 1
-                print(f'Dud file # {dud_file_counter}.')
                 if metadata['source_url'] in urls:
                   print('url already visited')
                   exit(0)
+                urls.add(url)
+              else:
+                dud_file_counter += 1
+                print(f'Dud file # {dud_file_counter}.')
         except Exception as e:
             print(f"Error processing document {doc_id}: {str(e)}")
             continue
