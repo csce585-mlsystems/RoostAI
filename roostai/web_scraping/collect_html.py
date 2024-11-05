@@ -16,7 +16,7 @@ def collect_html_files(source_dir, destination_dir):
           print('Metadata not found')
           print(root)
           print(files)
-        elif 'scraped_data.html' not in files:
+        if 'scraped_data.html' not in files:
           print('HTML not found')
           print(root)
           print(files)
@@ -36,7 +36,8 @@ def collect_html_files(source_dir, destination_dir):
                 shutil.copy2(source_file_path, destination_file_path)
 
                 # print(f"Copied: {source_file_path} -> {destination_file_path}")
-        counter +=1
+        if files:
+          counter +=1
 
 
 if __name__ == "__main__":
