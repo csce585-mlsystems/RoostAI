@@ -39,6 +39,7 @@ def process_files_with_metadata(directory_path: str, chunk_size: int = 512) -> D
     
     # counts files with empty main text
     dud_file_counter = 0
+    urls = set()
     for main_file in main_files:
         # Extract document ID from filename
         doc_id = re.search(r'scraped_html_(\d+)\.txt', main_file.name).group(1)
@@ -78,8 +79,12 @@ def process_files_with_metadata(directory_path: str, chunk_size: int = 512) -> D
                 
                 print(f"Processed document {doc_id}: {len(chunks)} chunks")
               else:
+                url = metadata['source_url']
                 dud_file_counter += 1
-                print(f'Dud file # {dud_file_counter}. Url: {metadata}')
+                print(f'Dud file # {dud_file_counter}.')
+                if metadata['source_url'] in urls:
+                  print('url already visited')
+                  exit(0)
         except Exception as e:
             print(f"Error processing document {doc_id}: {str(e)}")
             continue
