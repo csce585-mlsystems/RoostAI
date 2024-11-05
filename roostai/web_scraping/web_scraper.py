@@ -351,3 +351,4 @@ if __name__ == "__main__":
             print("\nScraping interrupted by user")
         except Exception as e:
             print(f"Scraping error: {e}")
+    print("Finished web scraping scripting")

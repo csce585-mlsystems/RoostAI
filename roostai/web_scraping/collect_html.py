@@ -46,3 +46,4 @@ if __name__ == "__main__":
     destination_directory = "/home/cc/collected_data"  # Replace with your destination directory
 
     collect_html_files(source_directory, destination_directory)
+    print('Finished collecting HTML files')

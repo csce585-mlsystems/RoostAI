@@ -100,7 +100,7 @@ def save_processed_data(processed_data: Dict[str, Dict[str, Any]], output_file: 
 
 # Example usage
 if __name__ == "__main__":
-    DIRECTORY_PATH = '/home/cc/scraped_data_main_text'
+    DIRECTORY_PATH = '/home/cc/extracted_data'
     OUTPUT_FILE = "/home/cc/chunks_and_metadata.json"
     
     try:
