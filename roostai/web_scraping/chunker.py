@@ -89,7 +89,7 @@ def process_files_with_metadata(directory_path: str, chunk_size: int = 512) -> D
               dud_file_counter += 1
               print(f'Dud file # {dud_file_counter}.')
               print(metadata['source_url'])
-              exit(0)
+              # exit(0)
                 
         except Exception as e:
             print(f"Error processing document {doc_id}: {str(e)}")
