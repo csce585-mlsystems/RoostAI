@@ -40,21 +40,24 @@ def extract_main_text(html_content):
 
 
 def extract_pdf_text(url):
-    # downloading pdf
-    response = requests.get(url)
-    response.raise_for_status()
+    try:
+        # downloading pdf
+        response = requests.get(url)
+        response.raise_for_status()
 
-    # converting pdf to binary stream
-    pdf_file = io.BytesIO(response.content)
+        # converting pdf to binary stream
+        pdf_file = io.BytesIO(response.content)
 
-    # pdf reader object from file
-    pdf_reader = PdfReader(pdf_file)
+        # pdf reader object from file
+        pdf_reader = PdfReader(pdf_file)
 
-    # extract text
-    text = ''
-    for page in pdf_reader.pages:
-        text += page.extract_text() + " "
-    return text
+        # extract text
+        text = ''
+        for page in pdf_reader.pages:
+            text += page.extract_text() + " "
+        return text
+    except: 
+        return ""
 
 
 def save_text_to_file(text, output_file):
@@ -91,11 +94,12 @@ def process_files(input_dir, output_dir):
               html_content = html_file.read()
           main_text = extract_main_text(html_content)
         
-        # save main text to output file
-        file_name_without_extension, _= file_name.split('.')
-        output_file_path = os.path.join(output_dir, f'{file_name_without_extension}.txt')
-        save_text_to_file(main_text, output_file_path)
-        print(f"Processed {file_name} and saved to {output_file_path}")
+        if main_text:
+          # save main text to output file
+          file_name_without_extension, _= file_name.split('.')
+          output_file_path = os.path.join(output_dir, f'{file_name_without_extension}.txt')
+          save_text_to_file(main_text, output_file_path)
+          print(f"Processed {file_name} and saved to {output_file_path}")
 
 
 if __name__ == "__main__":
