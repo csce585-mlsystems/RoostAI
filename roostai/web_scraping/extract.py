@@ -77,7 +77,7 @@ def process_files(input_dir, output_dir):
         
         # extracting url
         metadata_file_name = file_name.replace('scraped_html_', 'metadata_')
-        metadata_file_name = file_name.replace('.html', '.json')
+        metadata_file_name = metadata_file_name.replace('.html', '.json')
         metadata = os.path.join(input_dir, metadata_file_name)
         with open(metadata, 'r', encoding='utf-8') as file:
           metadata = json.load(file)
