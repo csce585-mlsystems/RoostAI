@@ -5,9 +5,10 @@ from typing import Dict, Any
 from pathlib import Path
 import json
 import re
+import os
 
 
-def process_files_with_metadata(directory_path: str, chunk_size: int = 512) -> Dict[str, Dict[str, Any]]:
+def process_files_with_metadata(directory_path: str, output_dir: str):
     """
     Process text files and their corresponding metadata files, organizing chunks and metadata
     in a specified JSON structure.
@@ -31,7 +32,7 @@ def process_files_with_metadata(directory_path: str, chunk_size: int = 512) -> D
     )
     
     # Initialize result dictionary
-    result = {}
+    # result = {}
     
     # Get all main text files
     directory = Path(directory_path)
@@ -75,10 +76,16 @@ def process_files_with_metadata(directory_path: str, chunk_size: int = 512) -> D
               chunks = [' '.join(node.text.split()) for node in nodes]
               
               # Store in result dictionary
-              result[doc_id] = {
-                  "main_text": main_text,
-                  "chunks": chunks,
-                  "metadata": metadata
+              # result[doc_id] = {
+              #     "main_text": main_text,
+              #     "chunks": chunks,
+              #     "metadata": metadata
+              # }
+              
+              results = {
+                "main_text": main_text,
+                "chunks": chunks,
+                "metadata": metadata
               }
               
               # print(f"Processed document {doc_id}: {len(chunks)} chunks")
@@ -87,6 +94,11 @@ def process_files_with_metadata(directory_path: str, chunk_size: int = 512) -> D
                 print('url already visited')
                 exit(0)
               urls.add(url)
+              
+              
+              with open(os.path.join(output_dir, f'chunks_{i}.json'), 'w', encoding='utf-8') as f:
+                json.dump(results, f)
+              
             else:
               dud_file_counter += 1
               if 'pdf' not in metadata['source_url']:
@@ -98,7 +110,7 @@ def process_files_with_metadata(directory_path: str, chunk_size: int = 512) -> D
             print(f"Error processing document {doc_id}: {str(e)}")
             continue
     
-    return result
+    # return result
 
 
 def save_processed_data(processed_data: Dict[str, Dict[str, Any]], output_file: str):
@@ -114,18 +126,17 @@ def save_processed_data(processed_data: Dict[str, Dict[str, Any]], output_file: 
     print(f"Saved processed data to {output_file}")
 
 
-# Example usage
 if __name__ == "__main__":
     DIRECTORY_PATH = '/home/cc/extracted_data'
     # DIRECTORY_PATH = '/home/cc/scraped_data_main_text'
-    OUTPUT_FILE = "/home/cc/chunks_and_metadata.json"
+    OUTPUT_DIR = "/home/cc/chunks_and_metadata"
     
     try:
         # Process all files
-        processed_data = process_files_with_metadata(DIRECTORY_PATH)
+        processed_data = process_files_with_metadata(DIRECTORY_PATH, OUTPUT_DIR)
         
         # Print example of structure
-        print("\nExample of processed data structure:")
+        print("\nDone chunking. \nExample of processed data structure:")
         for doc_id, data in list(processed_data.items())[:1]:  # Show first document
             print(f"\nDocument {doc_id}:")
             print(f"Number of chunks: {len(data['chunks'])}")
@@ -133,7 +144,7 @@ if __name__ == "__main__":
             print("Metadata keys:", list(data['metadata'].keys()))
         
         # Save to file
-        save_processed_data(processed_data, OUTPUT_FILE)
+        # save_processed_data(processed_data, OUTPUT_FILE)
         
     except Exception as e:
         print(f"Error: {str(e)}")
