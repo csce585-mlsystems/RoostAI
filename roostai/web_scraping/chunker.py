@@ -6,6 +6,7 @@ from pathlib import Path
 import json
 import re
 
+
 def process_files_with_metadata(directory_path: str, chunk_size: int = 512) -> Dict[str, Dict[str, Any]]:
     """
     Process text files and their corresponding metadata files, organizing chunks and metadata
@@ -41,7 +42,7 @@ def process_files_with_metadata(directory_path: str, chunk_size: int = 512) -> D
     urls = set()
     for i, main_file in enumerate(main_files):
         percentage_complete = (i / len(main_files)) * 100
-        if (int(percentage_complete) % 5) == 0:
+        if (int(percentage_complete) % 5) == 0 and int(percentage_complete) > 0:
           print(f'{percentage_complete}% of files chunked')
         # Extract document ID from filename
         doc_id = re.search(r'scraped_html_(\d+)\.txt', main_file.name).group(1)
@@ -99,6 +100,7 @@ def process_files_with_metadata(directory_path: str, chunk_size: int = 512) -> D
     
     return result
 
+
 def save_processed_data(processed_data: Dict[str, Dict[str, Any]], output_file: str):
     """
     Save the processed data to a JSON file.
@@ -110,6 +112,7 @@ def save_processed_data(processed_data: Dict[str, Dict[str, Any]], output_file: 
     with open(output_file, 'w') as f:
         json.dump(processed_data, f, indent=2)
     print(f"Saved processed data to {output_file}")
+
 
 # Example usage
 if __name__ == "__main__":

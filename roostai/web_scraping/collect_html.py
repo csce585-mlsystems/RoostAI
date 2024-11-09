@@ -1,6 +1,7 @@
 import os
 import shutil
 
+
 def collect_html_files(source_dir, destination_dir):
     # Create destination directory if it doesn't exist
     if not os.path.exists(destination_dir):

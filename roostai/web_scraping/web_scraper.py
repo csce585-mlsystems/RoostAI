@@ -30,6 +30,7 @@ sys.setrecursionlimit(5000)
 
 abs_data_path = Path("/home/cc/scraped_data")
 
+
 class WebScraper:
     def __init__(self, start_urls, max_concurrent=2):  # Reduced default concurrency
       self.start_urls = start_urls
@@ -49,6 +50,7 @@ class WebScraper:
       self.logger = logging.getLogger(__name__)
 
       self.chrome_driver_path = "/usr/lib/chromium-browser/chromedriver"   
+
 
     @contextmanager
     def create_driver(self):
@@ -336,11 +338,14 @@ class WebScraper:
         except Exception as e:
             print(f"Error during cleanup: {e}")
 
+
     def __enter__(self):
         return self
 
+
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.cleanup_chrome_processes()
+
 
 if __name__ == "__main__":
     start_urls = ["https://sc.edu"]
@@ -352,3 +357,4 @@ if __name__ == "__main__":
         except Exception as e:
             print(f"Scraping error: {e}")
     print("Finished web scraping scripting")
+    

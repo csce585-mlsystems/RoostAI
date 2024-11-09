@@ -2,12 +2,25 @@ import os
 from bs4 import BeautifulSoup
 import shutil
 
+
 def extract_main_text(html_content):
     soup = BeautifulSoup(html_content, 'html.parser')
     
     # Remove unwanted elements like scripts, styles, and comments
     for element in soup(["script", "style", "comment"]):
         element.extract()
+    
+    # Process all links before getting the text
+    for link in soup.find_all('a'):
+        # Get the link text and href
+        text = link.get_text(strip=True)
+        href = link.get('href', '')
+        
+        # Only process if there's both text and href
+        if text and href:
+            # Replace the link with text(link) format
+            # Preserve the link's position in the document
+            link.replace_with(f"{text}({href})")
     
     # Extract the text content, excluding boilerplate elements
     relevant_text = soup.get_text(strip=True)
@@ -22,9 +35,11 @@ def extract_main_text(html_content):
     # else:
     #     return ""  # Return empty string if <main> tag is not found
 
+
 def save_text_to_file(text, output_file):
     with open(output_file, 'w', encoding='utf-8') as file:
         file.write(text)
+
 
 def process_html_files(input_dir, output_dir):
     if not os.path.exists(output_dir):
@@ -49,6 +64,7 @@ def process_html_files(input_dir, output_dir):
         save_text_to_file(main_text, output_file_path)
 
         print(f"Processed {file_name} and saved to {output_file_path}")
+
 
 if __name__ == "__main__":
   # Example usage
