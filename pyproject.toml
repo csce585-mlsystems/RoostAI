@@ -27,6 +27,7 @@ llama-index-embeddings-huggingface = "^0.3.1"
 # The backend dependency group
 # `poetry add <name-of-package> --group backend` to add a package to this group
 requests = "^2.32.3"
+pycryptodome = "^3.21.0"
 [tool.poetry.group.backend.dependencies]
 torch = "^2.5.1"
 langchain = "^0.3.7"
