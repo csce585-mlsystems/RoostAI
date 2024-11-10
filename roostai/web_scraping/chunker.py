@@ -130,6 +130,7 @@ if __name__ == "__main__":
     DIRECTORY_PATH = '/home/cc/extracted_data'
     # DIRECTORY_PATH = '/home/cc/scraped_data_main_text'
     OUTPUT_DIR = "/home/cc/chunks_and_metadata"
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
     
     try:
         # Process all files
