@@ -64,22 +64,6 @@ Put your answer in <context> tags.
     # Get only the part in <context> tags
     cleaned_response = raw_response.split("<context>")[2].split("</context>")[0].strip()
 
-    # Remove common prefixes that the model might add
-    prefixes_to_remove = [
-        "The chunk is",
-        "This chunk",
-        "Context:",
-        "The context is",
-        "Here is the context:",
-    ]
-
-    for prefix in prefixes_to_remove:
-        if cleaned_response.startswith(prefix):
-            cleaned_response = cleaned_response[len(prefix):].strip()
-
-    # Remove any remaining leading/trailing punctuation
-    cleaned_response = cleaned_response.strip(" .,:")
-
     return {
         'original_chunk': chunk,
         'has_context_tag': True,
