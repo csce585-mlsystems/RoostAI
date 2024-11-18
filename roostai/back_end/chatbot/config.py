@@ -8,8 +8,8 @@ import yaml
 class ModelConfig:
     embedding_model: str = "all-MiniLM-L6-v2"
     cross_encoder_model: str = "cross-encoder/ms-marco-MiniLM-L-6-v2"
-    # llm_model: str = "mistralai/Mixtral-8x7B-v0.1"
-    llm_model: str = "Qwen/Qwen2.5-1.5B"
+    # llm_model: str = "meta-llama/Meta-Llama-3-8B-Instruct"
+    llm_model: str = "mistralai/Mixtral-8x7B-Instruct-v0.1"
 
 
 @dataclass

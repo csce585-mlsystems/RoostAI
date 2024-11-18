@@ -27,7 +27,6 @@ class LLMManager:
             timeout=30  # 30 seconds timeout
         )
 
-
         self.client = InferenceClient(token=self.api_token)
         # self.model = "mistralai/Mixtral-8x7B-v0.1"
         self.model = "Qwen/Qwen2.5-1.5B"
