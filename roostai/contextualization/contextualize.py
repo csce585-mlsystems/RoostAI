@@ -47,14 +47,8 @@ Put your answer in <context> tags.
     # Get the raw response
     raw_response = tokenizer.decode(outputs[0], skip_special_tokens=True)
 
-    print(f"\nRaw response: {raw_response}")
-
-    has_context_tag = "<context>" in raw_response
-    print(f"Context tag found: {has_context_tag}")
-
-    # Clean up the response
     # Only get the answer in <context> tags
-    if not has_context_tag:
+    if "<context>" not in raw_response:
         return {
             'original_chunk': chunk,
             'has_context_tag': False,
@@ -67,7 +61,7 @@ Put your answer in <context> tags.
     return {
         'original_chunk': chunk,
         'has_context_tag': True,
-        'contextualized_chunk': cleaned_response + " " + chunk,
+        'contextualized_chunk': cleaned_response + "\n" + chunk,
     }
 
 
