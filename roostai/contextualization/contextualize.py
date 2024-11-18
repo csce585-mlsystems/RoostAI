@@ -61,7 +61,8 @@ Put your answer in <context> tags.
             'contextualized_chunk': "No context tags detected",
         }
 
-    cleaned_response = raw_response.split("<context>")[1].split("</context>")[0].strip()
+    # Get only the part in <context> tags
+    cleaned_response = raw_response.split("<context>")[2].split("</context>")[0].strip()
 
     # Remove common prefixes that the model might add
     prefixes_to_remove = [
@@ -138,7 +139,7 @@ def process_document(filename):
             'document': document,
             'original_chunks': [r['original_chunk'] for r in all_results],
             'have_context_tags': [r['has_context_tag'] for r in all_results],
-            'processed_chunks': [r['contextualized_chunk'] for r in all_results],
+            'contextualized_chunk': [r['contextualized_chunk'] for r in all_results],
             'metadata': metadata
         }, f, indent=2, ensure_ascii=False)
 
