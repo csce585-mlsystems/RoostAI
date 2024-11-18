@@ -33,7 +33,8 @@ Here is the chunk we want to situate within the whole document
 <chunk>
 {chunk}
 </chunk>
-Please give a short succinct context to situate this chunk within the overall document for the purposes of improving search retrieval of the chunk. Answer only with the succinct context and nothing else."""
+Please give a short succinct context to situate this chunk within the overall document for the purposes of improving search retrieval of the chunk. Answer only with the succinct context and nothing else.
+Put your answer in <context> tags."""
 
     inputs = tokenizer(prompt, return_tensors="pt")
 
@@ -45,9 +46,11 @@ Please give a short succinct context to situate this chunk within the overall do
     # Get the raw response
     raw_response = tokenizer.decode(outputs[0], skip_special_tokens=True)
 
+    has_context_tag = "<context>" in raw_response
+
     # Clean up the response
-    # Remove the initial prompt
-    cleaned_response = raw_response.split("</chunk>")[-1].strip()
+    # Only get the answer in <context> tags
+    cleaned_response = raw_response.split("<context>")[1].split("</context>")[0].strip()
 
     # Remove common prefixes that the model might add
     prefixes_to_remove = [
@@ -67,6 +70,7 @@ Please give a short succinct context to situate this chunk within the overall do
 
     return {
         'original_chunk': chunk,
+        'has_context_tag': has_context_tag,
         'contextualized_chunk': cleaned_response + " " + chunk
     }
 
