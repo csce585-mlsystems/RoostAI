@@ -137,6 +137,7 @@ def process_document(filename):
         json.dump({
             'document': document,
             'original_chunks': [r['original_chunk'] for r in all_results],
+            'have_context_tags': [r['has_context_tag'] for r in all_results],
             'processed_chunks': [r['contextualized_chunk'] for r in all_results],
             'metadata': metadata
         }, f, indent=2, ensure_ascii=False)
