@@ -8,8 +8,8 @@ import gc
 
 CHUNK_DIR = "./chunks_and_metadata"
 OUTPUT_DIR = "./processed_chunks"
-# Number of chunks to process in parallel - adjust based on your RAM
-BATCH_SIZE = 4
+# Number of chunks to process in parallel - adjust based on RAM
+BATCH_SIZE = 12
 
 
 def setup_model():
