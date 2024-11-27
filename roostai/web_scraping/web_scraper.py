@@ -352,27 +352,27 @@ class WebScraper:
             for url, error in failed_urls:
                 self.logger.warning(f"- {url}: {error}")
                   
-        def cleanup_chrome_processes(self):
-            """
-            Clean up any lingering chrome processes
-            """
-            try:
-                if platform.system() == "Linux":
-                    os.system("pkill -f chromium")
-                    os.system("pkill -f chrome")
-                elif platform.system() == "Windows":
-                    os.system("taskkill /f /im chrome.exe")
-                    os.system("taskkill /f /im chromedriver.exe")
-            except Exception as e:
-                print(f"Error during cleanup: {e}")
+    def cleanup_chrome_processes(self):
+        """
+        Clean up any lingering chrome processes
+        """
+        try:
+            if platform.system() == "Linux":
+                os.system("pkill -f chromium")
+                os.system("pkill -f chrome")
+            elif platform.system() == "Windows":
+                os.system("taskkill /f /im chrome.exe")
+                os.system("taskkill /f /im chromedriver.exe")
+        except Exception as e:
+            print(f"Error during cleanup: {e}")
 
 
-        def __enter__(self):
-            return self
+    def __enter__(self):
+        return self
 
 
-        def __exit__(self, exc_type, exc_val, exc_tb):
-            self.cleanup_chrome_processes()
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.cleanup_chrome_processes()
 
 
 if __name__ == "__main__":
