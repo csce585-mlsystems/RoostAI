@@ -153,9 +153,7 @@ class WebScraper:
             EC.presence_of_element_located((By.TAG_NAME, "body"))
         )
 
-        # Allow some time for JavaScript to execute
-        time.sleep(2)  
-
+ 
         # Get the rendered HTML
         html_content = self.driver.page_source
 
