@@ -96,17 +96,18 @@ class WebScraper:
 
         return new_urls
 
-    async def scrape_url(self, url, playwright):
+    async def scrape_url(self, url, browser):
         """
-        Scrape a URL using Playwright.
+        Scrape a URL using a shared Playwright browser instance.
         """
         async with self.semaphore:  # Limit concurrency
             try:
                 self.logger.info(f"Scraping: {url}")
-                async with playwright.chromium.launch(headless=True) as browser:
-                    context = await browser.new_context()
-                    page = await context.new_page()
-                    return await self.scrape_page(page, url)
+                context = await browser.new_context()
+                page = await context.new_page()
+                new_urls = await self.scrape_page(page, url)
+                await context.close()
+                return new_urls
             except Exception as e:
                 self.logger.error(f"Error scraping {url}: {e}")
                 return []
@@ -121,12 +122,14 @@ class WebScraper:
             self.visited.add(url)
 
         async with async_playwright() as playwright:
+            browser = await playwright.chromium.launch(headless=True)
             while not queue.empty():
                 url = await queue.get()
-                new_urls = await self.scrape_url(url, playwright)
+                new_urls = await self.scrape_url(url, browser)
                 for new_url in new_urls:
                     if new_url not in self.visited:
                         queue.put_nowait(new_url)
+            await browser.close()
 
 if __name__ == "__main__":
     start_urls = ["https://sc.edu"]
@@ -134,6 +137,7 @@ if __name__ == "__main__":
     scraper = WebScraper(start_urls, max_concurrent=2)
     asyncio.run(scraper.start())
     print("Finished web scraping scripting")
+
     
 # # Standard library imports
 # import hashlib
