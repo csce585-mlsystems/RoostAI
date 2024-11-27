@@ -20,7 +20,7 @@ def extract_main_text(html_content):
         href = link.get('href', '')
         
         # Only process if there's both text and href
-        if text and href:
+        if text and href and 'http' in href:
             # Replace the link with text(link) format
             # Preserve the link's position in the document
             link.replace_with(f"{text}({href})")
