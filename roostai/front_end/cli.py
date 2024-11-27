@@ -21,10 +21,9 @@ from .base import ChatbotInterface
 
 
 class CLIInterface(ChatbotInterface):
-    def __init__(self, config_path: Optional[str] = None):
+    def __init__(self):
         self.console = Console()
         self.chatbot: Optional[UniversityChatbot] = None
-        self.config_path = config_path or "config.yaml"
         self._cleanup_done = False
         self._setup_signal_handlers()
 
@@ -52,7 +51,7 @@ class CLIInterface(ChatbotInterface):
         try:
             with self._create_progress("Initializing chatbot...") as progress:
                 task = progress.add_task("Initializing...", total=1)
-                self.chatbot = UniversityChatbot(config_path=self.config_path)
+                self.chatbot = UniversityChatbot()
                 progress.update(task, advance=1)
 
             doc_count = await self.chatbot.get_document_count()
@@ -248,12 +247,12 @@ class CLIInterface(ChatbotInterface):
 
 
 @click.command()
-@click.option('--config', '-c', type=str, help='Path to config file')
-def chat(config: Optional[str]):
+# @click.option('--config', '-c', type=str, help='Path to config file')
+def chat():
     """Start an interactive chat session."""
 
     async def run_chat():
-        interface = CLIInterface(config_path=config)
+        interface = CLIInterface()
         try:
             await interface.initialize()
             await interface.show_help()  # Show help first

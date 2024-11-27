@@ -3,9 +3,17 @@ from typing import List, Optional
 
 
 @dataclass
+class DocumentMetadata:
+    url: str
+    department: Optional[str] = None
+    doc_type: Optional[str] = None
+    date_added: Optional[str] = None
+
+
+@dataclass
 class Document:
     content: str
-    metadata: dict
+    metadata: DocumentMetadata
     score: Optional[float] = None
 
 

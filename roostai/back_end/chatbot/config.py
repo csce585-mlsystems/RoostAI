@@ -8,20 +8,25 @@ import yaml
 class ModelConfig:
     embedding_model: str = "all-MiniLM-L6-v2"
     cross_encoder_model: str = "cross-encoder/ms-marco-MiniLM-L-6-v2"
-    # llm_model: str = "meta-llama/Meta-Llama-3-8B-Instruct"
     llm_model: str = "mistralai/Mixtral-8x7B-Instruct-v0.1"
 
 
 @dataclass
 class ThresholdConfig:
+    # Threshold for reranking; Used to filter out low-quality documents; Primarily used in `reranker.py`
     reranking_threshold: float = 0.5
+
+    # Threshold for quality check; Used to filter out low-quality documents
+    # Primarily used in `llm_manager.py` and `quality_checker.py`
     quality_min_score: float = 0.5
+
+    # Minimum number of documents required for quality check; Primarily used in `quality_checker.py`
     quality_min_docs: int = 1
-    similarity_threshold: float = 0.7
 
 
 @dataclass
 class VectorDBConfig:
+    db_path: str = "../front_end/data"  # relative to the location of `vector_store.py` (back_end directory)
     collection_name: str = "university_docs"
     top_k: int = 5
 
@@ -43,7 +48,7 @@ class Config:
     llm: LLMConfig
 
     @classmethod
-    def load_config(cls, config_path: str = "config.yaml") -> 'Config':
+    def load_config(cls) -> 'Config':
         """Load configuration from YAML file with environment variable override support."""
         # Default configuration
         default_config = {
@@ -52,20 +57,5 @@ class Config:
             "vector_db": VectorDBConfig(),
             "llm": LLMConfig()
         }
-
-        # Load from YAML if exists
-        if os.path.exists(config_path):
-            with open(config_path, 'r') as f:
-                yaml_config = yaml.safe_load(f)
-
-                # Update default config with YAML values
-                if yaml_config.get('model'):
-                    default_config['model'] = ModelConfig(**yaml_config['model'])
-                if yaml_config.get('thresholds'):
-                    default_config['thresholds'] = ThresholdConfig(**yaml_config['thresholds'])
-                if yaml_config.get('vector_db'):
-                    default_config['vector_db'] = VectorDBConfig(**yaml_config['vector_db'])
-                if yaml_config.get('llm'):
-                    default_config['llm'] = LLMConfig(**yaml_config['llm'])
 
         return cls(**default_config)

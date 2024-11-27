@@ -1,6 +1,6 @@
 import logging
 from typing import List
-
+import numpy as np
 from sentence_transformers import CrossEncoder
 
 from .types import Document
@@ -30,16 +30,21 @@ class Reranker:
             # Get cross-encoder scores
             scores = self.model.predict(pairs)
 
+            # Convert scores to float if they're numpy arrays
+            scores = [float(score) if isinstance(score, (np.ndarray, np.float32, np.float64))
+                     else score for score in scores]
+
             # Update document scores and filter
             scored_docs = []
             for doc, score in zip(documents, scores):
-                doc.score = float(score)
+                doc.score = score
                 if score >= threshold:
                     scored_docs.append(doc)
 
             # Sort by score descending
             scored_docs.sort(key=lambda x: x.score, reverse=True)
 
+            self.logger.info(f"Reranked {len(scored_docs)} documents passed threshold")
             if not scored_docs:
                 self.logger.warning(
                     f"No documents passed threshold {threshold}. Best score was {max(scores) if scores else 'N/A'}"

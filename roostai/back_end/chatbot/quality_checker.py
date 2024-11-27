@@ -7,8 +7,8 @@ from .types import Document, QueryResult
 class QualityChecker:
     def __init__(self, min_score: float, min_docs: int):
         """Initialize quality checker with threshold parameters."""
-        self.min_score = min_score
-        self.min_docs = min_docs
+        self.min_score = min_score  # Minimum score to pass quality check
+        self.min_docs = min_docs  # Minimum number of documents required for quality check
         self.logger = logging.getLogger(__name__)
 
     async def check_quality(
