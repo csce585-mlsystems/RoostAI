@@ -9,7 +9,7 @@ from pathlib import Path
 from urllib.parse import urljoin, urlparse
 import threading
 from queue import Queue
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, TimeoutError
 import platform
 import logging
 from contextlib import contextmanager
@@ -185,14 +185,17 @@ class WebScraper:
             self.logger.error(f"Error force quitting driver: {e}")
 
 
-    def scrape_url(self, url, max_retries=3, retry_delay=5):
+    def scrape_url(self, url, max_retries=2, retry_delay=5):
         """Improved URL scraping with better error handling"""
+        # only try a certain number of times
         for attempt in range(max_retries):
+            # only a certain number of threads will be able to scrape at a time to prevent too many chromedrivers to be running
             with self.semaphore:
                 try:
+                    # create selenium web driver 
                     with self.create_driver() as driver:
                         try:
-                            # Set shorter timeout and wait for specific elements
+                            # Set timeout and wait for specific elements
                             driver.set_page_load_timeout(20)
                             driver.get(url)
                             
@@ -287,19 +290,30 @@ class WebScraper:
           
     
     def start(self):
-        """Enhanced start method with better error handling and recovery"""
+        """
+        Enhanced start method with comprehensive error handling and detailed logging.
+        
+        Provides more granular error tracking and recovery mechanisms for web scraping.
+        """
         for url in self.start_urls:
             self.url_queue.put(url)
             with self.lock:
                 self.visited.add(url)
         
+        # Track overall scraping statistics
+        total_processed_urls = 0
+        failed_urls = []
+        
+        # spawn the threads
         with ThreadPoolExecutor(max_workers=self.max_concurrent) as executor:
             while True:
                 try:
+                    # append all urls in the queue to current urls
                     current_urls = []
                     while not self.url_queue.empty():
                         current_urls.append(self.url_queue.get())
                     
+                    # no more to scrape
                     if not current_urls:
                         break
                     
@@ -307,44 +321,58 @@ class WebScraper:
                     futures = []
                     for url in current_urls:
                         future = executor.submit(self.scrape_url, url)
-                        futures.append(future)
+                        futures.append((url, future))
                     
                     # Handle results and queue new URLs
-                    for future in futures:
+                    for url, future in futures:
                         try:
-                            new_urls = future.result(timeout=60)  # Add timeout
-                            for new_url in new_urls:
-                                self.url_queue.put(new_url)
+                            new_urls = future.result(timeout=90)  # Increased timeout
+                            total_processed_urls += 1
+                            
+                            if new_urls:
+                                for new_url in new_urls:
+                                    self.url_queue.put(new_url)
+                            
+                        except TimeoutError:
+                            self.logger.warning(f"Timeout occurred while processing {url}")
+                            failed_urls.append((url, "Timeout"))
+                        
                         except Exception as e:
-                            self.logger.error(f"Error processing future: {e}")
-                            continue
-                    
+                            self.logger.error(f"Failed to process {url}: {e}")
+                            failed_urls.append((url, str(e)))
+                
                 except Exception as e:
-                    self.logger.error(f"Error in main loop: {e}")
+                    self.logger.critical(f"Catastrophic error in scraping loop: {e}")
                     break
+        
+        # Log final scraping statistics
+        self.logger.info(f"Total URLs Processed: {total_processed_urls}")
+        if failed_urls:
+            self.logger.warning(f"Failed URLs ({len(failed_urls)}):")
+            for url, error in failed_urls:
+                self.logger.warning(f"- {url}: {error}")
+                  
+        def cleanup_chrome_processes(self):
+            """
+            Clean up any lingering chrome processes
+            """
+            try:
+                if platform.system() == "Linux":
+                    os.system("pkill -f chromium")
+                    os.system("pkill -f chrome")
+                elif platform.system() == "Windows":
+                    os.system("taskkill /f /im chrome.exe")
+                    os.system("taskkill /f /im chromedriver.exe")
+            except Exception as e:
+                print(f"Error during cleanup: {e}")
 
-              
-    def cleanup_chrome_processes(self):
-        """
-        Clean up any lingering chrome processes
-        """
-        try:
-            if platform.system() == "Linux":
-                os.system("pkill -f chromium")
-                os.system("pkill -f chrome")
-            elif platform.system() == "Windows":
-                os.system("taskkill /f /im chrome.exe")
-                os.system("taskkill /f /im chromedriver.exe")
-        except Exception as e:
-            print(f"Error during cleanup: {e}")
+
+        def __enter__(self):
+            return self
 
 
-    def __enter__(self):
-        return self
-
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        self.cleanup_chrome_processes()
+        def __exit__(self, exc_type, exc_val, exc_tb):
+            self.cleanup_chrome_processes()
 
 
 if __name__ == "__main__":
