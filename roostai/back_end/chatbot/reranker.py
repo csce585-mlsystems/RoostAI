@@ -13,10 +13,7 @@ class Reranker:
         self.model = CrossEncoder(model_name)
 
     async def rerank(
-            self,
-            query: str,
-            documents: List[Document],
-            threshold: float
+        self, query: str, documents: List[Document], threshold: float
     ) -> List[Document]:
         """Rerank documents using cross-encoder and filter by threshold."""
         try:
@@ -31,8 +28,14 @@ class Reranker:
             scores = self.model.predict(pairs)
 
             # Convert scores to float if they're numpy arrays
-            scores = [float(score) if isinstance(score, (np.ndarray, np.float32, np.float64))
-                     else score for score in scores]
+            scores = [
+                (
+                    float(score)
+                    if isinstance(score, (np.ndarray, np.float32, np.float64))
+                    else score
+                )
+                for score in scores
+            ]
 
             # Update document scores and filter
             scored_docs = []

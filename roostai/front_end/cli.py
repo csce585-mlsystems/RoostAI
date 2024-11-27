@@ -34,7 +34,9 @@ class CLIInterface(ChatbotInterface):
 
     def _signal_handler(self, signum, frame):
         """Handle system signals."""
-        self.console.print("\n[yellow]Received shutdown signal. Cleaning up...[/yellow]")
+        self.console.print(
+            "\n[yellow]Received shutdown signal. Cleaning up...[/yellow]"
+        )
         asyncio.create_task(self.cleanup())
         sys.exit(0)
 
@@ -55,7 +57,9 @@ class CLIInterface(ChatbotInterface):
                 progress.update(task, advance=1)
 
             doc_count = await self.chatbot.get_document_count()
-            self.console.print(f"[green]✓ Chatbot initialized successfully with {doc_count} documents!")
+            self.console.print(
+                f"[green]✓ Chatbot initialized successfully with {doc_count} documents!"
+            )
         except Exception as e:
             self.console.print(f"[red]Error initializing chatbot: {str(e)}")
             sys.exit(1)
@@ -64,23 +68,24 @@ class CLIInterface(ChatbotInterface):
         """Handle a user query."""
         try:
             with Progress(
-                    SpinnerColumn(),
-                    TextColumn("[progress.description]{task.description}"),
-                    console=self.console
+                SpinnerColumn(),
+                TextColumn("[progress.description]{task.description}"),
+                console=self.console,
             ) as progress:
                 # Create main task
                 main_task = progress.add_task("Processing query...", total=5)
 
                 # Step 1: Process query
                 progress.update(main_task, description="Generating query embedding...")
-                cleaned_query, query_embedding = await self.chatbot.query_processor.process_query(query)
+                cleaned_query, query_embedding = (
+                    await self.chatbot.query_processor.process_query(query)
+                )
                 progress.advance(main_task)
 
                 # Step 2: Search vector store
                 progress.update(main_task, description="Searching knowledge base...")
                 documents = await self.chatbot.vector_store.query(
-                    query_embedding,
-                    k=self.chatbot.config.vector_db.top_k
+                    query_embedding, k=self.chatbot.config.vector_db.top_k
                 )
                 progress.advance(main_task)
 
@@ -93,18 +98,22 @@ class CLIInterface(ChatbotInterface):
                 reranked_docs = await self.chatbot.reranker.rerank(
                     cleaned_query,
                     documents,
-                    threshold=self.chatbot.config.thresholds.reranking_threshold
+                    threshold=self.chatbot.config.thresholds.reranking_threshold,
                 )
                 progress.advance(main_task)
 
                 # Step 4: Quality check
                 progress.update(main_task, description="Checking result quality...")
-                result = await self.chatbot.quality_checker.check_quality(cleaned_query, reranked_docs)
+                result = await self.chatbot.quality_checker.check_quality(
+                    cleaned_query, reranked_docs
+                )
                 progress.advance(main_task)
 
                 # Step 5: Generate response
                 progress.update(main_task, description="Generating response...")
-                response = await self.chatbot.llm_manager.generate_response(cleaned_query, result)
+                response = await self.chatbot.llm_manager.generate_response(
+                    cleaned_query, result
+                )
                 progress.advance(main_task)
 
             # Display response
@@ -124,7 +133,9 @@ class CLIInterface(ChatbotInterface):
 
             if success:
                 doc_count = await self.chatbot.get_document_count()
-                self.console.print(f"[green]✓ Documents added successfully! Total documents: {doc_count}")
+                self.console.print(
+                    f"[green]✓ Documents added successfully! Total documents: {doc_count}"
+                )
             else:
                 self.console.print("[red]Failed to add documents.")
 
@@ -221,10 +232,10 @@ class CLIInterface(ChatbotInterface):
                 self.console.print(f"[red]File not found: {file_path}")
                 return
 
-            if path.suffix == '.json':
+            if path.suffix == ".json":
                 with open(path) as f:
                     data = json.load(f)
-            elif path.suffix in ['.yaml', '.yml']:
+            elif path.suffix in [".yaml", ".yml"]:
                 with open(path) as f:
                     data = yaml.safe_load(f)
             else:
@@ -233,9 +244,7 @@ class CLIInterface(ChatbotInterface):
 
             documents = [
                 Document(
-                    content=doc['content'],
-                    metadata=doc.get('metadata', {}),
-                    score=None
+                    content=doc["content"], metadata=doc.get("metadata", {}), score=None
                 )
                 for doc in data
             ]
@@ -259,30 +268,33 @@ def chat():
 
             while True:
                 try:
-                    query = Prompt.ask("\n[bold cyan]Enter your question or command[/bold cyan]").strip()
+                    query = Prompt.ask(
+                        "\n[bold cyan]Enter your question or command[/bold cyan]"
+                    ).strip()
 
                     # Skip empty queries
                     if not query:
                         continue
 
                     # Handle commands
-                    if query.startswith('/'):
+                    if query.startswith("/"):
                         cmd = query.lower().split()
                         command = cmd[0]
 
-                        if command == '/exit':
+                        if command == "/exit":
                             break
-                        elif command == '/help':
+                        elif command == "/help":
                             await interface.show_help()
-                        elif command == '/info':
+                        elif command == "/info":
                             await interface.show_info()
-                        elif command == '/add':
+                        elif command == "/add":
                             await interface.add_document_interactive()
-                        elif command == '/add_file' and len(cmd) > 1:
+                        elif command == "/add_file" and len(cmd) > 1:
                             await interface.add_documents_from_file(cmd[1])
                         else:
                             interface.console.print(
-                                "[yellow]Unknown command. Type /help for available commands.[/yellow]")
+                                "[yellow]Unknown command. Type /help for available commands.[/yellow]"
+                            )
                     else:
                         # Handle regular queries
                         await interface.handle_query(query)
@@ -300,5 +312,5 @@ def chat():
         sys.exit(0)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     chat()

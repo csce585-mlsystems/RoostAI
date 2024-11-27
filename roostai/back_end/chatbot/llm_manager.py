@@ -25,23 +25,24 @@ class LLMManager:
 
         # Initialize client with timeout
         self.client = InferenceClient(
-            token=self.api_token,
-            timeout=30  # 30 seconds timeout
+            token=self.api_token, timeout=30  # 30 seconds timeout
         )
 
         self.client = InferenceClient(token=self.api_token)
         self.model = llm_model
 
-        self.system_prompt: str = ("You are a chatbot specifically designed to provide information about the "
-                                   "University of South Carolina (USC). Your knowledge encompasses USC's "
-                                   "history, academics, campus life, athletics, notable alumni, and current events "
-                                   "related to the university. When answering questions, always assume they are in "
-                                   "the context of USC unless explicitly stated otherwise. Provide accurate and "
-                                   "up-to-date information about USC, maintaining a friendly and enthusiastic tone "
-                                   "that reflects the spirit of the community. If you're unsure about any "
-                                   "USC-specific information, state that you don't have that particular detail rather "
-                                   "than guessing. Your purpose is to assist students, faculty, alumni, and anyone "
-                                   "interested in learning more about USC.")
+        self.system_prompt: str = (
+            "You are a chatbot specifically designed to provide information about the "
+            "University of South Carolina (USC). Your knowledge encompasses USC's "
+            "history, academics, campus life, athletics, notable alumni, and current events "
+            "related to the university. When answering questions, always assume they are in "
+            "the context of USC unless explicitly stated otherwise. Provide accurate and "
+            "up-to-date information about USC, maintaining a friendly and enthusiastic tone "
+            "that reflects the spirit of the community. If you're unsure about any "
+            "USC-specific information, state that you don't have that particular detail rather "
+            "than guessing. Your purpose is to assist students, faculty, alumni, and anyone "
+            "interested in learning more about USC."
+        )
 
     def generate_prompt(self, query: str, result: QueryResult) -> str:
         """Generate prompt for LLM using query and retrieved documents."""
@@ -70,11 +71,7 @@ Please provide a helpful response based on the context above. If the context doe
 contain relevant information to answer the question, please state that clearly.
 """
 
-    async def generate_response(
-            self,
-            query: str,
-            result: QueryResult
-    ) -> Optional[str]:
+    async def generate_response(self, query: str, result: QueryResult) -> Optional[str]:
         try:
             if result.quality_score < self.config.quality_min_score:
                 self.logger.warning(f"Low quality score: {result.quality_score}")
@@ -84,8 +81,7 @@ contain relevant information to answer the question, please state that clearly.
 
             # Use asyncio.wait_for to add timeout
             response = await asyncio.wait_for(
-                self._generate_response(prompt),
-                timeout=15.0  # 15 seconds timeout
+                self._generate_response(prompt), timeout=15.0  # 15 seconds timeout
             )
 
             return response
@@ -105,13 +101,13 @@ contain relevant information to answer the question, please state that clearly.
             max_new_tokens=self.config.max_length,
             temperature=self.config.temperature,
             top_p=self.config.top_p,
-            repetition_penalty=self.config.repetition_penalty
+            repetition_penalty=self.config.repetition_penalty,
         )
 
     async def close(self):
         """Close LLM connections and clean up resources."""
         try:
-            if hasattr(self, 'client'):
+            if hasattr(self, "client"):
                 # Close any active sessions
                 self.client = None
             self.logger.info("LLM manager cleaned up successfully")

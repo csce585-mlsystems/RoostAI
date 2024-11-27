@@ -10,28 +10,37 @@ from playwright.async_api import async_playwright
 # Base directory for saving scraped data
 abs_data_path = Path("/home/cc/scraped_data")
 
+# BFS web scraping tool
+
+
 class WebScraper:
     def __init__(self, start_urls, max_concurrent=2):
         self.start_urls = start_urls
+        # scheme://netloc/path/...
         self.domains = [urlparse(start_url).netloc for start_url in start_urls]
-        self.visited = set()
-        self.html_hashes = set()
+        self.visited = set()  # set of visited urls
+        self.html_hashes = set()  # set of scraped HTML hashes
+        # semaphore defined by max number of threads
         self.semaphore = asyncio.Semaphore(max_concurrent)
 
         # Configure logging
         logging.basicConfig(
-            level=logging.INFO,
-            format='%(asctime)s - %(levelname)s - %(message)s'
+            level=logging.INFO,  # WARNING, ERROR, CRITICAL messages will be logged
+            # Timestamp - (Warning/Error/Critical) - STDOUT
+            format="%(asctime)s - %(levelname)s - %(message)s",
         )
+        # sets the name of the logger to be the name of the module
         self.logger = logging.getLogger(__name__)
 
     def is_valid(self, url):
+        """Validate that urls only have the root url's (sc.edu) netloc"""
         parsed = urlparse(url)
         return bool(parsed.netloc) and parsed.netloc.endswith(tuple(self.domains))
 
     def get_url_save_path(self, url):
-        url = '/'.join(url.split('#'))
-        url_path = Path(url.replace('//', '/'))
+        #
+        url = "/".join(url.split("#"))
+        url_path = Path(url.replace("//", "/"))
         return abs_data_path / url_path
 
     def is_unique(self, html_content):
@@ -59,10 +68,12 @@ class WebScraper:
             await self.save_html(url, html_content)
 
         new_urls = []
-        links = await page.evaluate("""
+        links = await page.evaluate(
+            """
             Array.from(document.querySelectorAll('a'))
                  .map(link => link.href)
-        """)
+        """
+        )
         for href in links:
             full_url = urljoin(url, href)
             if self.is_valid(full_url) and full_url not in self.visited:
@@ -96,14 +107,17 @@ class WebScraper:
                     new_urls = await self.scrape_url(url, browser)
                     for new_url in new_urls:
                         if new_url not in self.visited:
-                            queue.put_nowait(new_url)  # Add only unvisited URLs
+                            # Add only unvisited URLs
+                            queue.put_nowait(new_url)
                 self.logger.info(f"Queue size: {queue.qsize()}")
             await browser.close()
 
 
 if __name__ == "__main__":
+    # scrape USC web data, with 5 crawling threads
     start_urls = ["https://sc.edu"]
-
     scraper = WebScraper(start_urls, max_concurrent=5)
+
+    # run asynchronous function
     asyncio.run(scraper.start())
     print("Finished web scraping scripting")

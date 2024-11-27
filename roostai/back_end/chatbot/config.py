@@ -26,7 +26,9 @@ class ThresholdConfig:
 
 @dataclass
 class VectorDBConfig:
-    db_path: str = "../front_end/data"  # relative to the location of `vector_store.py` (back_end directory)
+    db_path: str = (
+        "../front_end/data"  # relative to the location of `vector_store.py` (back_end directory)
+    )
     collection_name: str = "university_docs"
     top_k: int = 5
 
@@ -48,14 +50,14 @@ class Config:
     llm: LLMConfig
 
     @classmethod
-    def load_config(cls) -> 'Config':
+    def load_config(cls) -> "Config":
         """Load configuration from YAML file with environment variable override support."""
         # Default configuration
         default_config = {
             "model": ModelConfig(),
             "thresholds": ThresholdConfig(),
             "vector_db": VectorDBConfig(),
-            "llm": LLMConfig()
+            "llm": LLMConfig(),
         }
 
         return cls(**default_config)

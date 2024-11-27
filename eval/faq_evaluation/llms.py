@@ -34,18 +34,22 @@ class LLM(ABC):
 
         # Get the average length of the questions and answers. Round to the nearest 10
         avg_question_length: int = round(_get_column_average(df, "answer")) // 10 * 10
-        self.prompt_addition: str = f"Please limit your question to {avg_question_length} words or less."
+        self.prompt_addition: str = (
+            f"Please limit your question to {avg_question_length} words or less."
+        )
 
-        self.system_prompt: str = ("You are a chatbot specifically designed to provide information about the "
-                                   "University of South Carolina (USC). Your knowledge encompasses USC's "
-                                   "history, academics, campus life, athletics, notable alumni, and current events "
-                                   "related to the university. When answering questions, always assume they are in "
-                                   "the context of USC unless explicitly stated otherwise. Provide accurate and "
-                                   "up-to-date information about USC, maintaining a friendly and enthusiastic tone "
-                                   "that reflects the spirit of the community. If you're unsure about any "
-                                   "USC-specific information, state that you don't have that particular detail rather "
-                                   "than guessing. Your purpose is to assist students, faculty, alumni, and anyone "
-                                   "interested in learning more about USC.")
+        self.system_prompt: str = (
+            "You are a chatbot specifically designed to provide information about the "
+            "University of South Carolina (USC). Your knowledge encompasses USC's "
+            "history, academics, campus life, athletics, notable alumni, and current events "
+            "related to the university. When answering questions, always assume they are in "
+            "the context of USC unless explicitly stated otherwise. Provide accurate and "
+            "up-to-date information about USC, maintaining a friendly and enthusiastic tone "
+            "that reflects the spirit of the community. If you're unsure about any "
+            "USC-specific information, state that you don't have that particular detail rather "
+            "than guessing. Your purpose is to assist students, faculty, alumni, and anyone "
+            "interested in learning more about USC."
+        )
 
     @abstractmethod
     def get_response(self, question: str) -> str:
@@ -81,12 +85,12 @@ class phi_3_5_mini_ins(LLM):
         return_str: str = ""
 
         for message in client.chat_completion(
-                messages=[
-                    {"role": "system", "content": self.system_prompt},
-                    {"role": "user", "content": question}
-                ],
-                max_tokens=2048,
-                stream=True,
+            messages=[
+                {"role": "system", "content": self.system_prompt},
+                {"role": "user", "content": question},
+            ],
+            max_tokens=2048,
+            stream=True,
         ):
             return_str += message.choices[0].delta.content
 
@@ -109,17 +113,19 @@ class llama_3_8b_ins(LLM):
         """
         question = question + " " + self.prompt_addition
 
-        client = InferenceClient("meta-llama/Meta-Llama-3-8B-Instruct", token=self.token)
+        client = InferenceClient(
+            "meta-llama/Meta-Llama-3-8B-Instruct", token=self.token
+        )
 
         return_str: str = ""
 
         for message in client.chat_completion(
-                messages=[
-                    {"role": "system", "content": self.system_prompt},
-                    {"role": "user", "content": question}
-                ],
-                max_tokens=2048,
-                stream=True,
+            messages=[
+                {"role": "system", "content": self.system_prompt},
+                {"role": "user", "content": question},
+            ],
+            max_tokens=2048,
+            stream=True,
         ):
             return_str += message.choices[0].delta.content
 
@@ -143,7 +149,9 @@ class gemini_flash(LLM):
         question = question + " " + self.prompt_addition
 
         genai.configure(api_key=self.token)
-        model = genai.GenerativeModel('gemini-1.5-flash', system_instruction=self.system_prompt)
+        model = genai.GenerativeModel(
+            "gemini-1.5-flash", system_instruction=self.system_prompt
+        )
 
         return model.generate_content(question).text
 
@@ -164,17 +172,19 @@ class mixtral_8x7b_ins(LLM):
         """
         question = question + " " + self.prompt_addition
 
-        client = InferenceClient("mistralai/Mixtral-8x7B-Instruct-v0.1", token=self.token)
+        client = InferenceClient(
+            "mistralai/Mixtral-8x7B-Instruct-v0.1", token=self.token
+        )
 
         return_str: str = ""
 
         for message in client.chat_completion(
-                messages=[
-                    {"role": "system", "content": self.system_prompt},
-                    {"role": "user", "content": question}
-                ],
-                max_tokens=2048,
-                stream=True,
+            messages=[
+                {"role": "system", "content": self.system_prompt},
+                {"role": "user", "content": question},
+            ],
+            max_tokens=2048,
+            stream=True,
         ):
             return_str += message.choices[0].delta.content
 
@@ -240,8 +250,8 @@ class gpt_4o(LLM):
             model="gpt-4o",
             messages=[
                 {"role": "system", "content": self.system_prompt},
-                {"role": "user", "content": question}
-            ]
+                {"role": "user", "content": question},
+            ],
         )
 
         # To avoid overloading the API, sleep
@@ -273,8 +283,8 @@ class gpt_4o_mini(LLM):
             model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": self.system_prompt},
-                {"role": "user", "content": question}
-            ]
+                {"role": "user", "content": question},
+            ],
         )
 
         # To avoid overloading the API, sleep

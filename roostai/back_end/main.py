@@ -26,22 +26,20 @@ class UniversityChatbot:
 
         self.vector_store = VectorStore(
             collection_name=self.config.vector_db.collection_name,
-            db_path=self.config.vector_db.db_path
+            db_path=self.config.vector_db.db_path,
         )
 
-        self.reranker = Reranker(
-            model_name=self.config.model.cross_encoder_model
-        )
+        self.reranker = Reranker(model_name=self.config.model.cross_encoder_model)
 
         self.quality_checker = QualityChecker(
             min_score=self.config.thresholds.quality_min_score,
-            min_docs=self.config.thresholds.quality_min_docs
+            min_docs=self.config.thresholds.quality_min_docs,
         )
 
         self.llm_manager = LLMManager(
             model_name=self.config.model.llm_model,
             config=self.config.llm,
-            llm_model=self.config.model.llm_model
+            llm_model=self.config.model.llm_model,
         )
 
     async def process_query(self, query: str) -> str:
@@ -49,29 +47,36 @@ class UniversityChatbot:
             if not query.strip():
                 return "Please provide a valid question."
 
-            cleaned_query, query_embedding = await self.query_processor.process_query(query)
+            cleaned_query, query_embedding = await self.query_processor.process_query(
+                query
+            )
 
             documents = await self.vector_store.query(
-                query_embedding,
-                k=self.config.vector_db.top_k
+                query_embedding, k=self.config.vector_db.top_k
             )
 
             if not documents:
-                return ("I don't have any relevant information to answer your question. "
-                        "Please try asking something about USC.")
+                return (
+                    "I don't have any relevant information to answer your question. "
+                    "Please try asking something about USC."
+                )
 
             reranked_docs = await self.reranker.rerank(
                 cleaned_query,
                 documents,
-                threshold=self.config.thresholds.reranking_threshold
+                threshold=self.config.thresholds.reranking_threshold,
             )
 
-            result = await self.quality_checker.check_quality(cleaned_query, reranked_docs)
+            result = await self.quality_checker.check_quality(
+                cleaned_query, reranked_docs
+            )
 
             if result.quality_score < self.config.thresholds.quality_min_score:
-                return ("I apologize, but I don't have enough confident information to "
-                        "provide a good answer to your question. Please try rephrasing or "
-                        "asking about a different topic related to USC.")
+                return (
+                    "I apologize, but I don't have enough confident information to "
+                    "provide a good answer to your question. Please try rephrasing or "
+                    "asking about a different topic related to USC."
+                )
 
             response = await self.llm_manager.generate_response(cleaned_query, result)
 
@@ -79,8 +84,10 @@ class UniversityChatbot:
 
         except Exception as e:
             self.logger.error(f"Error processing query: {e}")
-            return ("I apologize, but I encountered an error processing your query. "
-                    "Please try again or rephrase your question.")
+            return (
+                "I apologize, but I encountered an error processing your query. "
+                "Please try again or rephrase your question."
+            )
 
     async def add_documents(self, documents: List[Document]):
         """Add documents to the vector store."""
@@ -105,11 +112,11 @@ class UniversityChatbot:
         """Cleanup all resources."""
         pass
         tasks = []
-        if hasattr(self, 'vector_store'):
+        if hasattr(self, "vector_store"):
             tasks.append(self.vector_store.close())
-        if hasattr(self, 'llm_manager'):
+        if hasattr(self, "llm_manager"):
             tasks.append(self.llm_manager.close())
-        if hasattr(self, 'query_processor'):
+        if hasattr(self, "query_processor"):
             self.query_processor.clear_cache()
 
         if tasks:
@@ -122,27 +129,25 @@ async def main():
 
     chatbot = UniversityChatbot()
 
-    sample_url = DocumentMetadata(
-            url="https://sample_url"
-        )
+    sample_url = DocumentMetadata(url="https://sample_url")
 
     # More relevant test documents
     test_docs = [
         Document(
             content="The USC Computer Science program requires a minimum GPA of 3.0 for admission. "
-                    "Applicants must also complete prerequisite courses in mathematics and programming.",
-            metadata=sample_url
+            "Applicants must also complete prerequisite courses in mathematics and programming.",
+            metadata=sample_url,
         ),
         Document(
             content="Computer Science admission requirements include: SAT/ACT scores, "
-                    "letters of recommendation, and a strong background in mathematics.",
-            metadata=sample_url
+            "letters of recommendation, and a strong background in mathematics.",
+            metadata=sample_url,
         ),
         Document(
             content="Transfer students applying to the Computer Science program must have "
-                    "completed calculus I and have a minimum GPA of 3.0 in all prior coursework.",
-            metadata=sample_url
-        )
+            "completed calculus I and have a minimum GPA of 3.0 in all prior coursework.",
+            metadata=sample_url,
+        ),
     ]
 
     # Add documents

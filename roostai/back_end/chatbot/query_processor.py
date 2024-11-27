@@ -36,6 +36,6 @@ class QueryProcessor:
 
     def clear_cache(self):
         """Clear any cached embeddings."""
-        if hasattr(self, 'model'):
+        if hasattr(self, "model"):
             # No clear_cache() method available in SentenceTransformer, use something else instead
             pass

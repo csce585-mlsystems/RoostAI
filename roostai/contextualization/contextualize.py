@@ -60,7 +60,6 @@ user	606m15.685s
 sys	167m30.987s"""
 
 
-
 def setup_model():
     print("Loading model and tokenizer...")
     model_name = "mistralai/Mixtral-8x7B-Instruct-v0.1"
@@ -99,18 +98,18 @@ Put your answer in <context> tags.
     # Only get the answer in <context> tags
     if "<context>" not in raw_response:
         return {
-            'original_chunk': chunk,
-            'has_context_tag': False,
-            'contextualized_chunk': "No context tags detected",
+            "original_chunk": chunk,
+            "has_context_tag": False,
+            "contextualized_chunk": "No context tags detected",
         }
 
     # Get only the part in <context> tags
     cleaned_response = raw_response.split("<context>")[2].split("</context>")[0].strip()
 
     return {
-        'original_chunk': chunk,
-        'has_context_tag': True,
-        'contextualized_chunk': cleaned_response + "\n" + chunk,
+        "original_chunk": chunk,
+        "has_context_tag": True,
+        "contextualized_chunk": cleaned_response + "\n" + chunk,
     }
 
 
@@ -132,12 +131,12 @@ def process_document(filename):
 
     # Load document data
     file_path = os.path.join(CHUNK_DIR, filename)
-    with open(file_path, 'r', encoding='utf-8') as f:
+    with open(file_path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    document = data['main_text']
-    chunks = data['chunks']
-    metadata = data['metadata']
+    document = data["main_text"]
+    chunks = data["chunks"]
+    metadata = data["metadata"]
 
     print(f"Found {len(chunks)} chunks to process")
 
@@ -147,8 +146,10 @@ def process_document(filename):
     # Process chunks in batches
     all_results = []
     for i in range(0, len(chunks), BATCH_SIZE):
-        batch = chunks[i:i + BATCH_SIZE]
-        print(f"\nProcessing batch {i // BATCH_SIZE + 1}/{(len(chunks) + BATCH_SIZE - 1) // BATCH_SIZE}")
+        batch = chunks[i : i + BATCH_SIZE]
+        print(
+            f"\nProcessing batch {i // BATCH_SIZE + 1}/{(len(chunks) + BATCH_SIZE - 1) // BATCH_SIZE}"
+        )
         results = process_chunks_batch(model, tokenizer, document, batch)
         all_results.extend(results)
 
@@ -160,15 +161,22 @@ def process_document(filename):
         gc.collect()
 
     # Save results
-    output_file = os.path.join(OUTPUT_DIR, filename.replace('.json', '_processed.json'))
-    with open(output_file, 'w', encoding='utf-8') as f:
-        json.dump({
-            'document': document,
-            'original_chunks': [r['original_chunk'] for r in all_results],
-            'have_context_tags': [r['has_context_tag'] for r in all_results],
-            'contextualized_chunk': [r['contextualized_chunk'] for r in all_results],
-            'metadata': metadata
-        }, f, indent=2, ensure_ascii=False)
+    output_file = os.path.join(OUTPUT_DIR, filename.replace(".json", "_processed.json"))
+    with open(output_file, "w", encoding="utf-8") as f:
+        json.dump(
+            {
+                "document": document,
+                "original_chunks": [r["original_chunk"] for r in all_results],
+                "have_context_tags": [r["has_context_tag"] for r in all_results],
+                "contextualized_chunk": [
+                    r["contextualized_chunk"] for r in all_results
+                ],
+                "metadata": metadata,
+            },
+            f,
+            indent=2,
+            ensure_ascii=False,
+        )
 
     print(f"\nSaved results to {output_file}")
 
@@ -184,7 +192,11 @@ def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
     # Get list of files to process
-    filenames = [f for f in os.listdir(CHUNK_DIR) if f.startswith('chunks_') and f.endswith('.json')]
+    filenames = [
+        f
+        for f in os.listdir(CHUNK_DIR)
+        if f.startswith("chunks_") and f.endswith(".json")
+    ]
     print(f"Found {len(filenames)} files to process")
 
     # Process one document at a time (since model is large)
