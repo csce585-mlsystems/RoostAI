@@ -130,6 +130,7 @@ class WebScraper:
                 for new_url in new_urls:
                     if new_url not in self.visited:
                         queue.put_nowait(new_url)
+                print(queue)
             await browser.close()
 
 if __name__ == "__main__":
