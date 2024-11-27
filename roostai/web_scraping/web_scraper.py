@@ -67,6 +67,8 @@ class WebScraper:
         chrome_options.add_argument("--log-level=3")  # Reduce logging
         chrome_options.add_argument("--silent")
         chrome_options.binary_location = "/usr/bin/chromium-browser"
+        chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
+        chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])   
         
         service = Service(
             self.chrome_driver_path,
