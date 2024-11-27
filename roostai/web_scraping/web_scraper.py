@@ -377,7 +377,7 @@ class WebScraper:
 
 if __name__ == "__main__":
     start_urls = ["https://sc.edu"]
-    with WebScraper(start_urls, max_concurrent=4) as scraper:
+    with WebScraper(start_urls, max_concurrent=2) as scraper:
         try:
             scraper.start()
         except KeyboardInterrupt:
