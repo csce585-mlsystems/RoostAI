@@ -11,6 +11,55 @@ OUTPUT_DIR = "./processed_chunks"
 # Number of chunks to process in parallel - adjust based on RAM
 BATCH_SIZE = 12
 
+"""
+cc@vnagpal-test:~/RoostAI/roostai/contextualization$ time poetry run python contextualize.py
+The currently activated Python version 3.8.10 is not supported by the project (>=3.9,<3.13).
+Trying to find and use a compatible version.
+Using python3 (3.10.15)
+Found 10 files to process
+Processing documents:   0%|                                                                                                           | 0/10 [00:00<?, ?it/s]
+Processing file: chunks_127137.json
+Found 3 chunks to process
+Loading model and tokenizer...
+Loading checkpoint shards: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████| 19/19 [03:57<00:00, 12.52s/it]
+Model loaded successfully! 100%|████████████████████████████████████████████████████████████████████████████████████████████████████| 19/19 [03:57<00:00, 12.06s/it]
+
+Processing batch 1/1
+                                                                                                                                                                   Setting `pad_token_id` to `eos_token_id`:None for open-end generation.                                                                         | 0/3 [00:00<?, ?it/s]
+Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+
+Saved results to ./processed_chunks/chunks_127137_processed.json
+Processing documents:  10%|█████████▌                                                                                      | 1/10 [12:58<1:56:42, 778.09s/it]
+Processing file: chunks_127131.json
+Found 2 chunks to process
+Loading model and tokenizer...
+Loading checkpoint shards: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████| 19/19 [03:58<00:00, 12.56s/it]
+Model loaded successfully! 100%|████████████████████████████████████████████████████████████████████████████████████████████████████| 19/19 [03:58<00:00, 12.19s/it]
+
+Processing batch 1/1
+                                                                                                                                                                   Setting `pad_token_id` to `eos_token_id`:None for open-end generation.                                                                         | 0/2 [00:00<?, ?it/s]
+Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+
+Saved results to ./processed_chunks/chunks_127131_processed.json
+Processing documents:  20%|███████████████████▏                                                                            | 2/10 [21:55<1:24:50, 636.27s/it]
+Processing file: chunks_127132.json
+Found 3 chunks to process
+Loading model and tokenizer...
+Loading checkpoint shards: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████| 19/19 [04:00<00:00, 12.64s/it]
+Model loaded successfully! 100%|████████████████████████████████████████████████████████████████████████████████████████████████████| 19/19 [04:00<00:00, 12.34s/it]
+
+Processing batch 1/1
+                                                                                                                                                                   Setting `pad_token_id` to `eos_token_id`:None for open-end generation.                                                                         | 0/3 [00:00<?, ?it/s]
+Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+Killed
+
+real	31m17.153s
+user	606m15.685s
+sys	167m30.987s"""
+
+
 
 def setup_model():
     print("Loading model and tokenizer...")

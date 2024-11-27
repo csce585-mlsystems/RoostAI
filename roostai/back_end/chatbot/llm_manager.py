@@ -11,7 +11,9 @@ from .types import QueryResult
 
 
 class LLMManager:
-    def __init__(self, model_name: str, config: LLMConfig):
+    def __init__(self, model_name: str, config: LLMConfig, llm_model: str):
+        """Initialize the Hugging Face Inference API client for LLM."""
+
         self.logger = logging.getLogger(__name__)
         self.model_name = model_name
         self.config = config
@@ -28,8 +30,7 @@ class LLMManager:
         )
 
         self.client = InferenceClient(token=self.api_token)
-        # self.model = "mistralai/Mixtral-8x7B-v0.1"
-        self.model = "Qwen/Qwen2.5-1.5B"
+        self.model = llm_model
 
         self.system_prompt: str = ("You are a chatbot specifically designed to provide information about the "
                                    "University of South Carolina (USC). Your knowledge encompasses USC's "
@@ -44,18 +45,29 @@ class LLMManager:
 
     def generate_prompt(self, query: str, result: QueryResult) -> str:
         """Generate prompt for LLM using query and retrieved documents."""
+
+        if not result.documents:
+            return f"""
+{self.system_prompt}
+
+User question: {query}
+
+Please note that I don't have any specific information about this in my knowledge base. 
+I can only provide general information based on my training.
+"""
+
         context = "\n".join(f"- {doc.content}" for doc in result.documents)
 
         return f"""
 {self.system_prompt}
 
 Context information:
-
 {context}
 
 User question: {query}
 
-Please provide a helpful response based on the context above.
+Please provide a helpful response based on the context above. If the context doesn't 
+contain relevant information to answer the question, please state that clearly.
 """
 
     async def generate_response(
