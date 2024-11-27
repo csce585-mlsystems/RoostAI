@@ -26,24 +26,15 @@ class WebScraper:
         self.logger = logging.getLogger(__name__)
 
     def is_valid(self, url):
-        """
-        Check if a URL is valid and belongs to the same domain as the start URL.
-        """
         parsed = urlparse(url)
         return bool(parsed.netloc) and parsed.netloc.endswith(tuple(self.domains))
 
     def get_url_save_path(self, url):
-        """
-        Returns the file save path for a given URL.
-        """
-        url = '/'.join(url.split('#'))  # Remove fragments
+        url = '/'.join(url.split('#'))
         url_path = Path(url.replace('//', '/'))
         return abs_data_path / url_path
 
     def is_unique(self, html_content):
-        """
-        Check if HTML content is unique by comparing its hash.
-        """
         content_hash = hashlib.md5(html_content.encode()).hexdigest()
         if content_hash in self.html_hashes:
             return False
@@ -51,38 +42,22 @@ class WebScraper:
         return True
 
     async def save_html(self, url, content):
-        """
-        Save the HTML content and metadata to the disk.
-        """
         save_path = self.get_url_save_path(url)
-
-        # Create directory structure if it doesn't exist
         os.makedirs(save_path, exist_ok=True)
-
-        # Save HTML content
         with open(save_path / "scraped_data.html", "w", encoding="utf-8") as f:
             f.write(content)
-
-        # Save metadata
         with open(save_path / "metadata.json", "w") as f:
             metadata = {"source_url": f"https://{url}"}
             json.dump(metadata, f)
 
     async def scrape_page(self, page, url):
-        """
-        Scrape a single page, extract links, and save content.
-        """
-        await page.goto(url, timeout=30000)  # 30-second timeout
+        await page.goto(url, timeout=30000)
         await page.wait_for_load_state("domcontentloaded")
-
-        # Extract page content
         html_content = await page.content()
 
-        # Save unique content
         if self.is_unique(html_content):
             await self.save_html(url, html_content)
 
-        # Extract and filter new URLs
         new_urls = []
         links = await page.evaluate("""
             Array.from(document.querySelectorAll('a'))
@@ -92,46 +67,39 @@ class WebScraper:
             full_url = urljoin(url, href)
             if self.is_valid(full_url) and full_url not in self.visited:
                 new_urls.append(full_url)
-                self.visited.add(full_url)
-
         return new_urls
 
     async def scrape_url(self, url, browser):
-        """
-        Scrape a URL using a shared Playwright browser instance.
-        """
-        async with self.semaphore:  # Limit concurrency
+        async with self.semaphore:
             try:
                 self.logger.info(f"Scraping: {url}")
                 context = await browser.new_context()
                 page = await context.new_page()
                 new_urls = await self.scrape_page(page, url)
                 await context.close()
-                print(f'New urls: {new_urls}')
                 return new_urls
             except Exception as e:
                 self.logger.error(f"Error scraping {url}: {e}")
                 return []
 
     async def start(self):
-        """
-        Start scraping all URLs asynchronously.
-        """
         queue = asyncio.Queue()
         for url in self.start_urls:
             queue.put_nowait(url)
-            self.visited.add(url)
 
         async with async_playwright() as playwright:
             browser = await playwright.chromium.launch(headless=True)
             while not queue.empty():
                 url = await queue.get()
-                new_urls = await self.scrape_url(url, browser)
-                for new_url in new_urls:
-                    if new_url not in self.visited:
-                        queue.put_nowait(new_url)
-                print(queue)
+                if url not in self.visited:  # Process only if not visited
+                    self.visited.add(url)  # Mark visited after dequeuing
+                    new_urls = await self.scrape_url(url, browser)
+                    for new_url in new_urls:
+                        if new_url not in self.visited:
+                            queue.put_nowait(new_url)  # Add only unvisited URLs
+                self.logger.info(f"Queue size: {queue.qsize()}")
             await browser.close()
+
 
 if __name__ == "__main__":
     start_urls = ["https://sc.edu"]
@@ -139,7 +107,6 @@ if __name__ == "__main__":
     scraper = WebScraper(start_urls, max_concurrent=2)
     asyncio.run(scraper.start())
     print("Finished web scraping scripting")
-
     
 # # Standard library imports
 # import hashlib
