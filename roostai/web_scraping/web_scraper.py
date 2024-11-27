@@ -107,6 +107,7 @@ class WebScraper:
                 page = await context.new_page()
                 new_urls = await self.scrape_page(page, url)
                 await context.close()
+                print(f'New urls: {new_urls}')
                 return new_urls
             except Exception as e:
                 self.logger.error(f"Error scraping {url}: {e}")
