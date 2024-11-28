@@ -5,7 +5,7 @@ import json
 import requests
 import io
 from PyPDF2 import PdfReader
-import tqdm
+from tqdm import tqdm
 
 
 def extract_main_text(html_content):

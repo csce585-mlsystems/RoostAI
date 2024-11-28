@@ -6,7 +6,7 @@ from pathlib import Path
 import json
 import re
 import os
-import tqdm
+from tqdm import tqdm
 
 
 def process_files_with_metadata(directory_path: str, output_dir: str):
