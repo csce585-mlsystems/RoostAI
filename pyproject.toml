@@ -30,7 +30,11 @@ requests = "^2.32.3"
 pycryptodome = "^3.21.0"
 accelerate = "^1.1.1"
 playwright = "^1.49.0"
+<<<<<<< Updated upstream
 black = "^24.10.0"
+=======
+pypdf2 = "^3.0.1"
+>>>>>>> Stashed changes
 [tool.poetry.group.backend.dependencies]
 torch = "^2.5.1"
 langchain = "^0.3.7"
