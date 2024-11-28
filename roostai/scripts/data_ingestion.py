@@ -2,10 +2,12 @@
 import json
 import logging
 import os
+from collections import defaultdict
 from datetime import datetime
-from typing import List, Dict, Any
-import asyncio
 from pathlib import Path
+from typing import List, Dict, Any, Set, Tuple
+import asyncio
+from tqdm import tqdm
 
 from roostai.back_end.chatbot.types import Document, DocumentMetadata
 from roostai.back_end.chatbot.query_processor import QueryProcessor
@@ -14,6 +16,91 @@ from roostai.back_end.chatbot.config import Config
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+
+class DuplicateTracker:
+    def __init__(self):
+        self.content_hashes: Set[str] = set()
+        self.duplicate_counts: Dict[str, int] = defaultdict(int)
+        self.duplicate_sources: Dict[str, List[str]] = defaultdict(list)
+        self.total_chunks = 0
+        self.unique_chunks = 0
+
+    def is_duplicate(self, content: str, source_url: str) -> bool:
+        """Check if content is duplicate and track statistics."""
+        self.total_chunks += 1
+        content_hash = hash(content.strip())
+
+        if content_hash in self.content_hashes:
+            self.duplicate_counts[source_url] += 1
+            return True
+
+        self.content_hashes.add(content_hash)
+        self.unique_chunks += 1
+        return False
+
+    def print_statistics(self):
+        """Print duplicate statistics."""
+        logger.info("\n=== Duplicate Statistics ===")
+        logger.info(f"Total chunks processed: {self.total_chunks}")
+        logger.info(f"Unique chunks: {self.unique_chunks}")
+        logger.info(f"Duplicate chunks: {self.total_chunks - self.unique_chunks}")
+
+        if self.duplicate_counts:
+            logger.info("\nSources with duplicates:")
+            for url, count in sorted(
+                self.duplicate_counts.items(), key=lambda x: x[1], reverse=True
+            ):
+                logger.info(f"  {url}: {count} duplicates")
+
+
+def _create_documents_from_chunks(
+    chunks: List[str], metadata: Dict[str, Any], duplicate_tracker: DuplicateTracker
+) -> List[Document]:
+    """Create Document objects from chunks and metadata, excluding duplicates."""
+    doc_metadata = DocumentMetadata(**metadata)
+    unique_documents = []
+
+    for chunk in chunks:
+        if not duplicate_tracker.is_duplicate(chunk, metadata.get("url", "unknown")):
+            unique_documents.append(
+                Document(content=chunk, metadata=doc_metadata, score=None)
+            )
+
+    return unique_documents
+
+
+async def process_file(
+    file_path: str, duplicate_tracker: DuplicateTracker
+) -> List[Document]:
+    """Process a single JSON file and return list of unique Document objects."""
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        chunks = data.get("chunks", [])
+        metadata = data.get("metadata", {})
+
+        # Handle URL field
+        if "url" not in metadata:
+            if "source_url" in metadata:
+                metadata["url"] = metadata["source_url"]
+                metadata.pop("source_url")
+            else:
+                logger.warning(f"No URL found in metadata for {file_path}")
+                return []
+
+        if not chunks:
+            logger.warning(f"No chunks found in {file_path}")
+            return []
+
+        documents = _create_documents_from_chunks(chunks, metadata, duplicate_tracker)
+        logger.info(f"Processed {len(documents)} unique chunks from {file_path}")
+        return documents
+
+    except Exception as e:
+        logger.error(f"Error processing file {file_path}: {e}")
+        return []
 
 
 class DataIngestionManager:
@@ -27,50 +114,14 @@ class DataIngestionManager:
             collection_name=self.config.vector_db.collection_name,
             db_path=self.config.vector_db.db_path,
         )
-
-    def _process_metadata(self, metadata: Dict[str, Any]) -> DocumentMetadata:
-        """Convert raw metadata dictionary to DocumentMetadata object."""
-        return DocumentMetadata(
-            url=metadata.get("url", ""),
-            department=metadata.get("department"),
-            doc_type=metadata.get("doc_type"),
-            date_added=datetime.now().isoformat(),
-        )
-
-    def _create_documents_from_chunks(
-        self, chunks: List[str], metadata: Dict[str, Any]
-    ) -> List[Document]:
-        """Create Document objects from chunks and metadata."""
-        doc_metadata = self._process_metadata(metadata)
-        return [
-            Document(content=chunk, metadata=doc_metadata, score=None)
-            for chunk in chunks
-        ]
-
-    async def process_file(self, file_path: str) -> List[Document]:
-        """Process a single JSON file and return list of Document objects."""
-        try:
-            with open(file_path, "r", encoding="utf-8") as f:
-                data = json.load(f)
-
-            chunks = data.get("chunks", [])
-            metadata = data.get("metadata", {})
-
-            if not chunks:
-                logger.warning(f"No chunks found in {file_path}")
-                return []
-
-            documents = self._create_documents_from_chunks(chunks, metadata)
-            logger.info(f"Processed {len(documents)} chunks from {file_path}")
-            return documents
-
-        except Exception as e:
-            logger.error(f"Error processing file {file_path}: {e}")
-            return []
+        self.duplicate_tracker = DuplicateTracker()
 
     async def ingest_documents(self, documents: List[Document]) -> bool:
         """Ingest documents into the vector store."""
         try:
+            if not documents:
+                return True  # Nothing to ingest
+
             # Generate embeddings for all documents
             embeddings = [
                 self.query_processor.model.encode(doc.content).tolist()
@@ -102,8 +153,9 @@ class DataIngestionManager:
             current_batch: List[Document] = []
             total_documents = 0
 
-            for file_path in json_files:
-                documents = await self.process_file(str(file_path))
+            # Use tqdm for progress bar
+            for file_path in tqdm(json_files, desc="Processing files"):
+                documents = await process_file(str(file_path), self.duplicate_tracker)
                 current_batch.extend(documents)
 
                 # If batch is full, process it
@@ -122,8 +174,10 @@ class DataIngestionManager:
                 if success:
                     total_documents += len(current_batch)
 
+            # Print final statistics
+            self.duplicate_tracker.print_statistics()
             logger.info(
-                f"Completed ingestion. Total documents processed: {total_documents}"
+                f"Completed ingestion. Total unique documents processed: {total_documents}"
             )
 
         except Exception as e:
@@ -141,8 +195,7 @@ async def main():
     config = Config.load_config()
     ingestion_manager = DataIngestionManager(config)
 
-    # TODO: Directory containing your JSON files
-    data_directory = ""
+    data_directory = "/Users/nitingupta/usc/fa24/csce585/chunks_and_metadata"
 
     try:
         await ingestion_manager.process_directory(data_directory)
