@@ -27,6 +27,7 @@ playwright = "^1.49.0"
 black = "^24.10.0"
 pypdf2 = "^3.0.1"
 pre-commit = "^4.0.1"
+pysqlite3-binary = "^0.5.4"
 
 [tool.poetry.group.backend.dependencies]
 # The backend dependency group

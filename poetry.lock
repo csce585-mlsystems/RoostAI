@@ -3715,6 +3715,23 @@ files = [
 ]
 
 [[package]]
+name = "pysqlite3-binary"
+version = "0.5.4"
+description = "DB-API 2.0 interface for Sqlite 3.x"
+optional = false
+python-versions = "*"
+files = [
+    {file = "pysqlite3_binary-0.5.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:df084f3da52bc92204357cd6ba68f98a8ef8e55a9e8dac3c4d96029ee56fb57b"},
+    {file = "pysqlite3_binary-0.5.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:bf257ca54a0b94dce14324b29960fae5b1d57a669ce327b92fe245049abf2854"},
+    {file = "pysqlite3_binary-0.5.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:cb551d736ac3a049b3a91332dbcb0df506eaed58add8a95acfd264dc45ce3fa8"},
+    {file = "pysqlite3_binary-0.5.4-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:bb3653a0eb0ef5db2d0ed49d43b11ab4be24fdf5b2e65a39650fc59348e30dc6"},
+    {file = "pysqlite3_binary-0.5.4-cp36-cp36m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:1a7e41f169994c140064e3757f9785f5f460e72607f1d9a5244853d4de3cc4f2"},
+    {file = "pysqlite3_binary-0.5.4-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c7146a400deb786b064fd299aa79589a81e532f6dccc38b7986744ace484afdc"},
+    {file = "pysqlite3_binary-0.5.4-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a4be1927a02d8079f1bf8e46af641798341e9bd1a3c5e57fa6f83207a0a8fa66"},
+    {file = "pysqlite3_binary-0.5.4-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c8d25d8568978669c8ba53f32d10fb779176f25d720cda148b28baaf6ef0a20c"},
+]
+
+[[package]]
 name = "python-dateutil"
 version = "2.9.0.post0"
 description = "Extensions to the standard Python datetime module"
@@ -5487,4 +5504,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.13"
-content-hash = "888dd9490d514982dd6361021344fd7f1f76131ad420602b1bf2799b31597456"
+content-hash = "96c1399998d6944e05c4afd5f432958df5e2965df824a81ce06acb764be6e5d1"
