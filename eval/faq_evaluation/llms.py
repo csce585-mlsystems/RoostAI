@@ -212,12 +212,7 @@ class claude_sonnet(LLM):
         message = client.messages.create(
             max_tokens=2048,
             system=self.system_prompt,
-            messages=[
-                {
-                    "role": "user",
-                    "content": question,
-                }
-            ],
+            messages=[{"role": "user", "content": question,}],
             model="claude-3-5-sonnet-20240620",
         )
 

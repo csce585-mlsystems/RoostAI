@@ -77,9 +77,10 @@ class CLIInterface(ChatbotInterface):
 
                 # Step 1: Process query
                 progress.update(main_task, description="Generating query embedding...")
-                cleaned_query, query_embedding = (
-                    await self.chatbot.query_processor.process_query(query)
-                )
+                (
+                    cleaned_query,
+                    query_embedding,
+                ) = await self.chatbot.query_processor.process_query(query)
                 progress.advance(main_task)
 
                 # Step 2: Search vector store
