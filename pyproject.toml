@@ -20,19 +20,18 @@ google-generativeai = "^0.8.3"
 huggingface-hub = "^0.26.0"
 anthropic = "^0.36.2"
 llama-index-embeddings-huggingface = "^0.3.1"
-
-# Might need the following command if running into `protobuf` errors
-# `poetry run pip install "protobuf==3.20.*"`
-
-# The backend dependency group
-# `poetry add <name-of-package> --group backend` to add a package to this group
 requests = "^2.32.3"
 pycryptodome = "^3.21.0"
 accelerate = "^1.1.1"
 playwright = "^1.49.0"
 black = "^24.10.0"
 pypdf2 = "^3.0.1"
+pre-commit = "^4.0.1"
+
 [tool.poetry.group.backend.dependencies]
+# The backend dependency group
+# `poetry add <name-of-package> --group backend` to add a package to this group
+
 torch = "^2.5.1"
 langchain = "^0.3.7"
 sentence-transformers = "^3.2.1"
@@ -45,3 +44,6 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 roostai = "roostai.front_end.cli:cli"
+
+# Might need the following command if running into `protobuf` errors
+# `poetry run pip install "protobuf==3.20.*"`

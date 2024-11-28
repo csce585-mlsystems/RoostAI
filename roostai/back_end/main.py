@@ -1,15 +1,15 @@
 import asyncio
 import logging
-import os
+import time
 from typing import List
 
+from roostai.back_end.chatbot.config import Config
 from roostai.back_end.chatbot.llm_manager import LLMManager
 from roostai.back_end.chatbot.quality_checker import QualityChecker
 from roostai.back_end.chatbot.query_processor import QueryProcessor
 from roostai.back_end.chatbot.reranker import Reranker
 from roostai.back_end.chatbot.types import Document, DocumentMetadata
 from roostai.back_end.chatbot.vector_store import VectorStore
-from roostai.back_end.chatbot.config import Config
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -124,9 +124,6 @@ class UniversityChatbot:
 
 
 async def main():
-    if not os.path.exists("data"):
-        os.makedirs("data")
-
     chatbot = UniversityChatbot()
 
     sample_url = DocumentMetadata(url="https://sample_url")
@@ -158,13 +155,20 @@ async def main():
     doc_count = await chatbot.get_document_count()
     logger.info(f"Total documents in database: {doc_count}")
 
-    # Test query
-    query = "What are the admission requirements for the Computer Science program?"
-    query = "Who is the student body president at USC?"
+    queries = [
+        "What are the admission requirements for the Computer Science program?",
+        "What are the SAT/ACT score requirements for USC?",
+        "Who is the student body president at USC?",
+    ]
 
-    logger.info(f"Processing query: {query}")
-    response = await chatbot.process_query(query)
-    print("\nResponse:", response)
+    for query in queries:
+        print(f"\nQuery: {query}")
+
+        # Get the time taken to process the query
+        start = time.time()
+        response = await chatbot.process_query(query)
+        print(f"Response: {response} \n")
+        print(f"Time taken: {time.time() - start}")
 
     await chatbot.cleanup()
 

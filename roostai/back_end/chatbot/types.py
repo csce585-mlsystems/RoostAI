@@ -5,9 +5,9 @@ from typing import List, Optional
 @dataclass
 class DocumentMetadata:
     url: str
-    department: Optional[str] = None
-    doc_type: Optional[str] = None
-    date_added: Optional[str] = None
+    # department: Optional[str] = None
+    # doc_type: Optional[str] = None
+    # date_added: Optional[str] = None
 
 
 @dataclass
