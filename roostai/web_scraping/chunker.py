@@ -6,6 +6,7 @@ from pathlib import Path
 import json
 import re
 import os
+import tqdm
 
 
 def process_files_with_metadata(directory_path: str, output_dir: str):
@@ -39,7 +40,7 @@ def process_files_with_metadata(directory_path: str, output_dir: str):
     # counts files with empty main text
     dud_file_counter = 0
     urls = set()
-    for i, main_file in enumerate(main_files):
+    for i, main_file in tqdm(enumerate(main_files)):
         percentage_complete = (i / len(main_files)) * 100
         if (int(percentage_complete) % 5) == 0 and int(percentage_complete) > 0:
             print(f"{percentage_complete}% of files chunked")

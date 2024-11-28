@@ -5,6 +5,7 @@ import json
 import requests
 import io
 from PyPDF2 import PdfReader
+import tqdm
 
 
 def extract_main_text(html_content):
@@ -70,7 +71,7 @@ def process_files(input_dir, output_dir):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    for i, file_name in enumerate(os.listdir(input_dir), 1):
+    for i, file_name in tqdm(enumerate(os.listdir(input_dir), 1)):
         if not file_name.endswith("html"):
             source_file = os.path.join(input_dir, file_name)
             dest_file = os.path.join(output_dir, file_name)
