@@ -126,9 +126,9 @@ class UniversityChatbot:
                 if documents:
                     logger.info("Top 3 initial documents:")
                     for i, doc in enumerate(documents[:3], 1):
-                        logger.info(f"\n{i}. Score: {doc.score:.4f}")
+                        logger.info(f"\n\n{i}. Score: {doc.score:.4f}")
                         logger.info(f"URL: {doc.metadata.url}")
-                        logger.info(f"Content: {doc.content[:200]}...")
+                        logger.info(f"Content: {doc.content}")
 
             if not documents:
                 return (
