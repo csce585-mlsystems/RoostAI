@@ -1,3 +1,5 @@
+from datetime import datetime
+
 __import__("pysqlite3")
 import sys
 
@@ -5,6 +7,7 @@ sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
 
 import json
 import logging
+import shutil
 from collections import defaultdict
 from pathlib import Path
 from typing import List, Dict, Any, Set
@@ -18,6 +21,28 @@ from roostai.back_end.chatbot.config import Config
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+
+def clear_database(db_path: str):
+    """Clear existing database files."""
+    try:
+        db_dir = Path(db_path)
+        if db_dir.exists():
+            # Create a backup first
+            backup_dir = (
+                db_dir.parent
+                / f"data_backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+            )
+            shutil.copytree(db_dir, backup_dir)
+            logger.info(f"Created backup at: {backup_dir}")
+
+            # Remove all files in the directory
+            shutil.rmtree(db_dir)
+            db_dir.mkdir(exist_ok=True)
+            logger.info(f"Cleared database directory: {db_dir}")
+    except Exception as e:
+        logger.error(f"Error clearing database: {e}")
+        raise
 
 
 class DuplicateTracker:
@@ -109,6 +134,11 @@ class DataIngestionManager:
     def __init__(self, config: Config):
         """Initialize the data ingestion manager."""
         self.config = config
+
+        # Clear existing database
+        clear_database(self.config.vector_db.db_path)
+        logger.info("Cleared existing database")
+
         self.query_processor = QueryProcessor(
             model_name=self.config.model.embedding_model
         )
@@ -124,14 +154,20 @@ class DataIngestionManager:
             if not documents:
                 return True  # Nothing to ingest
 
-            # Generate embeddings for all documents
-            embeddings = [
-                self.query_processor.model.encode(doc.content).tolist()
-                for doc in documents
-            ]
+            logger.info(f"Generating embeddings for {len(documents)} documents...")
 
+            # Generate embeddings for all documents
+            embeddings = []
+            for doc in tqdm(documents, desc="Generating embeddings"):
+                embedding = self.query_processor.model.encode(doc.content).tolist()
+                embeddings.append(embedding)
+
+            logger.info("Adding documents to vector store...")
             # Add documents to vector store
             await self.vector_store.add_documents(documents, embeddings)
+            logger.info(
+                f"Successfully added {len(documents)} documents to vector store"
+            )
             return True
 
         except Exception as e:
@@ -195,17 +231,26 @@ class DataIngestionManager:
 async def main():
     """Main function to run the data ingestion process."""
     config = Config.load_config()
+    # Override the database path
+    config.vector_db.db_path = "/home/cc/RoostAI/roostai/data"
+
     ingestion_manager = DataIngestionManager(config)
 
     data_directory = "/home/cc/chunks_and_metadata"
 
     try:
+        logger.info(f"Starting ingestion from directory: {data_directory}")
+        logger.info(f"Using database path: {config.vector_db.db_path}")
+
         await ingestion_manager.process_directory(data_directory)
 
         # Verify ingestion
         doc_count = await ingestion_manager.vector_store.get_document_count()
         logger.info(f"Final document count in database: {doc_count}")
 
+    except Exception as e:
+        logger.error(f"Fatal error during ingestion: {e}")
+        raise
     finally:
         await ingestion_manager.cleanup()
 
