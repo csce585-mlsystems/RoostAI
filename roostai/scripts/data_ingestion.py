@@ -236,7 +236,7 @@ async def main():
 
     ingestion_manager = DataIngestionManager(config)
 
-    data_directory = "/home/cc/chunks_and_metadata"
+    data_directory = "/home/cc/chunks_and_metadata_small"
 
     try:
         logger.info(f"Starting ingestion from directory: {data_directory}")
