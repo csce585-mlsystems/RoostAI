@@ -7,7 +7,10 @@ import google.generativeai as genai
 from huggingface_hub import InferenceClient
 from openai import OpenAI
 from anthropic import Anthropic
+from tqdm import tqdm
 
+# Enable tqdm support for all pandas operations
+tqdm.pandas()
 
 def _get_column_average(df: pd.DataFrame, column: str) -> float:
     """
@@ -17,7 +20,7 @@ def _get_column_average(df: pd.DataFrame, column: str) -> float:
     @param column: The column to get the average length of.
     @return: The average length of the strings in the column.
     """
-    return df[column].apply(lambda x: len(x.split())).mean()
+    return df[column].progress_apply(lambda x: len(x.split())).mean()
 
 
 class LLM(ABC):
@@ -61,7 +64,7 @@ class LLM(ABC):
         Add as a new column in the DataFrame with the name of the LLM.
         @return: The Pandas Series of responses.
         """
-        return self.df["question"].apply(self.get_response)
+        return self.df["question"].progress_apply(self.get_response)
 
 
 class phi_3_5_mini_ins(LLM):
@@ -93,7 +96,7 @@ class phi_3_5_mini_ins(LLM):
             stream=True,
         ):
             return_str += message.choices[0].delta.content
-        print(f"Sleeping for 2 seconds to avoid overloading the API...")
+        # print(f"Sleeping for 2 seconds to avoid overloading the API...")
         time.sleep(2)
         return return_str
 
@@ -129,7 +132,7 @@ class llama_3_8b_ins(LLM):
             stream=True,
         ):
             return_str += message.choices[0].delta.content
-        print(f"Sleeping for 2 seconds to avoid overloading the API...")
+        # print(f"Sleeping for 2 seconds to avoid overloading the API...")
         time.sleep(2)
         return return_str
 
@@ -154,7 +157,7 @@ class gemini_flash(LLM):
         model = genai.GenerativeModel(
             "gemini-1.5-flash", system_instruction=self.system_prompt
         )
-        print(f"Sleeping for 2 seconds to avoid overloading the API...")
+        # print(f"Sleeping for 2 seconds to avoid overloading the API...")
         time.sleep(2)
         return model.generate_content(question).text
 
@@ -190,7 +193,7 @@ class mixtral_8x7b_ins(LLM):
             stream=True,
         ):
             return_str += message.choices[0].delta.content
-        print(f"Sleeping for 2 seconds to avoid overloading the API...")
+        # print(f"Sleeping for 2 seconds to avoid overloading the API...")
         time.sleep(2)
         return return_str
 
@@ -221,7 +224,7 @@ class claude_sonnet(LLM):
         )
 
         # To avoid overloading the API, sleep
-        print(f"Sleeping for 2 seconds to avoid overloading the API...")
+        # print(f"Sleeping for 2 seconds to avoid overloading the API...")
         time.sleep(2)
 
         return message.content[0].text
@@ -254,7 +257,7 @@ class gpt_4o(LLM):
         )
 
         # To avoid overloading the API, sleep
-        print(f"Sleeping for 2 seconds to avoid overloading the API...")
+        # print(f"Sleeping for 2 seconds to avoid overloading the API...")
         time.sleep(2)
 
         return completion.choices[0].message.content
@@ -287,7 +290,7 @@ class gpt_4o_mini(LLM):
         )
 
         # To avoid overloading the API, sleep
-        print(f"Sleeping for 2 seconds to avoid overloading the API...")
+        # print(f"Sleeping for 2 seconds to avoid overloading the API...")
         time.sleep(2)
 
         return completion.choices[0].message.content
