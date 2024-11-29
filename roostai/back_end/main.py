@@ -209,15 +209,15 @@ async def main():
         # Test queries that cover different aspects of USC
         test_queries = [
             "What are the admission requirements for USC?",
-            "Tell me about the Computer Science department at USC",
-            "What sports teams does USC have?",
-            "What dining options are available on campus?",
-            "What is the history of USC?",
-            "What research centers does USC have?",
-            "What student organizations are available at USC?",
-            "What are the housing options for freshmen at USC?",
-            "Tell me about USC's library system",
-            "What financial aid options are available at USC?",
+            # "Tell me about the Computer Science department at USC",
+            # "What sports teams does USC have?",
+            # "What dining options are available on campus?",
+            # "What is the history of USC?",
+            # "What research centers does USC have?",
+            # "What student organizations are available at USC?",
+            # "What are the housing options for freshmen at USC?",
+            # "Tell me about USC's library system",
+            # "What financial aid options are available at USC?",
         ]
 
         logger.info("\nStarting query tests...")
