@@ -1,3 +1,5 @@
+import os
+
 __import__("pysqlite3")
 import sys
 
@@ -20,21 +22,54 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
+# Add a function to verify database path
+def verify_db_path(db_path: str) -> bool:
+    """Verify that the database path exists and contains the expected files."""
+    if not os.path.exists(db_path):
+        logger.error(f"Database directory does not exist: {db_path}")
+        return False
+
+    # Check for chroma.sqlite3
+    sqlite_path = os.path.join(db_path, "chroma.sqlite3")
+    if not os.path.exists(sqlite_path):
+        logger.error(f"SQLite database file not found at: {sqlite_path}")
+        return False
+
+    logger.info(f"Found database at: {sqlite_path}")
+    return True
+
+
 class UniversityChatbot:
     def __init__(self):
         self.config = Config.load_config()
-        # Override the database path to use the existing database
-        self.config.vector_db.db_path = "/home/cc/RoostAI/roostai/data"
+
+        # Set the absolute path to the database
+        db_path = "/home/cc/RoostAI/roostai/data"
+
+        # Verify database path
+        if not verify_db_path(db_path):
+            raise ValueError(f"Invalid database path: {db_path}")
+
+        self.config.vector_db.db_path = db_path
         self.logger = logging.getLogger(__name__)
+
+        self.logger.info(f"Initializing with database path: {db_path}")
 
         self.query_processor = QueryProcessor(
             model_name=self.config.model.embedding_model
         )
 
-        self.vector_store = VectorStore(
-            collection_name=self.config.vector_db.collection_name,
-            db_path=self.config.vector_db.db_path,
-        )
+        try:
+            self.vector_store = VectorStore(
+                collection_name=self.config.vector_db.collection_name,
+                db_path=self.config.vector_db.db_path,
+            )
+            # Immediately verify we can access the database
+            asyncio.create_task(self._verify_db_access())
+
+        except Exception as e:
+            self.logger.error(f"Failed to initialize vector store: {e}")
+            raise
 
         self.reranker = Reranker(model_name=self.config.model.cross_encoder_model)
 
@@ -48,6 +83,26 @@ class UniversityChatbot:
             config=self.config.llm,
             llm_model=self.config.model.llm_model,
         )
+
+    async def _verify_db_access(self):
+        """Verify that we can access the database and log its contents."""
+        try:
+            count = await self.vector_store.get_document_count()
+            self.logger.info(
+                f"Successfully connected to database. Document count: {count}"
+            )
+
+            # Try to get a sample document if count > 0
+            if count > 0:
+                query_embedding = self.query_processor.model.encode("test").tolist()
+                docs = await self.vector_store.query(query_embedding, k=1)
+                if docs:
+                    self.logger.info("Successfully retrieved a sample document")
+                else:
+                    self.logger.warning("No documents retrieved in sample query")
+        except Exception as e:
+            self.logger.error(f"Database verification failed: {e}")
+            raise
 
     async def process_query(self, query: str, verbose: bool = False) -> str:
         """Process a query with optional verbose output for debugging."""
@@ -142,43 +197,58 @@ class UniversityChatbot:
 async def main():
     chatbot = UniversityChatbot()
 
-    # First, let's check the document count
-    doc_count = await chatbot.get_document_count()
-    logger.info(f"\nTotal documents in database: {doc_count}")
+    try:
+        # First, let's check the document count
+        doc_count = await chatbot.get_document_count()
+        logger.info(f"\nTotal documents in database: {doc_count}")
 
-    # Test queries that cover different aspects of USC
-    test_queries = [
-        "What are the admission requirements for USC?",
-        "Tell me about the Computer Science department at USC",
-        "What sports teams does USC have?",
-        "What dining options are available on campus?",
-        "What is the history of USC?",
-        "What research centers does USC have?",
-        "What student organizations are available at USC?",
-        "What are the housing options for freshmen at USC?",
-        "Tell me about USC's library system",
-        "What financial aid options are available at USC?",
-    ]
+        if doc_count == 0:
+            logger.error("No documents found in the database. Exiting.")
+            return
 
-    logger.info("\nStarting query tests...")
+        # Test queries that cover different aspects of USC
+        test_queries = [
+            "What are the admission requirements for USC?",
+            "Tell me about the Computer Science department at USC",
+            "What sports teams does USC have?",
+            "What dining options are available on campus?",
+            "What is the history of USC?",
+            "What research centers does USC have?",
+            "What student organizations are available at USC?",
+            "What are the housing options for freshmen at USC?",
+            "Tell me about USC's library system",
+            "What financial aid options are available at USC?",
+        ]
 
-    for i, query in enumerate(test_queries, 1):
-        logger.info(f"\n=== Query {i} ===")
-        logger.info(f"Q: {query}")
+        logger.info("\nStarting query tests...")
 
-        start_time = time.time()
-        response = await chatbot.process_query(query, verbose=True)
-        end_time = time.time()
+        for i, query in enumerate(test_queries, 1):
+            logger.info(f"\n=== Query {i} ===")
+            logger.info(f"Q: {query}")
 
-        logger.info(f"\nA: {response}")
-        logger.info(f"Time taken: {end_time - start_time:.2f} seconds")
-        logger.info("=" * 80)
+            try:
+                start_time = time.time()
+                response = await chatbot.process_query(query, verbose=True)
+                end_time = time.time()
 
-        # Add a small delay between queries to avoid rate limiting
-        await asyncio.sleep(1)
+                logger.info(f"\nA: {response}")
+                logger.info(f"Time taken: {end_time - start_time:.2f} seconds")
+                logger.info("=" * 80)
 
-    await chatbot.cleanup()
-    logger.info("\nTest completed successfully!")
+            except Exception as e:
+                logger.error(f"Error processing query {i}: {e}")
+                continue
+
+            # Add a small delay between queries to avoid rate limiting
+            await asyncio.sleep(1)
+
+    except Exception as e:
+        logger.error(f"Fatal error: {e}")
+
+    finally:
+        if "chatbot" in locals():
+            await chatbot.cleanup()
+            logger.info("\nTest completed!")
 
 
 if __name__ == "__main__":
