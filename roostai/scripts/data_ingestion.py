@@ -23,28 +23,6 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def clear_database(db_path: str):
-    """Clear existing database files."""
-    try:
-        db_dir = Path(db_path)
-        if db_dir.exists():
-            # Create a backup first
-            backup_dir = (
-                db_dir.parent
-                / f"data_backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
-            )
-            shutil.copytree(db_dir, backup_dir)
-            logger.info(f"Created backup at: {backup_dir}")
-
-            # Remove all files in the directory
-            shutil.rmtree(db_dir)
-            db_dir.mkdir(exist_ok=True)
-            logger.info(f"Cleared database directory: {db_dir}")
-    except Exception as e:
-        logger.error(f"Error clearing database: {e}")
-        raise
-
-
 class DuplicateTracker:
     def __init__(self):
         self.content_hashes: Set[str] = set()
@@ -134,10 +112,6 @@ class DataIngestionManager:
     def __init__(self, config: Config):
         """Initialize the data ingestion manager."""
         self.config = config
-
-        # Clear existing database
-        clear_database(self.config.vector_db.db_path)
-        logger.info("Cleared existing database")
 
         self.query_processor = QueryProcessor(
             model_name=self.config.model.embedding_model
@@ -236,7 +210,7 @@ async def main():
 
     ingestion_manager = DataIngestionManager(config)
 
-    data_directory = "/home/cc/chunks_and_metadata_small"
+    data_directory = "/home/cc/chunks_and_metadata"
 
     try:
         logger.info(f"Starting ingestion from directory: {data_directory}")
