@@ -1,6 +1,7 @@
 import hashlib
 import logging
 from typing import List
+import math
 
 import chromadb
 from chromadb.config import Settings
@@ -65,19 +66,24 @@ class VectorStore:
                 and results["documents"]
                 and len(results["documents"][0]) > 0
             ):
+                # Get max distance for normalization
+                distances = results["distances"][0]
+                max_distance = max(distances) if distances else 1.0
 
                 for doc, metadata, distance in zip(
                     results["documents"][0],
                     results["metadatas"][0],
-                    results["distances"][0],
+                    distances,
                 ):
-                    # Convert distance to similarity score (1 - normalized distance)
-                    similarity_score = 1.0 - float(distance)
+                    # Normalize squared L2 distance to similarity score (0 to 1)
+                    # Using exponential decay: exp(-distance/max_distance)
+                    similarity_score = (
+                        math.exp(-distance / max_distance) if max_distance > 0 else 0.0
+                    )
 
                     # Create DocumentMetadata object from the metadata dictionary based on the fields in `metadata`
                     # The fields might vary based on the metadata provided, so we need to handle this dynamically
                     doc_metadata = DocumentMetadata(**metadata)
-
                     documents.append(
                         Document(
                             content=doc, metadata=doc_metadata, score=similarity_score
@@ -86,7 +92,13 @@ class VectorStore:
 
                 self.logger.info(f"Retrieved {len(documents)} documents")
                 if documents:
-                    self.logger.debug(f"Top document score: {documents[0].score}")
+                    self.logger.debug(
+                        f"Distance range: [{min(distances):.3f}, {max_distance:.3f}]"
+                    )
+                    self.logger.debug(
+                        f"Score range: [{min(doc.score for doc in documents):.3f}, "
+                        f"{max(doc.score for doc in documents):.3f}]"
+                    )
             else:
                 self.logger.info("No matching documents found")
                 return []
