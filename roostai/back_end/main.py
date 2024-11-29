@@ -208,7 +208,8 @@ async def main():
 
         # Test queries that cover different aspects of USC
         test_queries = [
-            "What are the admission requirements for USC?",
+            "How do Carolina Core Overlay courses work?"
+            # "What are the admission requirements for USC?",
             # "Tell me about the Computer Science department at USC",
             # "What sports teams does USC have?",
             # "What dining options are available on campus?",
