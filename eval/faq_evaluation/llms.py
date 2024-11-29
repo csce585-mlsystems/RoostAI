@@ -93,7 +93,8 @@ class phi_3_5_mini_ins(LLM):
             stream=True,
         ):
             return_str += message.choices[0].delta.content
-
+        print(f"Sleeping for 10 seconds to avoid overloading the API...")
+        time.sleep(10)
         return return_str
 
 
@@ -128,7 +129,8 @@ class llama_3_8b_ins(LLM):
             stream=True,
         ):
             return_str += message.choices[0].delta.content
-
+        print(f"Sleeping for 10 seconds to avoid overloading the API...")
+        time.sleep(10)
         return return_str
 
 
@@ -152,7 +154,8 @@ class gemini_flash(LLM):
         model = genai.GenerativeModel(
             "gemini-1.5-flash", system_instruction=self.system_prompt
         )
-
+        print(f"Sleeping for 10 seconds to avoid overloading the API...")
+        time.sleep(10)
         return model.generate_content(question).text
 
 
@@ -187,7 +190,8 @@ class mixtral_8x7b_ins(LLM):
             stream=True,
         ):
             return_str += message.choices[0].delta.content
-
+        print(f"Sleeping for 10 seconds to avoid overloading the API...")
+        time.sleep(10)
         return return_str
 
 
@@ -250,8 +254,8 @@ class gpt_4o(LLM):
         )
 
         # To avoid overloading the API, sleep
-        # print(f"Sleeping for 5 seconds to avoid overloading the API...")
-        # time.sleep(5)
+        print(f"Sleeping for 5 seconds to avoid overloading the API...")
+        time.sleep(5)
 
         return completion.choices[0].message.content
 
