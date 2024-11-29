@@ -1,4 +1,7 @@
-# back_end/chatbot/data_ingestion.py
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
 import json
 import logging
 import os
@@ -16,7 +19,6 @@ from roostai.back_end.chatbot.config import Config
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
 
 class DuplicateTracker:
     def __init__(self):
@@ -195,7 +197,7 @@ async def main():
     config = Config.load_config()
     ingestion_manager = DataIngestionManager(config)
 
-    data_directory = "/Users/nitingupta/usc/fa24/csce585/chunks_and_metadata"
+    data_directory = "/home/cc/chunks_and_metadata"
 
     try:
         await ingestion_manager.process_directory(data_directory)

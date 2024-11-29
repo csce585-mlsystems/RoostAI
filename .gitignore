@@ -3,5 +3,7 @@
 .venv/
 .env
 *.pyc
+**__pychache__
 own/
-/src/back-end/data
+
+roostai/data/chroma.sqlite3
