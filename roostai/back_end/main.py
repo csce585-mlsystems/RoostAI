@@ -1,23 +1,26 @@
+# back_end/main.py
 import asyncio
 import logging
 import time
-from typing import List
 
 from roostai.back_end.chatbot.config import Config
 from roostai.back_end.chatbot.llm_manager import LLMManager
 from roostai.back_end.chatbot.quality_checker import QualityChecker
 from roostai.back_end.chatbot.query_processor import QueryProcessor
 from roostai.back_end.chatbot.reranker import Reranker
-from roostai.back_end.chatbot.types import Document, DocumentMetadata
 from roostai.back_end.chatbot.vector_store import VectorStore
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
 logger = logging.getLogger(__name__)
 
 
 class UniversityChatbot:
     def __init__(self):
         self.config = Config.load_config()
+        # Override the database path to use the existing database
+        self.config.vector_db.db_path = "roostai/data"
         self.logger = logging.getLogger(__name__)
 
         self.query_processor = QueryProcessor(
@@ -42,10 +45,14 @@ class UniversityChatbot:
             llm_model=self.config.model.llm_model,
         )
 
-    async def process_query(self, query: str) -> str:
+    async def process_query(self, query: str, verbose: bool = False) -> str:
+        """Process a query with optional verbose output for debugging."""
         try:
             if not query.strip():
                 return "Please provide a valid question."
+
+            if verbose:
+                logger.info(f"Processing query: {query}")
 
             cleaned_query, query_embedding = await self.query_processor.process_query(
                 query
@@ -54,6 +61,15 @@ class UniversityChatbot:
             documents = await self.vector_store.query(
                 query_embedding, k=self.config.vector_db.top_k
             )
+
+            if verbose:
+                logger.info(f"Retrieved {len(documents)} initial documents")
+                if documents:
+                    logger.info("Top 3 initial documents:")
+                    for i, doc in enumerate(documents[:3], 1):
+                        logger.info(f"\n{i}. Score: {doc.score:.4f}")
+                        logger.info(f"URL: {doc.metadata.url}")
+                        logger.info(f"Content: {doc.content[:200]}...")
 
             if not documents:
                 return (
@@ -67,9 +83,21 @@ class UniversityChatbot:
                 threshold=self.config.thresholds.reranking_threshold,
             )
 
+            if verbose:
+                logger.info(f"\nReranked documents: {len(reranked_docs)}")
+                if reranked_docs:
+                    logger.info("Top 3 reranked documents:")
+                    for i, doc in enumerate(reranked_docs[:3], 1):
+                        logger.info(f"\n{i}. Score: {doc.score:.4f}")
+                        logger.info(f"URL: {doc.metadata.url}")
+                        logger.info(f"Content: {doc.content[:200]}...")
+
             result = await self.quality_checker.check_quality(
                 cleaned_query, reranked_docs
             )
+
+            if verbose:
+                logger.info(f"\nQuality score: {result.quality_score:.4f}")
 
             if result.quality_score < self.config.thresholds.quality_min_score:
                 return (
@@ -89,28 +117,12 @@ class UniversityChatbot:
                 "Please try again or rephrase your question."
             )
 
-    async def add_documents(self, documents: List[Document]):
-        """Add documents to the vector store."""
-        try:
-            # Generate embeddings for all documents
-            embeddings = [
-                self.query_processor.model.encode(doc.content).tolist()
-                for doc in documents
-            ]
-            await self.vector_store.add_documents(documents, embeddings)
-            return True
-
-        except Exception as e:
-            logger.error(f"Failed to add documents: {e}")
-            return False
-
     async def get_document_count(self) -> int:
         """Get the total number of documents in the system."""
         return await self.vector_store.get_document_count()
 
     async def cleanup(self):
         """Cleanup all resources."""
-        pass
         tasks = []
         if hasattr(self, "vector_store"):
             tasks.append(self.vector_store.close())
@@ -126,51 +138,43 @@ class UniversityChatbot:
 async def main():
     chatbot = UniversityChatbot()
 
-    sample_url = DocumentMetadata(url="https://sample_url")
-
-    # More relevant test documents
-    test_docs = [
-        Document(
-            content="The USC Computer Science program requires a minimum GPA of 3.0 for admission. "
-            "Applicants must also complete prerequisite courses in mathematics and programming.",
-            metadata=sample_url,
-        ),
-        Document(
-            content="Computer Science admission requirements include: SAT/ACT scores, "
-            "letters of recommendation, and a strong background in mathematics.",
-            metadata=sample_url,
-        ),
-        Document(
-            content="Transfer students applying to the Computer Science program must have "
-            "completed calculus I and have a minimum GPA of 3.0 in all prior coursework.",
-            metadata=sample_url,
-        ),
-    ]
-
-    # Add documents
-    success = await chatbot.add_documents(test_docs)
-    logger.info(f"Documents added successfully: {success}")
-
-    # Verify document count
+    # First, let's check the document count
     doc_count = await chatbot.get_document_count()
-    logger.info(f"Total documents in database: {doc_count}")
+    logger.info(f"\nTotal documents in database: {doc_count}")
 
-    queries = [
-        "What are the admission requirements for the Computer Science program?",
-        "What are the SAT/ACT score requirements for USC?",
-        "Who is the student body president at USC?",
+    # Test queries that cover different aspects of USC
+    test_queries = [
+        "What are the admission requirements for USC?",
+        "Tell me about the Computer Science department at USC",
+        "What sports teams does USC have?",
+        "What dining options are available on campus?",
+        "What is the history of USC?",
+        "What research centers does USC have?",
+        "What student organizations are available at USC?",
+        "What are the housing options for freshmen at USC?",
+        "Tell me about USC's library system",
+        "What financial aid options are available at USC?",
     ]
 
-    for query in queries:
-        print(f"\nQuery: {query}")
+    logger.info("\nStarting query tests...")
 
-        # Get the time taken to process the query
-        start = time.time()
-        response = await chatbot.process_query(query)
-        print(f"Response: {response} \n")
-        print(f"Time taken: {time.time() - start}")
+    for i, query in enumerate(test_queries, 1):
+        logger.info(f"\n=== Query {i} ===")
+        logger.info(f"Q: {query}")
+
+        start_time = time.time()
+        response = await chatbot.process_query(query, verbose=True)
+        end_time = time.time()
+
+        logger.info(f"\nA: {response}")
+        logger.info(f"Time taken: {end_time - start_time:.2f} seconds")
+        logger.info("=" * 80)
+
+        # Add a small delay between queries to avoid rate limiting
+        await asyncio.sleep(1)
 
     await chatbot.cleanup()
+    logger.info("\nTest completed successfully!")
 
 
 if __name__ == "__main__":

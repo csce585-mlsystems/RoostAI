@@ -1,14 +1,13 @@
-__import__('pysqlite3')
+__import__("pysqlite3")
 import sys
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
+sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
 
 import json
 import logging
-import os
 from collections import defaultdict
-from datetime import datetime
 from pathlib import Path
-from typing import List, Dict, Any, Set, Tuple
+from typing import List, Dict, Any, Set
 import asyncio
 from tqdm import tqdm
 
@@ -19,6 +18,7 @@ from roostai.back_end.chatbot.config import Config
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
 
 class DuplicateTracker:
     def __init__(self):
