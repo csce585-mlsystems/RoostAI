@@ -10,6 +10,7 @@ from llms import (
     gpt_4o,
 )
 
+data_file: str = "data/faq_pairs_milestone2.csv"
 
 def save_temp_df(df: pd.DataFrame, out_file: str):
     print(f"Writing to file {out_file}")
@@ -24,7 +25,6 @@ def main():
     anthropic_api_key = getenv("ANTHROPIC_API_KEY")
     openai_api_key = getenv("OPENAI_API_KEY")
 
-    data_file: str = "data/faq_pairs.csv"
     print(f"Reading data from {data_file}")
 
     bank_df: pd.DataFrame = pd.read_csv(data_file)
@@ -36,11 +36,11 @@ def main():
     print("Getting Llama responses...")
     bank_df["llama"] = llama_3_8b_ins(bank_df, hf_api_key).get_responses().values
 
-    print("Getting Gemini responses...")
-    bank_df["gemini"] = gemini_flash(bank_df, google_api_key).get_responses().values
-
     print("Getting Mixtral responses...")
     bank_df["mixtral"] = mixtral_8x7b_ins(bank_df, hf_api_key).get_responses().values
+
+    print("Getting Gemini responses...")
+    bank_df["gemini"] = gemini_flash(bank_df, google_api_key).get_responses().values
 
     print("Getting Claude responses...")
     bank_df["claude"] = claude_sonnet(bank_df, anthropic_api_key).get_responses().values
