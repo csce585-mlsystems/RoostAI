@@ -1,7 +1,4 @@
-import os
 from dataclasses import dataclass
-
-import yaml
 
 
 @dataclass
@@ -26,9 +23,7 @@ class ThresholdConfig:
 
 @dataclass
 class VectorDBConfig:
-    db_path: str = (
-        "../front_end/data"  # relative to the location of `vector_store.py` (back_end directory)
-    )
+    db_path: str = "./roostai/data"  # relative to the location of running the script
     collection_name: str = "university_docs"
     top_k: int = 5
 

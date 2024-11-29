@@ -19,7 +19,8 @@ class VectorStore:
         self.logger = logging.getLogger(__name__)
         try:
             self.client = chromadb.PersistentClient(
-                path=db_path, settings=Settings(allow_reset=True)
+                path=db_path,
+                settings=Settings(allow_reset=True, anonymized_telemetry=False),
             )
 
             try:
@@ -73,13 +74,9 @@ class VectorStore:
                     # Convert distance to similarity score (1 - normalized distance)
                     similarity_score = 1.0 - float(distance)
 
-                    # Create DocumentMetadata object from the metadata dictionary
-                    doc_metadata = DocumentMetadata(
-                        url=metadata.get("url", ""),
-                        department=metadata.get("department"),
-                        doc_type=metadata.get("doc_type"),
-                        date_added=metadata.get("date_added"),
-                    )
+                    # Create DocumentMetadata object from the metadata dictionary based on the fields in `metadata`
+                    # The fields might vary based on the metadata provided, so we need to handle this dynamically
+                    doc_metadata = DocumentMetadata(**metadata)
 
                     documents.append(
                         Document(
@@ -128,15 +125,9 @@ class VectorStore:
                     new_embeddings.append(embedding)
                     new_ids.append(doc_id)
 
-                    # Convert DocumentMetadata to dictionary
-                    new_metadata.append(
-                        {
-                            "url": doc.metadata.url,
-                            "department": doc.metadata.department,
-                            "doc_type": doc.metadata.doc_type,
-                            "date_added": doc.metadata.date_added,
-                        }
-                    )
+                    # Convert DocumentMetadata to dictionary based on the fields in `doc.metadata`
+                    # Append to `new_metadata`
+                    new_metadata.append(doc.metadata.__dict__)
 
             if new_docs:
                 self.collection.add(
@@ -158,12 +149,12 @@ class VectorStore:
         return self.collection.count()
 
     async def close(self):
-        """Close the vector store connection."""
+        """Close the vector store connection without destroying data."""
         try:
-            if self.client:
-                self.client.reset()
-                self.client = None
+            if hasattr(self, "client"):
+                # Don't reset, just remove the references
                 self.collection = None
+                self.client = None
                 self.logger.info("Vector store connection closed successfully")
         except Exception as e:
             self.logger.error(f"Error closing vector store connection: {e}")
