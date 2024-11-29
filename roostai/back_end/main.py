@@ -24,7 +24,7 @@ class UniversityChatbot:
     def __init__(self):
         self.config = Config.load_config()
         # Override the database path to use the existing database
-        self.config.vector_db.db_path = "roostai/data"
+        self.config.vector_db.db_path = "/home/cc/RoostAI/roostai/data"
         self.logger = logging.getLogger(__name__)
 
         self.query_processor = QueryProcessor(
