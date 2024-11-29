@@ -78,10 +78,11 @@ contain relevant information to answer the question, please state that clearly.
                 return "I apologize, but I don't have enough relevant information to provide a good answer."
 
             prompt = self.generate_prompt(query, result)
+            print(prompt)
 
             # Use asyncio.wait_for to add timeout
             response = await asyncio.wait_for(
-                self._generate_response(prompt), timeout=15.0  # 15 seconds timeout
+                self._generate_response(prompt), timeout=5.0  # 5 seconds timeout
             )
 
             return response
