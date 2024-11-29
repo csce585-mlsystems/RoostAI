@@ -149,14 +149,13 @@ class VectorStore:
         return self.collection.count()
 
     async def close(self):
-        """Close the vector store connection."""
-        ...
-        # try:
-        #     if self.client:
-        #         self.client.reset()
-        #         self.client = None
-        #         self.collection = None
-        #         self.logger.info("Vector store connection closed successfully")
-        # except Exception as e:
-        #     self.logger.error(f"Error closing vector store connection: {e}")
-        #     raise
+        """Close the vector store connection without destroying data."""
+        try:
+            if hasattr(self, "client"):
+                # Don't reset, just remove the references
+                self.collection = None
+                self.client = None
+                self.logger.info("Vector store connection closed successfully")
+        except Exception as e:
+            self.logger.error(f"Error closing vector store connection: {e}")
+            raise
