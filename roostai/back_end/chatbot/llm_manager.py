@@ -67,8 +67,7 @@ Context information:
 
 User question: {query}
 
-Please provide a helpful response based on the context above. If the context doesn't 
-contain relevant information to answer the question, please state that clearly.
+Please provide a helpful response based on the context above. If the context doesn't contain relevant information to answer the question, please state that clearly.
 """
 
     async def generate_response(self, query: str, result: QueryResult) -> Optional[str]:
