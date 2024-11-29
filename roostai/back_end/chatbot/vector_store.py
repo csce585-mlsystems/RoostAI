@@ -150,12 +150,13 @@ class VectorStore:
 
     async def close(self):
         """Close the vector store connection."""
-        try:
-            if self.client:
-                self.client.reset()
-                self.client = None
-                self.collection = None
-                self.logger.info("Vector store connection closed successfully")
-        except Exception as e:
-            self.logger.error(f"Error closing vector store connection: {e}")
-            raise
+        ...
+        # try:
+        #     if self.client:
+        #         self.client.reset()
+        #         self.client = None
+        #         self.collection = None
+        #         self.logger.info("Vector store connection closed successfully")
+        # except Exception as e:
+        #     self.logger.error(f"Error closing vector store connection: {e}")
+        #     raise
