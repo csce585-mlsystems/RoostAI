@@ -10,12 +10,12 @@ class ModelConfig:
 
 @dataclass
 class ThresholdConfig:
-    # Threshold for reranking; Used to filter out low-quality documents; Primarily used in `reranker.py`
-    reranking_threshold: float = 0.3
+    # Threshold for reranking using cross-encoder to filter out low-quality documents; Primarily used in `reranker.py`
+    reranking_threshold: float = -0.2
 
     # Threshold for quality check; Used to filter out low-quality documents
-    # Primarily used in `llm_manager.py` and `quality_checker.py`
-    quality_min_score: float = 0.4
+    # Primarily used in `quality_checker.py` - Also using cross-encoder scores
+    quality_min_score: float = -0.2
 
     # Minimum number of documents required for quality check; Primarily used in `quality_checker.py`
     quality_min_docs: int = 1

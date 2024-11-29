@@ -27,21 +27,17 @@ class Reranker:
             # Get cross-encoder scores
             scores = self.model.predict(pairs)
 
-            # Convert scores to float if they're numpy arrays
-            scores = [
-                (
-                    float(score)
-                    if isinstance(score, (np.ndarray, np.float32, np.float64))
-                    else score
-                )
-                for score in scores
-            ]
+            # For ms-marco cross-encoder models, typical score ranges are:
+            # - Relevant documents: > -2.0
+            # - Highly relevant: > 0.0
+            # Adjust threshold accordingly
+            CROSS_ENCODER_THRESHOLD = -2.0  # More appropriate threshold for this model
 
             # Update document scores and filter
             scored_docs = []
             for doc, score in zip(documents, scores):
-                doc.score = score
-                if score >= threshold:
+                doc.score = float(score)  # Convert to float if needed
+                if score >= CROSS_ENCODER_THRESHOLD:  # Use appropriate threshold
                     scored_docs.append(doc)
 
             # Sort by score descending
@@ -50,7 +46,8 @@ class Reranker:
             self.logger.info(f"Reranked {len(scored_docs)} documents passed threshold")
             if not scored_docs:
                 self.logger.warning(
-                    f"No documents passed threshold {threshold}. Best score was {max(scores) if scores else 'N/A'}"
+                    f"No documents passed threshold {CROSS_ENCODER_THRESHOLD}. "
+                    f"Best score was {max(scores) if scores else 'N/A'}"
                 )
 
             return scored_docs
