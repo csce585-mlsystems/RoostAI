@@ -1,0 +1,74 @@
+2024-11-30 22:02:14,534 - __main__ - INFO - Found database at: /home/cc/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-11-30 22:02:14,536 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2024-11-30 22:02:14,536 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-11-30 22:02:15,410 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-11-30 22:02:15,654 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: cpu
+2024-11-30 22:02:15,668 - __main__ - INFO - Total documents in database: 47015
+2024-11-30 22:02:20,544 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 15 documents
+2024-11-30 22:02:20,807 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-11-30 22:02:20,807 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.697
+  - Cross-encoder score: 5.275
+  - Content preview: Admissions Entrance Requirements In addition to the academic admission requirements of the Moore Sch...
+2024-11-30 22:02:20,807 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.664
+  - Cross-encoder score: 2.115
+  - Content preview: Admission Guidelines - College of Information and Communications | University of South Carolina Skip...
+2024-11-30 22:02:20,807 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.652
+  - Cross-encoder score: 4.496
+  - Content preview: Undergraduate Admissions - Molinaroli College of Engineering and Computing | University of South Car...
+2024-11-30 22:02:20,807 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 15
+ - Passed threshold (-2.5): 15
+ - Best cross-encoder score: 5.280210018157959
+ - Best vector similarity: 0.697216272354126
+2024-11-30 22:02:20,807 - roostai.back_end.chatbot.quality_checker - INFO - Quality check completed. Score: 7.38
+2024-11-30 22:02:20,814 - __main__ - INFO - Connected to database. Document count: 47015
+2024-11-30 22:02:26,582 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 15 documents
+2024-11-30 22:02:26,825 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-11-30 22:02:26,826 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.649
+  - Cross-encoder score: 5.266
+  - Content preview: Courses - Office of the Provost | University of South Carolina Skip to Content Office of the Provost...
+2024-11-30 22:02:26,826 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.626
+  - Cross-encoder score: -0.380
+  - Content preview: What Makes up my Program of Study? - My Arts and Sciences | University of South Carolina Skip to Con...
+2024-11-30 22:02:26,826 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.611
+  - Cross-encoder score: 4.001
+  - Content preview: Requirements - Office of the Provost | University of South Carolina Skip to Content Office of the Pr...
+2024-11-30 22:02:26,826 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 15
+ - Passed threshold (-2.5): 12
+ - Best cross-encoder score: 5.265827178955078
+ - Best vector similarity: 0.6485635638237
+2024-11-30 22:02:26,826 - roostai.back_end.chatbot.quality_checker - INFO - Quality check completed. Score: 6.92
+2024-11-30 22:02:31,101 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 15 documents
+2024-11-30 22:02:31,359 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-11-30 22:02:31,359 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.495
+  - Cross-encoder score: -7.193
+  - Content preview: Request for Instructional Support (RIS) - My Arts and Sciences | University of South Carolina Skip t...
+2024-11-30 22:02:31,359 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.488
+  - Cross-encoder score: -11.318
+  - Content preview: sc.edu/postings/176831"/> <title>Professor, Tenure Track</title> <content/> <author> <name>CEC Colle...
+2024-11-30 22:02:31,359 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.484
+  - Cross-encoder score: -9.349
+  - Content preview: Profile Update Form - College of Education | University of South Carolina Skip to Content College of...
+2024-11-30 22:02:31,359 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 15
+ - Passed threshold (-2.5): 0
+ - Best cross-encoder score: -5.485910892486572
+ - Best vector similarity: 0.49527204036712646
+2024-11-30 22:02:31,359 - roostai.back_end.chatbot.quality_checker - WARNING - No documents provided for quality check
+2024-11-30 22:02:31,359 - roostai.back_end.chatbot.llm_manager - WARNING - No documents retrieved for LLM response generation
+2024-11-30 22:02:33,494 - roostai.back_end.chatbot.vector_store - INFO - Vector store connection closed successfully
+2024-11-30 22:02:33,494 - roostai.back_end.chatbot.llm_manager - INFO - LLM manager cleaned up successfully
+2024-11-30 22:02:33,494 - __main__ - INFO - Session ended
