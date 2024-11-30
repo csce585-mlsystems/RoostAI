@@ -25,7 +25,10 @@ from roostai.back_end.chatbot.vector_store import VectorStore
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    handlers=[logging.StreamHandler(), logging.FileHandler("chatbot.log")],
+    handlers=[
+        logging.StreamHandler(),
+        logging.FileHandler(sys.argv[0].replace(".py", ".log")),
+    ],
 )
 logger = logging.getLogger(__name__)
 
@@ -250,7 +253,7 @@ async def interactive_session(chatbot: UniversityChatbot):
         try:
             query = input("\nYour question: ").strip()
 
-            if query.lower() == "quit":
+            if query.lower() == "quit" or query.lower() == "exit":
                 break
             elif query.lower() == "debug":
                 verbose = not verbose

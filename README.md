@@ -13,8 +13,9 @@ poetry run python roostai/scripts/data_ingestion.py 2>&1 | tee roostai/scripts/d
 
 - Running sample queries on the chatbot
     The script below asks you to enter queries interactively and then runs the query on the chatbot.
+    Logging is saved at `roostai/back_end/main.log`
 ```bash
-poetry run python roostai/back_end/main.py
+poetry run python roostai/back_end/main.py 2>&1 | tee roostai/back_end/dry-run.out
 ```
 
 -  Getting FAQ responses from LLM APIs
