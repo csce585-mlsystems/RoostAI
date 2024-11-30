@@ -14,7 +14,7 @@ class ThresholdConfig:
     reranking_threshold: float = -0.2
 
     # Threshold for quality check; Used to filter out low-quality documents
-    # Primarily used in `quality_checker.py` - Also using cross-encoder scores
+    # Primarily used in `quality_checker.py` and `llm_manager` - Also using cross-encoder scores
     quality_min_score: float = -0.2
 
     # Minimum number of documents required for quality check; Primarily used in `quality_checker.py`
@@ -34,7 +34,6 @@ class LLMConfig:
     temperature: float = 0.7
     top_p: float = 0.9
     repetition_penalty: float = 1.1
-    quality_min_score: float = 0.5
 
 
 @dataclass

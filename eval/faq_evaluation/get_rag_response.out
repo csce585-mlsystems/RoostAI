@@ -1,0 +1,805 @@
+The currently activated Python version 3.8.10 is not supported by the project (>=3.9,<3.13).
+Trying to find and use a compatible version. 
+Using python3 (3.10.15)
+2024-11-30 00:04:38,021 - INFO - Found database at: /home/cc/RoostAI/roostai/data/chroma.sqlite3
+2024-11-30 00:04:38,021 - INFO - Initializing with database path: /home/cc/RoostAI/roostai/data
+2024-11-30 00:04:38,023 - INFO - Use pytorch device_name: cpu
+2024-11-30 00:04:38,023 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-11-30 00:04:38,840 - INFO - Connected to existing collection: university_docs
+2024-11-30 00:04:39,044 - INFO - Use pytorch device: cpu
+2024-11-30 00:04:39,061 - INFO - Database contains 59763 documents
+2024-11-30 00:04:39,061 - INFO - Reading questions from data/faq_pairs_milestone2.csv
+2024-11-30 00:04:39,063 - INFO - Loaded 111 questions
+2024-11-30 00:04:39,063 - INFO - Getting responses from local RAG system...
+2024-11-30 00:04:39,063 - INFO - Processing question 1/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 25.21it/s]
+2024-11-30 00:04:39,475 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  9.32it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  9.28it/s]
+2024-11-30 00:04:39,584 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:04:39,584 - WARNING - No documents passed threshold -2.0. Best score was -5.460668563842773
+2024-11-30 00:04:39,584 - WARNING - No documents provided for quality check
+2024-11-30 00:04:39,584 - WARNING - Low quality score: 0.0
+2024-11-30 00:04:39,592 - INFO - Successfully connected to database. Document count: 59763
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 132.37it/s]
+2024-11-30 00:04:39,612 - INFO - Retrieved 1 documents
+2024-11-30 00:04:39,612 - INFO - Successfully retrieved a sample document
+2024-11-30 00:04:40,086 - INFO - Processing question 2/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 118.12it/s]
+2024-11-30 00:04:40,108 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.13it/s]
+2024-11-30 00:04:40,192 - INFO - Reranked 5 documents passed threshold
+2024-11-30 00:04:40,192 - INFO - Quality check completed. Score: 4.81
+2024-11-30 00:04:40,872 - INFO - Processing question 3/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 107.18it/s]
+2024-11-30 00:04:40,897 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.16it/s]
+2024-11-30 00:04:40,981 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:04:40,981 - WARNING - No documents passed threshold -2.0. Best score was -8.396594047546387
+2024-11-30 00:04:40,981 - WARNING - No documents provided for quality check
+2024-11-30 00:04:40,981 - WARNING - Low quality score: 0.0
+2024-11-30 00:04:41,483 - INFO - Processing question 4/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 102.33it/s]
+2024-11-30 00:04:41,507 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 10.47it/s]
+2024-11-30 00:04:41,604 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:04:41,604 - WARNING - No documents passed threshold -2.0. Best score was -8.653446197509766
+2024-11-30 00:04:41,604 - WARNING - No documents provided for quality check
+2024-11-30 00:04:41,604 - WARNING - Low quality score: 0.0
+2024-11-30 00:04:42,105 - INFO - Processing question 5/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 70.31it/s]
+2024-11-30 00:04:42,133 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.38it/s]
+2024-11-30 00:04:42,215 - INFO - Reranked 3 documents passed threshold
+2024-11-30 00:04:42,215 - INFO - Quality check completed. Score: 0.03
+2024-11-30 00:04:42,215 - WARNING - Low quality score: 0.032314084470272064
+2024-11-30 00:04:42,717 - INFO - Processing question 6/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 121.96it/s]
+2024-11-30 00:04:42,739 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 11.00it/s]
+2024-11-30 00:04:42,831 - INFO - Reranked 2 documents passed threshold
+2024-11-30 00:04:42,831 - INFO - Quality check completed. Score: 1.98
+2024-11-30 00:04:43,382 - INFO - Processing question 7/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 101.30it/s]
+2024-11-30 00:04:43,408 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.83it/s]
+2024-11-30 00:04:43,487 - INFO - Reranked 3 documents passed threshold
+2024-11-30 00:04:43,488 - INFO - Quality check completed. Score: 0.67
+2024-11-30 00:04:44,038 - INFO - Processing question 8/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 113.01it/s]
+2024-11-30 00:04:44,063 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 11.39it/s]
+2024-11-30 00:04:44,152 - INFO - Reranked 2 documents passed threshold
+2024-11-30 00:04:44,152 - INFO - Quality check completed. Score: 2.06
+2024-11-30 00:04:44,681 - INFO - Processing question 9/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 115.04it/s]
+2024-11-30 00:04:44,705 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 11.73it/s]
+2024-11-30 00:04:44,791 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:04:44,791 - WARNING - No documents passed threshold -2.0. Best score was -8.176614761352539
+2024-11-30 00:04:44,791 - WARNING - No documents provided for quality check
+2024-11-30 00:04:44,792 - WARNING - Low quality score: 0.0
+2024-11-30 00:04:45,293 - INFO - Processing question 10/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 113.07it/s]
+2024-11-30 00:04:45,317 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 10.42it/s]
+2024-11-30 00:04:45,414 - INFO - Reranked 4 documents passed threshold
+2024-11-30 00:04:45,414 - INFO - Quality check completed. Score: 2.25
+2024-11-30 00:04:49,572 - INFO - Processed 10/111 questions
+2024-11-30 00:04:49,572 - INFO - Processing question 11/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 99.71it/s]
+2024-11-30 00:04:49,598 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.12it/s]
+2024-11-30 00:04:49,683 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:04:49,683 - WARNING - No documents passed threshold -2.0. Best score was -3.8561673164367676
+2024-11-30 00:04:49,683 - WARNING - No documents provided for quality check
+2024-11-30 00:04:49,683 - WARNING - Low quality score: 0.0
+2024-11-30 00:04:50,184 - INFO - Processing question 12/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 116.23it/s]
+2024-11-30 00:04:50,207 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.96it/s]
+2024-11-30 00:04:50,280 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:04:50,280 - WARNING - No documents passed threshold -2.0. Best score was -9.438753128051758
+2024-11-30 00:04:50,280 - WARNING - No documents provided for quality check
+2024-11-30 00:04:50,280 - WARNING - Low quality score: 0.0
+2024-11-30 00:04:50,781 - INFO - Processing question 13/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 119.75it/s]
+2024-11-30 00:04:50,804 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.98it/s]
+2024-11-30 00:04:50,877 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:04:50,877 - WARNING - No documents passed threshold -2.0. Best score was -10.34567642211914
+2024-11-30 00:04:50,877 - WARNING - No documents provided for quality check
+2024-11-30 00:04:50,877 - WARNING - Low quality score: 0.0
+2024-11-30 00:04:51,378 - INFO - Processing question 14/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 107.88it/s]
+2024-11-30 00:04:51,401 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.00it/s]
+2024-11-30 00:04:51,479 - INFO - Reranked 2 documents passed threshold
+2024-11-30 00:04:51,479 - INFO - Quality check completed. Score: 0.34
+2024-11-30 00:04:51,479 - WARNING - Low quality score: 0.33534958958625793
+2024-11-30 00:04:51,980 - INFO - Processing question 15/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 105.04it/s]
+2024-11-30 00:04:52,005 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 11.84it/s]
+2024-11-30 00:04:52,091 - INFO - Reranked 4 documents passed threshold
+2024-11-30 00:04:52,091 - INFO - Quality check completed. Score: 1.99
+2024-11-30 00:05:06,498 - INFO - Processing question 16/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 75.28it/s]
+2024-11-30 00:05:06,529 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.27it/s]
+2024-11-30 00:05:06,605 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:05:06,605 - WARNING - No documents passed threshold -2.0. Best score was -10.241488456726074
+2024-11-30 00:05:06,605 - WARNING - No documents provided for quality check
+2024-11-30 00:05:06,606 - WARNING - Low quality score: 0.0
+2024-11-30 00:05:07,107 - INFO - Processing question 17/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 104.40it/s]
+2024-11-30 00:05:07,134 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.69it/s]
+2024-11-30 00:05:07,214 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:05:07,214 - WARNING - No documents passed threshold -2.0. Best score was -2.3058366775512695
+2024-11-30 00:05:07,214 - WARNING - No documents provided for quality check
+2024-11-30 00:05:07,214 - WARNING - Low quality score: 0.0
+2024-11-30 00:05:07,716 - INFO - Processing question 18/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 123.32it/s]
+2024-11-30 00:05:07,739 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.55it/s]
+2024-11-30 00:05:07,814 - INFO - Reranked 5 documents passed threshold
+2024-11-30 00:05:07,814 - INFO - Quality check completed. Score: 1.92
+2024-11-30 00:05:14,423 - INFO - Processing question 19/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 111.38it/s]
+2024-11-30 00:05:14,448 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.49it/s]
+2024-11-30 00:05:14,518 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:05:14,518 - WARNING - No documents passed threshold -2.0. Best score was -5.95402193069458
+2024-11-30 00:05:14,519 - WARNING - No documents provided for quality check
+2024-11-30 00:05:14,519 - WARNING - Low quality score: 0.0
+2024-11-30 00:05:15,020 - INFO - Processing question 20/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 126.09it/s]
+2024-11-30 00:05:15,043 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.02it/s]
+2024-11-30 00:05:15,115 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:05:15,115 - WARNING - No documents passed threshold -2.0. Best score was -8.060988426208496
+2024-11-30 00:05:15,115 - WARNING - No documents provided for quality check
+2024-11-30 00:05:15,115 - WARNING - Low quality score: 0.0
+2024-11-30 00:05:15,616 - INFO - Processed 20/111 questions
+2024-11-30 00:05:15,617 - INFO - Processing question 21/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 102.40it/s]
+2024-11-30 00:05:15,643 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.37it/s]
+2024-11-30 00:05:15,713 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:05:15,713 - WARNING - No documents passed threshold -2.0. Best score was -8.656547546386719
+2024-11-30 00:05:15,713 - WARNING - No documents provided for quality check
+2024-11-30 00:05:15,714 - WARNING - Low quality score: 0.0
+2024-11-30 00:05:16,215 - INFO - Processing question 22/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 121.43it/s]
+2024-11-30 00:05:16,237 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.47it/s]
+2024-11-30 00:05:16,313 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:05:16,313 - WARNING - No documents passed threshold -2.0. Best score was -10.609856605529785
+2024-11-30 00:05:16,313 - WARNING - No documents provided for quality check
+2024-11-30 00:05:16,313 - WARNING - Low quality score: 0.0
+2024-11-30 00:05:16,814 - INFO - Processing question 23/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 119.69it/s]
+2024-11-30 00:05:16,837 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.83it/s]
+2024-11-30 00:05:16,910 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:05:16,910 - WARNING - No documents passed threshold -2.0. Best score was -4.681385517120361
+2024-11-30 00:05:16,910 - WARNING - No documents provided for quality check
+2024-11-30 00:05:16,910 - WARNING - Low quality score: 0.0
+2024-11-30 00:05:17,411 - INFO - Processing question 24/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 124.49it/s]
+2024-11-30 00:05:17,434 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.39it/s]
+2024-11-30 00:05:17,510 - INFO - Reranked 5 documents passed threshold
+2024-11-30 00:05:17,510 - INFO - Quality check completed. Score: 6.52
+2024-11-30 00:05:23,729 - INFO - Processing question 25/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 112.05it/s]
+2024-11-30 00:05:23,754 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.29it/s]
+2024-11-30 00:05:23,831 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:05:23,831 - WARNING - No documents passed threshold -2.0. Best score was -3.5180957317352295
+2024-11-30 00:05:23,831 - WARNING - No documents provided for quality check
+2024-11-30 00:05:23,831 - WARNING - Low quality score: 0.0
+2024-11-30 00:05:24,332 - INFO - Processing question 26/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 111.12it/s]
+2024-11-30 00:05:24,356 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 10.95it/s]
+2024-11-30 00:05:24,449 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:05:24,449 - WARNING - No documents passed threshold -2.0. Best score was -7.560384273529053
+2024-11-30 00:05:24,449 - WARNING - No documents provided for quality check
+2024-11-30 00:05:24,449 - WARNING - Low quality score: 0.0
+2024-11-30 00:05:24,950 - INFO - Processing question 27/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 105.86it/s]
+2024-11-30 00:05:24,975 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.78it/s]
+2024-11-30 00:05:25,044 - INFO - Reranked 1 documents passed threshold
+2024-11-30 00:05:25,044 - INFO - Quality check completed. Score: 0.24
+2024-11-30 00:05:25,044 - WARNING - Low quality score: 0.23946426808834076
+2024-11-30 00:05:25,545 - INFO - Processing question 28/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 124.10it/s]
+2024-11-30 00:05:25,569 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.87it/s]
+2024-11-30 00:05:25,642 - INFO - Reranked 1 documents passed threshold
+2024-11-30 00:05:25,642 - INFO - Quality check completed. Score: -0.60
+2024-11-30 00:05:26,143 - INFO - Processing question 29/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 112.79it/s]
+2024-11-30 00:05:26,166 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.25it/s]
+2024-11-30 00:05:26,249 - INFO - Reranked 1 documents passed threshold
+2024-11-30 00:05:26,249 - INFO - Quality check completed. Score: 0.73
+2024-11-30 00:05:30,438 - INFO - Processing question 30/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 105.58it/s]
+2024-11-30 00:05:30,466 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  6.59it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  6.57it/s]
+2024-11-30 00:05:30,619 - INFO - Reranked 2 documents passed threshold
+2024-11-30 00:05:30,619 - INFO - Quality check completed. Score: 3.26
+2024-11-30 00:05:34,530 - INFO - Processed 30/111 questions
+2024-11-30 00:05:34,530 - INFO - Processing question 31/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 37.99it/s]
+2024-11-30 00:05:34,571 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  8.69it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  8.66it/s]
+2024-11-30 00:05:34,688 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:05:34,688 - WARNING - No documents passed threshold -2.0. Best score was -5.191664695739746
+2024-11-30 00:05:34,688 - WARNING - No documents provided for quality check
+2024-11-30 00:05:34,688 - WARNING - Low quality score: 0.0
+2024-11-30 00:05:35,189 - INFO - Processing question 32/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 119.40it/s]
+2024-11-30 00:05:35,212 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.86it/s]
+2024-11-30 00:05:35,286 - INFO - Reranked 1 documents passed threshold
+2024-11-30 00:05:35,286 - INFO - Quality check completed. Score: -1.97
+2024-11-30 00:05:35,787 - INFO - Processing question 33/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 106.71it/s]
+2024-11-30 00:05:35,810 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.36it/s]
+2024-11-30 00:05:35,892 - INFO - Reranked 3 documents passed threshold
+2024-11-30 00:05:35,893 - INFO - Quality check completed. Score: 0.11
+2024-11-30 00:05:35,893 - WARNING - Low quality score: 0.10656862705945969
+2024-11-30 00:05:36,394 - INFO - Processing question 34/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 108.91it/s]
+2024-11-30 00:05:36,417 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 11.22it/s]
+2024-11-30 00:05:36,508 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:05:36,508 - WARNING - No documents passed threshold -2.0. Best score was -9.706950187683105
+2024-11-30 00:05:36,508 - WARNING - No documents provided for quality check
+2024-11-30 00:05:36,508 - WARNING - Low quality score: 0.0
+2024-11-30 00:05:37,009 - INFO - Processing question 35/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 108.49it/s]
+2024-11-30 00:05:37,034 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.79it/s]
+2024-11-30 00:05:37,107 - INFO - Reranked 1 documents passed threshold
+2024-11-30 00:05:37,108 - INFO - Quality check completed. Score: 1.69
+2024-11-30 00:05:43,809 - INFO - Processing question 36/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 92.74it/s]
+2024-11-30 00:05:43,834 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 11.27it/s]
+2024-11-30 00:05:43,924 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:05:43,925 - WARNING - No documents passed threshold -2.0. Best score was -7.935259819030762
+2024-11-30 00:05:43,925 - WARNING - No documents provided for quality check
+2024-11-30 00:05:43,925 - WARNING - Low quality score: 0.0
+2024-11-30 00:05:44,426 - INFO - Processing question 37/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 90.88it/s]
+2024-11-30 00:05:44,455 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.09it/s]
+2024-11-30 00:05:44,539 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:05:44,539 - WARNING - No documents passed threshold -2.0. Best score was -5.29633092880249
+2024-11-30 00:05:44,539 - WARNING - No documents provided for quality check
+2024-11-30 00:05:44,539 - WARNING - Low quality score: 0.0
+2024-11-30 00:05:45,040 - INFO - Processing question 38/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 116.26it/s]
+2024-11-30 00:05:45,064 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 10.86it/s]
+2024-11-30 00:05:45,158 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:05:45,158 - WARNING - No documents passed threshold -2.0. Best score was -7.748601913452148
+2024-11-30 00:05:45,158 - WARNING - No documents provided for quality check
+2024-11-30 00:05:45,158 - WARNING - Low quality score: 0.0
+2024-11-30 00:05:45,659 - INFO - Processing question 39/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 119.22it/s]
+2024-11-30 00:05:45,682 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.57it/s]
+2024-11-30 00:05:45,757 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:05:45,757 - WARNING - No documents passed threshold -2.0. Best score was -3.8450043201446533
+2024-11-30 00:05:45,757 - WARNING - No documents provided for quality check
+2024-11-30 00:05:45,757 - WARNING - Low quality score: 0.0
+2024-11-30 00:05:46,258 - INFO - Processing question 40/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 128.72it/s]
+2024-11-30 00:05:46,280 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.73it/s]
+2024-11-30 00:05:46,354 - INFO - Reranked 4 documents passed threshold
+2024-11-30 00:05:46,354 - INFO - Quality check completed. Score: 2.94
+2024-11-30 00:05:54,694 - INFO - Processed 40/111 questions
+2024-11-30 00:05:54,695 - INFO - Processing question 41/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 96.56it/s]
+2024-11-30 00:05:54,721 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 10.84it/s]
+2024-11-30 00:05:54,815 - INFO - Reranked 3 documents passed threshold
+2024-11-30 00:05:54,815 - INFO - Quality check completed. Score: 2.91
+2024-11-30 00:06:14,376 - INFO - Processing question 42/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 101.97it/s]
+2024-11-30 00:06:14,402 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  8.42it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  8.39it/s]
+2024-11-30 00:06:14,522 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:06:14,522 - WARNING - No documents passed threshold -2.0. Best score was -3.3389360904693604
+2024-11-30 00:06:14,522 - WARNING - No documents provided for quality check
+2024-11-30 00:06:14,522 - WARNING - Low quality score: 0.0
+2024-11-30 00:06:15,023 - INFO - Processing question 43/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 23.55it/s]
+2024-11-30 00:06:15,080 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.92it/s]
+2024-11-30 00:06:15,153 - INFO - Reranked 2 documents passed threshold
+2024-11-30 00:06:15,153 - INFO - Quality check completed. Score: 3.88
+2024-11-30 00:06:18,853 - INFO - Processing question 44/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 61.94it/s]
+2024-11-30 00:06:18,887 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.44it/s]
+2024-11-30 00:06:18,962 - INFO - Reranked 1 documents passed threshold
+2024-11-30 00:06:18,962 - INFO - Quality check completed. Score: 0.87
+2024-11-30 00:06:24,086 - INFO - Processing question 45/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 99.27it/s]
+2024-11-30 00:06:24,112 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 11.61it/s]
+2024-11-30 00:06:24,199 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:06:24,200 - WARNING - No documents passed threshold -2.0. Best score was -11.05102252960205
+2024-11-30 00:06:24,200 - WARNING - No documents provided for quality check
+2024-11-30 00:06:24,200 - WARNING - Low quality score: 0.0
+2024-11-30 00:06:24,701 - INFO - Processing question 46/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 104.24it/s]
+2024-11-30 00:06:24,725 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.36it/s]
+2024-11-30 00:06:24,801 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:06:24,801 - WARNING - No documents passed threshold -2.0. Best score was -2.3147852420806885
+2024-11-30 00:06:24,801 - WARNING - No documents provided for quality check
+2024-11-30 00:06:24,801 - WARNING - Low quality score: 0.0
+2024-11-30 00:06:25,302 - INFO - Processing question 47/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 123.19it/s]
+2024-11-30 00:06:25,325 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.28it/s]
+2024-11-30 00:06:25,401 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:06:25,402 - WARNING - No documents passed threshold -2.0. Best score was -3.834325075149536
+2024-11-30 00:06:25,402 - WARNING - No documents provided for quality check
+2024-11-30 00:06:25,402 - WARNING - Low quality score: 0.0
+2024-11-30 00:06:25,903 - INFO - Processing question 48/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 126.15it/s]
+2024-11-30 00:06:25,925 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.89it/s]
+2024-11-30 00:06:25,998 - INFO - Reranked 1 documents passed threshold
+2024-11-30 00:06:25,999 - INFO - Quality check completed. Score: 5.24
+2024-11-30 00:06:32,480 - INFO - Processing question 49/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 116.64it/s]
+2024-11-30 00:06:32,505 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.85it/s]
+2024-11-30 00:06:32,578 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:06:32,578 - WARNING - No documents passed threshold -2.0. Best score was -4.666446685791016
+2024-11-30 00:06:32,578 - WARNING - No documents provided for quality check
+2024-11-30 00:06:32,579 - WARNING - Low quality score: 0.0
+2024-11-30 00:06:33,079 - INFO - Processing question 50/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 118.82it/s]
+2024-11-30 00:06:33,102 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.88it/s]
+2024-11-30 00:06:33,175 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:06:33,176 - WARNING - No documents passed threshold -2.0. Best score was -2.30949330329895
+2024-11-30 00:06:33,176 - WARNING - No documents provided for quality check
+2024-11-30 00:06:33,176 - WARNING - Low quality score: 0.0
+2024-11-30 00:06:33,676 - INFO - Processed 50/111 questions
+2024-11-30 00:06:33,677 - INFO - Processing question 51/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 103.31it/s]
+2024-11-30 00:06:33,701 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.10it/s]
+2024-11-30 00:06:33,773 - INFO - Reranked 3 documents passed threshold
+2024-11-30 00:06:33,773 - INFO - Quality check completed. Score: -1.44
+2024-11-30 00:06:34,274 - INFO - Processing question 52/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 75.06it/s]
+2024-11-30 00:06:34,303 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.46it/s]
+2024-11-30 00:06:34,385 - INFO - Reranked 1 documents passed threshold
+2024-11-30 00:06:34,385 - INFO - Quality check completed. Score: -0.99
+2024-11-30 00:06:34,886 - INFO - Processing question 53/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 104.92it/s]
+2024-11-30 00:06:34,912 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.77it/s]
+2024-11-30 00:06:34,985 - INFO - Reranked 1 documents passed threshold
+2024-11-30 00:06:34,985 - INFO - Quality check completed. Score: -1.30
+2024-11-30 00:06:35,487 - INFO - Processing question 54/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 95.50it/s]
+2024-11-30 00:06:35,515 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.17it/s]
+2024-11-30 00:06:35,592 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:06:35,592 - WARNING - No documents passed threshold -2.0. Best score was -8.194428443908691
+2024-11-30 00:06:35,592 - WARNING - No documents provided for quality check
+2024-11-30 00:06:35,592 - WARNING - Low quality score: 0.0
+2024-11-30 00:06:36,093 - INFO - Processing question 55/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 115.49it/s]
+2024-11-30 00:06:36,116 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.25it/s]
+2024-11-30 00:06:36,188 - INFO - Reranked 4 documents passed threshold
+2024-11-30 00:06:36,188 - INFO - Quality check completed. Score: 2.35
+2024-11-30 00:06:39,915 - INFO - Processing question 56/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 117.73it/s]
+2024-11-30 00:06:39,940 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.74it/s]
+2024-11-30 00:06:40,014 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:06:40,014 - WARNING - No documents passed threshold -2.0. Best score was -2.7774343490600586
+2024-11-30 00:06:40,014 - WARNING - No documents provided for quality check
+2024-11-30 00:06:40,014 - WARNING - Low quality score: 0.0
+2024-11-30 00:06:40,515 - INFO - Processing question 57/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 110.11it/s]
+2024-11-30 00:06:40,539 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.65it/s]
+2024-11-30 00:06:40,613 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:06:40,613 - WARNING - No documents passed threshold -2.0. Best score was -4.161713600158691
+2024-11-30 00:06:40,613 - WARNING - No documents provided for quality check
+2024-11-30 00:06:40,613 - WARNING - Low quality score: 0.0
+2024-11-30 00:06:41,114 - INFO - Processing question 58/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 123.50it/s]
+2024-11-30 00:06:41,137 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  8.23it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  8.20it/s]
+2024-11-30 00:06:41,261 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:06:41,261 - WARNING - No documents passed threshold -2.0. Best score was -8.649877548217773
+2024-11-30 00:06:41,261 - WARNING - No documents provided for quality check
+2024-11-30 00:06:41,261 - WARNING - Low quality score: 0.0
+2024-11-30 00:06:41,762 - INFO - Processing question 59/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 107.96it/s]
+2024-11-30 00:06:41,786 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 11.70it/s]
+2024-11-30 00:06:41,873 - INFO - Reranked 1 documents passed threshold
+2024-11-30 00:06:41,873 - INFO - Quality check completed. Score: -1.04
+2024-11-30 00:06:42,374 - INFO - Processing question 60/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 82.03it/s]
+2024-11-30 00:06:42,401 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.78it/s]
+2024-11-30 00:06:42,469 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:06:42,470 - WARNING - No documents passed threshold -2.0. Best score was -9.875255584716797
+2024-11-30 00:06:42,470 - WARNING - No documents provided for quality check
+2024-11-30 00:06:42,470 - WARNING - Low quality score: 0.0
+2024-11-30 00:06:42,971 - INFO - Processed 60/111 questions
+2024-11-30 00:06:42,971 - INFO - Processing question 61/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 115.08it/s]
+2024-11-30 00:06:42,994 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.49it/s]
+2024-11-30 00:06:43,069 - INFO - Reranked 1 documents passed threshold
+2024-11-30 00:06:43,069 - INFO - Quality check completed. Score: -0.13
+2024-11-30 00:06:43,069 - WARNING - Low quality score: -0.13469718396663666
+2024-11-30 00:06:43,570 - INFO - Processing question 62/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 54.82it/s]
+2024-11-30 00:06:43,604 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.52it/s]
+2024-11-30 00:06:43,679 - INFO - Reranked 3 documents passed threshold
+2024-11-30 00:06:43,680 - INFO - Quality check completed. Score: 1.62
+2024-11-30 00:06:48,786 - INFO - Processing question 63/111
+2024-11-30 00:06:48,803 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.64it/s]
+2024-11-30 00:06:48,884 - INFO - Reranked 3 documents passed threshold
+2024-11-30 00:06:48,884 - INFO - Quality check completed. Score: -1.44
+2024-11-30 00:06:49,385 - INFO - Processing question 64/111
+2024-11-30 00:06:49,402 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.38it/s]
+2024-11-30 00:06:49,478 - INFO - Reranked 1 documents passed threshold
+2024-11-30 00:06:49,478 - INFO - Quality check completed. Score: -0.99
+2024-11-30 00:06:49,979 - INFO - Processing question 65/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 131.19it/s]
+2024-11-30 00:06:50,001 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.19it/s]
+2024-11-30 00:06:50,073 - INFO - Reranked 5 documents passed threshold
+2024-11-30 00:06:50,073 - INFO - Quality check completed. Score: 2.24
+2024-11-30 00:06:52,110 - INFO - Processing question 66/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 116.97it/s]
+2024-11-30 00:06:52,137 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.04it/s]
+2024-11-30 00:06:52,209 - INFO - Reranked 5 documents passed threshold
+2024-11-30 00:06:52,210 - INFO - Quality check completed. Score: 2.07
+2024-11-30 00:06:59,012 - INFO - Processing question 67/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 112.13it/s]
+2024-11-30 00:06:59,039 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.53it/s]
+2024-11-30 00:06:59,114 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:06:59,114 - WARNING - No documents passed threshold -2.0. Best score was -4.558274745941162
+2024-11-30 00:06:59,114 - WARNING - No documents provided for quality check
+2024-11-30 00:06:59,114 - WARNING - Low quality score: 0.0
+2024-11-30 00:06:59,615 - INFO - Processing question 68/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 109.51it/s]
+2024-11-30 00:06:59,639 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.87it/s]
+2024-11-30 00:06:59,719 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:06:59,719 - WARNING - No documents passed threshold -2.0. Best score was -9.006175994873047
+2024-11-30 00:06:59,719 - WARNING - No documents provided for quality check
+2024-11-30 00:06:59,719 - WARNING - Low quality score: 0.0
+2024-11-30 00:07:00,220 - INFO - Processing question 69/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 121.84it/s]
+2024-11-30 00:07:00,243 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.48it/s]
+2024-11-30 00:07:00,318 - INFO - Reranked 3 documents passed threshold
+2024-11-30 00:07:00,319 - INFO - Quality check completed. Score: 5.24
+2024-11-30 00:07:05,193 - INFO - Processing question 70/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 106.98it/s]
+2024-11-30 00:07:05,221 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.22it/s]
+2024-11-30 00:07:05,298 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:07:05,298 - WARNING - No documents passed threshold -2.0. Best score was -7.662086009979248
+2024-11-30 00:07:05,298 - WARNING - No documents provided for quality check
+2024-11-30 00:07:05,298 - WARNING - Low quality score: 0.0
+2024-11-30 00:07:05,799 - INFO - Processed 70/111 questions
+2024-11-30 00:07:05,800 - INFO - Processing question 71/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 109.66it/s]
+2024-11-30 00:07:05,824 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.33it/s]
+2024-11-30 00:07:05,901 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:07:05,901 - WARNING - No documents passed threshold -2.0. Best score was -7.940993785858154
+2024-11-30 00:07:05,901 - WARNING - No documents provided for quality check
+2024-11-30 00:07:05,901 - WARNING - Low quality score: 0.0
+2024-11-30 00:07:06,402 - INFO - Processing question 72/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 138.93it/s]
+2024-11-30 00:07:06,424 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.37it/s]
+2024-11-30 00:07:06,495 - INFO - Reranked 2 documents passed threshold
+2024-11-30 00:07:06,495 - INFO - Quality check completed. Score: 0.58
+2024-11-30 00:07:09,668 - INFO - Processing question 73/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 131.76it/s]
+2024-11-30 00:07:09,692 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.72it/s]
+2024-11-30 00:07:09,761 - INFO - Reranked 2 documents passed threshold
+2024-11-30 00:07:09,761 - INFO - Quality check completed. Score: 4.01
+2024-11-30 00:07:15,974 - INFO - Processing question 74/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 62.44it/s]
+2024-11-30 00:07:16,006 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.51it/s]
+2024-11-30 00:07:16,077 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:07:16,077 - WARNING - No documents passed threshold -2.0. Best score was -6.92641019821167
+2024-11-30 00:07:16,077 - WARNING - No documents provided for quality check
+2024-11-30 00:07:16,077 - WARNING - Low quality score: 0.0
+2024-11-30 00:07:16,578 - INFO - Processing question 75/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 113.23it/s]
+2024-11-30 00:07:16,601 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.66it/s]
+2024-11-30 00:07:16,682 - INFO - Reranked 1 documents passed threshold
+2024-11-30 00:07:16,682 - INFO - Quality check completed. Score: -0.33
+2024-11-30 00:07:17,183 - INFO - Processing question 76/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 124.22it/s]
+2024-11-30 00:07:17,206 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.63it/s]
+2024-11-30 00:07:17,280 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:07:17,281 - WARNING - No documents passed threshold -2.0. Best score was -9.887106895446777
+2024-11-30 00:07:17,281 - WARNING - No documents provided for quality check
+2024-11-30 00:07:17,281 - WARNING - Low quality score: 0.0
+2024-11-30 00:07:17,782 - INFO - Processing question 77/111
+2024-11-30 00:07:17,797 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.03it/s]
+2024-11-30 00:07:17,875 - INFO - Reranked 5 documents passed threshold
+2024-11-30 00:07:17,875 - INFO - Quality check completed. Score: 2.07
+2024-11-30 00:07:18,423 - INFO - Processing question 78/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 100.40it/s]
+2024-11-30 00:07:18,451 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.70it/s]
+2024-11-30 00:07:18,525 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:07:18,525 - WARNING - No documents passed threshold -2.0. Best score was -11.039731979370117
+2024-11-30 00:07:18,525 - WARNING - No documents provided for quality check
+2024-11-30 00:07:18,525 - WARNING - Low quality score: 0.0
+2024-11-30 00:07:19,027 - INFO - Processing question 79/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 106.52it/s]
+2024-11-30 00:07:19,052 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.66it/s]
+2024-11-30 00:07:19,127 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:07:19,127 - WARNING - No documents passed threshold -2.0. Best score was -4.371936798095703
+2024-11-30 00:07:19,127 - WARNING - No documents provided for quality check
+2024-11-30 00:07:19,127 - WARNING - Low quality score: 0.0
+2024-11-30 00:07:19,628 - INFO - Processing question 80/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 110.83it/s]
+2024-11-30 00:07:19,654 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.08it/s]
+2024-11-30 00:07:19,726 - INFO - Reranked 3 documents passed threshold
+2024-11-30 00:07:19,726 - INFO - Quality check completed. Score: 0.36
+2024-11-30 00:07:19,726 - WARNING - Low quality score: 0.3612923324108124
+2024-11-30 00:07:20,227 - INFO - Processed 80/111 questions
+2024-11-30 00:07:20,228 - INFO - Processing question 81/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 129.44it/s]
+2024-11-30 00:07:20,250 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.76it/s]
+2024-11-30 00:07:20,330 - INFO - Reranked 2 documents passed threshold
+2024-11-30 00:07:20,330 - INFO - Quality check completed. Score: 1.59
+2024-11-30 00:07:23,586 - INFO - Processing question 82/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 115.10it/s]
+2024-11-30 00:07:23,613 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.68it/s]
+2024-11-30 00:07:23,687 - INFO - Reranked 3 documents passed threshold
+2024-11-30 00:07:23,687 - INFO - Quality check completed. Score: 4.28
+2024-11-30 00:07:35,112 - INFO - Processing question 83/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 74.52it/s]
+2024-11-30 00:07:35,141 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.23it/s]
+2024-11-30 00:07:35,218 - INFO - Reranked 1 documents passed threshold
+2024-11-30 00:07:35,218 - INFO - Quality check completed. Score: -0.47
+2024-11-30 00:07:35,719 - INFO - Processing question 84/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 119.06it/s]
+2024-11-30 00:07:35,742 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.08it/s]
+2024-11-30 00:07:35,815 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:07:35,815 - WARNING - No documents passed threshold -2.0. Best score was -4.875095367431641
+2024-11-30 00:07:35,815 - WARNING - No documents provided for quality check
+2024-11-30 00:07:35,815 - WARNING - Low quality score: 0.0
+2024-11-30 00:07:36,316 - INFO - Processing question 85/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 122.66it/s]
+2024-11-30 00:07:36,339 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.87it/s]
+2024-11-30 00:07:36,418 - INFO - Reranked 3 documents passed threshold
+2024-11-30 00:07:36,418 - INFO - Quality check completed. Score: 4.64
+2024-11-30 00:07:39,025 - INFO - Processing question 86/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 115.75it/s]
+2024-11-30 00:07:39,052 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  9.28it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  9.24it/s]
+2024-11-30 00:07:39,161 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:07:39,162 - WARNING - No documents passed threshold -2.0. Best score was -6.564924240112305
+2024-11-30 00:07:39,162 - WARNING - No documents provided for quality check
+2024-11-30 00:07:39,162 - WARNING - Low quality score: 0.0
+2024-11-30 00:07:39,663 - INFO - Processing question 87/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 81.41it/s]
+2024-11-30 00:07:39,689 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 11.62it/s]
+2024-11-30 00:07:39,776 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:07:39,777 - WARNING - No documents passed threshold -2.0. Best score was -10.127535820007324
+2024-11-30 00:07:39,777 - WARNING - No documents provided for quality check
+2024-11-30 00:07:39,777 - WARNING - Low quality score: 0.0
+2024-11-30 00:07:40,278 - INFO - Processing question 88/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 135.44it/s]
+2024-11-30 00:07:40,300 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.66it/s]
+2024-11-30 00:07:40,369 - INFO - Reranked 2 documents passed threshold
+2024-11-30 00:07:40,369 - INFO - Quality check completed. Score: 5.99
+2024-11-30 00:07:59,286 - INFO - Processing question 89/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 127.14it/s]
+2024-11-30 00:07:59,309 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.42it/s]
+2024-11-30 00:07:59,385 - INFO - Reranked 3 documents passed threshold
+2024-11-30 00:07:59,385 - INFO - Quality check completed. Score: 1.71
+2024-11-30 00:08:15,662 - INFO - Processing question 90/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 93.18it/s]
+2024-11-30 00:08:15,689 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.56it/s]
+2024-11-30 00:08:15,759 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:08:15,759 - WARNING - No documents passed threshold -2.0. Best score was -2.5293450355529785
+2024-11-30 00:08:15,759 - WARNING - No documents provided for quality check
+2024-11-30 00:08:15,759 - WARNING - Low quality score: 0.0
+2024-11-30 00:08:16,260 - INFO - Processed 90/111 questions
+2024-11-30 00:08:16,260 - INFO - Processing question 91/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 105.82it/s]
+2024-11-30 00:08:16,286 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.85it/s]
+2024-11-30 00:08:16,360 - INFO - Reranked 2 documents passed threshold
+2024-11-30 00:08:16,360 - INFO - Quality check completed. Score: 0.50
+2024-11-30 00:08:16,360 - WARNING - Low quality score: 0.49769386649131775
+2024-11-30 00:08:16,861 - INFO - Processing question 92/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 118.53it/s]
+2024-11-30 00:08:16,884 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.45it/s]
+2024-11-30 00:08:16,954 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:08:16,954 - WARNING - No documents passed threshold -2.0. Best score was -8.291241645812988
+2024-11-30 00:08:16,954 - WARNING - No documents provided for quality check
+2024-11-30 00:08:16,954 - WARNING - Low quality score: 0.0
+2024-11-30 00:08:17,455 - INFO - Processing question 93/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 113.58it/s]
+2024-11-30 00:08:17,478 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.17it/s]
+2024-11-30 00:08:17,550 - INFO - Reranked 5 documents passed threshold
+2024-11-30 00:08:17,550 - INFO - Quality check completed. Score: 3.23
+2024-11-30 00:08:27,102 - INFO - Processing question 94/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 91.96it/s]
+2024-11-30 00:08:27,130 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.47it/s]
+2024-11-30 00:08:27,206 - INFO - Reranked 5 documents passed threshold
+2024-11-30 00:08:27,206 - INFO - Quality check completed. Score: 8.48
+2024-11-30 00:08:31,721 - INFO - Processing question 95/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 124.45it/s]
+2024-11-30 00:08:31,747 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.01it/s]
+2024-11-30 00:08:31,820 - INFO - Reranked 2 documents passed threshold
+2024-11-30 00:08:31,820 - INFO - Quality check completed. Score: 2.76
+2024-11-30 00:08:52,149 - INFO - Processing question 96/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 83.12it/s]
+2024-11-30 00:08:52,176 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.89it/s]
+2024-11-30 00:08:52,255 - INFO - Reranked 1 documents passed threshold
+2024-11-30 00:08:52,255 - INFO - Quality check completed. Score: -1.77
+2024-11-30 00:08:52,756 - INFO - Processing question 97/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 114.81it/s]
+2024-11-30 00:08:52,781 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.68it/s]
+2024-11-30 00:08:52,855 - INFO - Reranked 3 documents passed threshold
+2024-11-30 00:08:52,855 - INFO - Quality check completed. Score: -0.34
+2024-11-30 00:08:53,356 - INFO - Processing question 98/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 117.98it/s]
+2024-11-30 00:08:53,380 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.75it/s]
+2024-11-30 00:08:53,449 - INFO - Reranked 5 documents passed threshold
+2024-11-30 00:08:53,449 - INFO - Quality check completed. Score: 4.13
+2024-11-30 00:08:58,965 - INFO - Processing question 99/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 108.27it/s]
+2024-11-30 00:08:58,990 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.64it/s]
+2024-11-30 00:08:59,064 - INFO - Reranked 4 documents passed threshold
+2024-11-30 00:08:59,065 - INFO - Quality check completed. Score: 4.37
+2024-11-30 00:09:10,936 - INFO - Processing question 100/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 87.02it/s]
+2024-11-30 00:09:10,964 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.24it/s]
+2024-11-30 00:09:11,041 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:09:11,041 - WARNING - No documents passed threshold -2.0. Best score was -8.411036491394043
+2024-11-30 00:09:11,041 - WARNING - No documents provided for quality check
+2024-11-30 00:09:11,041 - WARNING - Low quality score: 0.0
+2024-11-30 00:09:11,542 - INFO - Processed 100/111 questions
+2024-11-30 00:09:11,543 - INFO - Processing question 101/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 104.94it/s]
+2024-11-30 00:09:11,570 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.16it/s]
+2024-11-30 00:09:11,641 - INFO - Reranked 5 documents passed threshold
+2024-11-30 00:09:11,641 - INFO - Quality check completed. Score: 8.13
+2024-11-30 00:09:14,286 - INFO - Processing question 102/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 118.37it/s]
+2024-11-30 00:09:14,312 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.42it/s]
+2024-11-30 00:09:14,383 - INFO - Reranked 3 documents passed threshold
+2024-11-30 00:09:14,383 - INFO - Quality check completed. Score: 1.78
+2024-11-30 00:09:18,391 - INFO - Processing question 103/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 100.51it/s]
+2024-11-30 00:09:18,418 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.29it/s]
+2024-11-30 00:09:18,494 - INFO - Reranked 3 documents passed threshold
+2024-11-30 00:09:18,495 - INFO - Quality check completed. Score: 7.75
+2024-11-30 00:09:41,228 - INFO - Processing question 104/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 96.11it/s]
+2024-11-30 00:09:41,256 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.92it/s]
+2024-11-30 00:09:41,329 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:09:41,329 - WARNING - No documents passed threshold -2.0. Best score was -8.12178897857666
+2024-11-30 00:09:41,329 - WARNING - No documents provided for quality check
+2024-11-30 00:09:41,329 - WARNING - Low quality score: 0.0
+2024-11-30 00:09:41,830 - INFO - Processing question 105/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 129.83it/s]
+2024-11-30 00:09:41,853 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.24it/s]
+2024-11-30 00:09:41,924 - INFO - Reranked 1 documents passed threshold
+2024-11-30 00:09:41,924 - INFO - Quality check completed. Score: 0.82
+2024-11-30 00:10:03,544 - INFO - Processing question 106/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 92.83it/s]
+2024-11-30 00:10:03,574 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.53it/s]
+2024-11-30 00:10:03,649 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:10:03,649 - WARNING - No documents passed threshold -2.0. Best score was -2.6726067066192627
+2024-11-30 00:10:03,649 - WARNING - No documents provided for quality check
+2024-11-30 00:10:03,649 - WARNING - Low quality score: 0.0
+2024-11-30 00:10:04,150 - INFO - Processing question 107/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 104.05it/s]
+2024-11-30 00:10:04,176 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.19it/s]
+2024-11-30 00:10:04,254 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:10:04,254 - WARNING - No documents passed threshold -2.0. Best score was -10.368337631225586
+2024-11-30 00:10:04,254 - WARNING - No documents provided for quality check
+2024-11-30 00:10:04,254 - WARNING - Low quality score: 0.0
+2024-11-30 00:10:04,755 - INFO - Processing question 108/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 135.52it/s]
+2024-11-30 00:10:04,777 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.70it/s]
+2024-11-30 00:10:04,851 - INFO - Reranked 1 documents passed threshold
+2024-11-30 00:10:04,851 - INFO - Quality check completed. Score: 0.74
+2024-11-30 00:10:09,024 - INFO - Processing question 109/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 120.80it/s]
+2024-11-30 00:10:09,047 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.44it/s]
+2024-11-30 00:10:09,117 - INFO - Reranked 1 documents passed threshold
+2024-11-30 00:10:09,117 - INFO - Quality check completed. Score: -0.02
+2024-11-30 00:10:09,117 - WARNING - Low quality score: -0.02446732670068741
+2024-11-30 00:10:09,618 - INFO - Processing question 110/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 98.91it/s]
+2024-11-30 00:10:09,644 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.00it/s]
+2024-11-30 00:10:09,716 - INFO - Reranked 4 documents passed threshold
+2024-11-30 00:10:09,716 - INFO - Quality check completed. Score: 1.91
+2024-11-30 00:10:12,639 - INFO - Processed 110/111 questions
+2024-11-30 00:10:12,640 - INFO - Processing question 111/111
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 72.08it/s]
+2024-11-30 00:10:12,669 - INFO - Retrieved 5 documents
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  9.07it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  9.03it/s]
+2024-11-30 00:10:12,781 - INFO - Reranked 0 documents passed threshold
+2024-11-30 00:10:12,781 - WARNING - No documents passed threshold -2.0. Best score was -3.7270774841308594
+2024-11-30 00:10:12,781 - WARNING - No documents provided for quality check
+2024-11-30 00:10:12,781 - WARNING - Low quality score: 0.0
+2024-11-30 00:10:13,283 - INFO - Writing results to data/faq_responses_local_rag.csv
+2024-11-30 00:10:13,295 - INFO - Vector store connection closed successfully
+2024-11-30 00:10:13,295 - INFO - LLM manager cleaned up successfully
+2024-11-30 00:10:13,295 - INFO - Testing completed!

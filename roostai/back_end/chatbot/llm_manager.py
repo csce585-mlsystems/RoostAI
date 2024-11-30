@@ -6,17 +6,21 @@ from typing import Optional
 from dotenv import load_dotenv
 from huggingface_hub import InferenceClient
 
-from .config import LLMConfig
+from .config import Config
 from .types import QueryResult
 
 
 class LLMManager:
-    def __init__(self, model_name: str, config: LLMConfig, llm_model: str):
+    def __init__(self, model_name: str, config: Config, llm_model: str):
         """Initialize the Hugging Face Inference API client for LLM."""
 
         self.logger = logging.getLogger(__name__)
         self.model_name = model_name
+
         self.config = config
+        self.quality_min_score = (
+            config.thresholds.quality_min_score
+        )  # Get from main config
 
         load_dotenv()
         self.api_token = os.getenv("HF_API_KEY")
@@ -72,9 +76,19 @@ Please provide a helpful response based on the context above. If the context doe
 
     async def generate_response(self, query: str, result: QueryResult) -> Optional[str]:
         try:
-            if result.quality_score < self.config.quality_min_score:
-                self.logger.warning(f"Low quality score: {result.quality_score}")
-                return "I apologize, but I don't have enough relevant information to provide a good answer."
+            if result.quality_score < self.quality_min_score:
+                self.logger.warning(
+                    f"Query failed quality check:\n"
+                    f"- Quality score: {result.quality_score}\n"
+                    f"- Minimum required: {self.quality_min_score}\n"
+                    f"- Number of documents: {len(result.documents)}\n"
+                    f"- Top document score: {result.documents[0].score if result.documents else 'N/A'}"
+                )
+                return (
+                    "I apologize, but I don't have enough confident information to "
+                    "provide a good answer to your question. Please try rephrasing or "
+                    "asking about a different topic related to USC."
+                )
 
             prompt = self.generate_prompt(query, result)
             # print(prompt)

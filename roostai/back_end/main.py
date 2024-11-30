@@ -80,7 +80,7 @@ class UniversityChatbot:
 
         self.llm_manager = LLMManager(
             model_name=self.config.model.llm_model,
-            config=self.config.llm,
+            config=self.config,
             llm_model=self.config.model.llm_model,
         )
 
@@ -157,13 +157,6 @@ class UniversityChatbot:
 
             if verbose:
                 logger.info(f"\nQuality score: {result.quality_score:.4f}")
-
-            if result.quality_score < self.config.thresholds.quality_min_score:
-                return (
-                    "I apologize, but I don't have enough confident information to "
-                    "provide a good answer to your question. Please try rephrasing or "
-                    "asking about a different topic related to USC."
-                )
 
             response = await self.llm_manager.generate_response(cleaned_query, result)
 
