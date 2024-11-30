@@ -55,6 +55,8 @@ class LocalRAGTester:
                 logger.debug(f"Question: {question}")
 
                 response = await self.chatbot.process_query(question)
+                logger.debug(f"Response:\n{response}\n")
+
                 responses.append(response)
 
                 # Add a small delay between queries
