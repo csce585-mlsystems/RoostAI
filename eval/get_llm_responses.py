@@ -44,7 +44,7 @@ def main():
     print("Getting GPT-4o responses...")
     bank_df["gpt"] = gpt_4o(bank_df, openai_api_key).get_responses().values
 
-    out_file: str = "data/faq_responses.csv"
+    out_file: str = "second_faq_evaluation/data/faq_responses.csv"
     print(f"Writing to file {out_file}")
     bank_df.to_csv(out_file, index=False)
 
