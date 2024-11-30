@@ -19,10 +19,10 @@ class LocalRAGTester:
         self.chatbot = None
         self.df = None
 
-    async def initialize(self):
+    async def initialize(self, db_path: str):
         """Initialize the chatbot and load data."""
         try:
-            self.chatbot = UniversityChatbot()
+            self.chatbot = UniversityChatbot(db_path)
 
             # Verify database has documents
             doc_count = await self.chatbot.get_document_count()
@@ -81,11 +81,12 @@ class LocalRAGTester:
 async def main():
     data_file: str = "data/faq_pairs_milestone2.csv"
     out_file: str = "data/faq_responses_local_rag.csv"
+    db_path: str = "/home/cc/RoostAI/roostai/data/v2"
 
     tester = LocalRAGTester(data_file)
 
     try:
-        await tester.initialize()
+        await tester.initialize(db_path=db_path)
 
         # Get responses
         logger.info("Getting responses from local RAG system...")

@@ -1,4 +1,5 @@
 import os
+from typing import Optional
 
 __import__("pysqlite3")
 import sys
@@ -40,20 +41,23 @@ def verify_db_path(db_path: str) -> bool:
 
 
 class UniversityChatbot:
-    def __init__(self):
+    def __init__(self, db_path: Optional[str] = None):
         self.config = Config.load_config()
 
-        # Set the absolute path to the database
-        db_path = "/home/cc/RoostAI/roostai/data"
+        # If db_path is provided, override the default path
+        if db_path:
+            self.config.vector_db.db_path = db_path
 
         # Verify database path
-        if not verify_db_path(db_path):
-            raise ValueError(f"Invalid database path: {db_path}")
+        if not verify_db_path(self.config.vector_db.db_path):
+            raise ValueError(f"Invalid database path: {self.config.vector_db.db_path}")
 
-        self.config.vector_db.db_path = db_path
+        self.config.vector_db.db_path = self.config.vector_db.db_path
         self.logger = logging.getLogger(__name__)
 
-        self.logger.info(f"Initializing with database path: {db_path}")
+        self.logger.info(
+            f"Initializing with database path: {self.config.vector_db.db_path}"
+        )
 
         self.query_processor = QueryProcessor(
             model_name=self.config.model.embedding_model

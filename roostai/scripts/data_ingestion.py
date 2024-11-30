@@ -1,5 +1,3 @@
-from datetime import datetime
-
 __import__("pysqlite3")
 import sys
 
@@ -25,7 +23,7 @@ logger = logging.getLogger(__name__)
 
 class DuplicateTracker:
     def __init__(self):
-        self.content_hashes: Set[str] = set()
+        self.content_hashes: Set = set()
         self.duplicate_counts: Dict[str, int] = defaultdict(int)
         self.duplicate_sources: Dict[str, List[str]] = defaultdict(list)
         self.total_chunks = 0
@@ -205,11 +203,7 @@ class DataIngestionManager:
 async def main():
     """Main function to run the data ingestion process."""
     config = Config.load_config()
-    # Override the database path
-    config.vector_db.db_path = "/home/cc/RoostAI/roostai/data"
-
     ingestion_manager = DataIngestionManager(config)
-
     data_directory = "/home/cc/chunks_and_metadata"
 
     try:

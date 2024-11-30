@@ -27,11 +27,6 @@ class LLMManager:
         if not self.api_token:
             raise ValueError("HF_API_KEY environment variable not set")
 
-        # Initialize client with timeout
-        self.client = InferenceClient(
-            token=self.api_token, timeout=30  # 30 seconds timeout
-        )
-
         self.client = InferenceClient(token=self.api_token)
         self.model = llm_model
 
@@ -72,6 +67,7 @@ Context information:
 User question: {query}
 
 Please provide a helpful response based on the context above. If the context doesn't contain relevant information to answer the question, please state that clearly.
+Additionally, please enclose your response in <response> tags.
 """
 
     async def generate_response(self, query: str, result: QueryResult) -> Optional[str]:
@@ -122,7 +118,6 @@ Please provide a helpful response based on the context above. If the context doe
         """Close LLM connections and clean up resources."""
         try:
             if hasattr(self, "client"):
-                # Close any active sessions
                 self.client = None
             self.logger.info("LLM manager cleaned up successfully")
         except Exception as e:
