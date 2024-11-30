@@ -14,27 +14,33 @@ class QualityChecker:
         self.logger = logging.getLogger(__name__)
 
     async def check_quality(self, query: str, documents: List[Document]) -> QueryResult:
-        """Check quality of retrieved documents."""
+        """Enhanced quality checking with more flexible criteria."""
         try:
             if not documents:
                 self.logger.warning("No documents provided for quality check")
                 return QueryResult(documents=[], quality_score=0.0)
 
-            # Calculate average score of top documents
-            top_docs = documents[: self.min_docs]
-            if len(top_docs) < self.min_docs:
-                self.logger.warning(
-                    f"Insufficient number of documents: {len(top_docs)} < {self.min_docs}"
-                )
-                return QueryResult(documents=documents, quality_score=0.0)
+            # Calculate weighted quality score
+            scores = []
+            weights = []
 
-            scores = [doc.score for doc in top_docs if doc.score is not None]
+            # Consider more documents but with decreasing weights
+            for i, doc in enumerate(documents[:5]):  # Consider top 5 docs
+                if doc.score is not None:
+                    weight = 1.0 / (i + 1)  # Decreasing weights
+                    scores.append(doc.score * weight)
+                    weights.append(weight)
+
             if not scores:
                 self.logger.warning("No valid scores found in documents")
                 return QueryResult(documents=documents, quality_score=0.0)
 
-            avg_score = sum(scores) / len(scores)
-            quality_score = avg_score if len(top_docs) >= self.min_docs else 0.0
+            # Weighted average score
+            quality_score = sum(scores) / sum(weights)
+
+            # Bonus for having multiple relevant documents
+            if len(scores) >= 2:
+                quality_score *= 1 + 0.1 * len(scores)  # Bonus for more docs
 
             self.logger.info(f"Quality check completed. Score: {quality_score:.2f}")
             self.logger.debug(f"Number of documents: {len(documents)}")

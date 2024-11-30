@@ -23,3 +23,8 @@ poetry run python roostai/back_end/main.py 2>&1 | tee roostai/back_end/dry-runs/
 ```bash
 poetry run python get_llm_responses.py
 ```
+
+- Getting FAQ response from the chatbot
+```bash
+poetry run python eval/second_faq_evaluation/get_rag_response.py 2>&1 | tee eval/second_faq_evaluation/get_rag_response.out
+```
