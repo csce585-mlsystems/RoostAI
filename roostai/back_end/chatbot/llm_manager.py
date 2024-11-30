@@ -77,7 +77,7 @@ Please provide a helpful response based on the context above. If the context doe
                 return "I apologize, but I don't have enough relevant information to provide a good answer."
 
             prompt = self.generate_prompt(query, result)
-            print(prompt)
+            # print(prompt)
 
             # Use asyncio.wait_for to add timeout
             response = await asyncio.wait_for(
