@@ -50,7 +50,8 @@ class LocalRAGTester:
         for idx, row in self.df.iterrows():
             question = row["question"]
             try:
-                logger.info(f"\n\nProcessing question {idx + 1}/{len(self.df)}")
+                logger.info("\n\n")
+                logger.info(f"Processing question {idx + 1}/{len(self.df)}")
                 logger.debug(f"Question: {question}")
 
                 response = await self.chatbot.process_query(question)
