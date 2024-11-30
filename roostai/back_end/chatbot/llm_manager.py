@@ -57,7 +57,7 @@ Context information:
 User question: {query}
 
 Please provide a helpful response based on the context above. If the context doesn't contain relevant information to answer the question, please state that clearly.
-Additionally, please enclose your response in <response> tags.
+Additionally, make sure to enclose your response in <response> tags.
 """
 
     async def generate_response(self, query: str, result: QueryResult) -> Optional[str]:
@@ -94,7 +94,18 @@ Additionally, please enclose your response in <response> tags.
             )
 
             # Get the response within the <response> tags
-            return response.split("<response>")[1].split("</response>")[0].strip()
+            if "<response>" in response:
+                return response.split("<response>")[1].split("</response>")[0].strip()
+            else:  # Try again maximum two times
+                response = await asyncio.wait_for(
+                    self._generate_response(prompt), timeout=5.0  # 5 seconds timeout
+                )
+                if "<response>" in response:
+                    return (
+                        response.split("<response>")[1].split("</response>")[0].strip()
+                    )
+                else:
+                    return "I apologize, but I encountered an error generating the response."
 
         except asyncio.TimeoutError:
             self.logger.error("LLM response generation timed out")

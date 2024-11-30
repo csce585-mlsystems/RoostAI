@@ -1,6 +1,270 @@
-The currently activated Python version 3.8.10 is not supported by the project (>=3.9,<3.13).
-Trying to find and use a compatible version. 
-Using python3 (3.10.15)
+2024-11-30 22:08:22,257 - roostai.back_end.main - INFO - Found database at: /home/cc/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-11-30 22:08:22,258 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2024-11-30 22:08:22,258 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-11-30 22:08:23,076 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-11-30 22:08:23,277 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: cpu
+2024-11-30 22:08:23,291 - __main__ - INFO - Database contains 47015 documents
+2024-11-30 22:08:23,291 - __main__ - INFO - Reading questions from data/faq_pairs.csv
+2024-11-30 22:08:23,293 - __main__ - INFO - Loaded 111 questions
+2024-11-30 22:08:23,293 - __main__ - INFO - Getting responses from local RAG system...
+2024-11-30 22:08:23,293 - __main__ - INFO - 
+================================================================================
+2024-11-30 22:08:23,293 - __main__ - INFO - Processing question 1/111
+2024-11-30 22:08:23,422 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 15 documents
+2024-11-30 22:08:23,668 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-11-30 22:08:23,668 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.422
+  - Cross-encoder score: -8.298
+  - Content preview: BIOL 599 Topics in Biology NSCI 560 Advanced Topics in Neuroscience PSYC 589 Selected Topics in Psyc...
+2024-11-30 22:08:23,668 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.402
+  - Cross-encoder score: -6.609
+  - Content preview: Consult the department website or advising handbook for the most up to date list of approved concent...
+2024-11-30 22:08:23,669 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.402
+  - Cross-encoder score: -6.318
+  - Content preview: Applied Biotechnology Masters Concentration - School of Medicine Columbia | University of South Caro...
+2024-11-30 22:08:23,669 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 15
+ - Passed threshold (-2.5): 0
+ - Best cross-encoder score: -3.3699777126312256
+ - Best vector similarity: 0.42209768295288086
+2024-11-30 22:08:23,669 - roostai.back_end.chatbot.quality_checker - WARNING - No documents provided for quality check
+2024-11-30 22:08:23,669 - roostai.back_end.chatbot.llm_manager - WARNING - No documents retrieved for LLM response generation
+2024-11-30 22:08:23,669 - __main__ - INFO - 
+Query Results:
+2024-11-30 22:08:23,669 - __main__ - INFO - Stage completed: complete
+2024-11-30 22:08:23,669 - __main__ - INFO - Error (if any): None
+2024-11-30 22:08:23,669 - __main__ - INFO - 
+Metrics:
+2024-11-30 22:08:23,669 - __main__ - INFO - initial_docs_count: 15
+2024-11-30 22:08:23,669 - __main__ - INFO - reranked_docs_count: 0
+2024-11-30 22:08:23,669 - __main__ - INFO - quality_score: 0.0
+2024-11-30 22:08:23,669 - __main__ - INFO - top_doc_score: 0.42209768295288086
+2024-11-30 22:08:23,669 - __main__ - INFO - cleaned_query: Can a program include more than one concentration?
+2024-11-30 22:08:23,669 - __main__ - INFO - initial_docs: [{'content': 'BIOL 599 Topics in Biology NSCI 560 Advanced Topics in Neuroscience PSYC 589 Selected Topics in Psychology COLA 390 Internship: Community Engagement or COLA 391 Internship: Global Community Engagement', 'score': 0.42209768295288086}, {'content': 'Consult the department website or advising handbook for the most up to date list of approved concentration courses. Although these courses are designated as electives in the B.S.E. curriculum in chemi', 'score': 0.4024152159690857}, {'content': 'Applied Biotechnology Masters Concentration - School of Medicine Columbia | University of South Carolina Skip to Content School of Medicine Columbia SC.edu Study Colleges and Schools School of Medicin', 'score': 0.402302622795105}]
+2024-11-30 22:08:23,669 - __main__ - INFO - 
+Response: I apologize, but I don't have any relevant information to answer your question. Please try asking something about USC.
+
+2024-11-30 22:08:23,675 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-11-30 22:08:24,171 - __main__ - INFO - 
+================================================================================
+2024-11-30 22:08:24,171 - __main__ - INFO - Processing question 2/111
+2024-11-30 22:08:24,201 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 15 documents
+2024-11-30 22:08:24,437 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-11-30 22:08:24,438 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.669
+  - Cross-encoder score: 3.352
+  - Content preview: Teaching and Advising - Office of the Provost | University of South Carolina Skip to Content Office ...
+2024-11-30 22:08:24,438 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.656
+  - Cross-encoder score: 2.626
+  - Content preview: What Makes up my Program of Study? - My Arts and Sciences | University of South Carolina Skip to Con...
+2024-11-30 22:08:24,438 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.655
+  - Cross-encoder score: 3.458
+  - Content preview: Carolina Core - Office of the Provost | University of South Carolina Skip to Content Office of the P...
+2024-11-30 22:08:24,438 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 15
+ - Passed threshold (-2.5): 14
+ - Best cross-encoder score: 3.7584445476531982
+ - Best vector similarity: 0.6689591407775879
+2024-11-30 22:08:24,438 - roostai.back_end.chatbot.quality_checker - INFO - Quality check completed. Score: 5.45
+2024-11-30 22:08:28,787 - __main__ - INFO - 
+Query Results:
+2024-11-30 22:08:28,787 - __main__ - INFO - Stage completed: complete
+2024-11-30 22:08:28,788 - __main__ - INFO - Error (if any): None
+2024-11-30 22:08:28,788 - __main__ - INFO - 
+Metrics:
+2024-11-30 22:08:28,788 - __main__ - INFO - initial_docs_count: 15
+2024-11-30 22:08:28,788 - __main__ - INFO - reranked_docs_count: 14
+2024-11-30 22:08:28,788 - __main__ - INFO - quality_score: 5.452974863296008
+2024-11-30 22:08:28,788 - __main__ - INFO - top_doc_score: 0.6689591407775879
+2024-11-30 22:08:28,788 - __main__ - INFO - cleaned_query: Can I choose specific (prescribed) courses as part of the Carolina Core for my program?
+2024-11-30 22:08:28,788 - __main__ - INFO - initial_docs: [{'content': 'Teaching and Advising - Office of the Provost | University of South Carolina Skip to Content Office of the Provost SC.edu About Offices and Divisions Office of the Provost Our Offices Undergraduate St', 'score': 0.6689591407775879}, {'content': 'What Makes up my Program of Study? - My Arts and Sciences | University of South Carolina Skip to Content My Arts and Sciences SC.edu Study Colleges and Schools My Arts and Sciences Undergraduate Stude', 'score': 0.6560964584350586}, {'content': 'Carolina Core - Office of the Provost | University of South Carolina Skip to Content Office of the Provost SC.edu About Offices and Divisions Office of the Provost Our Offices Undergraduate Studies Ca', 'score': 0.6547122597694397}]
+2024-11-30 22:08:28,788 - __main__ - INFO - top_reranked_score: 3.7584445476531982
+2024-11-30 22:08:28,789 - __main__ - INFO - reranked_docs: [{'content': 'Requirements - Office of the Provost | University of South Carolina Skip to Content Office of the Provost SC.edu About Offices and Divisions Office of the Provost Our Offices Undergraduate Studies Car', 'score': 3.7584445476531982}, {'content': 'Courses - Office of the Provost | University of South Carolina Skip to Content Office of the Provost SC.edu About Offices and Divisions Office of the Provost Our Offices Undergraduate Studies Carolina', 'score': 3.6290948390960693}, {'content': 'Some programs may have a higher number of minimum Carolina Core hours due to specified requirements. 2. College Requirements (4-45 hours) To fulfill these requirements, courses must be listed as a "So', 'score': 3.517498016357422}]
+2024-11-30 22:08:28,789 - __main__ - INFO - 
+Response: Yes, you can choose specific prescribed courses as part of the Carolina Core for your program. The courses that fulfill each requirement vary depending on your college and major. It is important to consult with your academic advisor to ensure you are taking the correct courses to satisfy both your major and Carolina Core requirements.
+
+2024-11-30 22:08:29,290 - __main__ - INFO - 
+================================================================================
+2024-11-30 22:08:29,290 - __main__ - INFO - Processing question 3/111
+2024-11-30 22:08:29,319 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 15 documents
+2024-11-30 22:08:29,552 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-11-30 22:08:29,552 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.547
+  - Cross-encoder score: -1.886
+  - Content preview: Have corresponding program changes been submitted? Do the pre-/co-requisite changes involve another ...
+2024-11-30 22:08:29,552 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.508
+  - Cross-encoder score: -3.917
+  - Content preview: Course and Program Changes - College of Education | University of South Carolina Skip to Content Col...
+2024-11-30 22:08:29,552 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.498
+  - Cross-encoder score: -5.827
+  - Content preview: Curriculum Committee - C130 Date: April 25, 2003 Revised: December 15, 2008 POLICY: Any changes to t...
+2024-11-30 22:08:29,552 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 15
+ - Passed threshold (-2.5): 2
+ - Best cross-encoder score: -1.886481761932373
+ - Best vector similarity: 0.5467399954795837
+2024-11-30 22:08:29,552 - roostai.back_end.chatbot.quality_checker - INFO - Quality check completed. Score: -2.36
+2024-11-30 22:08:29,552 - __main__ - INFO - 
+Query Results:
+2024-11-30 22:08:29,552 - __main__ - INFO - Stage completed: quality_check
+2024-11-30 22:08:29,552 - __main__ - INFO - Error (if any): Failed quality check
+2024-11-30 22:08:29,553 - __main__ - INFO - 
+Metrics:
+2024-11-30 22:08:29,553 - __main__ - INFO - initial_docs_count: 15
+2024-11-30 22:08:29,553 - __main__ - INFO - reranked_docs_count: 2
+2024-11-30 22:08:29,553 - __main__ - INFO - quality_score: -2.3643095970153807
+2024-11-30 22:08:29,553 - __main__ - INFO - top_doc_score: 0.5467399954795837
+2024-11-30 22:08:29,553 - __main__ - INFO - cleaned_query: Do all changes to a cross-listed course affect any cross-listed course(s) as well?
+2024-11-30 22:08:29,553 - __main__ - INFO - initial_docs: [{'content': 'Have corresponding program changes been submitted? Do the pre-/co-requisite changes involve another department/program? If so, has a letter of concurrence been submitted? Variable Credit Hours? If the', 'score': 0.5467399954795837}, {'content': 'Course and Program Changes - College of Education | University of South Carolina Skip to Content College of Education SC.edu Study Colleges and Schools Colleges and Schools College of Education My COE', 'score': 0.5077949166297913}, {'content': 'Curriculum Committee - C130 Date: April 25, 2003 Revised: December 15, 2008 POLICY: Any changes to the curriculum, either in the form of a new course proposal or as a change to existing undergraduate ', 'score': 0.49790048599243164}]
+2024-11-30 22:08:29,553 - __main__ - INFO - top_reranked_score: -1.886481761932373
+2024-11-30 22:08:29,553 - __main__ - INFO - reranked_docs: [{'content': 'Have corresponding program changes been submitted? Do the pre-/co-requisite changes involve another department/program? If so, has a letter of concurrence been submitted? Variable Credit Hours? If the', 'score': -1.886481761932373}, {'content': 'Curriculum Management - My CEC | University of South Carolina Skip to Content My CEC SC.edu Study Colleges and Schools My CEC Faculty and Staff Resources Curriculum Management Curriculum Management CE', 'score': -2.137810468673706}]
+2024-11-30 22:08:29,553 - __main__ - INFO - 
+Response: I don't have enough confident information to provide a good answer. Please try rephrasing your question.
+
+2024-11-30 22:08:30,054 - __main__ - INFO - 
+================================================================================
+2024-11-30 22:08:30,055 - __main__ - INFO - Processing question 4/111
+2024-11-30 22:08:30,077 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 15 documents
+2024-11-30 22:08:30,304 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-11-30 22:08:30,304 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.457
+  - Cross-encoder score: -5.306
+  - Content preview: Absentee or proxy votes for or against a motion subsequently amended by the faculty in a faculty mee...
+2024-11-30 22:08:30,304 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.427
+  - Cross-encoder score: -4.322
+  - Content preview: Prerequisites Course prerequisites are listed to inform students about the academic background requi...
+2024-11-30 22:08:30,304 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.426
+  - Cross-encoder score: -5.358
+  - Content preview: If you need an override to get into a course, you will need the permission of the instructor to do s...
+2024-11-30 22:08:30,305 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 15
+ - Passed threshold (-2.5): 0
+ - Best cross-encoder score: -4.321748733520508
+ - Best vector similarity: 0.45711350440979004
+2024-11-30 22:08:30,305 - roostai.back_end.chatbot.quality_checker - WARNING - No documents provided for quality check
+2024-11-30 22:08:30,305 - roostai.back_end.chatbot.llm_manager - WARNING - No documents retrieved for LLM response generation
+2024-11-30 22:08:30,305 - __main__ - INFO - 
+Query Results:
+2024-11-30 22:08:30,305 - __main__ - INFO - Stage completed: complete
+2024-11-30 22:08:30,305 - __main__ - INFO - Error (if any): None
+2024-11-30 22:08:30,305 - __main__ - INFO - 
+Metrics:
+2024-11-30 22:08:30,305 - __main__ - INFO - initial_docs_count: 15
+2024-11-30 22:08:30,305 - __main__ - INFO - reranked_docs_count: 0
+2024-11-30 22:08:30,305 - __main__ - INFO - quality_score: 0.0
+2024-11-30 22:08:30,305 - __main__ - INFO - top_doc_score: 0.45711350440979004
+2024-11-30 22:08:30,305 - __main__ - INFO - cleaned_query: Do prerequisites have to be enforced in Banner?
+2024-11-30 22:08:30,305 - __main__ - INFO - initial_docs: [{'content': 'Absentee or proxy votes for or against a motion subsequently amended by the faculty in a faculty meeting, or that state that the absentee ballot may be cast based on the judgment of a faculty member p', 'score': 0.45711350440979004}, {'content': 'Prerequisites Course prerequisites are listed to inform students about the academic background required for satisfactory course completion. The instructor may approve the enrollment of students who ha', 'score': 0.42694973945617676}, {'content': 'If you need an override to get into a course, you will need the permission of the instructor to do so. Contact the academic department that sponsors the class you need an override for and line up your', 'score': 0.4264451861381531}]
+2024-11-30 22:08:30,305 - __main__ - INFO - 
+Response: I apologize, but I don't have any relevant information to answer your question. Please try asking something about USC.
+
+2024-11-30 22:08:30,807 - __main__ - INFO - 
+================================================================================
+2024-11-30 22:08:30,807 - __main__ - INFO - Processing question 5/111
+2024-11-30 22:08:30,841 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 15 documents
+2024-11-30 22:08:31,085 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-11-30 22:08:31,085 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.649
+  - Cross-encoder score: 5.266
+  - Content preview: Courses - Office of the Provost | University of South Carolina Skip to Content Office of the Provost...
+2024-11-30 22:08:31,085 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.626
+  - Cross-encoder score: -0.380
+  - Content preview: What Makes up my Program of Study? - My Arts and Sciences | University of South Carolina Skip to Con...
+2024-11-30 22:08:31,085 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.611
+  - Cross-encoder score: 4.001
+  - Content preview: Requirements - Office of the Provost | University of South Carolina Skip to Content Office of the Pr...
+2024-11-30 22:08:31,086 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 15
+ - Passed threshold (-2.5): 12
+ - Best cross-encoder score: 5.265827178955078
+ - Best vector similarity: 0.6485635638237
+2024-11-30 22:08:31,086 - roostai.back_end.chatbot.quality_checker - INFO - Quality check completed. Score: 6.92
+2024-11-30 22:08:31,134 - __main__ - INFO - 
+Query Results:
+2024-11-30 22:08:31,134 - __main__ - INFO - Stage completed: complete
+2024-11-30 22:08:31,134 - __main__ - INFO - Error (if any): None
+2024-11-30 22:08:31,134 - __main__ - INFO - 
+Metrics:
+2024-11-30 22:08:31,134 - __main__ - INFO - initial_docs_count: 15
+2024-11-30 22:08:31,134 - __main__ - INFO - reranked_docs_count: 12
+2024-11-30 22:08:31,134 - __main__ - INFO - quality_score: 6.920983364112185
+2024-11-30 22:08:31,134 - __main__ - INFO - top_doc_score: 0.6485635638237
+2024-11-30 22:08:31,134 - __main__ - INFO - cleaned_query: How do Carolina Core Overlay courses work?
+2024-11-30 22:08:31,134 - __main__ - INFO - initial_docs: [{'content': 'Courses - Office of the Provost | University of South Carolina Skip to Content Office of the Provost SC.edu About Offices and Divisions Office of the Provost Our Offices Undergraduate Studies Carolina', 'score': 0.6485635638237}, {'content': 'What Makes up my Program of Study? - My Arts and Sciences | University of South Carolina Skip to Content My Arts and Sciences SC.edu Study Colleges and Schools My Arts and Sciences Undergraduate Stude', 'score': 0.6256018877029419}, {'content': 'Requirements - Office of the Provost | University of South Carolina Skip to Content Office of the Provost SC.edu About Offices and Divisions Office of the Provost Our Offices Undergraduate Studies Car', 'score': 0.6108644008636475}]
+2024-11-30 22:08:31,134 - __main__ - INFO - top_reranked_score: 5.265827178955078
+2024-11-30 22:08:31,134 - __main__ - INFO - reranked_docs: [{'content': 'Courses - Office of the Provost | University of South Carolina Skip to Content Office of the Provost SC.edu About Offices and Divisions Office of the Provost Our Offices Undergraduate Studies Carolina', 'score': 5.265827178955078}, {'content': 'Click to search for CMS courses.(https://academicbulletins.sc.edu/undergraduate/carolina-core-courses/#foundationalcoursestext) Information LiteracyStudents will be able to collect, manage and evaluat', 'score': 4.852006435394287}, {'content': 'Requirements - Office of the Provost | University of South Carolina Skip to Content Office of the Provost SC.edu About Offices and Divisions Office of the Provost Our Offices Undergraduate Studies Car', 'score': 4.000523090362549}]
+2024-11-30 22:08:31,134 - __main__ - INFO - 
+Response: Carolina Core Overlay courses offer students the option of meeting two Carolina Core components in a single course. A maximum of two overlays is allowed. The total Carolina Core credit hours must add up to a minimum of 31 hours. This means that if you take an overlay course, it will satisfy two learning outcomes instead of just one, helping you save time and potentially combine similar subjects. Keep in mind that not all courses have overlay options, so check the course catalog or consult with your academic advisor to find out which courses offer overlays.
+
+2024-11-30 22:08:31,636 - __main__ - INFO - 
+================================================================================
+2024-11-30 22:08:31,636 - __main__ - INFO - Processing question 6/111
+2024-11-30 22:08:31,665 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 15 documents
+2024-11-30 22:08:31,891 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-11-30 22:08:31,892 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.568
+  - Cross-encoder score: 2.242
+  - Content preview: Learning outcomes describe the measurable skills, abilities, knowledge or values that students shoul...
+2024-11-30 22:08:31,892 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.560
+  - Cross-encoder score: 1.028
+  - Content preview: Learning Outcomes - Center for Teaching Excellence | University of South Carolina Skip to Content Ce...
+2024-11-30 22:08:31,892 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.526
+  - Cross-encoder score: 0.474
+  - Content preview: Include the best way to communicate with you (e.g., telephone, Blackboard Collaborate Ultra, instant...
+2024-11-30 22:08:31,892 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 15
+ - Passed threshold (-2.5): 8
+ - Best cross-encoder score: 2.242138147354126
+ - Best vector similarity: 0.5678308606147766
+2024-11-30 22:08:31,892 - roostai.back_end.chatbot.quality_checker - INFO - Quality check completed. Score: 1.69
+2024-11-30 22:08:40,830 - __main__ - INFO - 
+Query Results:
+2024-11-30 22:08:40,830 - __main__ - INFO - Stage completed: complete
+2024-11-30 22:08:40,830 - __main__ - INFO - Error (if any): None
+2024-11-30 22:08:40,830 - __main__ - INFO - 
+Metrics:
+2024-11-30 22:08:40,830 - __main__ - INFO - initial_docs_count: 15
+2024-11-30 22:08:40,830 - __main__ - INFO - reranked_docs_count: 8
+2024-11-30 22:08:40,830 - __main__ - INFO - quality_score: 1.6912167623204035
+2024-11-30 22:08:40,830 - __main__ - INFO - top_doc_score: 0.5678308606147766
+2024-11-30 22:08:40,830 - __main__ - INFO - cleaned_query: How do I change my program learning outcomes?
+2024-11-30 22:08:40,830 - __main__ - INFO - initial_docs: [{'content': 'Learning outcomes describe the measurable skills, abilities, knowledge or values that students should be able to demonstrate as a result of completing a course. They are student-centered rather than t', 'score': 0.5678308606147766}, {'content': 'Learning Outcomes - Center for Teaching Excellence | University of South Carolina Skip to Content Center for Teaching Excellence SC.edu About Offices and Divisions Center for Teaching Excellence Teach', 'score': 0.5601235032081604}, {'content': 'Include the best way to communicate with you (e.g., telephone, Blackboard Collaborate Ultra, instant messaging). Instructional Design Expand all The course is organized in modules. Structure your cour', 'score': 0.5263231992721558}]
+2024-11-30 22:08:40,830 - __main__ - INFO - top_reranked_score: 2.242138147354126
+2024-11-30 22:08:40,830 - __main__ - INFO - reranked_docs: [{'content': 'Learning outcomes describe the measurable skills, abilities, knowledge or values that students should be able to demonstrate as a result of completing a course. They are student-centered rather than t', 'score': 2.242138147354126}, {'content': 'Learning Outcomes - Center for Teaching Excellence | University of South Carolina Skip to Content Center for Teaching Excellence SC.edu About Offices and Divisions Center for Teaching Excellence Teach', 'score': 1.0276857614517212}, {'content': 'Include the best way to communicate with you (e.g., telephone, Blackboard Collaborate Ultra, instant messaging). Instructional Design Expand all The course is organized in modules. Structure your cour', 'score': 0.47386547923088074}]
+2024-11-30 22:08:40,830 - __main__ - INFO - 
+Response: To change your program learning outcomes, you will need to follow the assessment process established by your institution. This typically involves submitting a proposal to update the learning outcomes, along with justification for the changes and a plan for assessing the new outcomes.
+
+Here are the general steps to follow:
+
+1. Review the current program learning outcomes and identify areas for improvement or modification.
+2. Consult with stakeholders (faculty, students, alumni, and community members) to gather input and reach a consensus on the updates.
+3. Draft the updated learning outcomes, ensuring they are specific, measurable, achievable, relevant, and time-bound (SMART).
+4. Prepare a justification for the changes, addressing why the updates are necessary and beneficial for the program.
+5. Develop an assessment plan to measure the success of the new learning outcomes, including data collection, analysis, and reporting methods.
+6. Submit the proposal to the appropriate committee or office at your institution for review and approval.
+
+Remember to align your updated learning outcomes with accreditation standards and guidelines set by your program and institution.
+
+2024-11-30 22:08:41,192 - roostai.back_end.chatbot.vector_store - INFO - Vector store connection closed successfully
+2024-11-30 22:08:41,192 - roostai.back_end.chatbot.llm_manager - INFO - LLM manager cleaned up successfully
 2024-11-30 22:10:20,926 - roostai.back_end.main - INFO - Found database at: /home/cc/RoostAI/roostai/data/v2/chroma.sqlite3
 2024-11-30 22:10:20,928 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
 2024-11-30 22:10:20,928 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
@@ -13,9 +277,7 @@ Using python3 (3.10.15)
 2024-11-30 22:10:22,067 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:10:22,067 - __main__ - INFO - Processing question 1/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 24.22it/s]
 2024-11-30 22:10:22,204 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 10.61it/s]
 2024-11-30 22:10:22,300 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:10:22,300 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -56,9 +318,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:10:22,803 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:10:22,803 - __main__ - INFO - Processing question 2/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 91.73it/s]
 2024-11-30 22:10:22,832 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 11.94it/s]
 2024-11-30 22:10:22,917 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:10:22,917 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -99,9 +359,7 @@ Response: Yes, you can choose specific (prescribed) courses as part of the Carol
 2024-11-30 22:10:26,573 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:10:26,573 - __main__ - INFO - Processing question 3/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 50.38it/s]
 2024-11-30 22:10:26,620 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.13it/s]
 2024-11-30 22:10:26,697 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:10:26,698 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -156,9 +414,7 @@ Yes, the cross-listed course syllabus proposes one or more learning outcomes. Ho
 2024-11-30 22:10:42,199 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:10:42,199 - __main__ - INFO - Processing question 4/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 96.38it/s]
 2024-11-30 22:10:42,225 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.80it/s]
 2024-11-30 22:10:42,294 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:10:42,294 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -198,9 +454,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:10:42,796 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:10:42,796 - __main__ - INFO - Processing question 5/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 117.92it/s]
 2024-11-30 22:10:42,820 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 16.55it/s]
 2024-11-30 22:10:42,881 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:10:42,881 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -241,9 +495,7 @@ Response: Carolina Core Overlay courses allow students to apply the methods of o
 2024-11-30 22:10:48,013 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:10:48,013 - __main__ - INFO - Processing question 6/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 107.93it/s]
 2024-11-30 22:10:48,044 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 15.75it/s]
 2024-11-30 22:10:48,109 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:10:48,109 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -284,9 +536,7 @@ Response:
 2024-11-30 22:10:54,206 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:10:54,206 - __main__ - INFO - Processing question 7/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 77.95it/s]
 2024-11-30 22:10:54,236 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 16.60it/s]
 2024-11-30 22:10:54,297 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:10:54,298 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -328,9 +578,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:11:00,773 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:11:00,773 - __main__ - INFO - Processing question 8/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 123.25it/s]
 2024-11-30 22:11:00,797 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 16.02it/s]
 2024-11-30 22:11:00,861 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:11:00,861 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -372,9 +620,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:11:01,852 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:11:01,852 - __main__ - INFO - Processing question 9/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 102.76it/s]
 2024-11-30 22:11:01,879 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 16.25it/s]
 2024-11-30 22:11:01,941 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:11:01,941 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -414,9 +660,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:11:02,444 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:11:02,444 - __main__ - INFO - Processing question 10/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 112.93it/s]
 2024-11-30 22:11:02,468 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 16.61it/s]
 2024-11-30 22:11:02,529 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:11:02,529 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -458,9 +702,7 @@ Response: I don't have enough confident information to provide a good answer. Pl
 2024-11-30 22:11:03,032 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:11:03,032 - __main__ - INFO - Processing question 11/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 114.21it/s]
 2024-11-30 22:11:03,056 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.26it/s]
 2024-11-30 22:11:03,127 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:11:03,127 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -500,9 +742,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:11:03,629 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:11:03,629 - __main__ - INFO - Processing question 12/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 124.19it/s]
 2024-11-30 22:11:03,652 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 16.46it/s]
 2024-11-30 22:11:03,714 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:11:03,714 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -543,9 +783,7 @@ Response: Critical courses refer to those that are necessary for a student to co
 2024-11-30 22:11:06,415 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:11:06,415 - __main__ - INFO - Processing question 13/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 79.79it/s]
 2024-11-30 22:11:06,445 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.81it/s]
 2024-11-30 22:11:06,518 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:11:06,518 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -586,9 +824,7 @@ Response: Major maps are layouts of required courses in a given program of study
 2024-11-30 22:11:09,278 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:11:09,279 - __main__ - INFO - Processing question 14/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 64.88it/s]
 2024-11-30 22:11:09,309 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  7.52it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  7.49it/s]
 2024-11-30 22:11:09,443 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:11:09,444 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -630,9 +866,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:11:11,174 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:11:11,174 - __main__ - INFO - Processing question 15/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 56.17it/s]
 2024-11-30 22:11:11,207 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.78it/s]
 2024-11-30 22:11:11,286 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:11:11,286 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -673,9 +907,7 @@ Response: The requirements for a syllabus generally include providing essential 
 2024-11-30 22:11:19,362 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:11:19,362 - __main__ - INFO - Processing question 16/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 62.88it/s]
 2024-11-30 22:11:19,396 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.07it/s]
 2024-11-30 22:11:19,468 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:11:19,468 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -715,9 +947,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:11:19,970 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:11:19,971 - __main__ - INFO - Processing question 17/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 127.87it/s]
 2024-11-30 22:11:19,993 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.35it/s]
 2024-11-30 22:11:20,069 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:11:20,069 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -758,9 +988,7 @@ Response: A concentration is a specialized program of study within a larger fiel
 2024-11-30 22:11:30,441 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:11:30,442 - __main__ - INFO - Processing question 18/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 122.20it/s]
 2024-11-30 22:11:30,464 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.45it/s]
 2024-11-30 22:11:30,539 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:11:30,540 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -801,9 +1029,7 @@ Response: An integrative course is a type of course that combines both theoretic
 2024-11-30 22:11:47,441 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:11:47,441 - __main__ - INFO - Processing question 19/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 82.10it/s]
 2024-11-30 22:11:47,472 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.26it/s]
 2024-11-30 22:11:47,548 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:11:47,549 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -843,9 +1069,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:11:48,051 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:11:48,051 - __main__ - INFO - Processing question 20/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 136.15it/s]
 2024-11-30 22:11:48,073 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.39it/s]
 2024-11-30 22:11:48,149 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:11:48,149 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -886,9 +1110,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:11:48,651 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:11:48,651 - __main__ - INFO - Processing question 21/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 132.33it/s]
 2024-11-30 22:11:48,673 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.25it/s]
 2024-11-30 22:11:48,750 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:11:48,750 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -930,9 +1152,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:12:01,379 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:12:01,380 - __main__ - INFO - Processing question 22/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 103.32it/s]
 2024-11-30 22:12:01,406 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.11it/s]
 2024-11-30 22:12:01,490 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:12:01,490 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -973,9 +1193,7 @@ Response: EAB Navigate is an advising software used at the University of South C
 2024-11-30 22:12:02,039 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:12:02,040 - __main__ - INFO - Processing question 23/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 123.03it/s]
 2024-11-30 22:12:02,062 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.46it/s]
 2024-11-30 22:12:02,138 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:12:02,138 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -1017,9 +1235,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:12:04,997 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:12:04,997 - __main__ - INFO - Processing question 24/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 104.82it/s]
 2024-11-30 22:12:05,026 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.02it/s]
 2024-11-30 22:12:05,110 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:12:05,110 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -1061,9 +1277,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:12:06,921 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:12:06,921 - __main__ - INFO - Processing question 25/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 87.54it/s]
 2024-11-30 22:12:06,950 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.07it/s]
 2024-11-30 22:12:07,022 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:12:07,022 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -1103,9 +1317,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:12:07,524 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:12:07,524 - __main__ - INFO - Processing question 26/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 85.43it/s]
 2024-11-30 22:12:07,551 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.98it/s]
 2024-11-30 22:12:07,629 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:12:07,629 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -1148,9 +1360,7 @@ In summary, an undergraduate degree program involves completing specific coursew
 2024-11-30 22:12:16,288 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:12:16,288 - __main__ - INFO - Processing question 27/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 121.93it/s]
 2024-11-30 22:12:16,315 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.15it/s]
 2024-11-30 22:12:16,387 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:12:16,387 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -1191,9 +1401,7 @@ Response: The process for course actions at the University of South Carolina inv
 2024-11-30 22:12:24,286 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:12:24,287 - __main__ - INFO - Processing question 28/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 102.17it/s]
 2024-11-30 22:12:24,313 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.34it/s]
 2024-11-30 22:12:24,389 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:12:24,389 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -1234,9 +1442,7 @@ Response: The process for program actions involves submitting a new course propo
 2024-11-30 22:12:39,847 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:12:39,847 - __main__ - INFO - Processing question 29/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 98.37it/s]
 2024-11-30 22:12:39,874 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.25it/s]
 2024-11-30 22:12:39,945 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:12:39,945 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -1278,9 +1484,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:12:53,906 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:12:53,906 - __main__ - INFO - Processing question 30/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 54.12it/s]
 2024-11-30 22:12:53,941 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.64it/s]
 2024-11-30 22:12:54,022 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:12:54,022 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -1322,9 +1526,7 @@ Response: When proposing a Special Topics Education course, a syllabus is indeed
 2024-11-30 22:13:06,258 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:13:06,258 - __main__ - INFO - Processing question 31/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 72.42it/s]
 2024-11-30 22:13:06,289 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.71it/s]
 2024-11-30 22:13:06,363 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:13:06,363 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -1365,9 +1567,7 @@ Response: I don't have enough confident information to provide a good answer. Pl
 2024-11-30 22:13:06,865 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:13:06,865 - __main__ - INFO - Processing question 32/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 116.81it/s]
 2024-11-30 22:13:06,890 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.49it/s]
 2024-11-30 22:13:06,971 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:13:06,972 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -1408,9 +1608,7 @@ Response: The new Bulletin is published before the start of each academic year, 
 2024-11-30 22:13:14,151 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:13:14,151 - __main__ - INFO - Processing question 33/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 50.05it/s]
 2024-11-30 22:13:14,187 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 17.53it/s]
 2024-11-30 22:13:14,245 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:13:14,246 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -1452,9 +1650,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:13:30,727 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:13:30,727 - __main__ - INFO - Processing question 34/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 105.61it/s]
 2024-11-30 22:13:30,754 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.31it/s]
 2024-11-30 22:13:30,830 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:13:30,830 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -1494,9 +1690,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:13:31,333 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:13:31,333 - __main__ - INFO - Processing question 35/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 85.94it/s]
 2024-11-30 22:13:31,361 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.62it/s]
 2024-11-30 22:13:31,441 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:13:31,442 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -1537,9 +1731,7 @@ Response: Based on the provided context, it appears that the Academic Program Li
 2024-11-30 22:13:34,606 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:13:34,606 - __main__ - INFO - Processing question 36/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 67.54it/s]
 2024-11-30 22:13:34,637 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  5.74it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  5.73it/s]
 2024-11-30 22:13:34,812 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:13:34,813 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -1579,9 +1771,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:13:35,315 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:13:35,315 - __main__ - INFO - Processing question 37/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 101.48it/s]
 2024-11-30 22:13:35,341 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.34it/s]
 2024-11-30 22:13:35,412 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:13:35,412 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -1621,9 +1811,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:13:35,914 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:13:35,914 - __main__ - INFO - Processing question 38/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 114.74it/s]
 2024-11-30 22:13:35,939 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 11.98it/s]
 2024-11-30 22:13:36,023 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:13:36,023 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -1665,9 +1853,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:13:50,782 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:13:50,782 - __main__ - INFO - Processing question 39/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 45.90it/s]
 2024-11-30 22:13:50,821 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.30it/s]
 2024-11-30 22:13:50,897 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:13:50,897 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -1707,9 +1893,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:13:51,399 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:13:51,399 - __main__ - INFO - Processing question 40/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 122.20it/s]
 2024-11-30 22:13:51,424 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.33it/s]
 2024-11-30 22:13:51,500 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:13:51,500 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -1751,9 +1935,7 @@ Response: It's important to note that the decision of whether a budget is needed
 2024-11-30 22:14:10,547 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:14:10,547 - __main__ - INFO - Processing question 41/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 99.77it/s]
 2024-11-30 22:14:10,574 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.12it/s]
 2024-11-30 22:14:10,646 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:14:10,646 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -1794,9 +1976,7 @@ Response: The phrase 'each drop/add/w date' refers to two different dates: the a
 2024-11-30 22:14:22,437 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:14:22,437 - __main__ - INFO - Processing question 42/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 90.97it/s]
 2024-11-30 22:14:22,467 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.99it/s]
 2024-11-30 22:14:22,545 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:14:22,545 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -1837,9 +2017,7 @@ Response: If you fail a class, it means that you did not meet the minimum requir
 2024-11-30 22:14:26,011 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:14:26,011 - __main__ - INFO - Processing question 43/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 50.38it/s]
 2024-11-30 22:14:26,047 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.32it/s]
 2024-11-30 22:14:26,123 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:14:26,123 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -1880,9 +2058,7 @@ Response: The CarolinaCard office handles lost or stolen cards. They should be r
 2024-11-30 22:14:38,701 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:14:38,702 - __main__ - INFO - Processing question 44/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 107.70it/s]
 2024-11-30 22:14:38,727 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.79it/s]
 2024-11-30 22:14:38,807 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:14:38,807 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -1924,9 +2100,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:14:53,500 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:14:53,500 - __main__ - INFO - Processing question 45/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 113.43it/s]
 2024-11-30 22:14:53,525 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.70it/s]
 2024-11-30 22:14:53,605 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:14:53,605 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -1968,9 +2142,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:15:02,214 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:15:02,214 - __main__ - INFO - Processing question 46/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 78.36it/s]
 2024-11-30 22:15:02,243 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.99it/s]
 2024-11-30 22:15:02,321 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:15:02,321 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -2010,9 +2182,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:15:02,823 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:15:02,823 - __main__ - INFO - Processing question 47/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 137.94it/s]
 2024-11-30 22:15:02,845 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.43it/s]
 2024-11-30 22:15:02,926 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:15:02,927 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -2055,9 +2225,7 @@ Answer the following question: "Where do I buy my cap and gown?"
 2024-11-30 22:15:14,717 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:15:14,717 - __main__ - INFO - Processing question 48/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 103.67it/s]
 2024-11-30 22:15:14,743 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.13it/s]
 2024-11-30 22:15:14,820 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:15:14,821 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -2097,9 +2265,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:15:15,323 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:15:15,323 - __main__ - INFO - Processing question 49/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 120.94it/s]
 2024-11-30 22:15:15,350 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.33it/s]
 2024-11-30 22:15:15,421 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:15:15,421 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -2139,9 +2305,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:15:15,923 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:15:15,923 - __main__ - INFO - Processing question 50/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 129.00it/s]
 2024-11-30 22:15:15,945 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.57it/s]
 2024-11-30 22:15:16,014 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:15:16,015 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -2182,9 +2346,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:15:16,516 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:15:16,517 - __main__ - INFO - Processing question 51/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 122.98it/s]
 2024-11-30 22:15:16,539 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.53it/s]
 2024-11-30 22:15:16,609 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:15:16,609 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -2226,9 +2388,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:15:28,247 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:15:28,247 - __main__ - INFO - Processing question 52/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 108.31it/s]
 2024-11-30 22:15:28,272 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.88it/s]
 2024-11-30 22:15:28,351 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:15:28,351 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -2270,9 +2430,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:15:44,379 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:15:44,379 - __main__ - INFO - Processing question 53/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 110.10it/s]
 2024-11-30 22:15:44,407 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.10it/s]
 2024-11-30 22:15:44,484 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:15:44,485 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -2314,9 +2472,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:16:00,231 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:16:00,231 - __main__ - INFO - Processing question 54/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 81.17it/s]
 2024-11-30 22:16:00,260 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.42it/s]
 2024-11-30 22:16:00,336 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:16:00,336 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -2356,9 +2512,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:16:00,838 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:16:00,838 - __main__ - INFO - Processing question 55/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 143.01it/s]
 2024-11-30 22:16:00,860 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.36it/s]
 2024-11-30 22:16:00,942 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:16:00,942 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -2399,9 +2553,7 @@ Response: In long, it's quite clear that the question itself suggests a request 
 2024-11-30 22:16:17,107 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:16:17,108 - __main__ - INFO - Processing question 56/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 113.50it/s]
 2024-11-30 22:16:17,135 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.64it/s]
 2024-11-30 22:16:17,204 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:16:17,204 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -2442,9 +2594,7 @@ Response: I don't have enough confident information to provide a good answer. Pl
 2024-11-30 22:16:17,706 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:16:17,707 - __main__ - INFO - Processing question 57/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 103.14it/s]
 2024-11-30 22:16:17,733 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.19it/s]
 2024-11-30 22:16:17,809 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:16:17,809 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -2484,9 +2634,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:16:18,311 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:16:18,312 - __main__ - INFO - Processing question 58/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 125.03it/s]
 2024-11-30 22:16:18,334 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.26it/s]
 2024-11-30 22:16:18,410 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:16:18,411 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -2526,9 +2674,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:16:18,913 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:16:18,913 - __main__ - INFO - Processing question 59/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 128.51it/s]
 2024-11-30 22:16:18,935 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 11.67it/s]
 2024-11-30 22:16:19,022 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:16:19,022 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -2569,9 +2715,7 @@ Response: I don't have enough confident information to provide a good answer. Pl
 2024-11-30 22:16:19,524 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:16:19,524 - __main__ - INFO - Processing question 60/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 140.48it/s]
 2024-11-30 22:16:19,545 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  9.83it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  9.79it/s]
 2024-11-30 22:16:19,648 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:16:19,648 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -2614,9 +2758,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:16:34,390 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:16:34,391 - __main__ - INFO - Processing question 61/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 103.53it/s]
 2024-11-30 22:16:34,416 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.18it/s]
 2024-11-30 22:16:34,487 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:16:34,487 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -2658,9 +2800,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:16:44,169 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:16:44,170 - __main__ - INFO - Processing question 62/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 50.99it/s]
 2024-11-30 22:16:44,206 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.60it/s]
 2024-11-30 22:16:44,287 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:16:44,287 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -2702,7 +2842,6 @@ Response: Based on my analysis of the provided context, dual degree graduates ar
 ================================================================================
 2024-11-30 22:16:50,047 - __main__ - INFO - Processing question 63/111
 2024-11-30 22:16:50,067 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.71it/s]
 2024-11-30 22:16:50,146 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:16:50,147 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -2745,7 +2884,6 @@ Response: I apologize, but I encountered an error generating the response.
 ================================================================================
 2024-11-30 22:16:50,675 - __main__ - INFO - Processing question 64/111
 2024-11-30 22:16:50,692 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.60it/s]
 2024-11-30 22:16:50,772 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:16:50,772 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -2787,9 +2925,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:16:51,299 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:16:51,299 - __main__ - INFO - Processing question 65/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 136.31it/s]
 2024-11-30 22:16:51,321 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.13it/s]
 2024-11-30 22:16:51,398 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:16:51,398 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -2831,9 +2967,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:16:56,431 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:16:56,431 - __main__ - INFO - Processing question 66/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 118.81it/s]
 2024-11-30 22:16:56,457 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.12it/s]
 2024-11-30 22:16:56,534 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:16:56,534 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -2875,9 +3009,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:17:07,644 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:17:07,644 - __main__ - INFO - Processing question 67/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 81.82it/s]
 2024-11-30 22:17:07,673 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.35it/s]
 2024-11-30 22:17:07,749 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:17:07,749 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -2919,9 +3051,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:17:21,341 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:17:21,341 - __main__ - INFO - Processing question 68/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 66.77it/s]
 2024-11-30 22:17:21,373 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 11.91it/s]
 2024-11-30 22:17:21,458 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:17:21,458 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -2963,9 +3093,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:17:35,075 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:17:35,075 - __main__ - INFO - Processing question 69/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 114.71it/s]
 2024-11-30 22:17:35,099 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.10it/s]
 2024-11-30 22:17:35,177 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:17:35,177 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -3007,9 +3135,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:17:42,420 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:17:42,420 - __main__ - INFO - Processing question 70/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 127.08it/s]
 2024-11-30 22:17:42,445 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.42it/s]
 2024-11-30 22:17:42,526 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:17:42,527 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -3050,9 +3176,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:17:43,029 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:17:43,029 - __main__ - INFO - Processing question 71/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 119.28it/s]
 2024-11-30 22:17:43,051 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.80it/s]
 2024-11-30 22:17:43,130 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:17:43,130 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -3092,9 +3216,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:17:43,632 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:17:43,633 - __main__ - INFO - Processing question 72/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 116.51it/s]
 2024-11-30 22:17:43,657 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.58it/s]
 2024-11-30 22:17:43,731 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:17:43,731 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -3136,9 +3258,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:17:57,357 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:17:57,357 - __main__ - INFO - Processing question 73/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 70.20it/s]
 2024-11-30 22:17:57,388 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.09it/s]
 2024-11-30 22:17:57,472 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:17:57,472 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -3180,9 +3300,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:18:11,111 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:18:11,111 - __main__ - INFO - Processing question 74/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 93.41it/s]
 2024-11-30 22:18:11,140 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.36it/s]
 2024-11-30 22:18:11,215 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:18:11,216 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -3227,9 +3345,7 @@ The diploma within three months after you graduate. However, the diploma as easy
 2024-11-30 22:18:31,740 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:18:31,740 - __main__ - INFO - Processing question 75/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 96.24it/s]
 2024-11-30 22:18:31,768 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.02it/s]
 2024-11-30 22:18:31,846 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:18:31,846 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -3271,9 +3387,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:18:48,507 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:18:48,508 - __main__ - INFO - Processing question 76/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 105.87it/s]
 2024-11-30 22:18:48,535 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.62it/s]
 2024-11-30 22:18:48,604 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:18:48,604 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -3316,7 +3430,6 @@ Response: I apologize, but I encountered an error generating the response.
 ================================================================================
 2024-11-30 22:18:51,031 - __main__ - INFO - Processing question 77/111
 2024-11-30 22:18:51,058 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.22it/s]
 2024-11-30 22:18:51,141 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:18:51,141 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -3358,9 +3471,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:18:51,689 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:18:51,690 - __main__ - INFO - Processing question 78/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 111.70it/s]
 2024-11-30 22:18:51,714 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.31it/s]
 2024-11-30 22:18:51,790 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:18:51,790 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -3402,9 +3513,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:18:54,434 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:18:54,434 - __main__ - INFO - Processing question 79/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 108.44it/s]
 2024-11-30 22:18:54,461 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  8.85it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  8.82it/s]
 2024-11-30 22:18:54,576 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:18:54,576 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -3444,9 +3553,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:18:55,078 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:18:55,078 - __main__ - INFO - Processing question 80/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 142.16it/s]
 2024-11-30 22:18:55,100 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 10.81it/s]
 2024-11-30 22:18:55,194 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:18:55,194 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -3489,9 +3596,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:19:11,128 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:19:11,129 - __main__ - INFO - Processing question 81/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 124.95it/s]
 2024-11-30 22:19:11,156 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.16it/s]
 2024-11-30 22:19:11,233 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:19:11,233 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -3533,9 +3638,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:19:17,381 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:19:17,381 - __main__ - INFO - Processing question 82/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 95.97it/s]
 2024-11-30 22:19:17,410 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 10.53it/s]
 2024-11-30 22:19:17,506 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:19:17,506 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -3577,9 +3680,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:19:23,159 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:19:23,159 - __main__ - INFO - Processing question 83/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 66.94it/s]
 2024-11-30 22:19:23,189 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.04it/s]
 2024-11-30 22:19:23,267 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:19:23,267 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -3621,9 +3722,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:19:27,430 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:19:27,430 - __main__ - INFO - Processing question 84/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 110.50it/s]
 2024-11-30 22:19:27,454 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.27it/s]
 2024-11-30 22:19:27,537 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:19:27,537 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -3663,9 +3762,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:19:28,039 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:19:28,039 - __main__ - INFO - Processing question 85/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 122.45it/s]
 2024-11-30 22:19:28,063 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.23it/s]
 2024-11-30 22:19:28,140 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:19:28,140 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -3707,9 +3804,7 @@ In addition, the <context> div held in the
 2024-11-30 22:19:34,464 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:19:34,464 - __main__ - INFO - Processing question 86/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 116.25it/s]
 2024-11-30 22:19:34,489 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.35it/s]
 2024-11-30 22:19:34,565 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:19:34,565 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -3751,9 +3846,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:19:51,073 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:19:51,073 - __main__ - INFO - Processing question 87/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 97.84it/s]
 2024-11-30 22:19:51,100 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.35it/s]
 2024-11-30 22:19:51,176 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:19:51,176 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -3798,9 +3891,7 @@ The user would then need to provide immunization records in
 2024-11-30 22:19:53,811 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:19:53,812 - __main__ - INFO - Processing question 88/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 112.93it/s]
 2024-11-30 22:19:53,836 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.14it/s]
 2024-11-30 22:19:53,914 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:19:53,914 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -3842,9 +3933,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:19:55,937 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:19:55,937 - __main__ - INFO - Processing question 89/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 96.19it/s]
 2024-11-30 22:19:55,963 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.35it/s]
 2024-11-30 22:19:56,033 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:19:56,033 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -3886,9 +3975,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:20:10,108 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:20:10,109 - __main__ - INFO - Processing question 90/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 90.53it/s]
 2024-11-30 22:20:10,139 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 11.71it/s]
 2024-11-30 22:20:10,225 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:20:10,225 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -3929,9 +4016,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:20:10,728 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:20:10,728 - __main__ - INFO - Processing question 91/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 121.94it/s]
 2024-11-30 22:20:10,753 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.28it/s]
 2024-11-30 22:20:10,835 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:20:10,835 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -3971,9 +4056,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:20:11,338 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:20:11,338 - __main__ - INFO - Processing question 92/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 104.56it/s]
 2024-11-30 22:20:11,365 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.52it/s]
 2024-11-30 22:20:11,446 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:20:11,446 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -4013,9 +4096,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:20:11,948 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:20:11,949 - __main__ - INFO - Processing question 93/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 100.70it/s]
 2024-11-30 22:20:11,976 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.04it/s]
 2024-11-30 22:20:12,048 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:20:12,048 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -4057,9 +4138,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:20:17,669 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:20:17,669 - __main__ - INFO - Processing question 94/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 96.35it/s]
 2024-11-30 22:20:17,697 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.27it/s]
 2024-11-30 22:20:17,774 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:20:17,774 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -4101,9 +4180,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:20:40,268 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:20:40,268 - __main__ - INFO - Processing question 95/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 110.04it/s]
 2024-11-30 22:20:40,295 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.27it/s]
 2024-11-30 22:20:40,372 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:20:40,372 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -4145,9 +4222,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:20:52,620 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:20:52,620 - __main__ - INFO - Processing question 96/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 100.53it/s]
 2024-11-30 22:20:52,648 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.18it/s]
 2024-11-30 22:20:52,725 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:20:52,725 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -4187,9 +4262,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:20:53,227 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:20:53,227 - __main__ - INFO - Processing question 97/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 148.09it/s]
 2024-11-30 22:20:53,248 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.39it/s]
 2024-11-30 22:20:53,324 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:20:53,324 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -4231,9 +4304,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:20:56,277 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:20:56,277 - __main__ - INFO - Processing question 98/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 130.36it/s]
 2024-11-30 22:20:56,304 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.28it/s]
 2024-11-30 22:20:56,380 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:20:56,380 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -4275,9 +4346,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:21:09,291 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:21:09,291 - __main__ - INFO - Processing question 99/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 111.69it/s]
 2024-11-30 22:21:09,318 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 11.60it/s]
 2024-11-30 22:21:09,405 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:21:09,405 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -4319,9 +4388,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:21:12,764 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:21:12,764 - __main__ - INFO - Processing question 100/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 48.85it/s]
 2024-11-30 22:21:12,800 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.64it/s]
 2024-11-30 22:21:12,880 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:21:12,881 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -4364,9 +4431,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:21:30,060 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:21:30,060 - __main__ - INFO - Processing question 101/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 125.16it/s]
 2024-11-30 22:21:30,082 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.46it/s]
 2024-11-30 22:21:30,164 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:21:30,164 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -4408,9 +4473,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:21:45,630 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:21:45,630 - __main__ - INFO - Processing question 102/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 108.64it/s]
 2024-11-30 22:21:45,658 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.25it/s]
 2024-11-30 22:21:45,734 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:21:45,735 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -4450,9 +4513,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:21:46,236 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:21:46,237 - __main__ - INFO - Processing question 103/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 111.70it/s]
 2024-11-30 22:21:46,260 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.45it/s]
 2024-11-30 22:21:46,336 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:21:46,336 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -4494,9 +4555,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:21:51,300 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:21:51,300 - __main__ - INFO - Processing question 104/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 118.02it/s]
 2024-11-30 22:21:51,324 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.23it/s]
 2024-11-30 22:21:51,400 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:21:51,400 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -4536,9 +4595,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:21:51,902 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:21:51,902 - __main__ - INFO - Processing question 105/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 143.26it/s]
 2024-11-30 22:21:51,924 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 11.85it/s]
 2024-11-30 22:21:52,009 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:21:52,009 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -4580,9 +4637,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:22:06,579 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:22:06,579 - __main__ - INFO - Processing question 106/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 111.65it/s]
 2024-11-30 22:22:06,604 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.32it/s]
 2024-11-30 22:22:06,686 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:22:06,687 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -4624,9 +4679,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:22:20,704 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:22:20,705 - __main__ - INFO - Processing question 107/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 98.49it/s]
 2024-11-30 22:22:20,734 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.23it/s]
 2024-11-30 22:22:20,817 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:22:20,817 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -4668,9 +4721,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:22:25,389 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:22:25,389 - __main__ - INFO - Processing question 108/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 99.83it/s]
 2024-11-30 22:22:25,414 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.28it/s]
 2024-11-30 22:22:25,491 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:22:25,491 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -4712,9 +4763,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:22:29,037 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:22:29,037 - __main__ - INFO - Processing question 109/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 72.40it/s]
 2024-11-30 22:22:29,067 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.70it/s]
 2024-11-30 22:22:29,141 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:22:29,141 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -4754,9 +4803,7 @@ Response: I apologize, but I don't have any relevant information to answer your 
 2024-11-30 22:22:29,643 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:22:29,643 - __main__ - INFO - Processing question 110/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 102.96it/s]
 2024-11-30 22:22:29,670 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.85it/s]
 2024-11-30 22:22:29,743 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:22:29,743 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
@@ -4799,9 +4846,7 @@ Response: I apologize, but I encountered an error generating the response.
 2024-11-30 22:22:46,355 - __main__ - INFO - 
 ================================================================================
 2024-11-30 22:22:46,355 - __main__ - INFO - Processing question 111/111
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 102.52it/s]
 2024-11-30 22:22:46,380 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 15.68it/s]
 2024-11-30 22:22:46,445 - roostai.back_end.chatbot.reranker - INFO - 
 Score comparison for top documents:
 2024-11-30 22:22:46,445 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
