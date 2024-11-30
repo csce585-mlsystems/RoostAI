@@ -7,7 +7,7 @@ from pathlib import Path
 from roostai.back_end.main import UniversityChatbot
 
 logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+    level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s"
 )
 logger = logging.getLogger(__name__)
 
@@ -55,6 +55,8 @@ class LocalRAGTester:
                 logger.debug(f"Question: {question}")
 
                 response = await self.chatbot.process_query(question)
+                logger.info(f"Response:\n{response}\n")
+
                 responses.append(response)
 
                 # Add a small delay between queries
