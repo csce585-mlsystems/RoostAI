@@ -8,11 +8,11 @@ from PyPDF2 import PdfReader
 from tqdm import tqdm
 
 
-def extract_main_text(html_content):
+def extract_main_text(html_content, include_links=True):
     soup = BeautifulSoup(html_content, "html.parser")
 
     # Remove unwanted elements like scripts, styles, and comments
-    for element in soup(["script", "style", "comment"]):
+    for element in soup(["script", "style", "comment", "header", "footer", "nav"]):
         element.extract()
 
     # Process all links before getting the text
@@ -23,10 +23,10 @@ def extract_main_text(html_content):
 
         # Only process if there's both text and href
         if text and href and "http" in href:
-            # Replace the link with text(link) format
-            # Preserve the link's position in the document
-            link.replace_with(f"{text}({href})")
-
+            if include_links:
+                link.replace_with(f"{text}({href})")
+            else:
+                link.replace_with(text)
     # Extract the text content, excluding boilerplate elements
     relevant_text = soup.get_text(separator=' ', strip=True)
 

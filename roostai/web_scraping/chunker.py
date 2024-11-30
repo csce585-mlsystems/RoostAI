@@ -1,5 +1,5 @@
 from llama_index.core import SimpleDirectoryReader
-from llama_index.core.node_parser import SemanticSplitterNodeParser
+from llama_index.core.node_parser import SemanticSplitterNodeParser, SentenceSplitter
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from typing import Dict, Any
 from pathlib import Path
@@ -7,6 +7,15 @@ import json
 import re
 import os
 from tqdm import tqdm
+# Initialize the embedding model
+model_name = "sentence-transformers/all-MiniLM-L6-v2"
+embed_model = HuggingFaceEmbedding(model_name=model_name)
+
+# Initialize splitter
+# splitter = SemanticSplitterNodeParser(
+#     buffer_size=1, breakpoint_percentile_threshold=95, embed_model=embed_model
+# )
+splitter = SentenceSplitter()
 
 
 def process_files_with_metadata(directory_path: str, output_dir: str):
@@ -21,14 +30,6 @@ def process_files_with_metadata(directory_path: str, output_dir: str):
     Returns:
         Dict: Structure of {doc_id: {'chunks': [], 'metadata': {}}}
     """
-    # Initialize the embedding model
-    model_name = "sentence-transformers/all-MiniLM-L6-v2"
-    embed_model = HuggingFaceEmbedding(model_name=model_name)
-
-    # Initialize splitter
-    splitter = SemanticSplitterNodeParser(
-        buffer_size=1, breakpoint_percentile_threshold=95, embed_model=embed_model
-    )
 
     # Initialize result dictionary
     # result = {}
@@ -132,11 +133,13 @@ if __name__ == "__main__":
 
     try:
         # Process all files
-        processed_data = process_files_with_metadata(DIRECTORY_PATH, OUTPUT_DIR)
+        processed_data = process_files_with_metadata(
+            DIRECTORY_PATH, OUTPUT_DIR)
 
         # Print example of structure
         print("\nDone chunking. \nExample of processed data structure:")
-        for doc_id, data in list(processed_data.items())[:1]:  # Show first document
+        # Show first document
+        for doc_id, data in list(processed_data.items())[:1]:
             print(f"\nDocument {doc_id}:")
             print(f"Number of chunks: {len(data['chunks'])}")
             print("First chunk preview:", data["chunks"][0][:200], "...")
