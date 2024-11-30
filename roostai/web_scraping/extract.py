@@ -71,7 +71,7 @@ def process_files(input_dir, output_dir):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    for i, file_name in tqdm(enumerate(os.listdir(input_dir), 1)):
+    for file_name in tqdm(os.listdir(input_dir)):
         if not file_name.endswith("html"):
             source_file = os.path.join(input_dir, file_name)
             dest_file = os.path.join(output_dir, file_name)
