@@ -96,14 +96,14 @@ class UniversityChatbot:
                 f"Successfully connected to database. Document count: {count}"
             )
 
-            # Try to get a sample document if count > 0
-            if count > 0:
-                query_embedding = self.query_processor.model.encode("test").tolist()
-                docs = await self.vector_store.query(query_embedding, k=1)
-                if docs:
-                    self.logger.info("Successfully retrieved a sample document")
-                else:
-                    self.logger.warning("No documents retrieved in sample query")
+            # # Try to get a sample document if count > 0
+            # if count > 0:
+            #     query_embedding = self.query_processor.model.encode("test").tolist()
+            #     docs = await self.vector_store.query(query_embedding, k=1)
+            #     if docs:
+            #         self.logger.info("Successfully retrieved a sample document")
+            #     else:
+            #         self.logger.warning("No documents retrieved in sample query")
         except Exception as e:
             self.logger.error(f"Database verification failed: {e}")
             raise
