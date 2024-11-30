@@ -11,6 +11,7 @@ from playwright.async_api import async_playwright
 abs_data_path = Path("/home/cc/scraped_data")
 
 # BFS web scraping tool
+MAX_RETRIES = 3
 
 
 class WebScraper:
@@ -108,6 +109,18 @@ class WebScraper:
                 new_urls.append(full_url)
         return new_urls
 
+    async def scrape_url_with_retries(self, url, browser):
+        for attempt in range(MAX_RETRIES):
+            try:
+                return await self.scrape_url(url, browser)
+            except Exception as e:
+                self.logger.error(
+                    f"Attempt {attempt + 1} failed for {url}: {e}")
+                await asyncio.sleep(2 ** attempt)  # Exponential backoff
+        self.logger.error(
+            f"Failed to scrape {url} after {MAX_RETRIES} attempts.")
+        return []
+
     async def scrape_url(self, url, browser):
         """Scrape given url and return the list of urls on that page"""
         async with self.semaphore:  # cap the maximum number of crawlers
@@ -144,7 +157,7 @@ class WebScraper:
                         self.visited.add(url)  # Mark visited after dequeuing
                         try:
                             # get the set of new urls from the HTML a href tags
-                            new_urls = await self.scrape_url(url, browser)
+                            new_urls = await self.scrape_url_with_retries(url, browser)
                             # add new urls to queue if not visited previously
                             for new_url in new_urls:
                                 if new_url not in self.visited:
@@ -152,10 +165,15 @@ class WebScraper:
                                     queue.put_nowait(new_url)
                         except Exception as e:
                             self.logger.error(f'Error scraping {url}: {e}')
+                            if 'BrowserContext.new_page: Target page, context or browser has been closed' in f'Error scraping {url}: {e}':
+                                exit(0)
                     # log the size of the queue
                     self.logger.info(f"Queue size: {queue.qsize()}")
+            except Exception as e:
+                self.logger.error(f"Critical error: {e}")
             finally:
                 await browser.close()  # close browser after scraping is complete
+                self.logger.info("Browser closed successfully.")
 
 
 if __name__ == "__main__":
