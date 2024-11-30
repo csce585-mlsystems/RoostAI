@@ -12,10 +12,6 @@ from llms import (
 
 data_file: str = "data/faq_pairs_milestone2.csv"
 
-def save_temp_df(df: pd.DataFrame, out_file: str):
-    print(f"Writing to file {out_file}")
-    df.to_csv(out_file, index=False)
-
 
 def main():
     load_dotenv()
