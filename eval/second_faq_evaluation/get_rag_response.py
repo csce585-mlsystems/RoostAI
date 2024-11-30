@@ -79,7 +79,7 @@ class LocalRAGTester:
 
 
 async def main():
-    data_file: str = "data/faq_pairs_milestone2.csv"
+    data_file: str = "data/faq_pairs.csv"
     out_file: str = "data/faq_responses_local_rag.csv"
     db_path: str = "/home/cc/RoostAI/roostai/data/v2"
 
