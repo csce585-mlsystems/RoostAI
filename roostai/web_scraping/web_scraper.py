@@ -32,15 +32,30 @@ class WebScraper:
         # sets the name of the logger to be the name of the module
         self.logger = logging.getLogger(__name__)
 
-    def is_valid(self, url):
+    def is_valid(self, url: str):
         """Validate that urls only have the root url's (sc.edu) netloc"""
         parsed = urlparse(url)
         return bool(parsed.netloc) and parsed.netloc.endswith(tuple(self.domains))
 
-    def get_url_save_path(self, url):
+    def get_url_save_path(self, url: str):
         """Convert a URL to a file path"""
-        url = "/".join(url.split("#"))
-        url_path = Path(url.replace("//", "/"))
+        colon_index = url.index(':')
+        url = url[colon_index + 3:]  # remove https://
+
+        if len(url) > 250:
+            # Use a hash of the URL for long file names
+            hashed_url = hashlib.md5(url.encode('utf-8')).hexdigest()
+
+            # Optional: Extract a readable part of the URL (e.g., path or query) for better context
+            parsed_url = urlparse(url)
+            safe_name = parsed_url.path.replace(
+                '/', '_')[:50]  # Truncate and sanitize
+
+            # Combine safe name and hash for uniqueness
+            url_path = f"{safe_name}_{hashed_url}"
+        else:
+            url = "/".join(url.split("#"))
+            url_path = Path(url.replace("//", "/"))
         return abs_data_path / url_path
 
     def is_unique(self, html_content):
@@ -63,8 +78,8 @@ class WebScraper:
 
     async def scrape_page(self, page, url):
         """Save the HTML content of the url"""
-        await page.goto(url, timeout=30000)
-        await page.wait_for_load_state("domcontentloaded")
+        await page.goto(url, timeout=60000)
+        await page.wait_for_load_state("load")
         html_content = await page.content()
 
         # save HTML if unique file
@@ -79,10 +94,17 @@ class WebScraper:
                  .map(link => link.href)
         """
         )
+
+        # checks if any element of l is in s
+        file_extensions = ['.pdf', '.docx', '.doc',
+                           '.xlsx', '.xls', '.zip', '.pptx']
+
+        def ends_with(l, s): return any(s.endswith(x) for x in l)
+
         for href in links:
-            full_url = urljoin(url, href)  # join a base url and link
+            full_url: str = urljoin(url, href)  # join a base url and link
             # if valid and not visited, return it
-            if self.is_valid(full_url) and full_url not in self.visited:
+            if self.is_valid(full_url) and full_url not in self.visited and not full_url.endswith('pdf') and not ends_with(file_extensions, full_url):
                 new_urls.append(full_url)
         return new_urls
 
@@ -115,20 +137,25 @@ class WebScraper:
         async with async_playwright() as playwright:
             browser = await playwright.chromium.launch(headless=True)
             # scrape until we have no more URLs left in the queue
-            while not queue.empty():
-                url = await queue.get()  # retrieve url asynchronously to avoid deadlock
-                if url not in self.visited:  # Process only if not visited
-                    self.visited.add(url)  # Mark visited after dequeuing
-                    # get the set of new urls from the HTML a href tags
-                    new_urls = await self.scrape_url(url, browser)
-                    # add new urls to queue if not visited previously
-                    for new_url in new_urls:
-                        if new_url not in self.visited:
-                            # Add only unvisited URLs
-                            queue.put_nowait(new_url)
-                # log the size of the queue
-                self.logger.info(f"Queue size: {queue.qsize()}")
-            await browser.close()  # close browser after scraping is complete
+            try:
+                while not queue.empty():
+                    url = await queue.get()  # retrieve url asynchronously to avoid deadlock
+                    if url not in self.visited:  # Process only if not visited
+                        self.visited.add(url)  # Mark visited after dequeuing
+                        try:
+                            # get the set of new urls from the HTML a href tags
+                            new_urls = await self.scrape_url(url, browser)
+                            # add new urls to queue if not visited previously
+                            for new_url in new_urls:
+                                if new_url not in self.visited:
+                                    # Add only unvisited URLs
+                                    queue.put_nowait(new_url)
+                        except Exception as e:
+                            self.logger.error(f'Error scraping {url}: {e}')
+                    # log the size of the queue
+                    self.logger.info(f"Queue size: {queue.qsize()}")
+            finally:
+                await browser.close()  # close browser after scraping is complete
 
 
 if __name__ == "__main__":
