@@ -192,6 +192,7 @@ class UniversityChatbot:
 
 
 async def main():
+    """Main function to run the chatbot query tests."""
     chatbot = UniversityChatbot()
 
     try:
@@ -203,43 +204,23 @@ async def main():
             logger.error("No documents found in the database. Exiting.")
             return
 
-        # Test queries that cover different aspects of USC
-        test_queries = [
-            "Who should I contact if I have a correction for DegreeWorks?",
-            # "How do Carolina Core Overlay courses work?"
-            # "What are the admission requirements for USC?",
-            # "Tell me about the Computer Science department at USC",
-            # "What sports teams does USC have?",
-            # "What dining options are available on campus?",
-            # "What is the history of USC?",
-            # "What research centers does USC have?",
-            # "What student organizations are available at USC?",
-            # "What are the housing options for freshmen at USC?",
-            # "Tell me about USC's library system",
-            # "What financial aid options are available at USC?",
-        ]
+        # Get query from user input
+        query = input("Enter your question: ")
 
-        logger.info("\nStarting query tests...")
+        logger.info("\nStarting query test...")
+        logger.info(f"Q: {query}")
 
-        for i, query in enumerate(test_queries, 1):
-            logger.info(f"\n=== Query {i} ===")
-            logger.info(f"Q: {query}")
+        try:
+            start_time = time.time()
+            response = await chatbot.process_query(query, verbose=True)
+            end_time = time.time()
 
-            try:
-                start_time = time.time()
-                response = await chatbot.process_query(query, verbose=True)
-                end_time = time.time()
+            logger.info(f"\nA: {response}")
+            logger.info(f"Time taken: {end_time - start_time:.2f} seconds")
+            logger.info("=" * 80)
 
-                logger.info(f"\nA: {response}")
-                logger.info(f"Time taken: {end_time - start_time:.2f} seconds")
-                logger.info("=" * 80)
-
-            except Exception as e:
-                logger.error(f"Error processing query {i}: {e}")
-                continue
-
-            # Add a small delay between queries to avoid rate limiting
-            await asyncio.sleep(1)
+        except Exception as e:
+            logger.error("Error processing query")
 
     except Exception as e:
         logger.error(f"Fatal error: {e}")
