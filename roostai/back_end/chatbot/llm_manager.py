@@ -112,10 +112,10 @@ Please provide a helpful response based on the context above. If the context doe
         return self.client.text_generation(
             prompt,
             model=self.model_name,
-            max_new_tokens=self.config.max_length,
-            temperature=self.config.temperature,
-            top_p=self.config.top_p,
-            repetition_penalty=self.config.repetition_penalty,
+            max_new_tokens=self.config.llm.max_length,
+            temperature=self.config.llm.temperature,
+            top_p=self.config.llm.top_p,
+            repetition_penalty=self.config.llm.repetition_penalty,
         )
 
     async def close(self):
