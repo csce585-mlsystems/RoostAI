@@ -93,7 +93,8 @@ Additionally, please enclose your response in <response> tags.
                 self._generate_response(prompt), timeout=5.0  # 5 seconds timeout
             )
 
-            return response
+            # Get the response within the <response> tags
+            return response.split("<response>")[1].split("</response>")[0].strip()
 
         except asyncio.TimeoutError:
             self.logger.error("LLM response generation timed out")
