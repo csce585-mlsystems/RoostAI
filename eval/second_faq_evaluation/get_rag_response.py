@@ -190,9 +190,9 @@ class LocalRAGTester:
 
 
 async def main():
-    data_file: str = "data/faq_pairs.csv"
+    data_file: str = "/home/cc/RoostAI/eval/second_faq_evaluation/data/faq_pairs.csv"
     db_path: str = "/home/cc/RoostAI/roostai/data/v2"
-    output_dir: str = "data/results"
+    output_dir: str = "/home/cc/RoostAI/eval/second_faq_evaluation/data/results"
 
     tester = LocalRAGTester(data_file)
 

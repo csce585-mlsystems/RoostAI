@@ -25,7 +25,7 @@ class ThresholdConfig:
 class VectorDBConfig:
     db_path: str = "/home/cc/RoostAI/roostai/data/v2"
     collection_name: str = "university_docs"
-    top_k: int = 15
+    top_k: int = 5
 
 
 @dataclass
