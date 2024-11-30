@@ -55,7 +55,7 @@ class LocalRAGTester:
                 logger.debug(f"Question: {question}")
 
                 response = await self.chatbot.process_query(question)
-                logger.debug(f"Response:\n{response}\n")
+                logger.info(f"Response:\n{response}\n")
 
                 responses.append(response)
 
