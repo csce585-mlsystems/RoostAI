@@ -33,7 +33,7 @@ class LocalRAGTester:
 
             # Load questions
             logger.info(f"Reading questions from {self.data_file}")
-            self.df = pd.read_csv(self.data_file).head()
+            self.df = pd.read_csv(self.data_file)
             logger.info(f"Loaded {len(self.df)} questions")
 
         except Exception as e:
