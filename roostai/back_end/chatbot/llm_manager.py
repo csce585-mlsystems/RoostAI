@@ -46,16 +46,6 @@ class LLMManager:
     def generate_prompt(self, query: str, result: QueryResult) -> str:
         """Generate prompt for LLM using query and retrieved documents."""
 
-        if not result.documents:
-            return f"""
-{self.system_prompt}
-
-User question: {query}
-
-Please note that I don't have any specific information about this in my knowledge base. 
-I can only provide general information based on my training.
-"""
-
         context = "\n".join(f"- {doc.content}" for doc in result.documents)
 
         return f"""
@@ -86,8 +76,17 @@ Additionally, please enclose your response in <response> tags.
                     "asking about a different topic related to USC."
                 )
 
+            if not result.documents:
+                self.logger.warning(
+                    "No documents retrieved for LLM response generation"
+                )
+                return (
+                    "I apologize, but I don't have any relevant information to answer your question. "
+                    "Please try asking something about USC."
+                )
+
             prompt = self.generate_prompt(query, result)
-            # print(prompt)
+            print(f"Prompt:\n{prompt}")
 
             # Use asyncio.wait_for to add timeout
             response = await asyncio.wait_for(
