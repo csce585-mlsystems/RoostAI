@@ -103,7 +103,7 @@ def process_files(input_dir, output_dir):
                 output_dir, f"{file_name_without_extension}.txt"
             )
             save_text_to_file(main_text, output_file_path)
-            print(f"Processed {file_name} and saved to {output_file_path}")
+            # print(f"Processed {file_name} and saved to {output_file_path}")
 
 
 if __name__ == "__main__":
