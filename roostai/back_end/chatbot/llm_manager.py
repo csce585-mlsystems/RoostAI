@@ -86,7 +86,7 @@ Additionally, please enclose your response in <response> tags.
                 )
 
             prompt = self.generate_prompt(query, result)
-            print(f"Prompt:\n{prompt}")
+            # print(f"Prompt:\n{prompt}")
 
             # Use asyncio.wait_for to add timeout
             response = await asyncio.wait_for(
