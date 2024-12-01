@@ -156,10 +156,18 @@ class WebScraper:
         """Run the web scraper"""
         async with async_playwright() as playwright:
             # Launch the browser ONCE at the start
-            browser = await playwright.chromium.launch(headless=True)
+            # browser = await playwright.chromium.launch(headless=True)
 
-            # Create a single browser context to reuse
-            context = await browser.new_context()
+            # # Create a single browser context to reuse
+            # context = await browser.new_context()
+            browser = await playwright.chromium.launch(
+                headless=True, 
+                args=['--no-sandbox', '--disable-setuid-sandbox']
+            )
+            context = await browser.new_context(
+                viewport={'width': 1920, 'height': 1080},
+                user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            )
 
             queue = asyncio.Queue()
             for url in self.start_urls:
