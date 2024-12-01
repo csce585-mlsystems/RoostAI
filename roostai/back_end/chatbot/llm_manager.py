@@ -27,11 +27,6 @@ class LLMManager:
         if not self.api_token:
             raise ValueError("HF_API_KEY environment variable not set")
 
-        # Initialize client with timeout
-        self.client = InferenceClient(
-            token=self.api_token, timeout=30  # 30 seconds timeout
-        )
-
         self.client = InferenceClient(token=self.api_token)
         self.model = llm_model
 
@@ -51,16 +46,6 @@ class LLMManager:
     def generate_prompt(self, query: str, result: QueryResult) -> str:
         """Generate prompt for LLM using query and retrieved documents."""
 
-        if not result.documents:
-            return f"""
-{self.system_prompt}
-
-User question: {query}
-
-Please note that I don't have any specific information about this in my knowledge base. 
-I can only provide general information based on my training.
-"""
-
         context = "\n".join(f"- {doc.content}" for doc in result.documents)
 
         return f"""
@@ -72,6 +57,7 @@ Context information:
 User question: {query}
 
 Please provide a helpful response based on the context above. If the context doesn't contain relevant information to answer the question, please state that clearly.
+Additionally, make sure to enclose your response in <response> tags.
 """
 
     async def generate_response(self, query: str, result: QueryResult) -> Optional[str]:
@@ -90,15 +76,36 @@ Please provide a helpful response based on the context above. If the context doe
                     "asking about a different topic related to USC."
                 )
 
+            if not result.documents:
+                self.logger.warning(
+                    "No documents retrieved for LLM response generation"
+                )
+                return (
+                    "I apologize, but I don't have any relevant information to answer your question. "
+                    "Please try asking something about USC."
+                )
+
             prompt = self.generate_prompt(query, result)
-            # print(prompt)
+            # print(f"Prompt:\n{prompt}")
 
             # Use asyncio.wait_for to add timeout
             response = await asyncio.wait_for(
                 self._generate_response(prompt), timeout=5.0  # 5 seconds timeout
             )
 
-            return response
+            # Get the response within the <response> tags
+            if "<response>" in response:
+                return response.split("<response>")[1].split("</response>")[0].strip()
+            else:  # Try again maximum two times
+                response = await asyncio.wait_for(
+                    self._generate_response(prompt), timeout=5.0  # 5 seconds timeout
+                )
+                if "<response>" in response:
+                    return (
+                        response.split("<response>")[1].split("</response>")[0].strip()
+                    )
+                else:
+                    return "I apologize, but I encountered an error generating the response."
 
         except asyncio.TimeoutError:
             self.logger.error("LLM response generation timed out")
@@ -122,7 +129,6 @@ Please provide a helpful response based on the context above. If the context doe
         """Close LLM connections and clean up resources."""
         try:
             if hasattr(self, "client"):
-                # Close any active sessions
                 self.client = None
             self.logger.info("LLM manager cleaned up successfully")
         except Exception as e:

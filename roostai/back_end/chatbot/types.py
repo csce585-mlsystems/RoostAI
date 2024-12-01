@@ -14,7 +14,8 @@ class DocumentMetadata:
 class Document:
     content: str
     metadata: DocumentMetadata
-    score: Optional[float] = None
+    score: Optional[float] = None  # Score after reranking
+    vector_score: Optional[float] = None  # Original vector similarity score
 
 
 @dataclass

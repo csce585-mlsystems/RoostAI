@@ -11,11 +11,11 @@ class ModelConfig:
 @dataclass
 class ThresholdConfig:
     # Threshold for reranking using cross-encoder to filter out low-quality documents; Primarily used in `reranker.py`
-    reranking_threshold: float = -0.2
+    reranking_threshold: float = -2.5
 
     # Threshold for quality check; Used to filter out low-quality documents
     # Primarily used in `quality_checker.py` and `llm_manager` - Also using cross-encoder scores
-    quality_min_score: float = -0.2
+    quality_min_score: float = -2.0
 
     # Minimum number of documents required for quality check; Primarily used in `quality_checker.py`
     quality_min_docs: int = 1
@@ -23,7 +23,7 @@ class ThresholdConfig:
 
 @dataclass
 class VectorDBConfig:
-    db_path: str = "./roostai/data"  # relative to the location of running the script
+    db_path: str = "/home/cc/RoostAI/roostai/data/v2"
     collection_name: str = "university_docs"
     top_k: int = 5
 

@@ -25,40 +25,46 @@ class Reranker:
             pairs = [[query, doc.content] for doc in documents]
 
             # Get cross-encoder scores
-            scores = self.model.predict(pairs)
+            cross_encoder_scores = self.model.predict(pairs)
 
             # Convert scores to float if they're numpy arrays
             scores = [
-                (
-                    float(score)
-                    if isinstance(score, (np.ndarray, np.float32, np.float64))
-                    else score
-                )
-                for score in scores
+                float(score)
+                if isinstance(score, (np.ndarray, np.float32, np.float64))
+                else score
+                for score in cross_encoder_scores
             ]
 
-            # For ms-marco cross-encoder models, typical score ranges are:
-            # - Relevant documents: > -2.0
-            # - Highly relevant: > 0.0
-            # Adjust threshold accordingly
-            CROSS_ENCODER_THRESHOLD = -2.0  # More appropriate threshold for this model
+            # Log both vector similarity and cross-encoder scores for comparison
+            self.logger.info("\nScore comparison for top documents:")
+            for i, (doc, cross_score) in enumerate(zip(documents[:3], scores[:3])):
+                self.logger.info(
+                    f"Doc {i + 1}:"
+                    f"\n  - Vector similarity score: {doc.score:.3f}"
+                    f"\n  - Cross-encoder score: {cross_score:.3f}"
+                    f"\n  - Content preview: {doc.content[:100]}..."
+                )
 
             # Update document scores and filter
             scored_docs = []
-            for doc, score in zip(documents, scores):
-                doc.score = score
-                if score >= CROSS_ENCODER_THRESHOLD:  # Use appropriate threshold
+            for doc, cross_score in zip(documents, scores):
+                # Store both scores for transparency
+                doc.vector_score = doc.score  # Save original vector similarity score
+                doc.score = cross_score  # Update main score to cross-encoder score
+
+                if cross_score >= threshold:
                     scored_docs.append(doc)
 
-            # Sort by score descending
+            # Sort by cross-encoder score descending
             scored_docs.sort(key=lambda x: x.score, reverse=True)
 
-            self.logger.info(f"Reranked {len(scored_docs)} documents passed threshold")
-            if not scored_docs:
-                self.logger.warning(
-                    f"No documents passed threshold {CROSS_ENCODER_THRESHOLD}. "
-                    f"Best score was {max(scores) if scores else 'N/A'}"
-                )
+            self.logger.info(
+                f"Reranking results:"
+                f"\n - Input documents: {len(documents)}"
+                f"\n - Passed threshold ({threshold}): {len(scored_docs)}"
+                f"\n - Best cross-encoder score: {max(scores) if scores else 'N/A'}"
+                f"\n - Best vector similarity: {max(doc.vector_score for doc in documents) if documents else 'N/A'}"
+            )
 
             return scored_docs
 

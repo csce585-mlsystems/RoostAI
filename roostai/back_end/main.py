@@ -1,4 +1,6 @@
+# back_end/main.py
 import os
+from typing import Optional, Dict, Any
 
 __import__("pysqlite3")
 import sys
@@ -8,6 +10,9 @@ sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
 import asyncio
 import logging
 import time
+from pathlib import Path
+import json
+from datetime import datetime
 
 from roostai.back_end.chatbot.config import Config
 from roostai.back_end.chatbot.llm_manager import LLMManager
@@ -16,20 +21,40 @@ from roostai.back_end.chatbot.query_processor import QueryProcessor
 from roostai.back_end.chatbot.reranker import Reranker
 from roostai.back_end.chatbot.vector_store import VectorStore
 
+# Enhanced logging configuration
 logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.StreamHandler(),
+        logging.FileHandler(sys.argv[0].replace(".py", ".log")),
+    ],
 )
 logger = logging.getLogger(__name__)
 
 
-# Add a function to verify database path
+class QueryLogger:
+    """Helper class to log query results for analysis."""
+
+    def __init__(self, log_dir: str = "query_logs"):
+        self.log_dir = Path(log_dir)
+        self.log_dir.mkdir(exist_ok=True)
+
+    def log_query(self, results: Dict[str, Any]):
+        """Log query results to a JSON file."""
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = self.log_dir / f"query_{timestamp}.json"
+
+        with open(filename, "w") as f:
+            json.dump(results, f, indent=2)
+
+
 def verify_db_path(db_path: str) -> bool:
     """Verify that the database path exists and contains the expected files."""
     if not os.path.exists(db_path):
         logger.error(f"Database directory does not exist: {db_path}")
         return False
 
-    # Check for chroma.sqlite3
     sqlite_path = os.path.join(db_path, "chroma.sqlite3")
     if not os.path.exists(sqlite_path):
         logger.error(f"SQLite database file not found at: {sqlite_path}")
@@ -40,134 +65,163 @@ def verify_db_path(db_path: str) -> bool:
 
 
 class UniversityChatbot:
-    def __init__(self):
+    def __init__(self, db_path: Optional[str] = None):
+        """Initialize the chatbot with optional custom database path."""
         self.config = Config.load_config()
+        if db_path:
+            self.config.vector_db.db_path = db_path
 
-        # Set the absolute path to the database
-        db_path = "/home/cc/RoostAI/roostai/data"
+        if not verify_db_path(self.config.vector_db.db_path):
+            raise ValueError(f"Invalid database path: {self.config.vector_db.db_path}")
 
-        # Verify database path
-        if not verify_db_path(db_path):
-            raise ValueError(f"Invalid database path: {db_path}")
-
-        self.config.vector_db.db_path = db_path
         self.logger = logging.getLogger(__name__)
+        self.query_logger = QueryLogger()
 
-        self.logger.info(f"Initializing with database path: {db_path}")
+        # Initialize components
+        self._init_components()
 
-        self.query_processor = QueryProcessor(
-            model_name=self.config.model.embedding_model
-        )
-
+    def _init_components(self):
+        """Initialize all chatbot components."""
         try:
+            self.query_processor = QueryProcessor(
+                model_name=self.config.model.embedding_model
+            )
+
             self.vector_store = VectorStore(
                 collection_name=self.config.vector_db.collection_name,
                 db_path=self.config.vector_db.db_path,
             )
-            # Immediately verify we can access the database
+
+            self.reranker = Reranker(model_name=self.config.model.cross_encoder_model)
+
+            self.quality_checker = QualityChecker(
+                min_score=self.config.thresholds.quality_min_score,
+                min_docs=self.config.thresholds.quality_min_docs,
+            )
+
+            self.llm_manager = LLMManager(
+                model_name=self.config.model.llm_model,
+                config=self.config,
+                llm_model=self.config.model.llm_model,
+            )
+
+            # Verify database access
             asyncio.create_task(self._verify_db_access())
 
         except Exception as e:
-            self.logger.error(f"Failed to initialize vector store: {e}")
+            self.logger.error(f"Failed to initialize components: {e}")
             raise
 
-        self.reranker = Reranker(model_name=self.config.model.cross_encoder_model)
-
-        self.quality_checker = QualityChecker(
-            min_score=self.config.thresholds.quality_min_score,
-            min_docs=self.config.thresholds.quality_min_docs,
-        )
-
-        self.llm_manager = LLMManager(
-            model_name=self.config.model.llm_model,
-            config=self.config,
-            llm_model=self.config.model.llm_model,
-        )
-
     async def _verify_db_access(self):
-        """Verify that we can access the database and log its contents."""
+        """Verify database access and log statistics."""
         try:
             count = await self.vector_store.get_document_count()
-            self.logger.info(
-                f"Successfully connected to database. Document count: {count}"
-            )
-
-            # Try to get a sample document if count > 0
-            if count > 0:
-                query_embedding = self.query_processor.model.encode("test").tolist()
-                docs = await self.vector_store.query(query_embedding, k=1)
-                if docs:
-                    self.logger.info("Successfully retrieved a sample document")
-                else:
-                    self.logger.warning("No documents retrieved in sample query")
+            self.logger.info(f"Connected to database. Document count: {count}")
         except Exception as e:
             self.logger.error(f"Database verification failed: {e}")
             raise
 
-    async def process_query(self, query: str, verbose: bool = False) -> str:
-        """Process a query with optional verbose output for debugging."""
+    async def process_query(self, query: str, verbose: bool = False) -> Dict[str, Any]:
+        """Process a query and return detailed results dictionary."""
         try:
+            results = {
+                "query": query,
+                "response": None,
+                "stage": None,
+                "error": None,
+                "metrics": {
+                    "initial_docs_count": 0,
+                    "reranked_docs_count": 0,
+                    "quality_score": 0.0,
+                    "top_doc_score": None,
+                },
+            }
+
             if not query.strip():
-                return "Please provide a valid question."
+                results["error"] = "Empty query"
+                results["stage"] = "input_validation"
+                return results
 
-            if verbose:
-                logger.info(f"Processing query: {query}")
+            # 1. Query Processing
+            try:
+                (
+                    cleaned_query,
+                    query_embedding,
+                ) = await self.query_processor.process_query(query)
+                results["metrics"]["cleaned_query"] = cleaned_query
+            except Exception as e:
+                results["error"] = f"Query processing failed: {str(e)}"
+                results["stage"] = "query_processing"
+                return results
 
-            cleaned_query, query_embedding = await self.query_processor.process_query(
-                query
-            )
-
+            # 2. Vector Search
             documents = await self.vector_store.query(
                 query_embedding, k=self.config.vector_db.top_k
             )
+            results["metrics"]["initial_docs_count"] = len(documents)
 
-            if verbose:
-                logger.info(f"Retrieved {len(documents)} initial documents")
-                if documents:
-                    logger.info("Top 3 initial documents:")
-                    for i, doc in enumerate(documents[:3], 1):
-                        logger.info(f"\n\n{i}. Score: {doc.score:.4f}")
-                        logger.info(f"URL: {doc.metadata.url}")
-                        logger.info(f"Content: {doc.content}")
+            if documents:
+                results["metrics"]["top_doc_score"] = documents[0].score
+                if verbose:
+                    results["metrics"]["initial_docs"] = [
+                        {"content": doc.content[:200], "score": doc.score}
+                        for doc in documents[:3]
+                    ]
 
             if not documents:
-                return (
+                results["error"] = "No initial documents retrieved"
+                results["stage"] = "vector_search"
+                results["response"] = (
                     "I don't have any relevant information to answer your question. "
-                    "Please try asking something about USC."
+                    "Please try asking something else about USC."
                 )
+                return results
 
+            # 3. Reranking
             reranked_docs = await self.reranker.rerank(
                 cleaned_query,
                 documents,
                 threshold=self.config.thresholds.reranking_threshold,
             )
+            results["metrics"]["reranked_docs_count"] = len(reranked_docs)
 
-            if verbose:
-                logger.info(f"\nReranked documents: {len(reranked_docs)}")
-                if reranked_docs:
-                    logger.info("Top 3 reranked documents:")
-                    for i, doc in enumerate(reranked_docs[:3], 1):
-                        logger.info(f"\n{i}. Score: {doc.score:.4f}")
-                        logger.info(f"URL: {doc.metadata.url}")
-                        logger.info(f"Content: {doc.content[:200]}...")
+            if reranked_docs:
+                results["metrics"]["top_reranked_score"] = reranked_docs[0].score
+                if verbose:
+                    results["metrics"]["reranked_docs"] = [
+                        {"content": doc.content[:200], "score": doc.score}
+                        for doc in reranked_docs[:3]
+                    ]
 
-            result = await self.quality_checker.check_quality(
+            # 4. Quality Check
+            quality_result = await self.quality_checker.check_quality(
                 cleaned_query, reranked_docs
             )
+            results["metrics"]["quality_score"] = quality_result.quality_score
 
-            if verbose:
-                logger.info(f"\nQuality score: {result.quality_score:.4f}")
+            if quality_result.quality_score < self.config.thresholds.quality_min_score:
+                results["error"] = "Failed quality check"
+                results["stage"] = "quality_check"
+                results["response"] = (
+                    "I don't have enough confident information to provide a good answer. "
+                    "Please try rephrasing your question."
+                )
+                return results
 
-            response = await self.llm_manager.generate_response(cleaned_query, result)
+            # 5. LLM Response Generation
+            response = await self.llm_manager.generate_response(
+                cleaned_query, quality_result
+            )
+            results["response"] = response
+            results["stage"] = "complete"
 
-            return response or "I apologize, but I couldn't generate a response."
+            return results
 
         except Exception as e:
-            self.logger.error(f"Error processing query: {e}")
-            return (
-                "I apologize, but I encountered an error processing your query. "
-                "Please try again or rephrase your question."
-            )
+            results["error"] = str(e)
+            results["stage"] = "unknown"
+            results["response"] = "An error occurred processing your query."
+            return results
 
     async def get_document_count(self) -> int:
         """Get the total number of documents in the system."""
@@ -187,64 +241,87 @@ class UniversityChatbot:
             await asyncio.gather(*tasks)
 
 
-async def main():
-    chatbot = UniversityChatbot()
+async def interactive_session(chatbot: UniversityChatbot):
+    """Run an interactive session with the chatbot."""
+    print("\nUSC Chatbot Interactive Session")
+    print("Type 'quit' to exit, 'debug' to toggle verbose mode")
+    print("-" * 50)
 
+    verbose = False
+
+    while True:
+        try:
+            query = input("\nYour question: ").strip()
+
+            if query.lower() == "quit" or query.lower() == "exit":
+                break
+            elif query.lower() == "debug":
+                verbose = not verbose
+                print(f"Debug mode: {'enabled' if verbose else 'disabled'}")
+                continue
+
+            if not query:
+                print("Please enter a question.")
+                continue
+
+            start_time = time.time()
+            results = await chatbot.process_query(query, verbose=verbose)
+            end_time = time.time()
+
+            # Print response
+            print("\nResponse:", results["response"])
+
+            # Print debug information if verbose mode is enabled
+            if verbose:
+                print("\nDebug Information:")
+                print(f"Processing stage: {results['stage']}")
+                print(f"Time taken: {end_time - start_time:.2f} seconds")
+
+                if results.get("metrics"):
+                    print("\nMetrics:")
+                    for key, value in results["metrics"].items():
+                        print(f"- {key}: {value}")
+
+                if results.get("error"):
+                    print(f"\nError: {results['error']}")
+
+        except KeyboardInterrupt:
+            print("\nExiting...")
+            break
+        except Exception as e:
+            logger.error(f"Error in interactive session: {e}")
+            print("\nAn error occurred. Please try again.")
+
+
+async def main():
+    """Main function to run the chatbot."""
+    chatbot = None
     try:
-        # First, let's check the document count
+        chatbot = UniversityChatbot()
+
+        # Check document count
         doc_count = await chatbot.get_document_count()
-        logger.info(f"\nTotal documents in database: {doc_count}")
+        logger.info(f"Total documents in database: {doc_count}")
 
         if doc_count == 0:
             logger.error("No documents found in the database. Exiting.")
             return
 
-        # Test queries that cover different aspects of USC
-        test_queries = [
-            "Who should I contact if I have a correction for DegreeWorks?",
-            # "How do Carolina Core Overlay courses work?"
-            # "What are the admission requirements for USC?",
-            # "Tell me about the Computer Science department at USC",
-            # "What sports teams does USC have?",
-            # "What dining options are available on campus?",
-            # "What is the history of USC?",
-            # "What research centers does USC have?",
-            # "What student organizations are available at USC?",
-            # "What are the housing options for freshmen at USC?",
-            # "Tell me about USC's library system",
-            # "What financial aid options are available at USC?",
-        ]
-
-        logger.info("\nStarting query tests...")
-
-        for i, query in enumerate(test_queries, 1):
-            logger.info(f"\n=== Query {i} ===")
-            logger.info(f"Q: {query}")
-
-            try:
-                start_time = time.time()
-                response = await chatbot.process_query(query, verbose=True)
-                end_time = time.time()
-
-                logger.info(f"\nA: {response}")
-                logger.info(f"Time taken: {end_time - start_time:.2f} seconds")
-                logger.info("=" * 80)
-
-            except Exception as e:
-                logger.error(f"Error processing query {i}: {e}")
-                continue
-
-            # Add a small delay between queries to avoid rate limiting
-            await asyncio.sleep(1)
+        # Run interactive session
+        await interactive_session(chatbot)
 
     except Exception as e:
         logger.error(f"Fatal error: {e}")
-
     finally:
-        if "chatbot" in locals():
+        if chatbot:
             await chatbot.cleanup()
-            logger.info("\nTest completed!")
+        logger.info("Session ended")
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        print("\nShutting down...")
+    except Exception as e:
+        logger.error(f"Unexpected error: {e}")

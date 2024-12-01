@@ -1,7 +1,6 @@
 import hashlib
 import logging
 from typing import List
-import math
 
 import chromadb
 from chromadb.config import Settings
@@ -31,7 +30,12 @@ class VectorStore:
             except InvalidCollectionException:
                 self.collection = self.client.create_collection(
                     name=collection_name,
-                    metadata={"description": "University documents collection"},
+                    metadata={
+                        "hnsw:space": "cosine",  # Use cosine similarity for distance metric of the HNSW index
+                        "hnsw:search_ef": 100,  # Higher value = more accurate search, but slower
+                        "hnsw:batch_size": 200,  # Number of vectors to index in a batch, higher = faster indexing
+                        "description": "University documents collection",
+                    },
                 )
                 self.logger.info(f"Created new collection: {collection_name}")
 
@@ -66,20 +70,13 @@ class VectorStore:
                 and results["documents"]
                 and len(results["documents"][0]) > 0
             ):
-                # Get max distance for normalization
-                distances = results["distances"][0]
-                max_distance = max(distances) if distances else 1.0
-
                 for doc, metadata, distance in zip(
                     results["documents"][0],
                     results["metadatas"][0],
-                    distances,
+                    results["distances"][0],
                 ):
-                    # Normalize squared L2 distance to similarity score (0 to 1)
-                    # Using exponential decay: exp(-distance/max_distance)
-                    similarity_score = (
-                        math.exp(-distance / max_distance) if max_distance > 0 else 0.0
-                    )
+                    # Convert distance to similarity score (1 - normalized distance)
+                    similarity_score = 1.0 - float(distance)
 
                     # Create DocumentMetadata object from the metadata dictionary based on the fields in `metadata`
                     # The fields might vary based on the metadata provided, so we need to handle this dynamically
@@ -92,13 +89,7 @@ class VectorStore:
 
                 self.logger.info(f"Retrieved {len(documents)} documents")
                 if documents:
-                    self.logger.debug(
-                        f"Distance range: [{min(distances):.3f}, {max_distance:.3f}]"
-                    )
-                    self.logger.debug(
-                        f"Score range: [{min(doc.score for doc in documents):.3f}, "
-                        f"{max(doc.score for doc in documents):.3f}]"
-                    )
+                    self.logger.debug(f"Top document score: {documents[0].score}")
             else:
                 self.logger.info("No matching documents found")
                 return []
