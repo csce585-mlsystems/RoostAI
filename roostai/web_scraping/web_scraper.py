@@ -5,7 +5,7 @@ import hashlib
 import json
 import os
 import logging
-from playwright.async_api import async_playwright
+from playwright.async_api import async_playwright, Error as PlaywrightError
 
 # Base directory for saving scraped data
 abs_data_path = Path("/home/cc/scraped_data")
@@ -59,6 +59,11 @@ class WebScraper:
             url_path = Path(url.replace("//", "/"))
         return abs_data_path / url_path
 
+    def remove_http_protocol(self, url: str):
+        parsed_url = urlparse(url)
+        # Get everything after 'https://' or 'http://'
+        return parsed_url.netloc + parsed_url.path
+
     def is_unique(self, html_content):
         """Check that the HTML is unique using hashing"""
         content_hash = hashlib.md5(html_content.encode()).hexdigest()
@@ -79,8 +84,8 @@ class WebScraper:
 
     async def scrape_page(self, page, url):
         """Save the HTML content of the url"""
-        await page.goto(url, timeout=60000)
-        await page.wait_for_load_state("load")
+        await page.goto(url, timeout=90000)
+        await page.wait_for_load_state("load", timeout=60000)
         html_content = await page.content()
 
         # save HTML if unique file
@@ -98,25 +103,31 @@ class WebScraper:
 
         # checks if any element of l is in s
         file_extensions = ['.pdf', '.docx', '.doc',
-                           '.xlsx', '.xls', '.zip', '.pptx']
+                           '.xlsx', '.xls', '.zip', '.pptx', '.jpg', '.jpeg', '.png']
 
         def ends_with(l, s): return any(s.endswith(x) for x in l)
 
         for href in links:
             full_url: str = urljoin(url, href)  # join a base url and link
             # if valid and not visited, return it
-            if self.is_valid(full_url) and full_url not in self.visited and not full_url.endswith('pdf') and not ends_with(file_extensions, full_url):
+            if self.is_valid(full_url) and self.remove_http_protocol(full_url) not in self.visited and not full_url.endswith('pdf') and not ends_with(file_extensions, full_url):
                 new_urls.append(full_url)
         return new_urls
 
-    async def scrape_url_with_retries(self, url, browser):
+    async def scrape_url_with_retries(self, url, browser, context):
         for attempt in range(MAX_RETRIES):
             try:
-                return await self.scrape_url(url, browser)
+                page = await context.new_page()
+                result = await self.scrape_page(page, url)
+                await page.close()
+                return result
+            except PlaywrightError as e:
+                self.logger.error(f"Playwright Error for {url} : {e}")
             except Exception as e:
                 self.logger.error(
                     f"Attempt {attempt + 1} failed for {url}: {e}")
                 await asyncio.sleep(2 ** attempt)  # Exponential backoff
+
         self.logger.error(
             f"Failed to scrape {url} after {MAX_RETRIES} attempts.")
         return []
@@ -135,44 +146,53 @@ class WebScraper:
                 new_urls = await self.scrape_page(page, url)
                 await context.close()  # close browsing context
                 return new_urls
+            except PlaywrightError as e:
+                self.logger.error(f"Playwright Error for {url} : {e}")
             except Exception as e:
                 self.logger.error(f"Error scraping {url}: {e}")
                 return []
 
     async def start(self):
         """Run the web scraper"""
-        # immediately add starting urls to async queue
-        queue = asyncio.Queue()
-        for url in self.start_urls:
-            queue.put_nowait(url)
-
-        # async playwright session, launching chromium browser
         async with async_playwright() as playwright:
+            # Launch the browser ONCE at the start
             browser = await playwright.chromium.launch(headless=True)
-            # scrape until we have no more URLs left in the queue
+
+            # Create a single browser context to reuse
+            context = await browser.new_context()
+
+            queue = asyncio.Queue()
+            for url in self.start_urls:
+                queue.put_nowait(url)
+
             try:
                 while not queue.empty():
-                    url = await queue.get()  # retrieve url asynchronously to avoid deadlock
-                    if url not in self.visited:  # Process only if not visited
-                        self.visited.add(url)  # Mark visited after dequeuing
+                    url = await queue.get()
+                    if self.remove_http_protocol(url) not in self.visited:
+                        self.visited.add(self.remove_http_protocol(url))
                         try:
-                            # get the set of new urls from the HTML a href tags
-                            new_urls = await self.scrape_url_with_retries(url, browser)
-                            # add new urls to queue if not visited previously
+                            # Use the same context for all pages
+                            page = await context.new_page()
+                            new_urls = await self.scrape_page(page, url)
+                            await page.close()  # Close the page, but keep the context open
+
                             for new_url in new_urls:
-                                if new_url not in self.visited:
-                                    # Add only unvisited URLs
+                                if self.remove_http_protocol(new_url) not in self.visited:
                                     queue.put_nowait(new_url)
+                        except PlaywrightError as e:
+                            self.logger.error(
+                                f"Playwright Error for {url} : {e}")
                         except Exception as e:
                             self.logger.error(f'Error scraping {url}: {e}')
-                            if 'BrowserContext.new_page: Target page, context or browser has been closed' in f'Error scraping {url}: {e}':
-                                exit(0)
-                    # log the size of the queue
+
                     self.logger.info(f"Queue size: {queue.qsize()}")
+            except PlaywrightError as e:
+                self.logger.error(f"Playwright Error: {e}")
             except Exception as e:
                 self.logger.error(f"Critical error: {e}")
             finally:
-                await browser.close()  # close browser after scraping is complete
+                await context.close()
+                await browser.close()
                 self.logger.info("Browser closed successfully.")
 
 
