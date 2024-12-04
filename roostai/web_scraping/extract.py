@@ -28,7 +28,7 @@ def extract_main_text(html_content, include_links=True):
             else:
                 link.replace_with(text)
     # Extract the text content, excluding boilerplate elements
-    relevant_text = soup.get_text(separator=' ', strip=True)
+    relevant_text = soup.get_text(separator=" ", strip=True)
 
     return relevant_text
 

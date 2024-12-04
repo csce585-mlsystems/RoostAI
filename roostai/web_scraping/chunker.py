@@ -7,6 +7,7 @@ import json
 import re
 import os
 from tqdm import tqdm
+
 # Initialize the embedding model
 model_name = "sentence-transformers/all-MiniLM-L6-v2"
 embed_model = HuggingFaceEmbedding(model_name=model_name)
@@ -133,8 +134,7 @@ if __name__ == "__main__":
 
     try:
         # Process all files
-        processed_data = process_files_with_metadata(
-            DIRECTORY_PATH, OUTPUT_DIR)
+        processed_data = process_files_with_metadata(DIRECTORY_PATH, OUTPUT_DIR)
 
         # Print example of structure
         print("\nDone chunking. \nExample of processed data structure:")
