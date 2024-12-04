@@ -40,17 +40,16 @@ class WebScraper:
 
     def get_url_save_path(self, url: str):
         """Convert a URL to a file path"""
-        colon_index = url.index(':')
-        url = url[colon_index + 3:]  # remove https://
+        colon_index = url.index(":")
+        url = url[colon_index + 3 :]  # remove https://
 
         if len(url) > 250:
             # Use a hash of the URL for long file names
-            hashed_url = hashlib.md5(url.encode('utf-8')).hexdigest()
+            hashed_url = hashlib.md5(url.encode("utf-8")).hexdigest()
 
             # Optional: Extract a readable part of the URL (e.g., path or query) for better context
             parsed_url = urlparse(url)
-            safe_name = parsed_url.path.replace(
-                '/', '_')[:50]  # Truncate and sanitize
+            safe_name = parsed_url.path.replace("/", "_")[:50]  # Truncate and sanitize
 
             # Combine safe name and hash for uniqueness
             url_path = f"{safe_name}_{hashed_url}"
@@ -102,15 +101,32 @@ class WebScraper:
         )
 
         # checks if any element of l is in s
-        file_extensions = ['.pdf', '.docx', '.doc',
-                           '.xlsx', '.xls', '.zip', '.pptx', '.jpg', '.jpeg', '.png']
+        file_extensions = [
+            ".pdf",
+            ".docx",
+            ".doc",
+            ".xlsx",
+            ".xls",
+            ".zip",
+            ".pptx",
+            ".jpg",
+            ".jpeg",
+            ".png",
+            ".mov",
+        ]
 
-        def ends_with(l, s): return any(s.endswith(x) for x in l)
+        def ends_with(l, s):
+            return any(s.endswith(x) for x in l)
 
         for href in links:
             full_url: str = urljoin(url, href)  # join a base url and link
             # if valid and not visited, return it
-            if self.is_valid(full_url) and self.remove_http_protocol(full_url) not in self.visited and not full_url.endswith('pdf') and not ends_with(file_extensions, full_url):
+            if (
+                self.is_valid(full_url)
+                and self.remove_http_protocol(full_url) not in self.visited
+                and not full_url.endswith("pdf")
+                and not ends_with(file_extensions, full_url)
+            ):
                 new_urls.append(full_url)
         return new_urls
 
@@ -124,12 +140,10 @@ class WebScraper:
             except PlaywrightError as e:
                 self.logger.error(f"Playwright Error for {url} : {e}")
             except Exception as e:
-                self.logger.error(
-                    f"Attempt {attempt + 1} failed for {url}: {e}")
-                await asyncio.sleep(2 ** attempt)  # Exponential backoff
+                self.logger.error(f"Attempt {attempt + 1} failed for {url}: {e}")
+                await asyncio.sleep(2**attempt)  # Exponential backoff
 
-        self.logger.error(
-            f"Failed to scrape {url} after {MAX_RETRIES} attempts.")
+        self.logger.error(f"Failed to scrape {url} after {MAX_RETRIES} attempts.")
         return []
 
     async def scrape_url(self, url, browser):
@@ -161,12 +175,11 @@ class WebScraper:
             # # Create a single browser context to reuse
             # context = await browser.new_context()
             browser = await playwright.chromium.launch(
-                headless=True, 
-                args=['--no-sandbox', '--disable-setuid-sandbox']
+                headless=True, args=["--no-sandbox", "--disable-setuid-sandbox"]
             )
             context = await browser.new_context(
-                viewport={'width': 1920, 'height': 1080},
-                user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+                viewport={"width": 1920, "height": 1080},
+                user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
             )
 
             queue = asyncio.Queue()
@@ -185,13 +198,15 @@ class WebScraper:
                             await page.close()  # Close the page, but keep the context open
 
                             for new_url in new_urls:
-                                if self.remove_http_protocol(new_url) not in self.visited:
+                                if (
+                                    self.remove_http_protocol(new_url)
+                                    not in self.visited
+                                ):
                                     queue.put_nowait(new_url)
                         except PlaywrightError as e:
-                            self.logger.error(
-                                f"Playwright Error for {url} : {e}")
+                            self.logger.error(f"Playwright Error for {url} : {e}")
                         except Exception as e:
-                            self.logger.error(f'Error scraping {url}: {e}')
+                            self.logger.error(f"Error scraping {url}: {e}")
 
                     self.logger.info(f"Queue size: {queue.qsize()}")
             except PlaywrightError as e:
