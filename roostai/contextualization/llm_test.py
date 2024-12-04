@@ -13,7 +13,10 @@ def test_model_setup(model_name="mistralai/Mixtral-8x7B-Instruct-v0.1"):
         tokenizer = AutoTokenizer.from_pretrained(model_name)
 
         print("Loading model...")
-        model = AutoModelForCausalLM.from_pretrained(model_name, device_map="cpu",)
+        model = AutoModelForCausalLM.from_pretrained(
+            model_name,
+            device_map="cpu",
+        )
         print("✓ Model and tokenizer loaded successfully!")
         return model, tokenizer
 
@@ -49,7 +52,10 @@ Please give a short succinct context to situate this chunk within the overall do
 
         print("Running inference...")
         with torch.no_grad():
-            outputs = model.generate(**inputs, max_new_tokens=2048,)
+            outputs = model.generate(
+                **inputs,
+                max_new_tokens=2048,
+            )
 
         result = tokenizer.decode(outputs[0], skip_special_tokens=True)
         print("\nModel output:")
@@ -70,7 +76,7 @@ def test_system_requirements():
         import psutil
 
         # Check available RAM
-        available_ram = psutil.virtual_memory().available / (1024 ** 3)  # Convert to GB
+        available_ram = psutil.virtual_memory().available / (1024**3)  # Convert to GB
         print(f"Available RAM: {available_ram:.2f} GB")
 
         if available_ram < 8:
