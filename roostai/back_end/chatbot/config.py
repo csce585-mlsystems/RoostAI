@@ -23,7 +23,8 @@ class ThresholdConfig:
 
 @dataclass
 class VectorDBConfig:
-    db_path: str = "/home/cc/RoostAI/roostai/data/v2"
+    # db_path: str = "/home/cc/RoostAI/roostai/data/v2"
+    db_path: str = "/Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2"
     collection_name: str = "university_docs"
     top_k: int = 5
 

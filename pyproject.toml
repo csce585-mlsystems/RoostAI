@@ -9,7 +9,7 @@ authors = [
 readme = "README.md"
 
 [tool.poetry.dependencies]  # main dependency group
-python = ">=3.9,<3.13"  # Specify Python version range
+python = ">=3.9,<3.9.7 || >3.9.7,<3.13"
 selenium = "^4.25.0"
 bs4 = "^0.0.2"
 llama-index-embeddings-openai = "^0.2.5"
@@ -27,7 +27,9 @@ playwright = "^1.49.0"
 black = "^24.10.0"
 pypdf2 = "^3.0.1"
 pre-commit = "^4.0.1"
-pysqlite3-binary = "^0.5.4"
+streamlit = "^1.40.2"
+markdown = "^3.7"
+streamlit-modal = "^0.1.2"
 
 [tool.poetry.group.backend.dependencies]
 # The backend dependency group

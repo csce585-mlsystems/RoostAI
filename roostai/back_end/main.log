@@ -72,3 +72,67 @@ Score comparison for top documents:
 2024-11-30 22:02:33,494 - roostai.back_end.chatbot.vector_store - INFO - Vector store connection closed successfully
 2024-11-30 22:02:33,494 - roostai.back_end.chatbot.llm_manager - INFO - LLM manager cleaned up successfully
 2024-11-30 22:02:33,494 - __main__ - INFO - Session ended
+2024-12-07 15:16:07,557 - __main__ - ERROR - Database directory does not exist: /home/cc/RoostAI/roostai/data/v2
+2024-12-07 15:16:07,558 - __main__ - ERROR - Fatal error: Invalid database path: /home/cc/RoostAI/roostai/data/v2
+2024-12-07 15:16:07,558 - __main__ - INFO - Session ended
+2024-12-07 15:17:19,191 - __main__ - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 15:17:19,207 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 15:17:19,207 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 15:17:20,684 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 15:17:21,013 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 15:17:21,013 - __main__ - ERROR - Failed to initialize components: HF_API_KEY environment variable not set
+2024-12-07 15:17:21,013 - __main__ - ERROR - Fatal error: HF_API_KEY environment variable not set
+2024-12-07 15:17:21,017 - __main__ - INFO - Session ended
+2024-12-07 15:19:09,725 - __main__ - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 15:19:09,737 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 15:19:09,737 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 15:19:11,157 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 15:19:11,444 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 15:19:11,550 - __main__ - INFO - Total documents in database: 47015
+2024-12-07 15:19:15,434 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 15:19:16,093 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 15:19:16,093 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.290
+  - Cross-encoder score: -9.794
+  - Content preview: flyer_marsha_gordon.jpg (1000×1343)...
+2024-12-07 15:19:16,093 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.283
+  - Cross-encoder score: -9.739
+  - Content preview: 818009b4-5651-4b57-adeb-66a278fc256d.jpg (388×480)...
+2024-12-07 15:19:16,093 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.279
+  - Cross-encoder score: -9.634
+  - Content preview: 2bb39535-1152-4352-abd1-1e4d753227d0.jpg (675×900)...
+2024-12-07 15:19:16,093 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 0
+ - Best cross-encoder score: -9.634162902832031
+ - Best vector similarity: 0.2899623513221741
+2024-12-07 15:19:16,093 - roostai.back_end.chatbot.quality_checker - WARNING - No documents provided for quality check
+2024-12-07 15:19:16,093 - roostai.back_end.chatbot.llm_manager - WARNING - No documents retrieved for LLM response generation
+2024-12-07 15:19:36,971 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 15:19:37,285 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 15:19:37,285 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.597
+  - Cross-encoder score: 4.302
+  - Content preview: USCA has ten NCAA Division II Athletic programs. Learn more about USC Aiken at www.usca.edu(http://w...
+2024-12-07 15:19:37,285 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.576
+  - Cross-encoder score: 0.008
+  - Content preview: USC top college in the Southeast for veterans, military service members - USC News & Events | Univer...
+2024-12-07 15:19:37,285 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.568
+  - Cross-encoder score: -2.073
+  - Content preview: “To create the most exceptional experience at South Carolina, we must first hear directly from stude...
+2024-12-07 15:19:37,285 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 5
+ - Best cross-encoder score: 4.302359580993652
+ - Best vector similarity: 0.5973355770111084
+2024-12-07 15:19:37,285 - roostai.back_end.chatbot.quality_checker - INFO - Quality check completed. Score: 2.98
+2024-12-07 15:19:59,048 - __main__ - INFO - Connected to database. Document count: 47015
+2024-12-07 15:19:59,048 - roostai.back_end.chatbot.vector_store - INFO - Vector store connection closed successfully
+2024-12-07 15:19:59,048 - roostai.back_end.chatbot.llm_manager - INFO - LLM manager cleaned up successfully
+2024-12-07 15:19:59,049 - __main__ - INFO - Session ended
