@@ -72,3 +72,34 @@ Score comparison for top documents:
 2024-11-30 22:02:33,494 - roostai.back_end.chatbot.vector_store - INFO - Vector store connection closed successfully
 2024-11-30 22:02:33,494 - roostai.back_end.chatbot.llm_manager - INFO - LLM manager cleaned up successfully
 2024-11-30 22:02:33,494 - __main__ - INFO - Session ended
+2024-12-02 19:21:13,489 - __main__ - INFO - Found database at: /home/cc/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-02 19:21:13,490 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2024-12-02 19:21:13,490 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-02 19:21:14,372 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-02 19:21:14,567 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: cpu
+2024-12-02 19:21:14,584 - __main__ - INFO - Total documents in database: 47015
+2024-12-02 19:21:28,229 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-02 19:21:28,334 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-02 19:21:28,334 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.493
+  - Cross-encoder score: 1.985
+  - Content preview: The conflicted nature of this election can be seen in word clouds that capture the most-frequent com...
+2024-12-02 19:21:28,334 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.413
+  - Cross-encoder score: -5.175
+  - Content preview: Get ready to vote in 2024 presidential election - USC News & Events | University of South Carolina S...
+2024-12-02 19:21:28,334 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.398
+  - Cross-encoder score: -6.191
+  - Content preview: Read More(https://carolinanewsandreporter.cic.sc.edu/haley-shoots-for-enough-democratic-votes-in-hom...
+2024-12-02 19:21:28,334 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 2
+ - Best cross-encoder score: 1.984515905380249
+ - Best vector similarity: 0.4933164119720459
+2024-12-02 19:21:28,334 - roostai.back_end.chatbot.quality_checker - INFO - Quality check completed. Score: 0.87
+2024-12-02 19:21:28,340 - __main__ - INFO - Connected to database. Document count: 47015
+2024-12-02 19:24:22,099 - roostai.back_end.chatbot.vector_store - INFO - Vector store connection closed successfully
+2024-12-02 19:24:22,099 - roostai.back_end.chatbot.llm_manager - INFO - LLM manager cleaned up successfully
+2024-12-02 19:24:22,099 - __main__ - INFO - Session ended
