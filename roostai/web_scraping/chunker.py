@@ -1,5 +1,6 @@
 from llama_index.core import SimpleDirectoryReader
-from llama_index.core.node_parser import SemanticSplitterNodeParser, SentenceSplitter
+from llama_index.core.node_parser import SemanticSplitterNodeParser, SentenceSplitter, TokenTextSplitter
+
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from typing import Dict, Any
 from pathlib import Path
@@ -12,14 +13,8 @@ from tqdm import tqdm
 model_name = "sentence-transformers/all-MiniLM-L6-v2"
 embed_model = HuggingFaceEmbedding(model_name=model_name)
 
-# Initialize splitter
-# splitter = SemanticSplitterNodeParser(
-#     buffer_size=1, breakpoint_percentile_threshold=95, embed_model=embed_model
-# )
-splitter = SentenceSplitter()
 
-
-def process_files_with_metadata(directory_path: str, output_dir: str):
+def process_files_with_metadata(directory_path: str, output_dir: str, splitter):
     """
     Process text files and their corresponding metadata files, organizing chunks and metadata
     in a specified JSON structure.
@@ -113,40 +108,45 @@ def process_files_with_metadata(directory_path: str, output_dir: str):
     # return result
 
 
-def save_processed_data(processed_data: Dict[str, Dict[str, Any]], output_file: str):
-    """
-    Save the processed data to a JSON file.
-
-    Args:
-        processed_data (Dict): The processed data to save
-        output_file (str): Path to save the JSON file
-    """
-    with open(output_file, "w") as f:
-        json.dump(processed_data, f, indent=2)
-    print(f"Saved processed data to {output_file}")
-
-
 if __name__ == "__main__":
     DIRECTORY_PATH = "/home/cc/extracted_data"
     # DIRECTORY_PATH = '/home/cc/scraped_data_main_text'
-    OUTPUT_DIR = "/home/cc/chunks_and_metadata"
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-    try:
-        # Process all files
-        processed_data = process_files_with_metadata(DIRECTORY_PATH, OUTPUT_DIR)
+    # Initialize splitters
+    splitters = [
+        ('sentence_splitting_chunking', SentenceSplitter()),
+        ('fixed_size_token_chunking', TokenTextSplitter(
+            chunk_size=1024,
+            chunk_overlap=20,
+            separator=" ",
+        )),
+        ('semantic_chunking_95_threshold', SemanticSplitterNodeParser(
+            breakpoint_percentile_threshold=95, embed_model=embed_model
+        )),
+        ('semantic_chunking_50_threshold', SemanticSplitterNodeParser(
+            breakpoint_percentile_threshold=50, embed_model=embed_model
+        ))
+    ]
 
-        # Print example of structure
-        print("\nDone chunking. \nExample of processed data structure:")
-        # Show first document
-        for doc_id, data in list(processed_data.items())[:1]:
-            print(f"\nDocument {doc_id}:")
-            print(f"Number of chunks: {len(data['chunks'])}")
-            print("First chunk preview:", data["chunks"][0][:200], "...")
-            print("Metadata keys:", list(data["metadata"].keys()))
+    for desc, splitter in splitters:
+        OUTPUT_DIR = f"/home/cc/chunks_and_metadata_{desc}"
+        os.makedirs(OUTPUT_DIR, exist_ok=True)
+        try:
+            # Process all files
+            processed_data = process_files_with_metadata(
+                DIRECTORY_PATH, OUTPUT_DIR, splitter)
 
-        # Save to file
-        # save_processed_data(processed_data, OUTPUT_FILE)
+            # Print example of structure
+            print("\nDone chunking. \nExample of processed data structure:")
+            # Show first document
+            for doc_id, data in list(processed_data.items())[:1]:
+                print(f"\nDocument {doc_id}:")
+                print(f"Number of chunks: {len(data['chunks'])}")
+                print("First chunk preview:", data["chunks"][0][:200], "...")
+                print("Metadata keys:", list(data["metadata"].keys()))
 
-    except Exception as e:
-        print(f"Error: {str(e)}")
+            # Save to file
+            # save_processed_data(processed_data, OUTPUT_FILE)
+
+        except Exception as e:
+            print(f"Error: {str(e)}")
