@@ -29,9 +29,11 @@ class Reranker:
 
             # Convert scores to float if they're numpy arrays
             scores = [
-                float(score)
-                if isinstance(score, (np.ndarray, np.float32, np.float64))
-                else score
+                (
+                    float(score)
+                    if isinstance(score, (np.ndarray, np.float32, np.float64))
+                    else score
+                )
                 for score in cross_encoder_scores
             ]
 

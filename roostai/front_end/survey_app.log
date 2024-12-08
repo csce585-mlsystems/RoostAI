@@ -1,0 +1,852 @@
+2024-12-07 15:23:44,205 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 15:23:44,223 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 15:23:44,224 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 15:23:45,811 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 15:23:46,139 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 15:23:46,247 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 15:24:07,376 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 15:24:07,679 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 15:24:07,679 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.592
+  - Cross-encoder score: 1.838
+  - Content preview: USCA has ten NCAA Division II Athletic programs. Learn more about USC Aiken at www.usca.edu(http://w...
+2024-12-07 15:24:07,679 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.588
+  - Cross-encoder score: -0.646
+  - Content preview: “To create the most exceptional experience at South Carolina, we must first hear directly from stude...
+2024-12-07 15:24:07,679 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.585
+  - Cross-encoder score: -2.644
+  - Content preview: University of South Carolina | Search Jobs Skip to Main Content Toggle navigation Home Search Jobs S...
+2024-12-07 15:24:07,679 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 4
+ - Best cross-encoder score: 1.8383262157440186
+ - Best vector similarity: 0.5921217799186707
+2024-12-07 15:24:07,679 - roostai.back_end.chatbot.quality_checker - INFO - Quality check completed. Score: 0.84
+2024-12-07 15:26:49,840 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 15:26:49,845 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 15:26:49,845 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 15:26:51,172 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 15:26:51,480 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 15:26:51,583 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 15:27:04,627 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 15:27:04,897 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 15:27:04,897 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.591
+  - Cross-encoder score: 4.418
+  - Content preview: USCA has ten NCAA Division II Athletic programs. Learn more about USC Aiken at www.usca.edu(http://w...
+2024-12-07 15:27:04,897 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.572
+  - Cross-encoder score: 0.024
+  - Content preview: USC top college in the Southeast for veterans, military service members - USC News & Events | Univer...
+2024-12-07 15:27:04,897 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.571
+  - Cross-encoder score: 1.360
+  - Content preview: Our Location - College of Information and Communications | University of South Carolina Skip to Cont...
+2024-12-07 15:27:04,898 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 4
+ - Best cross-encoder score: 4.418128967285156
+ - Best vector similarity: 0.5911982655525208
+2024-12-07 15:27:04,898 - roostai.back_end.chatbot.quality_checker - INFO - Quality check completed. Score: 3.09
+2024-12-07 15:37:10,695 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 15:37:10,720 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 15:37:10,720 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 15:37:12,292 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 15:37:12,585 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 15:37:12,697 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 15:37:27,542 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 15:37:27,847 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 15:37:27,847 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.666
+  - Cross-encoder score: 0.067
+  - Content preview: Athletics | University of South Carolina Skip to Content SC.edu Athletics Athletics The University o...
+2024-12-07 15:37:27,847 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.651
+  - Cross-encoder score: 3.567
+  - Content preview: Historical Newspapers of South Carolina Historical Newspapers of South Carolina University of South ...
+2024-12-07 15:37:27,848 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.650
+  - Cross-encoder score: 1.946
+  - Content preview: Gamecock Nation - USC News & Events | University of South Carolina Skip to Content Posted on: Novemb...
+2024-12-07 15:37:27,848 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 5
+ - Best cross-encoder score: 3.5665910243988037
+ - Best vector similarity: 0.6662400364875793
+2024-12-07 15:37:27,848 - roostai.back_end.chatbot.quality_checker - INFO - Quality check completed. Score: 3.36
+2024-12-07 15:38:32,344 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 15:38:32,504 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 15:38:32,504 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.617
+  - Cross-encoder score: 6.309
+  - Content preview: Registering for Classes - Graduate School | University of South Carolina Skip to Content Graduate Sc...
+2024-12-07 15:38:32,504 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.612
+  - Cross-encoder score: 7.113
+  - Content preview: Click on the “ Registration ” box (3rd box from left on top row). Click on “ Register for Classes ” ...
+2024-12-07 15:38:32,504 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.536
+  - Cross-encoder score: 0.506
+  - Content preview: Registration Information - My Law School | University of South Carolina Skip to Content My Law Schoo...
+2024-12-07 15:38:32,504 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 4
+ - Best cross-encoder score: 7.113155364990234
+ - Best vector similarity: 0.6169297099113464
+2024-12-07 15:38:32,504 - roostai.back_end.chatbot.quality_checker - INFO - Quality check completed. Score: 7.58
+2024-12-07 15:39:06,134 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 15:39:06,290 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 15:39:06,290 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.279
+  - Cross-encoder score: -8.756
+  - Content preview: Grab a doughnut and a beverage while you are chatting! Free and no RSVP needed! Hosted by the Studen...
+2024-12-07 15:39:06,290 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.275
+  - Cross-encoder score: -10.817
+  - Content preview: bd132375-3848-4773-a364-b36a12c53285.jpg (1080×1024)...
+2024-12-07 15:39:06,290 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.274
+  - Cross-encoder score: -10.787
+  - Content preview: Molinaroli College of Engineering and Computing - Big Friday - September This website uses scripting...
+2024-12-07 15:39:06,290 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 0
+ - Best cross-encoder score: -8.755895614624023
+ - Best vector similarity: 0.2789679169654846
+2024-12-07 15:39:06,290 - roostai.back_end.chatbot.quality_checker - WARNING - No documents provided for quality check
+2024-12-07 15:39:06,290 - roostai.back_end.chatbot.llm_manager - WARNING - No documents retrieved for LLM response generation
+2024-12-07 16:02:45,173 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 16:02:45,186 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 16:02:45,186 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 16:02:46,690 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 16:02:47,065 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 16:02:47,173 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 16:02:55,804 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 16:02:56,113 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 16:02:56,113 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.697
+  - Cross-encoder score: 1.682
+  - Content preview: Athletics | University of South Carolina Skip to Content SC.edu Athletics Athletics The University o...
+2024-12-07 16:02:56,113 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.675
+  - Cross-encoder score: 4.521
+  - Content preview: Historical Newspapers of South Carolina Historical Newspapers of South Carolina University of South ...
+2024-12-07 16:02:56,113 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.674
+  - Cross-encoder score: 2.836
+  - Content preview: Gamecock Nation - USC News & Events | University of South Carolina Skip to Content Posted on: Novemb...
+2024-12-07 16:02:56,113 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 5
+ - Best cross-encoder score: 4.520626068115234
+ - Best vector similarity: 0.6969938278198242
+2024-12-07 16:02:56,113 - roostai.back_end.chatbot.quality_checker - INFO - Quality check completed. Score: 4.25
+2024-12-07 16:03:43,236 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 16:03:43,391 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 16:03:43,391 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.307
+  - Cross-encoder score: -10.439
+  - Content preview: 2bb39535-1152-4352-abd1-1e4d753227d0.jpg (675×900)...
+2024-12-07 16:03:43,391 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.300
+  - Cross-encoder score: -10.260
+  - Content preview: ad155836-25a2-4321-8463-a72ad715edd8.jpg (825×550)...
+2024-12-07 16:03:43,391 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.296
+  - Cross-encoder score: -10.463
+  - Content preview: fa31e261-4685-401d-aa5b-6bbc73910941.jpg (486×648)...
+2024-12-07 16:03:43,391 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 0
+ - Best cross-encoder score: -10.260419845581055
+ - Best vector similarity: 0.3066156506538391
+2024-12-07 16:03:43,391 - roostai.back_end.chatbot.quality_checker - WARNING - No documents provided for quality check
+2024-12-07 16:03:43,391 - roostai.back_end.chatbot.llm_manager - WARNING - No documents retrieved for LLM response generation
+2024-12-07 16:05:24,483 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 16:05:24,495 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 16:05:24,495 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 16:05:25,897 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 16:05:26,246 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 16:05:26,344 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 16:05:34,779 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 16:05:35,031 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 16:05:35,031 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.666
+  - Cross-encoder score: 0.067
+  - Content preview: Athletics | University of South Carolina Skip to Content SC.edu Athletics Athletics The University o...
+2024-12-07 16:05:35,031 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.651
+  - Cross-encoder score: 3.567
+  - Content preview: Historical Newspapers of South Carolina Historical Newspapers of South Carolina University of South ...
+2024-12-07 16:05:35,031 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.650
+  - Cross-encoder score: 1.946
+  - Content preview: Gamecock Nation - USC News & Events | University of South Carolina Skip to Content Posted on: Novemb...
+2024-12-07 16:05:35,031 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 5
+ - Best cross-encoder score: 3.5665910243988037
+ - Best vector similarity: 0.6662400364875793
+2024-12-07 16:05:35,031 - roostai.back_end.chatbot.quality_checker - INFO - Quality check completed. Score: 3.36
+2024-12-07 16:05:43,949 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 16:05:43,971 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 16:05:43,971 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.307
+  - Cross-encoder score: -10.439
+  - Content preview: 2bb39535-1152-4352-abd1-1e4d753227d0.jpg (675×900)...
+2024-12-07 16:05:43,971 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.300
+  - Cross-encoder score: -10.260
+  - Content preview: ad155836-25a2-4321-8463-a72ad715edd8.jpg (825×550)...
+2024-12-07 16:05:43,971 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.296
+  - Cross-encoder score: -10.463
+  - Content preview: fa31e261-4685-401d-aa5b-6bbc73910941.jpg (486×648)...
+2024-12-07 16:05:43,971 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 0
+ - Best cross-encoder score: -10.260419845581055
+ - Best vector similarity: 0.3066156506538391
+2024-12-07 16:05:43,971 - roostai.back_end.chatbot.quality_checker - WARNING - No documents provided for quality check
+2024-12-07 16:05:43,971 - roostai.back_end.chatbot.llm_manager - WARNING - No documents retrieved for LLM response generation
+2024-12-07 16:13:47,150 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 16:13:47,161 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 16:13:47,161 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 16:13:48,844 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 16:13:49,118 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 16:13:49,227 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 16:14:03,069 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 16:14:03,379 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 16:14:03,379 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.664
+  - Cross-encoder score: 0.202
+  - Content preview: Athletics | University of South Carolina Skip to Content SC.edu Athletics Athletics The University o...
+2024-12-07 16:14:03,379 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.649
+  - Cross-encoder score: 3.553
+  - Content preview: Historical Newspapers of South Carolina Historical Newspapers of South Carolina University of South ...
+2024-12-07 16:14:03,379 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.643
+  - Cross-encoder score: 2.065
+  - Content preview: Gamecock Nation - USC News & Events | University of South Carolina Skip to Content Posted on: Novemb...
+2024-12-07 16:14:03,379 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 5
+ - Best cross-encoder score: 4.543432235717773
+ - Best vector similarity: 0.6644827723503113
+2024-12-07 16:14:03,379 - roostai.back_end.chatbot.quality_checker - INFO - Quality check completed. Score: 5.11
+2024-12-07 16:14:22,276 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 16:14:22,458 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 16:14:22,459 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.411
+  - Cross-encoder score: -5.079
+  - Content preview: Qualifications Applicants must have a J.D. and at least two years of teaching or practice experience...
+2024-12-07 16:14:22,459 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.409
+  - Cross-encoder score: -5.090
+  - Content preview: Qualifications Applicants must have a J.D. and at least two years of teaching or practice experience...
+2024-12-07 16:14:22,459 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.406
+  - Cross-encoder score: -1.085
+  - Content preview: In addition, applicants must send all supporting material directly to the Graduate School. Applicati...
+2024-12-07 16:14:22,459 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 3
+ - Best cross-encoder score: -1.084931492805481
+ - Best vector similarity: 0.41074538230895996
+2024-12-07 16:14:22,459 - roostai.back_end.chatbot.quality_checker - INFO - Quality check completed. Score: -1.63
+2024-12-07 16:14:46,839 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 16:14:46,993 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 16:14:46,993 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.429
+  - Cross-encoder score: -0.920
+  - Content preview: – A small, intimate team gathering? A large college/division drop-in celebration? A lunch with 2-3 c...
+2024-12-07 16:14:46,993 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.348
+  - Cross-encoder score: -1.885
+  - Content preview: Typically, taking a break in study does affect your planned graduation date and may render transfer ...
+2024-12-07 16:14:46,993 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.330
+  - Cross-encoder score: -8.263
+  - Content preview: Leaving for Break - Law Enforcement and Safety | University of South Carolina Skip to Content Law En...
+2024-12-07 16:14:46,993 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 3
+ - Best cross-encoder score: -0.6710327863693237
+ - Best vector similarity: 0.42869216203689575
+2024-12-07 16:14:46,993 - roostai.back_end.chatbot.quality_checker - INFO - Quality check completed. Score: -1.25
+2024-12-07 16:19:14,481 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 16:19:14,497 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 16:19:14,498 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 16:19:16,139 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 16:19:16,413 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 16:19:16,522 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 16:19:29,821 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 16:19:30,121 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 16:19:30,121 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.622
+  - Cross-encoder score: 5.301
+  - Content preview: This requirement may be waived for applicants that have earned a prior degree from a US institution....
+2024-12-07 16:19:30,121 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.604
+  - Cross-encoder score: 5.558
+  - Content preview: Apply - USC Union | University of South Carolina Skip to Content Apply Whether you’re applying for t...
+2024-12-07 16:19:30,121 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.596
+  - Cross-encoder score: 2.680
+  - Content preview: Transfer Applicants - Office of Undergraduate Admissions | University of South Carolina Skip to Cont...
+2024-12-07 16:19:30,121 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 5
+ - Best cross-encoder score: 5.557869911193848
+ - Best vector similarity: 0.6221950650215149
+2024-12-07 16:19:30,122 - roostai.back_end.chatbot.quality_checker - INFO - Quality check completed. Score: 7.03
+2024-12-07 16:22:41,059 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 16:22:41,070 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 16:22:41,071 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 16:22:42,321 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 16:22:42,623 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 16:22:42,727 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 16:22:53,013 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 16:22:53,273 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 16:22:53,273 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.615
+  - Cross-encoder score: 7.929
+  - Content preview: Click on the “ Registration ” box (3rd box from left on top row). Click on “ Register for Classes ” ...
+2024-12-07 16:22:53,273 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.594
+  - Cross-encoder score: 6.427
+  - Content preview: Registering for Classes - Graduate School | University of South Carolina Skip to Content Graduate Sc...
+2024-12-07 16:22:53,274 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.550
+  - Cross-encoder score: 1.632
+  - Content preview: Registration Information - My Law School | University of South Carolina Skip to Content My Law Schoo...
+2024-12-07 16:22:53,274 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 5
+ - Best cross-encoder score: 7.928924560546875
+ - Best vector similarity: 0.6150826811790466
+2024-12-07 16:22:53,274 - roostai.back_end.chatbot.quality_checker - INFO - Quality check completed. Score: 9.02
+2024-12-07 16:23:43,655 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 16:23:43,660 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 16:23:43,661 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 16:23:45,066 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 16:23:45,426 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 16:23:45,526 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 16:24:01,446 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 16:24:01,699 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 16:24:01,699 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.532
+  - Cross-encoder score: 4.207
+  - Content preview: Registration Help - Academic Advising | University of South Carolina Skip to Content Academic Advisi...
+2024-12-07 16:24:01,700 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.523
+  - Cross-encoder score: 4.702
+  - Content preview: Advisement and Registration Instructions - My Arnold School | University of South Carolina Skip to C...
+2024-12-07 16:24:01,700 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.512
+  - Cross-encoder score: 3.510
+  - Content preview: Pre-Registration Checklist - Academic Advising | University of South Carolina Skip to Content Academ...
+2024-12-07 16:24:01,700 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 4
+ - Best cross-encoder score: 4.70205020904541
+ - Best vector similarity: 0.5316641926765442
+2024-12-07 16:24:01,700 - roostai.back_end.chatbot.quality_checker - INFO - Quality check completed. Score: 6.00
+2024-12-07 16:31:51,761 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 16:31:51,771 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 16:31:51,771 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 16:31:53,288 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 16:31:53,582 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 16:31:53,680 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 16:32:04,494 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 16:32:04,754 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 16:32:04,754 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.536
+  - Cross-encoder score: -3.561
+  - Content preview: And we all did figure it out. We still got there. The cooking class with the students was my favorit...
+2024-12-07 16:32:04,754 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.517
+  - Cross-encoder score: -5.213
+  - Content preview: That way they will dig into something that will inspire them to do good work. What does that look li...
+2024-12-07 16:32:04,754 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.509
+  - Cross-encoder score: -6.351
+  - Content preview: Our News - Student Affairs and Academic Support | University of South Carolina Skip to Content Stude...
+2024-12-07 16:32:04,754 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 0
+ - Best cross-encoder score: -3.5609092712402344
+ - Best vector similarity: 0.5360783338546753
+2024-12-07 16:32:04,755 - roostai.back_end.chatbot.quality_checker - WARNING - No documents provided for quality check
+2024-12-07 16:32:04,755 - roostai.back_end.chatbot.llm_manager - WARNING - No documents retrieved for LLM response generation
+2024-12-07 16:34:09,018 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 16:34:09,022 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 16:34:09,022 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 16:34:10,292 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 16:34:10,619 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 16:34:10,717 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 16:34:14,010 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 16:34:14,194 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 16:34:14,194 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.290
+  - Cross-encoder score: -9.794
+  - Content preview: flyer_marsha_gordon.jpg (1000×1343)...
+2024-12-07 16:34:14,194 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.283
+  - Cross-encoder score: -9.739
+  - Content preview: 818009b4-5651-4b57-adeb-66a278fc256d.jpg (388×480)...
+2024-12-07 16:34:14,194 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.279
+  - Cross-encoder score: -9.634
+  - Content preview: 2bb39535-1152-4352-abd1-1e4d753227d0.jpg (675×900)...
+2024-12-07 16:34:14,195 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 0
+ - Best cross-encoder score: -9.634162902832031
+ - Best vector similarity: 0.2899623513221741
+2024-12-07 16:34:14,195 - roostai.back_end.chatbot.quality_checker - WARNING - No documents provided for quality check
+2024-12-07 16:34:14,195 - roostai.back_end.chatbot.llm_manager - WARNING - No documents retrieved for LLM response generation
+2024-12-07 16:36:38,843 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 16:36:38,850 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 16:36:38,851 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 16:36:40,178 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 16:36:40,480 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 16:36:40,579 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 16:36:49,460 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 16:36:49,887 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 16:36:49,887 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.505
+  - Cross-encoder score: -3.177
+  - Content preview: Below you will find a link to instructions that provides a quick and easy way to determine if your s...
+2024-12-07 16:36:49,887 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.501
+  - Cross-encoder score: -7.218
+  - Content preview: Sign in to your account...
+2024-12-07 16:36:49,887 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.495
+  - Cross-encoder score: 0.238
+  - Content preview: Registering for Classes - Graduate School | University of South Carolina Skip to Content Graduate Sc...
+2024-12-07 16:36:49,887 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 1
+ - Best cross-encoder score: 0.23809167742729187
+ - Best vector similarity: 0.5046167969703674
+2024-12-07 16:36:49,887 - roostai.back_end.chatbot.quality_checker - INFO - Quality check completed. Score: 0.24
+2024-12-07 16:37:19,243 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 16:37:19,484 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 16:37:19,484 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.279
+  - Cross-encoder score: -8.756
+  - Content preview: Grab a doughnut and a beverage while you are chatting! Free and no RSVP needed! Hosted by the Studen...
+2024-12-07 16:37:19,484 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.275
+  - Cross-encoder score: -10.817
+  - Content preview: bd132375-3848-4773-a364-b36a12c53285.jpg (1080×1024)...
+2024-12-07 16:37:19,484 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.274
+  - Cross-encoder score: -10.787
+  - Content preview: Molinaroli College of Engineering and Computing - Big Friday - September This website uses scripting...
+2024-12-07 16:37:19,484 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 0
+ - Best cross-encoder score: -8.755895614624023
+ - Best vector similarity: 0.2789679169654846
+2024-12-07 16:37:19,484 - roostai.back_end.chatbot.quality_checker - WARNING - No documents provided for quality check
+2024-12-07 16:37:19,484 - roostai.back_end.chatbot.llm_manager - WARNING - No documents retrieved for LLM response generation
+2024-12-07 16:39:05,283 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 16:39:05,297 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 16:39:05,297 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 16:39:06,615 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 16:39:06,915 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 16:39:07,013 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 16:39:27,740 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 16:39:27,743 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 16:39:27,743 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 16:39:29,790 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 16:39:30,107 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 16:39:30,206 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 16:39:50,162 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 16:39:50,656 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 16:39:50,656 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.249
+  - Cross-encoder score: -8.737
+  - Content preview: Susi Long, education) Live5WCSC March 15, 2024 “Why the CAT bond market is booming right now”(https:...
+2024-12-07 16:39:50,656 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.238
+  - Cross-encoder score: -8.239
+  - Content preview: Oluwakemi Balogun and Ann Blair Kennedy, School of Medicine Greenville) —Massage Magazine August 20,...
+2024-12-07 16:39:50,656 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.235
+  - Cross-encoder score: -7.625
+  - Content preview: Multimedia Feature 7 th Place – Camille Herren, Kaylyn Jones, Parker Boothe and Erin Stender, Crimso...
+2024-12-07 16:39:50,656 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 0
+ - Best cross-encoder score: -6.127189636230469
+ - Best vector similarity: 0.24880915880203247
+2024-12-07 16:39:50,656 - roostai.back_end.chatbot.quality_checker - WARNING - No documents provided for quality check
+2024-12-07 16:39:50,656 - roostai.back_end.chatbot.llm_manager - WARNING - No documents retrieved for LLM response generation
+2024-12-07 16:40:18,798 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 16:40:18,810 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 16:40:18,810 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 16:40:20,489 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 16:40:20,818 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 16:40:20,919 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 16:40:24,021 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 16:40:24,231 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 16:40:24,232 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.272
+  - Cross-encoder score: -8.122
+  - Content preview: Hannah: Sports Editor of the ODYSSEY Media Group(http://www.odysseynewsmagazine.net/) . Sydney: I am...
+2024-12-07 16:40:24,232 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.248
+  - Cross-encoder score: -7.078
+  - Content preview: When I moved onto campus, I heard about the new building but it was never something I really thought...
+2024-12-07 16:40:24,232 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.245
+  - Cross-encoder score: -7.603
+  - Content preview: I fell in love with broadcasting and TV production when I was 14 years old and knew that it was what...
+2024-12-07 16:40:24,232 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 0
+ - Best cross-encoder score: -4.664668083190918
+ - Best vector similarity: 0.27211105823516846
+2024-12-07 16:40:24,232 - roostai.back_end.chatbot.quality_checker - WARNING - No documents provided for quality check
+2024-12-07 16:40:24,233 - roostai.back_end.chatbot.llm_manager - WARNING - No documents retrieved for LLM response generation
+2024-12-07 16:46:03,940 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 16:46:03,945 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 16:46:03,945 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 16:46:05,693 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 16:46:05,984 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 16:46:06,082 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 16:46:13,565 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 16:46:13,771 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 16:46:13,771 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.576
+  - Cross-encoder score: -2.095
+  - Content preview: What it takes to run the 'city' of USC - USC News & Events | University of South Carolina Skip to Co...
+2024-12-07 16:46:13,772 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.570
+  - Cross-encoder score: -2.647
+  - Content preview: Gamecocks come together for Carolina Day - USC News & Events | University of South Carolina Skip to ...
+2024-12-07 16:46:13,772 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.566
+  - Cross-encoder score: -2.466
+  - Content preview: Come help us welcome our USC students | University of South Carolina Skip to Content SC.edu About Ou...
+2024-12-07 16:46:13,772 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 2
+ - Best cross-encoder score: -2.0952200889587402
+ - Best vector similarity: 0.5763410329818726
+2024-12-07 16:46:13,772 - roostai.back_end.chatbot.quality_checker - INFO - Quality check completed. Score: -2.66
+2024-12-07 16:48:17,780 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 16:48:17,785 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 16:48:17,785 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 16:48:19,639 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 16:48:19,940 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 16:48:20,038 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 16:48:22,876 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 16:48:23,147 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 16:48:23,147 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.272
+  - Cross-encoder score: -8.122
+  - Content preview: Hannah: Sports Editor of the ODYSSEY Media Group(http://www.odysseynewsmagazine.net/) . Sydney: I am...
+2024-12-07 16:48:23,147 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.248
+  - Cross-encoder score: -7.078
+  - Content preview: When I moved onto campus, I heard about the new building but it was never something I really thought...
+2024-12-07 16:48:23,147 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.245
+  - Cross-encoder score: -7.603
+  - Content preview: I fell in love with broadcasting and TV production when I was 14 years old and knew that it was what...
+2024-12-07 16:48:23,147 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 0
+ - Best cross-encoder score: -4.664668083190918
+ - Best vector similarity: 0.27211105823516846
+2024-12-07 16:48:23,147 - roostai.back_end.chatbot.quality_checker - WARNING - No documents provided for quality check
+2024-12-07 16:48:23,147 - roostai.back_end.chatbot.llm_manager - WARNING - No documents retrieved for LLM response generation
+2024-12-07 17:08:57,339 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 17:08:57,348 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 17:08:57,348 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 17:08:59,138 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 17:08:59,435 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 17:08:59,537 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 17:09:04,207 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 17:09:04,458 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 17:09:04,458 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.222
+  - Cross-encoder score: -8.778
+  - Content preview: Pleasant , South Carolina ) Honorable Mention – Diego Gutierrez, The Shield , McCallum High School (...
+2024-12-07 17:09:04,458 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.221
+  - Cross-encoder score: -7.514
+  - Content preview: I fell in love with broadcasting and TV production when I was 14 years old and knew that it was what...
+2024-12-07 17:09:04,459 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.211
+  - Cross-encoder score: -8.088
+  - Content preview: Hannah: Sports Editor of the ODYSSEY Media Group(http://www.odysseynewsmagazine.net/) . Sydney: I am...
+2024-12-07 17:09:04,459 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 0
+ - Best cross-encoder score: -7.141291618347168
+ - Best vector similarity: 0.22218769788742065
+2024-12-07 17:09:04,459 - roostai.back_end.chatbot.quality_checker - WARNING - No documents provided for quality check
+2024-12-07 17:09:04,459 - roostai.back_end.chatbot.llm_manager - WARNING - No documents retrieved for LLM response generation
+2024-12-07 17:12:15,003 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 17:12:15,009 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 17:12:15,009 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 17:12:16,894 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 17:12:17,250 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 17:12:17,349 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 17:12:20,128 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 17:12:20,394 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 17:12:20,394 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.222
+  - Cross-encoder score: -8.778
+  - Content preview: Pleasant , South Carolina ) Honorable Mention – Diego Gutierrez, The Shield , McCallum High School (...
+2024-12-07 17:12:20,394 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.221
+  - Cross-encoder score: -7.514
+  - Content preview: I fell in love with broadcasting and TV production when I was 14 years old and knew that it was what...
+2024-12-07 17:12:20,394 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.211
+  - Cross-encoder score: -8.088
+  - Content preview: Hannah: Sports Editor of the ODYSSEY Media Group(http://www.odysseynewsmagazine.net/) . Sydney: I am...
+2024-12-07 17:12:20,394 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 0
+ - Best cross-encoder score: -7.141291618347168
+ - Best vector similarity: 0.22218769788742065
+2024-12-07 17:12:20,394 - roostai.back_end.chatbot.quality_checker - WARNING - No documents provided for quality check
+2024-12-07 17:12:20,394 - roostai.back_end.chatbot.llm_manager - WARNING - No documents retrieved for LLM response generation
+2024-12-07 17:12:34,945 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 17:12:34,948 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 17:12:34,948 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 17:12:36,241 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 17:12:36,595 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 17:12:36,692 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 17:13:41,596 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 17:13:41,608 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 17:13:41,609 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 17:13:42,987 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 17:13:43,291 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 17:13:43,395 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 17:13:46,807 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 17:13:47,216 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 17:13:47,216 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.290
+  - Cross-encoder score: -9.794
+  - Content preview: flyer_marsha_gordon.jpg (1000×1343)...
+2024-12-07 17:13:47,216 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.283
+  - Cross-encoder score: -9.739
+  - Content preview: 818009b4-5651-4b57-adeb-66a278fc256d.jpg (388×480)...
+2024-12-07 17:13:47,217 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.279
+  - Cross-encoder score: -9.634
+  - Content preview: 2bb39535-1152-4352-abd1-1e4d753227d0.jpg (675×900)...
+2024-12-07 17:13:47,217 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 0
+ - Best cross-encoder score: -9.634162902832031
+ - Best vector similarity: 0.2899623513221741
+2024-12-07 17:13:47,217 - roostai.back_end.chatbot.quality_checker - WARNING - No documents provided for quality check
+2024-12-07 17:13:47,217 - roostai.back_end.chatbot.llm_manager - WARNING - No documents retrieved for LLM response generation
+2024-12-07 17:14:05,466 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 17:14:05,629 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 17:14:05,629 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.222
+  - Cross-encoder score: -8.778
+  - Content preview: Pleasant , South Carolina ) Honorable Mention – Diego Gutierrez, The Shield , McCallum High School (...
+2024-12-07 17:14:05,630 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.221
+  - Cross-encoder score: -7.514
+  - Content preview: I fell in love with broadcasting and TV production when I was 14 years old and knew that it was what...
+2024-12-07 17:14:05,630 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.211
+  - Cross-encoder score: -8.088
+  - Content preview: Hannah: Sports Editor of the ODYSSEY Media Group(http://www.odysseynewsmagazine.net/) . Sydney: I am...
+2024-12-07 17:14:05,630 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 0
+ - Best cross-encoder score: -7.141291618347168
+ - Best vector similarity: 0.22218769788742065
+2024-12-07 17:14:05,630 - roostai.back_end.chatbot.quality_checker - WARNING - No documents provided for quality check
+2024-12-07 17:14:05,630 - roostai.back_end.chatbot.llm_manager - WARNING - No documents retrieved for LLM response generation
+2024-12-07 17:14:17,377 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 17:14:17,380 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 17:14:17,380 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 17:14:18,496 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 17:14:18,775 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 17:14:18,874 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 17:15:39,898 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 17:15:39,906 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 17:15:39,906 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 17:15:41,786 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 17:15:42,162 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 17:15:42,264 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 17:15:44,293 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 17:15:44,717 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 17:15:44,717 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.222
+  - Cross-encoder score: -8.778
+  - Content preview: Pleasant , South Carolina ) Honorable Mention – Diego Gutierrez, The Shield , McCallum High School (...
+2024-12-07 17:15:44,718 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.221
+  - Cross-encoder score: -7.514
+  - Content preview: I fell in love with broadcasting and TV production when I was 14 years old and knew that it was what...
+2024-12-07 17:15:44,718 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.211
+  - Cross-encoder score: -8.088
+  - Content preview: Hannah: Sports Editor of the ODYSSEY Media Group(http://www.odysseynewsmagazine.net/) . Sydney: I am...
+2024-12-07 17:15:44,718 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 0
+ - Best cross-encoder score: -7.141291618347168
+ - Best vector similarity: 0.22218769788742065
+2024-12-07 17:15:44,718 - roostai.back_end.chatbot.quality_checker - WARNING - No documents provided for quality check
+2024-12-07 17:15:44,718 - roostai.back_end.chatbot.llm_manager - WARNING - No documents retrieved for LLM response generation
+2024-12-07 17:15:55,928 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 17:15:55,932 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 17:15:55,935 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 17:15:57,666 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 17:15:57,958 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 17:15:58,066 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 17:48:31,571 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 17:48:31,585 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 17:48:31,585 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 17:48:33,141 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 17:48:33,457 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 17:48:33,556 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 17:48:37,525 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 17:48:37,885 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 17:48:37,885 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.290
+  - Cross-encoder score: -9.794
+  - Content preview: flyer_marsha_gordon.jpg (1000×1343)...
+2024-12-07 17:48:37,885 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.283
+  - Cross-encoder score: -9.739
+  - Content preview: 818009b4-5651-4b57-adeb-66a278fc256d.jpg (388×480)...
+2024-12-07 17:48:37,885 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.279
+  - Cross-encoder score: -9.634
+  - Content preview: 2bb39535-1152-4352-abd1-1e4d753227d0.jpg (675×900)...
+2024-12-07 17:48:37,885 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 0
+ - Best cross-encoder score: -9.634162902832031
+ - Best vector similarity: 0.2899623513221741
+2024-12-07 17:48:37,885 - roostai.back_end.chatbot.quality_checker - WARNING - No documents provided for quality check
+2024-12-07 17:48:37,885 - roostai.back_end.chatbot.llm_manager - WARNING - No documents retrieved for LLM response generation
+2024-12-07 17:48:42,275 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 17:48:42,591 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 17:48:42,591 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.222
+  - Cross-encoder score: -8.778
+  - Content preview: Pleasant , South Carolina ) Honorable Mention – Diego Gutierrez, The Shield , McCallum High School (...
+2024-12-07 17:48:42,591 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.221
+  - Cross-encoder score: -7.514
+  - Content preview: I fell in love with broadcasting and TV production when I was 14 years old and knew that it was what...
+2024-12-07 17:48:42,591 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.211
+  - Cross-encoder score: -8.088
+  - Content preview: Hannah: Sports Editor of the ODYSSEY Media Group(http://www.odysseynewsmagazine.net/) . Sydney: I am...
+2024-12-07 17:48:42,592 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 0
+ - Best cross-encoder score: -7.141291618347168
+ - Best vector similarity: 0.22218769788742065
+2024-12-07 17:48:42,592 - roostai.back_end.chatbot.quality_checker - WARNING - No documents provided for quality check
+2024-12-07 17:48:42,592 - roostai.back_end.chatbot.llm_manager - WARNING - No documents retrieved for LLM response generation
+2024-12-07 17:50:30,713 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 17:50:30,717 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 17:50:30,717 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 17:50:32,403 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 17:50:32,702 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 17:50:32,799 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
+2024-12-07 17:50:36,115 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 17:50:36,510 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 17:50:36,510 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.301
+  - Cross-encoder score: -4.817
+  - Content preview: “I know some people came here to celebrate me, but at the same time, I’m feeding off the energy that...
+2024-12-07 17:50:36,510 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.256
+  - Cross-encoder score: -10.407
+  - Content preview: Cappy Hour, Tuesday, Dec. 3, 2024, 2 - 7 p.m. - Gamecock Entertainment - Russell House | University ...
+2024-12-07 17:50:36,510 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.254
+  - Cross-encoder score: -10.415
+  - Content preview: Cappy Hour, Monday, Dec. 2, 2024, 12 - 5 p.m. - Gamecock Entertainment - Russell House | University ...
+2024-12-07 17:50:36,510 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 0
+ - Best cross-encoder score: -4.81658935546875
+ - Best vector similarity: 0.300912082195282
+2024-12-07 17:50:36,510 - roostai.back_end.chatbot.quality_checker - WARNING - No documents provided for quality check
+2024-12-07 17:50:36,511 - roostai.back_end.chatbot.llm_manager - WARNING - No documents retrieved for LLM response generation
+2024-12-07 17:51:02,872 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2024-12-07 17:51:03,222 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2024-12-07 17:51:03,222 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.280
+  - Cross-encoder score: -10.414
+  - Content preview: 2019 Announcements Archive | University of South Carolina Skip to Content 2019 Announcements Archive...
+2024-12-07 17:51:03,222 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.277
+  - Cross-encoder score: -9.159
+  - Content preview: Hannah: Sports Editor of the ODYSSEY Media Group(http://www.odysseynewsmagazine.net/) . Sydney: I am...
+2024-12-07 17:51:03,222 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.258
+  - Cross-encoder score: -10.943
+  - Content preview: Monday Mindfulness, Monday, Dec. 2, 2024, 12 - 12:30 p.m. - Success and Wellness Events - School of ...
+2024-12-07 17:51:03,222 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 0
+ - Best cross-encoder score: -7.8428497314453125
+ - Best vector similarity: 0.28018689155578613
+2024-12-07 17:51:03,222 - roostai.back_end.chatbot.quality_checker - WARNING - No documents provided for quality check
+2024-12-07 17:51:03,222 - roostai.back_end.chatbot.llm_manager - WARNING - No documents retrieved for LLM response generation
+2024-12-07 17:51:59,923 - roostai.back_end.main - INFO - Found database at: /Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2/chroma.sqlite3
+2024-12-07 17:51:59,927 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2024-12-07 17:51:59,928 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-12-07 17:52:01,743 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2024-12-07 17:52:02,046 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2024-12-07 17:52:02,145 - roostai.back_end.main - INFO - Connected to database. Document count: 47015
