@@ -204,23 +204,29 @@ async def main():
     """Main function to run the data ingestion process."""
     config = Config.load_config()
     ingestion_manager = DataIngestionManager(config)
-    data_directory = "/home/cc/chunks_and_metadata"
+    # data_directory = "/home/cc/chunks_and_metadata"
 
-    try:
-        logger.info(f"Starting ingestion from directory: {data_directory}")
-        logger.info(f"Using database path: {config.vector_db.db_path}")
+    
+    
+    data_directories = [("/home/cc/chunks_and_metadata_fixed_size_token_chunking/", "/home/cc/v3_token_chunking"),
+                        ("/home/cc/chunks_and_metadata_semantic_chunking_95_threshold/", "/home/cc/v3_95_thresh"),
+                        ("/home/cc/chunks_and_metadata_semantic_chunking_50_threshold/", "home/cc/v3_50_thresh"),
+                        ("/home/cc/chunks_and_metadata_sentence_splitting_chunking/", "/home/cc/v3_sentence_chunking")] 
+    for data_directory, output_path in data_directories:
+      ingestion_manager.config.vector_db.db_path = output_path
+      try:
+          logger.info(f"Starting ingestion from directory: {data_directory}")
+          logger.info(f"Using database path: {config.vector_db.db_path}")
+          await ingestion_manager.process_directory(data_directory)
 
-        await ingestion_manager.process_directory(data_directory)
-
-        # Verify ingestion
-        doc_count = await ingestion_manager.vector_store.get_document_count()
-        logger.info(f"Final document count in database: {doc_count}")
-
-    except Exception as e:
-        logger.error(f"Fatal error during ingestion: {e}")
-        raise
-    finally:
-        await ingestion_manager.cleanup()
+          # Verify ingestion
+          doc_count = await ingestion_manager.vector_store.get_document_count()
+          logger.info(f"Final document count in database: {doc_count}")
+      except Exception as e:
+          logger.error(f"Fatal error during ingestion: {e}")
+          raise
+      finally:
+          await ingestion_manager.cleanup()
 
 
 if __name__ == "__main__":
