@@ -27,9 +27,6 @@ def process_files_with_metadata(directory_path: str, output_dir: str, splitter):
         Dict: Structure of {doc_id: {'chunks': [], 'metadata': {}}}
     """
 
-    # Initialize result dictionary
-    # result = {}
-
     # Get all main text files
     directory = Path(directory_path)
     main_files = list(directory.glob("scraped_html_*.txt"))
@@ -69,13 +66,6 @@ def process_files_with_metadata(directory_path: str, output_dir: str, splitter):
                 nodes = splitter.get_nodes_from_documents(documents)
                 chunks = [" ".join(node.text.split()) for node in nodes]
 
-                # Store in result dictionary
-                # result[doc_id] = {
-                #     "main_text": main_text,
-                #     "chunks": chunks,
-                #     "metadata": metadata
-                # }
-
                 results = {
                     "main_text": main_text,
                     "chunks": chunks,
@@ -105,8 +95,6 @@ def process_files_with_metadata(directory_path: str, output_dir: str, splitter):
             print(f"Error processing document {doc_id}: {str(e)}")
             continue
 
-    # return result
-
 
 if __name__ == "__main__":
     DIRECTORY_PATH = "/home/cc/extracted_data"
@@ -133,20 +121,11 @@ if __name__ == "__main__":
         os.makedirs(OUTPUT_DIR, exist_ok=True)
         try:
             # Process all files
-            processed_data = process_files_with_metadata(
+            process_files_with_metadata(
                 DIRECTORY_PATH, OUTPUT_DIR, splitter)
 
             # Print example of structure
             print("\nDone chunking. \nExample of processed data structure:")
-            # Show first document
-            for doc_id, data in list(processed_data.items())[:1]:
-                print(f"\nDocument {doc_id}:")
-                print(f"Number of chunks: {len(data['chunks'])}")
-                print("First chunk preview:", data["chunks"][0][:200], "...")
-                print("Metadata keys:", list(data["metadata"].keys()))
-
-            # Save to file
-            # save_processed_data(processed_data, OUTPUT_FILE)
 
         except Exception as e:
             print(f"Error: {str(e)}")
