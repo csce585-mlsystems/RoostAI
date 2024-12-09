@@ -107,7 +107,7 @@ async def process_file(
 
 
 class DataIngestionManager:
-    def __init__(self, config: Config):
+    def __init__(self, config: Config, db_path:str = None):
         """Initialize the data ingestion manager."""
         self.config = config
 
@@ -116,7 +116,7 @@ class DataIngestionManager:
         )
         self.vector_store = VectorStore(
             collection_name=self.config.vector_db.collection_name,
-            db_path=self.config.vector_db.db_path,
+            db_path=db_path if db_path else self.config.vector_db.db_path,
         )
         self.duplicate_tracker = DuplicateTracker()
 
@@ -203,7 +203,7 @@ class DataIngestionManager:
 async def main():
     """Main function to run the data ingestion process."""
     config = Config.load_config()
-    ingestion_manager = DataIngestionManager(config)
+    # ingestion_manager = DataIngestionManager(config)
     # data_directory = "/home/cc/chunks_and_metadata"
 
     
@@ -213,7 +213,8 @@ async def main():
                         ("/home/cc/chunks_and_metadata_semantic_chunking_50_threshold/", "home/cc/v3_50_thresh"),
                         ("/home/cc/chunks_and_metadata_sentence_splitting_chunking/", "/home/cc/v3_sentence_chunking")] 
     for data_directory, output_path in data_directories:
-      ingestion_manager.config.vector_db.db_path = output_path
+      ingestion_manager = DataIngestionManager(config=None, db_path=output_path)
+      print(ingestion_manager.vector_store.db_path)
       try:
           logger.info(f"Starting ingestion from directory: {data_directory}")
           logger.info(f"Using database path: {config.vector_db.db_path}")
