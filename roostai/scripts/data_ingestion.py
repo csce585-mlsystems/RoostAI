@@ -213,7 +213,7 @@ async def main():
                         ("/home/cc/chunks_and_metadata_semantic_chunking_50_threshold/", "/home/cc/RoostAI/roostai/data/v3_50_thresh"),
                         ("/home/cc/chunks_and_metadata_sentence_splitting_chunking/", "/home/cc/RoostAI/roostai/data/v3_sentence_chunking")] 
     for data_directory, output_path in data_directories:
-      ingestion_manager = DataIngestionManager(config=None, db_path=output_path)
+      ingestion_manager = DataIngestionManager(config=config, db_path=output_path)
       print(ingestion_manager.vector_store.db_path)
       try:
           logger.info(f"Starting ingestion from directory: {data_directory}")
