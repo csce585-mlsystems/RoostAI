@@ -18,8 +18,9 @@ class VectorStore:
     def __init__(self, collection_name: str, db_path: str):
         self.logger = logging.getLogger(__name__)
         try:
+            self.db_path = db_path
             self.client = chromadb.PersistentClient(
-                path=db_path,
+                path=self.db_path,
                 settings=Settings(allow_reset=True, anonymized_telemetry=False),
             )
 
