@@ -1,6 +1,7 @@
 import asyncio
 import time
 import uuid
+from pathlib import Path
 
 import streamlit as st
 
@@ -33,6 +34,13 @@ if "show_modal" not in st.session_state:
 
 # Sidebar with system information
 with st.sidebar:
+    # Add icon to sidebar
+    st.image(
+        str(Path(__file__).parent / "assets" / "roostai_logo.png"),
+        use_container_width=True,
+        output_format="PNG",
+    )
+
     # Show system information after first interaction
     if len(st.session_state.chat_history) > 0:
         st.subheader("About RoostAI")
@@ -47,12 +55,9 @@ with st.sidebar:
         """
         )
 
-    # Show warning if waiting for feedback
-    if st.session_state.waiting_for_feedback:
-        st.warning("Please complete the feedback survey before continuing.")
+        st.markdown("---")  # Separator between sections
 
     # Session information
-    st.markdown("---")  # Separator between sections
     st.subheader("Session Information")
     st.write(f"Session ID: {st.session_state.session_id}")
     # Divide by 2 because each interaction has user + assistant message
@@ -130,14 +135,14 @@ if st.session_state.survey_completed:
 
         st.success(
             """
-        Thank you for completing the survey! Your feedback will help us improve 
-        the RoostAI system.
+        Thank You for Completing the Survey! Your Feedback Will Help Us Improve 
+        The RoostAI System.
         """
         )
         st.balloons()
 
         # Reset session state after a brief delay
-        with st.spinner("Resetting session..."):
+        with st.spinner("Resetting Session..."):
             time.sleep(2)
 
         # Reset all session state variables

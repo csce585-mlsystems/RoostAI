@@ -9,7 +9,7 @@ def render_likert_question(question: Dict, key_prefix: str) -> Optional[int]:
 
     options = {i: question["labels"].get(i, str(i)) for i in question["options"]}
     response = st.radio(
-        "Select your answer:",
+        "Select Your Answer:",
         options=list(options.keys()),
         format_func=lambda x: f"{x} - {options[x]}" if x in [1, 5] else str(x),
         key=f"{key_prefix}_{question['id']}",
@@ -31,16 +31,16 @@ def render_per_query_questions(config, interaction_id: str) -> Dict:
     show_modal()
 
     with st.container():
-        # Display the last interaction
-        with st.expander("View Last Response", expanded=True):
-            st.markdown("**Your Question:**")
-            st.write(st.session_state.current_interaction["query"])
-            st.markdown("**System Response:**")
-            st.markdown(st.session_state.current_interaction["response"])
+        # # Display the last interaction
+        # with st.expander("View Last Response", expanded=True):
+        #     st.markdown("**Your Question:**")
+        #     st.write(st.session_state.current_interaction["query"])
+        #     st.markdown("**System Response:**")
+        #     st.markdown(st.session_state.current_interaction["response"])
 
         responses = {}
 
-        st.subheader("Please rate the last response")
+        st.subheader("Please Rate the Last Response")
 
         # Render questions
         for question in config.per_query_questions:
@@ -68,7 +68,7 @@ def render_per_query_questions(config, interaction_id: str) -> Dict:
                 return responses
             else:
                 with col1:
-                    st.error("Please answer all questions before continuing.")
+                    st.error("Please Answer All Questions Before Continuing")
 
         return {}
 

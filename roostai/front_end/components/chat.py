@@ -30,16 +30,16 @@ def render_chat_interface(chatbot: UniversityChatbot) -> Optional[Dict]:
 
     # Chat input
     query = st.chat_input(
-        "Please provide feedback for the previous response before asking a new question."
+        "Please Provide Feedback for the Previous Response Before Asking a New Question"
         if st.session_state.needs_feedback
-        else "Ask a question about USC"
+        else "Ask a Question About USC"
     )
 
     if query:
         # Check if feedback is needed for previous interaction
         if st.session_state.needs_feedback:
             st.error(
-                "Please provide feedback for the previous response before asking a new question."
+                "Please Provide Feedback for the Previous Response Before Asking a New Question"
             )
             # Show feedback button again
             if st.button("Provide Feedback", key="feedback_reminder", type="primary"):
@@ -87,7 +87,7 @@ def render_chat_interface(chatbot: UniversityChatbot) -> Optional[Dict]:
                     st.session_state.last_response_shown = True
 
                 else:
-                    st.error("Failed to get a response. Please try again.")
+                    st.error("Failed To Get a Response. Please Try Again.")
                     return None
 
     # Show feedback button after response is shown
@@ -96,7 +96,7 @@ def render_chat_interface(chatbot: UniversityChatbot) -> Optional[Dict]:
         feedback_col1, feedback_col2, feedback_col3 = st.columns([1, 2, 1])
         with feedback_col2:
             if st.button(
-                "Provide Feedback for this Response",
+                "Provide Feedback for This Response",
                 key="feedback_button",
                 type="primary",
                 use_container_width=True,
