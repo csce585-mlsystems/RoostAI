@@ -1,0 +1,9 @@
+{
+  "total_queries": 111,
+  "successful_queries": 111,
+  "failed_queries": 0,
+  "failure_stages": {},
+  "average_quality_score": 5.974257370221663,
+  "average_initial_docs": 5.0,
+  "average_reranked_docs": 3.7117117117117115
+}
