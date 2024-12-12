@@ -21,8 +21,5 @@ def preprocess_json(file_path):
     json_dict["chunks"] = [shrink_whitespaces(chunk) for chunk in json_dict["chunks"]]
 
     # write cleaned file
-    with open(
-        "test.json",
-        "w",
-    ) as file:
+    with open("test.json", "w",) as file:
         file.write(modified_content)

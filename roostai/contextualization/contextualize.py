@@ -64,10 +64,7 @@ def setup_model():
     print("Loading model and tokenizer...")
     model_name = "mistralai/Mixtral-8x7B-Instruct-v0.1"
     tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = AutoModelForCausalLM.from_pretrained(
-        model_name,
-        device_map="cpu",
-    )
+    model = AutoModelForCausalLM.from_pretrained(model_name, device_map="cpu",)
     print("Model loaded successfully!")
     return model, tokenizer
 
@@ -88,10 +85,7 @@ Put your answer in <context> tags.
     inputs = tokenizer(prompt, return_tensors="pt")
 
     with torch.no_grad():
-        outputs = model.generate(
-            **inputs,
-            max_new_tokens=1024,
-        )
+        outputs = model.generate(**inputs, max_new_tokens=1024,)
     # Get the raw response
     raw_response = tokenizer.decode(outputs[0], skip_special_tokens=True)
 

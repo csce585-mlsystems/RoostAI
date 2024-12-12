@@ -107,7 +107,7 @@ async def process_file(
 
 
 class DataIngestionManager:
-    def __init__(self, config: Config, db_path:str = None):
+    def __init__(self, config: Config, db_path: str = None):
         """Initialize the data ingestion manager."""
         self.config = config
 
@@ -206,28 +206,40 @@ async def main():
     # ingestion_manager = DataIngestionManager(config)
     # data_directory = "/home/cc/chunks_and_metadata"
 
-    
-    
-    data_directories = [("/home/cc/chunks_and_metadata_fixed_size_token_chunking/", "/home/cc/RoostAI/roostai/data/v3_token_chunking"),
-                        ("/home/cc/chunks_and_metadata_semantic_chunking_95_threshold/", "/home/cc/RoostAI/roostai/data/v3_95_thresh"),
-                        ("/home/cc/chunks_and_metadata_semantic_chunking_50_threshold/", "/home/cc/RoostAI/roostai/data/v3_50_thresh"),
-                        ("/home/cc/chunks_and_metadata_sentence_splitting_chunking/", "/home/cc/RoostAI/roostai/data/v3_sentence_chunking")] 
+    data_directories = [
+        (
+            "/home/cc/chunks_and_metadata_fixed_size_token_chunking/",
+            "/home/cc/RoostAI/roostai/data/v3_token_chunking",
+        ),
+        (
+            "/home/cc/chunks_and_metadata_semantic_chunking_95_threshold/",
+            "/home/cc/RoostAI/roostai/data/v3_95_thresh",
+        ),
+        (
+            "/home/cc/chunks_and_metadata_semantic_chunking_50_threshold/",
+            "/home/cc/RoostAI/roostai/data/v3_50_thresh",
+        ),
+        (
+            "/home/cc/chunks_and_metadata_sentence_splitting_chunking/",
+            "/home/cc/RoostAI/roostai/data/v3_sentence_chunking",
+        ),
+    ]
     for data_directory, output_path in data_directories:
-      ingestion_manager = DataIngestionManager(config=config, db_path=output_path)
-      print(ingestion_manager.vector_store.db_path)
-      try:
-          logger.info(f"Starting ingestion from directory: {data_directory}")
-          logger.info(f"Using database path: {config.vector_db.db_path}")
-          await ingestion_manager.process_directory(data_directory)
+        ingestion_manager = DataIngestionManager(config=config, db_path=output_path)
+        print(ingestion_manager.vector_store.db_path)
+        try:
+            logger.info(f"Starting ingestion from directory: {data_directory}")
+            logger.info(f"Using database path: {config.vector_db.db_path}")
+            await ingestion_manager.process_directory(data_directory)
 
-          # Verify ingestion
-          doc_count = await ingestion_manager.vector_store.get_document_count()
-          logger.info(f"Final document count in database: {doc_count}")
-      except Exception as e:
-          logger.error(f"Fatal error during ingestion: {e}")
-          raise
-      finally:
-          await ingestion_manager.cleanup()
+            # Verify ingestion
+            doc_count = await ingestion_manager.vector_store.get_document_count()
+            logger.info(f"Final document count in database: {doc_count}")
+        except Exception as e:
+            logger.error(f"Fatal error during ingestion: {e}")
+            raise
+        finally:
+            await ingestion_manager.cleanup()
 
 
 if __name__ == "__main__":

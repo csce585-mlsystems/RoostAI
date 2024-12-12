@@ -73,8 +73,7 @@ class UniversityChatbot:
             self.config.vector_db.db_path = db_path
 
         if not verify_db_path(self.config.vector_db.db_path):
-            raise ValueError(
-                f"Invalid database path: {self.config.vector_db.db_path}")
+            raise ValueError(f"Invalid database path: {self.config.vector_db.db_path}")
 
         self.logger = logging.getLogger(__name__)
         self.query_logger = QueryLogger()
@@ -94,8 +93,7 @@ class UniversityChatbot:
                 db_path=self.config.vector_db.db_path,
             )
 
-            self.reranker = Reranker(
-                model_name=self.config.model.cross_encoder_model)
+            self.reranker = Reranker(model_name=self.config.model.cross_encoder_model)
 
             self.quality_checker = QualityChecker(
                 min_score=self.config.thresholds.quality_min_score,
@@ -138,7 +136,7 @@ class UniversityChatbot:
                     "reranked_docs_count": 0,
                     "quality_score": 0.0,
                     "top_doc_score": None,
-                }
+                },
             }
 
             if not query.strip():
@@ -218,8 +216,10 @@ class UniversityChatbot:
             )
             results["response"] = response
             results["stage"] = "complete"
-            results["contexts"] = [doc.content for doc in quality_result.documents] # retrieved contexts
-            
+            results["contexts"] = [
+                doc.content for doc in quality_result.documents
+            ]  # retrieved contexts
+
             return results
 
         except Exception as e:

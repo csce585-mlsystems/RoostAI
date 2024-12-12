@@ -62,7 +62,7 @@ class LocalRAGTester:
                 # Get detailed results from chatbot
                 result = await self.chatbot.process_query(question, verbose=verbose)
 
-                if not result['contexts']:
+                if not result["contexts"]:
                     logger.error(f"Did not recieve retrieved contexts")
 
                 # Add question metadata
@@ -168,21 +168,16 @@ class LocalRAGTester:
                 if "quality_score" in result["metrics"]:
                     quality_scores.append(result["metrics"]["quality_score"])
                 if "initial_docs_count" in result["metrics"]:
-                    initial_docs.append(
-                        result["metrics"]["initial_docs_count"])
+                    initial_docs.append(result["metrics"]["initial_docs_count"])
                 if "reranked_docs_count" in result["metrics"]:
-                    reranked_docs.append(
-                        result["metrics"]["reranked_docs_count"])
+                    reranked_docs.append(result["metrics"]["reranked_docs_count"])
 
         if quality_scores:
-            summary["average_quality_score"] = sum(
-                quality_scores) / len(quality_scores)
+            summary["average_quality_score"] = sum(quality_scores) / len(quality_scores)
         if initial_docs:
-            summary["average_initial_docs"] = sum(
-                initial_docs) / len(initial_docs)
+            summary["average_initial_docs"] = sum(initial_docs) / len(initial_docs)
         if reranked_docs:
-            summary["average_reranked_docs"] = sum(
-                reranked_docs) / len(reranked_docs)
+            summary["average_reranked_docs"] = sum(reranked_docs) / len(reranked_docs)
 
         # Save summary
         summary_path = output_dir / "summary.json"
@@ -199,13 +194,18 @@ class LocalRAGTester:
 
 
 async def main():
-    db_paths: List[str] = ['v3_50_thresh', 'v3_95_thresh',
-                           'v3_sentence_chunking', 'v3_token_chunking']
+    db_paths: List[str] = [
+        "v3_50_thresh",
+        "v3_95_thresh",
+        "v3_sentence_chunking",
+        "v3_token_chunking",
+    ]
     for db_name in db_paths:
         data_file: str = "/home/cc/RoostAI/eval/ragas_evaluation/data/faq_pairs.csv"
-        db_path = os.path.join('/home/cc/RoostAI/roostai/data', db_name)
+        db_path = os.path.join("/home/cc/RoostAI/roostai/data", db_name)
         output_dir: str = os.path.join(
-            "/home/cc/RoostAI/eval/ragas_evaluation/data/results", db_name)
+            "/home/cc/RoostAI/eval/ragas_evaluation/data/results", db_name
+        )
 
         tester = LocalRAGTester(data_file)
 

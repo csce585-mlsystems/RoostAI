@@ -54,9 +54,7 @@ def inspect_chroma_client():
     client = chromadb.PersistentClient(
         path=DB_PATH,
         settings=Settings(
-            anonymized_telemetry=False,
-            allow_reset=True,
-            is_persistent=True,
+            anonymized_telemetry=False, allow_reset=True, is_persistent=True,
         ),
     )
 

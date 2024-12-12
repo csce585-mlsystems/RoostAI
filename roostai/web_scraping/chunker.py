@@ -1,5 +1,9 @@
 from llama_index.core import SimpleDirectoryReader
-from llama_index.core.node_parser import SemanticSplitterNodeParser, SentenceSplitter, TokenTextSplitter
+from llama_index.core.node_parser import (
+    SemanticSplitterNodeParser,
+    SentenceSplitter,
+    TokenTextSplitter,
+)
 
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from typing import Dict, Any
@@ -102,18 +106,23 @@ if __name__ == "__main__":
 
     # Initialize splitters
     splitters = [
-        ('sentence_splitting_chunking', SentenceSplitter()),
-        ('fixed_size_token_chunking', TokenTextSplitter(
-            chunk_size=1024,
-            chunk_overlap=20,
-            separator=" ",
-        )),
-        ('semantic_chunking_95_threshold', SemanticSplitterNodeParser(
-            breakpoint_percentile_threshold=95, embed_model=embed_model
-        )),
-        ('semantic_chunking_50_threshold', SemanticSplitterNodeParser(
-            breakpoint_percentile_threshold=50, embed_model=embed_model
-        ))
+        ("sentence_splitting_chunking", SentenceSplitter()),
+        (
+            "fixed_size_token_chunking",
+            TokenTextSplitter(chunk_size=1024, chunk_overlap=20, separator=" ",),
+        ),
+        (
+            "semantic_chunking_95_threshold",
+            SemanticSplitterNodeParser(
+                breakpoint_percentile_threshold=95, embed_model=embed_model
+            ),
+        ),
+        (
+            "semantic_chunking_50_threshold",
+            SemanticSplitterNodeParser(
+                breakpoint_percentile_threshold=50, embed_model=embed_model
+            ),
+        ),
     ]
 
     for desc, splitter in splitters:
@@ -121,8 +130,7 @@ if __name__ == "__main__":
         os.makedirs(OUTPUT_DIR, exist_ok=True)
         try:
             # Process all files
-            process_files_with_metadata(
-                DIRECTORY_PATH, OUTPUT_DIR, splitter)
+            process_files_with_metadata(DIRECTORY_PATH, OUTPUT_DIR, splitter)
 
             # Print example of structure
             print("\nDone chunking. \nExample of processed data structure:")
