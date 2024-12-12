@@ -15,6 +15,10 @@ from ragas.metrics import (
     context_precision,
     answer_relevancy,
 )
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv())
+
 
 from ragas.metrics import (
     LLMContextPrecisionWithReference,
