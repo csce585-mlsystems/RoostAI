@@ -1,6 +1,6 @@
 from transformers import pipeline, AutoTokenizer, AutoModelForCausalLM
 from langchain import HuggingFacePipeline
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.llms import HuggingFaceEndpoint  # For remote HF models
 
 import logging
 import asyncio
@@ -18,25 +18,7 @@ from ragas.metrics import (
 )
 
 # embedding model
-embedding_model = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/all-MiniLM-L6-v2"
-)
-
-# evaluator
-model_id = "sentence-transformers/all-MiniLM-L6-v2"
-tokenizer = AutoTokenizer.from_pretrained(model_id)
-model = AutoModelForCausalLM.from_pretrained(model_id)
-
-pipe = pipeline(
-    model=model,
-    tokenizer=tokenizer,
-    return_full_text=True,  # langchain expects the full text
-    task="text-generation",
-    temperature=0.1,
-    repetition_penalty=1.1,  # without this output begins repeating
-)
-
-evaluator = HuggingFacePipeline(pipeline=pipe)
+evaluator = HuggingFaceEndpoint(repo_id="mistralai/Mixtral-8x7B-Instruct-v0.1")
 
 # initialize metric calculators
 context_precision = LLMContextPrecisionWithReference(llm=evaluator)
