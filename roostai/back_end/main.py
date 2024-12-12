@@ -218,8 +218,8 @@ class UniversityChatbot:
             )
             results["response"] = response
             results["stage"] = "complete"
-            results["contexts"] = quality_result.documents # retrieved contexts
-
+            results["contexts"] = [doc.content for doc in quality_result.documents] # retrieved contexts
+            
             return results
 
         except Exception as e:
