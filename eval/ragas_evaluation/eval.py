@@ -98,6 +98,8 @@ async def main():
     }
 
     for response_dir in tqdm(rag_response_dirs, "Chunking Strategy"):
+        if "v3_50_thresh" in response_dir:
+            continue
         logger.info(f"Evaluating {response_dir}")
         context_precision_scores = []
         context_recall_scores = []
