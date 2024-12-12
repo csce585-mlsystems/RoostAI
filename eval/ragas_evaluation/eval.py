@@ -1,14 +1,21 @@
 from transformers import pipeline, AutoTokenizer, AutoModelForCausalLM
 from langchain import HuggingFacePipeline
 from langchain_community.llms import HuggingFaceEndpoint  # For remote HF models
-
+from datasets import Dataset
 import logging
 import asyncio
 import os
 import json
 from tqdm import tqdm
 from statistics import mean
-from ragas import SingleTurnSample
+from ragas import SingleTurnSample, evaluate
+from ragas.metrics import (
+    faithfulness,
+    context_recall,
+    context_precision,
+    answer_relevancy,
+)
+
 from ragas.metrics import (
     LLMContextPrecisionWithReference,
     LLMContextRecall,
@@ -16,16 +23,17 @@ from ragas.metrics import (
     NoiseSensitivity,
     ResponseRelevancy,
 )
+import pandas as pd
 
 # embedding model
 evaluator = HuggingFaceEndpoint(repo_id="mistralai/Mixtral-8x7B-Instruct-v0.1")
 
 # initialize metric calculators
 # context_precision = LLMContextPrecisionWithReference(llm=evaluator)
-context_precision = LLMContextPrecisionWithReference()
-context_recall = LLMContextRecall(llm=evaluator)
-faithfulness = FaithfulnesswithHHEM(llm=evaluator)
-noise_sensitivity = NoiseSensitivity(llm=evaluator)
+# context_precision = LLMContextPrecisionWithReference()
+# context_recall = LLMContextRecall(llm=evaluator)
+# faithfulness = FaithfulnesswithHHEM(llm=evaluator)
+# noise_sensitivity = NoiseSensitivity(llm=evaluator)
 
 # initialize logger
 logging.basicConfig(
@@ -37,33 +45,33 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-async def rag_eval(query_info: dict):
-    """
-    query_info = {'query': str, 'ground_truth': str, 'response': str, 'contexts': List[str]}
-    """
-    sample = SingleTurnSample(
-        user_input=query_info["query"],
-        reference=query_info["ground_truth"],
-        response=query_info["response"],
-        retrieved_contexts=query_info["contexts"],
-    )
+# async def rag_eval(query_info: dict):
+#     """
+#     query_info = {'query': str, 'ground_truth': str, 'response': str, 'contexts': List[str]}
+#     """
+#     sample = SingleTurnSample(
+#         user_input=query_info["query"],
+#         reference=query_info["ground_truth"],
+#         response=query_info["response"],
+#         retrieved_contexts=query_info["contexts"],
+#     )
 
-    # context_precision_score = await context_precision.single_turn_ascore(sample)
-    context_precision_score = context_precision.score(sample)
-    context_recall_score = await context_precision.single_turn_ascore(sample)
-    faithfulness_score = await faithfulness.single_turn_ascore(sample)
-    noise_sensitivity_score = await noise_sensitivity.single_turn_ascore(sample)
+#     # context_precision_score = await context_precision.single_turn_ascore(sample)
+#     context_precision_score = context_precision.score(sample)
+#     context_recall_score = await context_precision.single_turn_ascore(sample)
+#     faithfulness_score = await faithfulness.single_turn_ascore(sample)
+#     noise_sensitivity_score = await noise_sensitivity.single_turn_ascore(sample)
 
-    # add previous evals
+#     # add previous evals
 
-    evals = {
-        "context_precision": context_precision_score,
-        "context_recall": context_recall_score,
-        "faithfulness": faithfulness_score,
-        "noise_sensitivty": noise_sensitivity_score,
-    }
+#     evals = {
+#         "context_precision": context_precision_score,
+#         "context_recall": context_recall_score,
+#         "faithfulness": faithfulness_score,
+#         "noise_sensitivty": noise_sensitivity_score,
+#     }
 
-    return evals
+#     return evals
 
 
 async def main():
@@ -94,26 +102,38 @@ async def main():
         context_recall_scores = []
         faithfulness_scores = []
         noise_sensitivity_scores = []
+        data = {"question": [], "answer": [], "contexts": [], "ground_truths": []}
         with open(os.path.join(response_dir, "detailed_results.json"), "r") as f:
             results: list = json.load(f)
-            for res in tqdm(results, "Responses"):
-                if res["response"] in failures:
-                    continue
-                scores = await rag_eval(res)
-                context_precision_scores.append(scores["context_precision"])
-                context_recall_scores.append(scores["context_recall"])
-                faithfulness_scores.append(scores["faithfulness"])
-                noise_sensitivity_scores.append(scores["noise_sensitivty"])
+        for res in tqdm(results, "Responses"):
+            if res["response"] in failures:
+                continue
+            data["question"].append(res["query"])
+            data["answer"].append(res["response"])
+            data["contexts"].append(res["contexts"])
+            data["ground_truths"].append(res["ground_truth"])
 
-        mean_scores = {
-            "context_precision": mean(context_precision_scores),
-            "context_recall": mean(context_recall_scores),
-            "faithfulness": mean(faithfulness_scores),
-            "noise_sensitivity": mean(noise_sensitivity_scores),
-        }
+            # scores = await rag_eval(res)
+            # context_precision_scores.append(scores["context_precision"])
+            # context_recall_scores.append(scores["context_recall"])
+            # faithfulness_scores.append(scores["faithfulness"])
+            # noise_sensitivity_scores.append(scores["noise_sensitivty"])
+        dataset = Dataset.from_dict(data)
+        result = evaluate(
+            dataset=dataset,
+            metrics=[context_precision, context_recall, faithfulness, answer_relevancy],
+        )
+        df = result.to_pandas()
+        df.to_csv(os.path.join(response_dir, "rag_scores.csv"))
+        # mean_scores = {
+        #     "context_precision": mean(context_precision_scores),
+        #     "context_recall": mean(context_recall_scores),
+        #     "faithfulness": mean(faithfulness_scores),
+        #     "noise_sensitivity": mean(noise_sensitivity_scores),
+        # }
 
-        with open(os.path.join(response_dir, "rag_scores.json"), "w") as f:
-            json.dump(mean_scores, f)
+        # with open(os.path.join(response_dir, "rag_scores.json"), "w") as f:
+        #     json.dump(mean_scores, f)
 
 
 if __name__ == "__main__":
