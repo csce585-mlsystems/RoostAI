@@ -111,7 +111,7 @@ async def main():
             data["question"].append(res["query"])
             data["answer"].append(res["response"])
             data["contexts"].append(res["contexts"])
-            data["ground_truths"].append(res["ground_truth"])
+            data["reference"].append(res["ground_truth"])
 
             # scores = await rag_eval(res)
             # context_precision_scores.append(scores["context_precision"])
