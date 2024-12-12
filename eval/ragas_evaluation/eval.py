@@ -18,7 +18,9 @@ from ragas.metrics import (
 )
 
 # embedding model
-embedding_model = HuggingFaceEmbeddings("sentence-transformers/all-MiniLM-L6-v2")
+embedding_model = HuggingFaceEmbeddings(
+    model_name="sentence-transformers/all-MiniLM-L6-v2"
+)
 
 # evaluator
 model_id = "sentence-transformers/all-MiniLM-L6-v2"
