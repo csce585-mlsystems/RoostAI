@@ -8,13 +8,13 @@
 - Semantic Chunking at 5% similarity threshold *
 - Semantic Chunking at 50% similarity threshold *
 
-##### n% similarity threshold - each sentence is added to a chunk as long as it is 5% or more similar to the chunk
+##### * n% similarity threshold - each sentence is added to a chunk as long as it is 5% or more similar to the chunk
 
 #### We have ~110 questions derived from USC frequently asked questions (FAQs) and their corresponding university provided answers. So we can use reference-based and reference-free RAG metrics. For each of our vectorized databases, we initialize our RAG pipeline and record the response provided by our system.
 
 #### We consider the following metrics for evaluating each instantiation of the RAG system
 - [Context Precision with reference](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/context_precision/#context-precision-without-reference:~:text=(sample)-,Context%20Precision%20with%20reference,-LLMContextPrecisionWithReference%20metric%20is)
-- [LLM Based Context Recall](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/context_recall/)\
+- [LLM Based Context Recall](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/context_recall/)
 - [Faithfulness](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/faithfulness/)
 - [Noise Sensitivity](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/noise_sensitivity/)
 - [Response Relevancy](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/answer_relevance/)
