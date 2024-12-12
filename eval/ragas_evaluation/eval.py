@@ -1,3 +1,4 @@
+import pandas as pd
 from transformers import pipeline, AutoTokenizer, AutoModelForCausalLM
 from langchain import HuggingFacePipeline
 from langchain_community.llms import HuggingFaceEndpoint  # For remote HF models
@@ -20,17 +21,13 @@ from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
 
-from ragas.metrics import (
-    LLMContextPrecisionWithReference,
-    LLMContextRecall,
-    FaithfulnesswithHHEM,
-    NoiseSensitivity,
-    ResponseRelevancy,
-)
-import pandas as pd
-
-# embedding model
-evaluator = HuggingFaceEndpoint(repo_id="mistralai/Mixtral-8x7B-Instruct-v0.1")
+# from ragas.metrics import (
+#     LLMContextPrecisionWithReference,
+#     LLMContextRecall,
+#     FaithfulnesswithHHEM,
+#     NoiseSensitivity,
+#     ResponseRelevancy,
+# )
 
 # initialize metric calculators
 # context_precision = LLMContextPrecisionWithReference(llm=evaluator)
@@ -110,7 +107,7 @@ async def main():
         with open(os.path.join(response_dir, "detailed_results.json"), "r") as f:
             results: list = json.load(f)
         for res in tqdm(results, "Responses"):
-            if res["response"] in failures:
+            if res["response"] in failures or not len(res["contexts"]):
                 continue
             data["question"].append(res["query"])
             data["answer"].append(res["response"])
