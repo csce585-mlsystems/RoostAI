@@ -102,7 +102,7 @@ async def main():
         context_recall_scores = []
         faithfulness_scores = []
         noise_sensitivity_scores = []
-        data = {"question": [], "answer": [], "contexts": [], "ground_truths": []}
+        data = {"question": [], "answer": [], "contexts": [], "reference": []}
         with open(os.path.join(response_dir, "detailed_results.json"), "r") as f:
             results: list = json.load(f)
         for res in tqdm(results, "Responses"):
