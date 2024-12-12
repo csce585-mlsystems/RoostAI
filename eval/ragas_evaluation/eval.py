@@ -21,7 +21,8 @@ from ragas.metrics import (
 evaluator = HuggingFaceEndpoint(repo_id="mistralai/Mixtral-8x7B-Instruct-v0.1")
 
 # initialize metric calculators
-context_precision = LLMContextPrecisionWithReference(llm=evaluator)
+# context_precision = LLMContextPrecisionWithReference(llm=evaluator)
+context_precision = LLMContextPrecisionWithReference()
 context_recall = LLMContextRecall(llm=evaluator)
 faithfulness = FaithfulnesswithHHEM(llm=evaluator)
 noise_sensitivity = NoiseSensitivity(llm=evaluator)
@@ -47,7 +48,8 @@ async def rag_eval(query_info: dict):
         retrieved_contexts=query_info["contexts"],
     )
 
-    context_precision_score = await context_precision.single_turn_ascore(sample)
+    # context_precision_score = await context_precision.single_turn_ascore(sample)
+    context_precision_score = context_precision.score(sample)
     context_recall_score = await context_precision.single_turn_ascore(sample)
     faithfulness_score = await faithfulness.single_turn_ascore(sample)
     noise_sensitivity_score = await noise_sensitivity.single_turn_ascore(sample)
