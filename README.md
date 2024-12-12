@@ -1,5 +1,7 @@
-# RoostAI
-RoostAI: A University-Centered Chatbot
+# _RoostAI_: A University-Centered Chatbot
+
+![RoostAI Logo](https://github.com/user-attachments/assets/dc626e71-e946-4065-a818-1b7ed0148417)
+
 
 ## Commands
 
