@@ -202,10 +202,10 @@ async def main():
     db_paths: List[str] = ['v3_50_thresh', 'v3_95_thresh',
                            'v3_sentence_chunking', 'v3_token_chunking']
     for db_name in db_paths:
-        data_file: str = "/home/cc/RoostAI/eval/second_faq_evaluation/data/faq_pairs.csv"
+        data_file: str = "/home/cc/RoostAI/eval/ragas_evaluation/data/faq_pairs.csv"
         db_path = os.path.join('/home/cc/RoostAI/roostai/data', db_name)
         output_dir: str = os.path.join(
-            "/home/cc/RoostAI/eval/second_faq_evaluation/data/results", db_name)
+            "/home/cc/RoostAI/eval/ragas_evaluation/data/results", db_name)
 
         tester = LocalRAGTester(data_file)
 
