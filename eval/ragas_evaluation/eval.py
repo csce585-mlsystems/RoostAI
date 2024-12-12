@@ -1,3 +1,7 @@
+from transformers import pipeline, AutoTokenizer, AutoModelForCausalLM
+from langchain import HuggingFacePipeline
+from langchain_community.embeddings import HuggingFaceEmbeddings
+
 import logging
 import asyncio
 import os
@@ -13,11 +17,30 @@ from ragas.metrics import (
     ResponseRelevancy,
 )
 
+# embedding model
+embedding_model = HuggingFaceEmbeddings("sentence-transformers/all-MiniLM-L6-v2")
+
+# evaluator
+model_id = "sentence-transformers/all-MiniLM-L6-v2"
+tokenizer = AutoTokenizer.from_pretrained(model_id)
+model = AutoModelForCausalLM.from_pretrained(model_id)
+
+pipe = pipeline(
+    model=model,
+    tokenizer=tokenizer,
+    return_full_text=True,  # langchain expects the full text
+    task="text-generation",
+    temperature=0.1,
+    repetition_penalty=1.1,  # without this output begins repeating
+)
+
+evaluator = HuggingFacePipeline(pipeline=pipe)
+
 # initialize metric calculators
-context_precision = LLMContextPrecisionWithReference()
-context_recall = LLMContextRecall()
-faithfulness = FaithfulnesswithHHEM()
-noise_sensitivity = NoiseSensitivity()
+context_precision = LLMContextPrecisionWithReference(llm=evaluator)
+context_recall = LLMContextRecall(llm=evaluator)
+faithfulness = FaithfulnesswithHHEM(llm=evaluator)
+noise_sensitivity = NoiseSensitivity(llm=evaluator)
 
 # initialize logger
 logging.basicConfig(
