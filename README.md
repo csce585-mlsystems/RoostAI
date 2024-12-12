@@ -3,6 +3,14 @@ RoostAI: A University-Centered Chatbot
 
 ## Commands
 
+- Web Scraping
+```bash
+1. poetry run python roostai/web_scraping/web_scraper.py
+2. poetry run python roostai/web_scraping/collect_html.py
+3. poetry run python roostai/web_scraping/extract.py
+4. poetry run python roostai/web_scraping/chunker.py
+```
+
 - Creating Database
 ```bash
 poetry run python roostai/scripts/data_ingestion.py
