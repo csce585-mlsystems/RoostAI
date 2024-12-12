@@ -14,9 +14,11 @@
 
 #### We consider the following metrics for evaluating each instantiation of the RAG system
 - [Context Precision with reference](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/context_precision/#context-precision-without-reference:~:text=(sample)-,Context%20Precision%20with%20reference,-LLMContextPrecisionWithReference%20metric%20is)
+  - Between 0 and 1, higher values are better and imply more retrieved chunks are relevant
 - [LLM Based Context Recall](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/context_recall/)
+  - Between 0 and 1, higher values are better and imply more relevant chunks are retrieved
 - [Faithfulness](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/faithfulness/)
+  - Between 0 and 1, higher values are better and imply that the more of the claims in the generated response can be inferred from given contexts 
 - [Noise Sensitivity](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/noise_sensitivity/)
-- [Response Relevancy](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/answer_relevance/)
-
+  - Between 0 and 1, lower values are better and imply that generated response includes less incorrect claims
 #### We will also compare each RAG instance by using the existing reference-based metrics we have used in the past

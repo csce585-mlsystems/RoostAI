@@ -73,7 +73,8 @@ class UniversityChatbot:
             self.config.vector_db.db_path = db_path
 
         if not verify_db_path(self.config.vector_db.db_path):
-            raise ValueError(f"Invalid database path: {self.config.vector_db.db_path}")
+            raise ValueError(
+                f"Invalid database path: {self.config.vector_db.db_path}")
 
         self.logger = logging.getLogger(__name__)
         self.query_logger = QueryLogger()
@@ -93,7 +94,8 @@ class UniversityChatbot:
                 db_path=self.config.vector_db.db_path,
             )
 
-            self.reranker = Reranker(model_name=self.config.model.cross_encoder_model)
+            self.reranker = Reranker(
+                model_name=self.config.model.cross_encoder_model)
 
             self.quality_checker = QualityChecker(
                 min_score=self.config.thresholds.quality_min_score,
@@ -126,16 +128,17 @@ class UniversityChatbot:
         """Process a query and return detailed results dictionary."""
         try:
             results = {
-                "query": query,
-                "response": None,
-                "stage": None,
-                "error": None,
+                "query": query,  # user query
+                "response": None,  # chatbot response
+                "stage": None,  # for debugging
+                "error": None,  # for debugging
+                "contexts": None,  # retrieved contexts
                 "metrics": {
                     "initial_docs_count": 0,
                     "reranked_docs_count": 0,
                     "quality_score": 0.0,
                     "top_doc_score": None,
-                },
+                }
             }
 
             if not query.strip():
@@ -215,6 +218,7 @@ class UniversityChatbot:
             )
             results["response"] = response
             results["stage"] = "complete"
+            results["contexts"] = quality_result.documents # retrieved contexts
 
             return results
 
