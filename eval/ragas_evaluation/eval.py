@@ -1,6 +1,6 @@
 from transformers import pipeline, AutoTokenizer, AutoModelForCausalLM
 from langchain import HuggingFacePipeline
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 
 import logging
 import asyncio

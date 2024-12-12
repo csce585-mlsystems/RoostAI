@@ -32,6 +32,7 @@ markdown = "^3.7"
 streamlit-modal = "^0.1.2"
 ragas = "^0.2.8"
 langsmith = "^0.2.3"
+langchain-huggingface = "^0.1.2"
 
 [tool.poetry.group.backend.dependencies]
 # The backend dependency group
