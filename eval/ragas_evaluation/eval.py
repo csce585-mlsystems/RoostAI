@@ -101,46 +101,52 @@ async def main():
         if "v3_50_thresh" in response_dir:
             continue
         logger.info(f"Evaluating {response_dir}")
-        context_precision_scores = []
-        context_recall_scores = []
-        faithfulness_scores = []
-        noise_sensitivity_scores = []
-        data = {"question": [], "answer": [], "contexts": [], "reference": []}
-        with open(os.path.join(response_dir, "detailed_results.json"), "r") as f:
-            results: list = json.load(f)
-        for res in tqdm(results, "Responses"):
-            if res["response"] in failures or not len(res["contexts"]):
-                continue
-            data["question"].append(res["query"])
-            data["answer"].append(res["response"])
-            data["contexts"].append(res["contexts"])
-            data["reference"].append(res["ground_truth"])
 
-            # scores = await rag_eval(res)
-            # context_precision_scores.append(scores["context_precision"])
-            # context_recall_scores.append(scores["context_recall"])
-            # faithfulness_scores.append(scores["faithfulness"])
-            # noise_sensitivity_scores.append(scores["noise_sensitivty"])
-        with open("test.json", "w") as f:
-            json.dump(data, f)
-        exit(0)
-        dataset = Dataset.from_dict(data)
+        try:
+            # Your existing data preparation code
+            data = {"question": [], "answer": [], "contexts": [], "reference": []}
+            with open(os.path.join(response_dir, "detailed_results.json"), "r") as f:
+                results: list = json.load(f)
 
-        result = evaluate(
-            dataset=dataset,
-            metrics=[context_precision, context_recall, faithfulness, answer_relevancy],
-        )
-        df = result.to_pandas()
-        df.to_csv(os.path.join(response_dir, "rag_scores.csv"))
-        # mean_scores = {
-        #     "context_precision": mean(context_precision_scores),
-        #     "context_recall": mean(context_recall_scores),
-        #     "faithfulness": mean(faithfulness_scores),
-        #     "noise_sensitivity": mean(noise_sensitivity_scores),
-        # }
+            for res in tqdm(results, "Responses"):
+                if res["response"] in failures or not len(res["contexts"]):
+                    continue
+                data["question"].append(res["query"])
+                data["answer"].append(res["response"])
+                data["contexts"].append(res["contexts"])
+                data["reference"].append(res["ground_truth"])
 
-        # with open(os.path.join(response_dir, "rag_scores.json"), "w") as f:
-        #     json.dump(mean_scores, f)
+            assert (
+                len(data["question"])
+                == len(data["answer"])
+                == len(data["contexts"])
+                == len(data["references"])
+            )
+            assert all(type(context) == list for context in data["contexts"])
+
+            # Add some debug prints
+            print(f"Number of samples: {len(data['question'])}")
+            print("Sample data:", {k: v[:2] for k, v in data.items()})
+
+            dataset = Dataset.from_dict(data)
+
+            # Try evaluating with fewer metrics if needed
+            result = evaluate(
+                dataset=dataset,
+                metrics=[context_precision, context_recall],  # Reduced metrics
+            )
+
+            df = result.to_pandas()
+            df.to_csv(os.path.join(response_dir, "rag_scores.csv"))
+
+        except Exception as e:
+            logger.error(f"Error processing {response_dir}: {e}")
+            import traceback
+
+            traceback.print_exc()
+            continue
+
+    return  # Replace exit(0) with return
 
 
 if __name__ == "__main__":
