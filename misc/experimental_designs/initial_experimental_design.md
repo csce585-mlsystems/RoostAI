@@ -1,4 +1,4 @@
-## **Prioritize Evaluation Setup**
+# Initial Experiment Design
 
 Jupyter Notebook will be our medium for experimentation and presentation
 

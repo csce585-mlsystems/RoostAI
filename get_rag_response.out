@@ -1,4 +1,0 @@
-The currently activated Python version 3.8.10 is not supported by the project (>=3.9,<3.13).
-Trying to find and use a compatible version. 
-Using python3 (3.10.15)
-/home/cc/.cache/pypoetry/virtualenvs/roostai-UKlTrTvR-py3.10/bin/python: can't open file '/home/cc/RoostAI/get_rag_response.py': [Errno 2] No such file or directory
