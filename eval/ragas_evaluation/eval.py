@@ -120,7 +120,7 @@ async def main():
                 len(data["question"])
                 == len(data["answer"])
                 == len(data["contexts"])
-                == len(data["references"])
+                == len(data["reference"])
             )
             assert all(type(context) == list for context in data["contexts"])
 
