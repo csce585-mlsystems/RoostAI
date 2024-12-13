@@ -121,7 +121,11 @@ async def main():
             # context_recall_scores.append(scores["context_recall"])
             # faithfulness_scores.append(scores["faithfulness"])
             # noise_sensitivity_scores.append(scores["noise_sensitivty"])
+        with open("test.json", "w") as f:
+            json.dump(data, f)
+        exit(0)
         dataset = Dataset.from_dict(data)
+
         result = evaluate(
             dataset=dataset,
             metrics=[context_precision, context_recall, faithfulness, answer_relevancy],
