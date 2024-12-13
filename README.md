@@ -34,7 +34,7 @@ Add the following environment variables to your `.env` file:
 ```bash
 # HuggingFace API Key
 HF_API_KEY=your_huggingface_api_key
-22
+
 # Optional: OpenAI, Anthropic, and Google API Keys
 OPENAI_API_KEY=your_openai_api_key
 ANTHROPIC_API_KEY=your_anthropic_api_key
