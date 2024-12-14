@@ -7,13 +7,14 @@ _RoostAI_ is an intelligent chatbot specifically designed to provide information
 
 ## Project Structure
 ```
-roostai/
+roostai/            
 ├── back_end/      # Core chatbot implementation
 ├── front_end/     # User interface components
 ├── web_scraping/  # Data collection utilities
 ├── scripts/       # Utility scripts for setup and maintenance
-├── eval/          # Evaluation scripts and tools
 └── data/          # Vector database and related data
+
+eval/              # Evaluation scripts and tools
 ```
 
 ## Setup and Installation
@@ -72,7 +73,7 @@ poetry run python roostai/back_end/main.py 2>&1 | tee roostai/back_end/dry-run.o
 poetry run python eval/get_llm_responses.py
 
 # RAG Response Evaluation
-poetry run python eval/second_faq_evaluation/get_rag_response.py
+poetry run python eval/ragas_evaluation/get_rag_response.py
 ```
 
 ## Project Components
@@ -94,4 +95,4 @@ poetry run python eval/second_faq_evaluation/get_rag_response.py
 - Data ingestion pipeline
 
 ## License
-This project is licensed under the MIT License. For more information, see the `LICENSE` file.
+This project is licensed under the BSD-2 Clause License. For more information, see the `LICENSE` file.
