@@ -9,7 +9,6 @@ Tools for collecting and processing university website content.
 - `collect_html.py`: HTML content collection
 - `extract.py`: Content extraction
 - `chunker.py`: Text chunking
-- `preprocess_json.py`: JSON preprocessing
 
 ## Usage Pipeline
 To procure dataset, execute the following scripts in this order from the `web_scraping` directory:
