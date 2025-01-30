@@ -97,8 +97,9 @@ class CustomAsyncScraper:
             try:
                 # Process the URL using the crawler
                 result = await self.crawler.arun(url=url)
-
                 # Save the scraped content (e.g., markdown and etc.)
+                if not result.metadata or not result.markdown or not result.links:
+                    continue
                 self._save_to_file(url_path, result)
 
                 # Enqueue new internal links
