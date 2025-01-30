@@ -86,7 +86,6 @@ class CustomAsyncScraper:
     async def _process_queue(self):
         while not self.queue.empty():
             url = await self.queue.get()
-            print(f"Url: {url}")
             url_path = self.clean(url)
 
             if url_path in self.visited_paths or any(
@@ -112,6 +111,11 @@ class CustomAsyncScraper:
     def _save_to_file(self, url_path, result):
         save_path = self.get_url_save_path(url_path)
         os.makedirs(save_path, exist_ok=True)
+
+        markdown = result.markdown
+        metadata = result.matadata
+        if not markdown or not metadata:
+            return
 
         markdown_file = os.path.join(save_path, "scraped.md")
         metadata_file = os.path.join(save_path, "metadata.json")
