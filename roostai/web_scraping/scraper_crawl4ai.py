@@ -19,7 +19,7 @@ import json
 #     level="INFO",
 # )
 
-abs_data_path = Path("C:\\Users\\2002v\\Desktop\\RoostAI\\roostai\\web_scraping")
+abs_data_path = Path("/home/cc/scraped_data")
 
 
 class CustomAsyncScraper:
