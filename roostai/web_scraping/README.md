@@ -35,6 +35,3 @@ poetry run python chunker.py
 
 ## Output
 Processed data is saved in JSON format for database ingestion.
-
-## Logging
-Operations are logged to `combined.log`

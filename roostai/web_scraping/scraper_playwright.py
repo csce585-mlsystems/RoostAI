@@ -141,7 +141,7 @@ class WebScraper:
                 self.logger.error(f"Playwright Error for {url} : {e}")
             except Exception as e:
                 self.logger.error(f"Attempt {attempt + 1} failed for {url}: {e}")
-                await asyncio.sleep(2 ** attempt)  # Exponential backoff
+                await asyncio.sleep(2**attempt)  # Exponential backoff
 
         self.logger.error(f"Failed to scrape {url} after {MAX_RETRIES} attempts.")
         return []
