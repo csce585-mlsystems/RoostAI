@@ -34,6 +34,7 @@ ragas = "^0.2.8"
 langsmith = "^0.2.3"
 langchain-huggingface = "^0.1.2"
 crawl4ai = "^0.4.247"
+loguru = "^0.7.3"
 
 [tool.poetry.group.backend.dependencies]
 # The backend dependency group
