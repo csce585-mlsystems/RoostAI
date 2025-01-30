@@ -113,7 +113,7 @@ class CustomAsyncScraper:
         os.makedirs(save_path, exist_ok=True)
 
         markdown = result.markdown
-        metadata = result.matadata
+        metadata = result.metadata
         if not markdown or not metadata:
             return
 
