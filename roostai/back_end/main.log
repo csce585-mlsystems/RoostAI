@@ -1,0 +1,123 @@
+2025-02-15 15:12:40,962 - __main__ - INFO - Found database at: /Users/nitingupta/usc/projects/RoostAI/roostai/data/v2/chroma.sqlite3
+2025-02-15 15:12:40,984 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2025-02-15 15:12:40,985 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-02-15 15:12:43,386 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2025-02-15 15:12:43,605 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2025-02-15 15:12:43,802 - __main__ - INFO - Total documents in database: 47015
+2025-02-15 15:12:50,875 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2025-02-15 15:12:51,945 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2025-02-15 15:12:51,945 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.290
+  - Cross-encoder score: -9.794
+  - Content preview: flyer_marsha_gordon.jpg (1000×1343)...
+2025-02-15 15:12:51,945 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.283
+  - Cross-encoder score: -9.739
+  - Content preview: 818009b4-5651-4b57-adeb-66a278fc256d.jpg (388×480)...
+2025-02-15 15:12:51,945 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.279
+  - Cross-encoder score: -9.634
+  - Content preview: 2bb39535-1152-4352-abd1-1e4d753227d0.jpg (675×900)...
+2025-02-15 15:12:51,945 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 0
+ - Best cross-encoder score: -9.634160995483398
+ - Best vector similarity: 0.28996241092681885
+2025-02-15 15:12:51,945 - roostai.back_end.chatbot.quality_checker - WARNING - No documents provided for quality check
+2025-02-15 15:12:51,945 - roostai.back_end.chatbot.llm_manager - WARNING - No documents retrieved for LLM response generation
+2025-02-15 15:13:03,853 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2025-02-15 15:13:04,164 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2025-02-15 15:13:04,165 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.556
+  - Cross-encoder score: -3.369
+  - Content preview: Under no circumstances will students be allowed to appeal to short-lived rules and regulations which...
+2025-02-15 15:13:04,165 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.546
+  - Cross-encoder score: -4.377
+  - Content preview: Get ahead with College of Education summer 2015 classes - College of Education | University of South...
+2025-02-15 15:13:04,165 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.534
+  - Cross-encoder score: 1.928
+  - Content preview: May 28 Last Day of Drop-Add See Summer Calendar Independence Day (No Classes) Thursday, July 4 Last ...
+2025-02-15 15:13:04,165 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 2
+ - Best cross-encoder score: 2.8601760864257812
+ - Best vector similarity: 0.5562458038330078
+2025-02-15 15:13:04,165 - roostai.back_end.chatbot.quality_checker - INFO - Quality check completed. Score: 3.06
+2025-02-15 15:13:18,974 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2025-02-15 15:13:19,194 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2025-02-15 15:13:19,194 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.310
+  - Cross-encoder score: -10.603
+  - Content preview: 4a639ae4-8524-4201-b39c-b7161c560fc6.jpg (1024×683)...
+2025-02-15 15:13:19,194 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.303
+  - Cross-encoder score: -10.633
+  - Content preview: 4334c339-35f5-42a9-9c17-6d34d9fcc1a9.jpg (1364×768)...
+2025-02-15 15:13:19,194 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.302
+  - Cross-encoder score: -10.923
+  - Content preview: 4c307020-151d-4bf5-916b-06cb42b424cd.jpg (805×537)...
+2025-02-15 15:13:19,194 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 0
+ - Best cross-encoder score: -10.603317260742188
+ - Best vector similarity: 0.3095431923866272
+2025-02-15 15:13:19,194 - roostai.back_end.chatbot.quality_checker - WARNING - No documents provided for quality check
+2025-02-15 15:13:19,194 - roostai.back_end.chatbot.llm_manager - WARNING - No documents retrieved for LLM response generation
+2025-02-15 15:13:24,531 - __main__ - INFO - Connected to database. Document count: 47015
+2025-02-15 15:13:41,223 - __main__ - INFO - Found database at: /Users/nitingupta/usc/projects/RoostAI/roostai/data/v2/chroma.sqlite3
+2025-02-15 15:13:41,237 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2025-02-15 15:13:41,237 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-02-15 15:13:42,598 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2025-02-15 15:13:42,874 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2025-02-15 15:13:43,073 - __main__ - INFO - Total documents in database: 47015
+2025-02-15 15:13:48,894 - roostai.back_end.chatbot.vector_store - INFO - Retrieved 5 documents
+2025-02-15 15:13:49,065 - roostai.back_end.chatbot.reranker - INFO - 
+Score comparison for top documents:
+2025-02-15 15:13:49,065 - roostai.back_end.chatbot.reranker - INFO - Doc 1:
+  - Vector similarity score: 0.556
+  - Cross-encoder score: -3.369
+  - Content preview: Under no circumstances will students be allowed to appeal to short-lived rules and regulations which...
+2025-02-15 15:13:49,065 - roostai.back_end.chatbot.reranker - INFO - Doc 2:
+  - Vector similarity score: 0.546
+  - Cross-encoder score: -4.377
+  - Content preview: Get ahead with College of Education summer 2015 classes - College of Education | University of South...
+2025-02-15 15:13:49,065 - roostai.back_end.chatbot.reranker - INFO - Doc 3:
+  - Vector similarity score: 0.534
+  - Cross-encoder score: 1.928
+  - Content preview: May 28 Last Day of Drop-Add See Summer Calendar Independence Day (No Classes) Thursday, July 4 Last ...
+2025-02-15 15:13:49,065 - roostai.back_end.chatbot.reranker - INFO - Reranking results:
+ - Input documents: 5
+ - Passed threshold (-2.5): 2
+ - Best cross-encoder score: 2.8601760864257812
+ - Best vector similarity: 0.5562458038330078
+2025-02-15 15:13:49,065 - roostai.back_end.chatbot.quality_checker - INFO - Quality check completed. Score: 3.06
+2025-02-15 15:20:27,289 - __main__ - INFO - Connected to database. Document count: 47015
+2025-02-15 15:20:27,290 - roostai.back_end.chatbot.vector_store - INFO - Vector store connection closed successfully
+2025-02-15 15:20:27,290 - roostai.back_end.chatbot.llm_manager - INFO - LLM manager cleaned up successfully
+2025-02-15 15:20:27,290 - __main__ - INFO - Session ended
+2025-02-15 15:41:13,653 - __main__ - INFO - Found database at: /Users/nitingupta/usc/projects/RoostAI/roostai/data/v2/chroma.sqlite3
+2025-02-15 15:41:13,666 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2025-02-15 15:41:13,666 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-02-15 15:41:15,308 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2025-02-15 15:41:15,532 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2025-02-15 15:41:15,721 - __main__ - INFO - Total documents in database: 47015
+2025-02-15 15:41:20,088 - __main__ - INFO - Connected to database. Document count: 47015
+2025-02-15 15:41:20,088 - roostai.back_end.chatbot.vector_store - INFO - Vector store connection closed successfully
+2025-02-15 15:41:20,088 - roostai.back_end.chatbot.llm_manager - INFO - LLM manager cleaned up successfully
+2025-02-15 15:41:20,088 - __main__ - INFO - Session ended
+2025-02-15 15:42:12,070 - __main__ - INFO - Found database at: /Users/nitingupta/usc/projects/RoostAI/roostai/data/v2/chroma.sqlite3
+2025-02-15 15:42:12,082 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: mps
+2025-02-15 15:42:12,082 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-02-15 15:42:13,588 - roostai.back_end.chatbot.vector_store - INFO - Connected to existing collection: university_docs
+2025-02-15 15:42:13,848 - sentence_transformers.cross_encoder.CrossEncoder - INFO - Use pytorch device: mps
+2025-02-15 15:42:14,044 - __main__ - INFO - Total documents in database: 47015
+2025-02-15 15:42:15,843 - __main__ - INFO - Connected to database. Document count: 47015
+2025-02-15 15:42:15,844 - roostai.back_end.chatbot.vector_store - INFO - Vector store connection closed successfully
+2025-02-15 15:42:15,844 - roostai.back_end.chatbot.llm_manager - INFO - LLM manager cleaned up successfully
+2025-02-15 15:42:15,844 - __main__ - INFO - Session ended
