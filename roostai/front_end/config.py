@@ -5,65 +5,45 @@ from pathlib import Path
 
 @dataclass
 class SurveyConfig:
-    # Per-query questions
-    per_query_questions: List[Dict] = None
-
     # Overall system survey questions
     overall_questions: List[Dict] = None
 
     # Paths
-    responses_dir: Path = Path("roostai/front_end/data/responses")
+    responses_dir: Path = Path("roostai/front_end/responses")
 
     def __post_init__(self):
-        self.per_query_questions = [
-            {
-                "id": "trust",
-                "text": "How much do you trust this provided response?",
-                "type": "likert",
-                "options": list(range(1, 6)),
-                "labels": {1: "No trust", 5: "Complete Trust"},
-            },
-            {
-                "id": "comprehensiveness",
-                "text": "How comprehensive did you find the response?",
-                "type": "likert",
-                "options": list(range(1, 6)),
-                "labels": {1: "Very Superficial", 5: "Very Thorough"},
-            },
-        ]
-
         self.overall_questions = [
             {
-                "id": "speed",
-                "text": "How would you rate the speed of the system's responses compared to other information retrieval methods?",
+                "id": "response_quality",
+                "text": "💎 Quality: How would you rate the overall quality of the responses?",
                 "type": "likert",
                 "options": list(range(1, 6)),
-                "labels": {1: "Much Slower", 5: "Much Faster"},
+                "labels": {1: "Poor", 5: "Excellent"},
+            },
+            {
+                "id": "speed",
+                "text": "💨 Speed: How would you rate the speed of the system's responses?",
+                "type": "likert",
+                "options": list(range(1, 6)),
+                "labels": {1: "Very Slow", 5: "Very Fast"},
             },
             {
                 "id": "ease_of_use",
-                "text": "How easy was it to use the system and understand its responses?",
+                "text": "✨ Usability: How easy was it to use the system?",
                 "type": "likert",
                 "options": list(range(1, 6)),
-                "labels": {1: "Strongly Disagree", 5: "Strongly Agree"},
+                "labels": {1: "Very Difficult", 5: "Very Easy"},
             },
             {
-                "id": "query_handling",
-                "text": "How well did the system handle different types of queries?",
+                "id": "would_use_again",
+                "text": "😌 Satisfaction: How likely are you to use this system again?",
                 "type": "likert",
                 "options": list(range(1, 6)),
-                "labels": {1: "Strongly Disagree", 5: "Strongly Agree"},
-            },
-            {
-                "id": "satisfaction",
-                "text": "How satisfied are you with the RAG system?",
-                "type": "likert",
-                "options": list(range(1, 6)),
-                "labels": {1: "Very Dissatisfied", 5: "Very Satisfied"},
+                "labels": {1: "Very Unlikely", 5: "Very Likely"},
             },
             {
                 "id": "improvements",
-                "text": "What specific improvements would you suggest for the system?",
+                "text": "📈 Optional Suggestion: What improvements would you suggest for the system?",
                 "type": "text",
                 "optional": True,
             },

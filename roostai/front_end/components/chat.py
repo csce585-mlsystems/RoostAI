@@ -4,6 +4,7 @@ import asyncio
 from datetime import datetime
 
 from roostai.back_end.main import UniversityChatbot
+from components.utils import save_interaction
 
 
 async def initialize_chatbot() -> UniversityChatbot:
@@ -13,15 +14,41 @@ async def initialize_chatbot() -> UniversityChatbot:
 
 def render_chat_interface(chatbot: UniversityChatbot) -> Optional[Dict]:
     """Render chat interface and return interaction details if query is submitted."""
-    st.subheader("Chat with RoostAI")
 
-    # Initialize chat history and feedback states in session state if not present
+    # Create a horizontal layout for the header
+    header_col1, header_col2 = st.columns([2, 3])
+
+    with header_col1:
+        st.subheader("Chat with RoostAI...")
+
+    with header_col2:
+        # Create an expander for feedback
+        with st.expander("Help Improve RoostAI", expanded=False, icon="📝"):
+            st.markdown(
+                """
+                We'd love to hear your thoughts about RoostAI! Your feedback helps us improve.
+                """
+            )
+
+            # Show progress if there are draft responses
+            if st.session_state.draft_survey_responses:
+                st.info("You have a partially completed survey")
+                feedback_label = "Continue Survey"
+            else:
+                feedback_label = "Start Survey"
+
+            if st.button(
+                feedback_label,
+                type="primary",
+                use_container_width=True,
+                key="feedback_button_header",
+            ):
+                st.session_state.survey_mode = True
+                st.rerun()
+
+    # Initialize chat history in session state if not present
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = []
-    if "needs_feedback" not in st.session_state:
-        st.session_state.needs_feedback = False
-    if "last_response_shown" not in st.session_state:
-        st.session_state.last_response_shown = False
 
     # Display chat history
     for message in st.session_state.chat_history:
@@ -29,25 +56,9 @@ def render_chat_interface(chatbot: UniversityChatbot) -> Optional[Dict]:
             st.markdown(message["content"])
 
     # Chat input
-    query = st.chat_input(
-        "Please Provide Feedback for the Previous Response Before Asking a New Question"
-        if st.session_state.needs_feedback
-        else "Ask a Question About USC"
-    )
+    query = st.chat_input("Ask a Question About USC")
 
     if query:
-        # Check if feedback is needed for previous interaction
-        if st.session_state.needs_feedback:
-            st.error(
-                "Please Provide Feedback for the Previous Response Before Asking a New Question"
-            )
-            # Show feedback button again
-            if st.button("Provide Feedback", key="feedback_reminder", type="primary"):
-                st.session_state.waiting_for_feedback = True
-                st.session_state.show_modal = True
-                st.rerun()
-            return None
-
         # Add user message to chat history
         st.session_state.chat_history.append({"role": "user", "content": query})
 
@@ -73,8 +84,8 @@ def render_chat_interface(chatbot: UniversityChatbot) -> Optional[Dict]:
                         {"role": "assistant", "content": results["response"]}
                     )
 
-                    # Store current interaction for survey
-                    st.session_state.current_interaction = {
+                    # Store interaction for logging
+                    interaction = {
                         "timestamp": start_time.isoformat(),
                         "query": query,
                         "response": results["response"],
@@ -82,28 +93,30 @@ def render_chat_interface(chatbot: UniversityChatbot) -> Optional[Dict]:
                         "raw_results": results,
                     }
 
-                    # Mark that feedback is needed and response has been shown
-                    st.session_state.needs_feedback = True
-                    st.session_state.last_response_shown = True
+                    # Save interaction without feedback
+                    save_interaction(
+                        st.session_state.config.responses_dir,
+                        st.session_state.session_id,
+                        st.session_state.interaction_num,
+                        interaction,
+                        {},
+                    )
+                    st.session_state.interaction_num += 1
+
+                    # After a few interactions, show a gentle reminder if no feedback started
+                    if (
+                        len(st.session_state.chat_history) >= 6
+                        and not st.session_state.draft_survey_responses
+                    ):
+                        st.info(
+                            """
+                            👋 Enjoying RoostAI? We'd love to hear your thoughts! 
+                            Click the feedback expander above to share your experience.
+                            """
+                        )
 
                 else:
                     st.error("Failed To Get a Response. Please Try Again.")
                     return None
-
-    # Show feedback button after response is shown
-    if st.session_state.needs_feedback and st.session_state.last_response_shown:
-        st.markdown("---")
-        feedback_col1, feedback_col2, feedback_col3 = st.columns([1, 2, 1])
-        with feedback_col2:
-            if st.button(
-                "Provide Feedback for This Response",
-                key="feedback_button",
-                type="primary",
-                use_container_width=True,
-            ):
-                st.session_state.waiting_for_feedback = True
-                st.session_state.show_modal = True
-                st.session_state.interaction_num += 1
-                st.rerun()
 
     return None

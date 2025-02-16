@@ -3,11 +3,20 @@ from typing import Dict, Optional
 from .modal import show_modal, close_modal
 
 
-def render_likert_question(question: Dict, key_prefix: str) -> Optional[int]:
-    """Render a Likert scale question."""
+def render_likert_question(
+    question: Dict, key_prefix: str, default: Optional[int] = None
+) -> Optional[int]:
+    """Render a Likert scale question with default value support."""
     st.write(question["text"])
 
     options = {i: question["labels"].get(i, str(i)) for i in question["options"]}
+
+    # Calculate index for default value
+    if default is not None:
+        default_index = list(options.keys()).index(default)
+    else:
+        default_index = None
+
     response = st.radio(
         "Select Your Answer:",
         options=list(options.keys()),
@@ -15,15 +24,19 @@ def render_likert_question(question: Dict, key_prefix: str) -> Optional[int]:
         key=f"{key_prefix}_{question['id']}",
         horizontal=True,
         label_visibility="collapsed",
-        index=None,  # No default selection
+        index=default_index,
     )
 
     return response
 
 
-def render_text_question(question: Dict, key_prefix: str) -> Optional[str]:
-    """Render a text input question."""
-    return st.text_area(question["text"], key=f"{key_prefix}_{question['id']}")
+def render_text_question(
+    question: Dict, key_prefix: str, default: str = ""
+) -> Optional[str]:
+    """Render a text input question with default value support."""
+    return st.text_area(
+        question["text"], value=default, key=f"{key_prefix}_{question['id']}"
+    )
 
 
 def render_per_query_questions(config, interaction_id: str) -> Dict:
@@ -31,13 +44,6 @@ def render_per_query_questions(config, interaction_id: str) -> Dict:
     show_modal()
 
     with st.container():
-        # # Display the last interaction
-        # with st.expander("View Last Response", expanded=True):
-        #     st.markdown("**Your Question:**")
-        #     st.write(st.session_state.current_interaction["query"])
-        #     st.markdown("**System Response:**")
-        #     st.markdown(st.session_state.current_interaction["response"])
-
         responses = {}
 
         st.subheader("Please Rate the Last Response")
@@ -74,49 +80,64 @@ def render_per_query_questions(config, interaction_id: str) -> Dict:
 
 
 def render_overall_survey(config) -> Dict:
-    """Render overall survey questions in a modal."""
-    show_modal()
+    """Render overall survey questions with draft saving."""
+    st.subheader("We'd Love Your Feedback!")
+    st.write("Please share your thoughts about RoostAI:")
 
-    with st.container():
-        st.subheader("Overall System Survey")
-        st.write("Please provide your feedback about the overall system:")
+    # Initialize responses with existing drafts
+    responses = st.session_state.draft_survey_responses.copy()
 
-        responses = {}
-
-        # Render questions
-        for question in config.overall_questions:
-            st.markdown("---")
-            if question["type"] == "likert":
-                response = render_likert_question(question, "overall")
+    # Render questions
+    for question in config.overall_questions:
+        st.markdown("---")
+        if question["type"] == "likert":
+            # Pass default value from draft
+            response = render_likert_question(
+                question, "overall", default=responses.get(question["id"])
+            )
+            if response is not None:  # Update draft when changed
                 responses[question["id"]] = response
-            elif question["type"] == "text":
-                response = render_text_question(question, "overall")
-                if response:  # Only include non-empty text responses
-                    responses[question["id"]] = response
-
-        # Add submit button with columns for error message
-        col1, col2 = st.columns([4, 1])
-        with col2:
-            submit_button = st.button(
-                "Submit Survey",
-                key="submit_overall_survey",
-                type="primary",
-                use_container_width=True,
+        elif question["type"] == "text":
+            # Pass default value from draft
+            response = render_text_question(
+                question, "overall", default=responses.get(question["id"], "")
             )
+            if response:  # Update draft when changed
+                responses[question["id"]] = response
 
-        if submit_button:
-            required_answered = all(
-                responses.get(q["id"]) is not None
-                for q in config.overall_questions
-                if q["type"] == "likert"  # All Likert questions are required
-            )
+    # Save drafts to session state
+    st.session_state.draft_survey_responses = responses.copy()
 
-            if required_answered:
-                st.session_state.overall_survey_responses = responses
-                close_modal()
-                return responses
-            else:
-                with col1:
-                    st.error("Please answer all required questions before submitting.")
+    # Add columns for buttons
+    col1, col2 = st.columns([1, 1])
 
-        return {}
+    with col1:
+        if st.button("Return to Chat", type="secondary", use_container_width=True):
+            st.session_state.survey_mode = False
+            st.rerun()
+
+    with col2:
+        if st.session_state.draft_survey_responses:
+            if st.button(
+                "Clear Draft Responses", type="secondary", use_container_width=True
+            ):
+                st.session_state.draft_survey_responses = {}
+                st.rerun()
+
+    st.markdown("---")
+
+    if st.button("Submit Feedback", type="primary", use_container_width=True):
+        required_answered = all(
+            responses.get(q["id"]) is not None
+            for q in config.overall_questions
+            if q["type"] == "likert"
+        )
+
+        if required_answered:
+            # Clear draft after successful submission
+            st.session_state.draft_survey_responses = {}
+            return responses
+        else:
+            st.error("Please answer all required questions before submitting.")
+
+    return {}
