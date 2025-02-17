@@ -75,9 +75,6 @@ poetry run python roostai/back_end/main.py 2>&1 | tee roostai/back_end/dry-run.o
 ```bash
 # Interactive Mode
 poetry run streamlit run roostai/front_end/survey_app.py
-
-# With Output Logging
-poetry run python roostai/back_end/main.py 2>&1 | tee roostai/back_end/dry-run.out
 ```
 
 ### Evaluation Tools
