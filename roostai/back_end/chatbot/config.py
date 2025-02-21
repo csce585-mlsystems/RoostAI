@@ -23,8 +23,8 @@ class ThresholdConfig:
 
 @dataclass
 class VectorDBConfig:
-    db_path: str = "/var/www/html/roostai/data/v3_sentence_chunking"
-    # db_path: str = "/Users/nitingupta/usc/fa24/csce585/RoostAI/roostai/data/v2"
+    # db_path: str = "/var/www/html/roostai/data/v3_sentence_chunking"
+    db_path: str = "/Users/nitingupta/usc/projects/RoostAI/roostai/data/v2"
     collection_name: str = "university_docs"
     top_k: int = 5
 

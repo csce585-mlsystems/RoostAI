@@ -4,7 +4,10 @@
 
 ## Overview
 _RoostAI_ is an intelligent chatbot specifically designed to provide information about the University of South Carolina (USC). It uses advanced RAG (Retrieval-Augmented Generation) techniques to deliver accurate, context-aware responses to university-related queries.
-**Check out a [presentation of the application's functionality](https://youtu.be/5mxdNu07L_Y)**
+
+* **Check out a [Presentation](https://youtu.be/5mxdNu07L_Y) along with the [slides](./writeups/RoostAI-Final-Presentation.pdf)**
+
+* **Read the [Technical Report](./writeups/RoostAI-Final-Report.pdf)**
 
 ## Project Structure
 ```
@@ -59,13 +62,19 @@ poetry run python roostai/web_scraping/chunker.py
 poetry run python roostai/scripts/data_ingestion.py
 ```
 
-### Running the Chatbot
+### Running the Chatbot (CLI Version)
 ```bash
 # Interactive Mode
 poetry run python roostai/back_end/main.py
 
 # With Output Logging
 poetry run python roostai/back_end/main.py 2>&1 | tee roostai/back_end/dry-run.out
+```
+
+### Running the Chatbot (GUI Version)
+```bash
+# Interactive Mode
+poetry run streamlit run roostai/front_end/survey_app.py
 ```
 
 ### Evaluation Tools
