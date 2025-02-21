@@ -11,6 +11,8 @@ import os
 from pathlib import Path
 import json
 
+abs_data_path = "/home/cc/scraped_data"
+
 
 class CustomAsyncScraper:
     def __init__(self, max_threads=1):
@@ -20,8 +22,6 @@ class CustomAsyncScraper:
         )
 
         crawler_config = CrawlerRunConfig(
-            wait_for_selector="body",  # Wait for body to load
-            wait_until="networkidle",  # Wait until network is idle
             timeout=30000,  # 30 second timeout
         )
 
@@ -163,9 +163,14 @@ class CustomAsyncScraper:
 async def main():
     initial_urls = ["https://sc.edu"]
     scraper = CustomAsyncScraper()
-    await scraper.start(initial_urls)
+
+    try:
+        await scraper.start(initial_urls)
+    except Exception as e:
+        logger.error(f"Main execution error: {e}")
+    finally:
+        logger.info("Finished web scraping")
 
 
 if __name__ == "__main__":
     asyncio.run(main())
-    logger.info("Finished web scraping")
