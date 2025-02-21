@@ -1,27 +1,30 @@
 import asyncio
-from asyncio import Queue
 from concurrent.futures import ThreadPoolExecutor
 from crawl4ai import AsyncWebCrawler, CacheMode
-from crawl4ai.async_configs import CrawlerRunConfig
+from crawl4ai.async_configs import CrawlerRunConfig, BrowserConfig
 from urllib.parse import urlparse
 from loguru import logger
 import sys
 import hashlib
-from typing import List
+from typing import List, Set
 import os
 from pathlib import Path
 import json
 
 
-abs_data_path = Path("/home/cc/scraped_data")
-
-
 class CustomAsyncScraper:
-    def __init__(self, max_threads=2):
-        self.config = CrawlerRunConfig(cache_mode=CacheMode.DISABLED)
-        self.crawler = AsyncWebCrawler()
-        self.visited_paths = set()
-        self.queue = Queue()
+    def __init__(self, max_threads=1):
+        # Configure browser with longer timeout and proper context handling
+        self.crawler = AsyncWebCrawler(
+            config=BrowserConfig(
+                verbose=True,
+                timeout=30000,  # Increase timeout to 30 seconds
+                retry_count=3,  # Add retry mechanism
+            )
+        )
+
+        self.visited_paths: Set[str] = set()
+        self.queue = asyncio.Queue()
         self.executor = ThreadPoolExecutor(max_threads)
         self.forbidden_extensions = [
             ".pdf",
@@ -36,35 +39,49 @@ class CustomAsyncScraper:
             ".png",
             ".mov",
         ]
-        # Increase recursion limit
         sys.setrecursionlimit(10000)
 
-    async def start(self, initial_urls: List[str]):
-        # Enqueue initial URLs
-        for url in initial_urls:
-            await self.queue.put(url)
+    async def start(self, initial_urls: List[str]) -> None:
+        try:
+            # Ensure browser is properly started
+            await self.crawler.start()
 
-        await self.crawler.start()
+            for url in initial_urls:
+                await self.queue.put(url)
 
-        # Process URLs in batches to prevent deep callback chains
-        while not self.queue.empty():
-            batch_tasks = []
-            # Process up to 10 URLs at a time
-            for _ in range(min(10, self.queue.qsize())):
-                if self.queue.empty():
-                    continue
-                url = await self.queue.get()
-                batch_tasks.append(self._process_url(url))
+            while not self.queue.empty():
+                batch_tasks = []
+                batch_size = min(5, self.queue.qsize())  # Reduced batch size
 
-            if batch_tasks:
-                await asyncio.gather(*batch_tasks)
+                for _ in range(batch_size):
+                    if self.queue.empty():
+                        break
+                    url = await self.queue.get()
+                    batch_tasks.append(self._process_url(url))
 
-            # Add a small delay to prevent CPU overload
-            await asyncio.sleep(0.1)
+                if batch_tasks:
+                    # Add error handling for the batch
+                    try:
+                        await asyncio.gather(*batch_tasks, return_exceptions=True)
+                    except Exception as e:
+                        logger.error(f"Batch processing error: {e}")
 
-        await self.crawler.close()
+                # Increased delay between batches
+                await asyncio.sleep(0.5)
 
-    async def _process_url(self, url: str):
+        except Exception as e:
+            logger.error(f"Scraper error: {e}")
+        finally:
+            # Ensure proper cleanup
+            await self.cleanup()
+
+    async def cleanup(self):
+        try:
+            await self.crawler.close()
+        except Exception as e:
+            logger.error(f"Error during cleanup: {e}")
+
+    async def _process_url(self, url: str) -> None:
         url_path = self.clean(url)
 
         if url_path in self.visited_paths or any(
@@ -76,21 +93,40 @@ class CustomAsyncScraper:
         logger.info(f"Processing URL: {url}")
 
         try:
-            result = await self.crawler.arun(url=url)
-            if not result.metadata or not result.markdown or not result.links:
+            # Add retry logic for individual URL processing
+            for attempt in range(3):
+                try:
+                    result = await self.crawler.arun(url=url)
+                    if result.success:
+                        break
+                    logger.warning(
+                        f"Attempt {attempt + 1} failed: {result.error_message}"
+                    )
+                    await asyncio.sleep(1 * (attempt + 1))  # Exponential backoff
+                except Exception as e:
+                    if attempt == 2:  # Last attempt
+                        raise
+                    logger.warning(f"Attempt {attempt + 1} failed: {e}")
+                    await asyncio.sleep(1 * (attempt + 1))
+
+            if not result.success:
+                logger.error(f"Failed to process {url} after 3 attempts")
                 return
 
-            self._save_to_file(url_path, result)
+            if result.markdown and result.metadata and result.links:
+                self._save_to_file(url_path, result)
 
-            # Add new URLs to queue
-            for link in result.links["internal"]:
-                clean_link = self.clean(link["href"])
-                if clean_link not in self.visited_paths:
-                    await self.queue.put(link["href"])
+                # Process new URLs with rate limiting
+                for link in result.links["internal"]:
+                    clean_link = self.clean(link["href"])
+                    if clean_link not in self.visited_paths:
+                        await self.queue.put(link["href"])
+                        await asyncio.sleep(0.1)  # Rate limiting for URL adding
+
         except Exception as e:
             logger.error(f"Error processing URL {url}: {e}")
 
-    def clean(self, url):
+    def clean(self, url: str) -> str:
         url_info = urlparse(url)
         url = url_info.netloc + url_info.path
         if url.startswith("www"):
@@ -107,7 +143,7 @@ class CustomAsyncScraper:
             file_path = Path(url_path.replace("//", "/"))
         return abs_data_path / file_path
 
-    def _save_to_file(self, url_path, result):
+    def _save_to_file(self, url_path, result) -> None:
         save_path = self.get_url_save_path(url_path)
         os.makedirs(save_path, exist_ok=True)
 
