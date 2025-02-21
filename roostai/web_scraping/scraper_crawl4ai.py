@@ -11,6 +11,8 @@ import os
 from pathlib import Path
 import json
 
+abs_data_path: str = "/home/cc/scraped_data"
+
 
 class CustomAsyncScraper:
     def __init__(self, max_threads=1):
