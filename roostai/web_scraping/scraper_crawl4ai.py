@@ -14,14 +14,18 @@ import json
 
 class CustomAsyncScraper:
     def __init__(self, max_threads=1):
-        # Configure browser with longer timeout and proper context handling
-        self.crawler = AsyncWebCrawler(
-            config=BrowserConfig(
-                verbose=True,
-                timeout=30000,  # Increase timeout to 30 seconds
-                retry_count=3,  # Add retry mechanism
-            )
+        # Configure browser with proper settings
+        browser_config = BrowserConfig(
+            verbose=True,
         )
+
+        crawler_config = CrawlerRunConfig(
+            wait_for_selector="body",  # Wait for body to load
+            wait_until="networkidle",  # Wait until network is idle
+            timeout=30000,  # 30 second timeout
+        )
+
+        self.crawler = AsyncWebCrawler(config=browser_config, run_config=crawler_config)
 
         self.visited_paths: Set[str] = set()
         self.queue = asyncio.Queue()
@@ -43,7 +47,6 @@ class CustomAsyncScraper:
 
     async def start(self, initial_urls: List[str]) -> None:
         try:
-            # Ensure browser is properly started
             await self.crawler.start()
 
             for url in initial_urls:
@@ -51,7 +54,7 @@ class CustomAsyncScraper:
 
             while not self.queue.empty():
                 batch_tasks = []
-                batch_size = min(5, self.queue.qsize())  # Reduced batch size
+                batch_size = min(5, self.queue.qsize())
 
                 for _ in range(batch_size):
                     if self.queue.empty():
@@ -60,19 +63,16 @@ class CustomAsyncScraper:
                     batch_tasks.append(self._process_url(url))
 
                 if batch_tasks:
-                    # Add error handling for the batch
                     try:
                         await asyncio.gather(*batch_tasks, return_exceptions=True)
                     except Exception as e:
                         logger.error(f"Batch processing error: {e}")
 
-                # Increased delay between batches
                 await asyncio.sleep(0.5)
 
         except Exception as e:
             logger.error(f"Scraper error: {e}")
         finally:
-            # Ensure proper cleanup
             await self.cleanup()
 
     async def cleanup(self):
@@ -93,7 +93,6 @@ class CustomAsyncScraper:
         logger.info(f"Processing URL: {url}")
 
         try:
-            # Add retry logic for individual URL processing
             for attempt in range(3):
                 try:
                     result = await self.crawler.arun(url=url)
@@ -102,9 +101,9 @@ class CustomAsyncScraper:
                     logger.warning(
                         f"Attempt {attempt + 1} failed: {result.error_message}"
                     )
-                    await asyncio.sleep(1 * (attempt + 1))  # Exponential backoff
+                    await asyncio.sleep(1 * (attempt + 1))
                 except Exception as e:
-                    if attempt == 2:  # Last attempt
+                    if attempt == 2:
                         raise
                     logger.warning(f"Attempt {attempt + 1} failed: {e}")
                     await asyncio.sleep(1 * (attempt + 1))
@@ -116,12 +115,11 @@ class CustomAsyncScraper:
             if result.markdown and result.metadata and result.links:
                 self._save_to_file(url_path, result)
 
-                # Process new URLs with rate limiting
                 for link in result.links["internal"]:
                     clean_link = self.clean(link["href"])
                     if clean_link not in self.visited_paths:
                         await self.queue.put(link["href"])
-                        await asyncio.sleep(0.1)  # Rate limiting for URL adding
+                        await asyncio.sleep(0.1)
 
         except Exception as e:
             logger.error(f"Error processing URL {url}: {e}")
