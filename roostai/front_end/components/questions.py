@@ -82,6 +82,25 @@ def render_per_query_questions(config, interaction_id: str) -> Dict:
 def render_overall_survey(config) -> Dict:
     """Render overall survey questions with draft saving."""
     st.subheader("We'd Love Your Feedback!")
+
+    # Check if survey has been submitted
+    if "survey_submitted" in st.session_state and st.session_state.survey_submitted:
+        st.success(
+            """
+            Thank You for Completing the Survey! Your Feedback Will Help Us Improve 
+            The RoostAI System.
+            """
+        )
+        st.balloons()
+
+        if st.button("Start New Session", type="primary", use_container_width=True):
+            # Reset all session state variables
+            for key in list(st.session_state.keys()):
+                del st.session_state[key]
+            st.rerun()
+
+        return {}
+
     st.write("Please share your thoughts about RoostAI:")
 
     # Initialize responses with existing drafts
@@ -136,6 +155,7 @@ def render_overall_survey(config) -> Dict:
         if required_answered:
             # Clear draft after successful submission
             st.session_state.draft_survey_responses = {}
+            st.session_state.survey_submitted = True
             return responses
         else:
             st.error("Please answer all required questions before submitting.")
