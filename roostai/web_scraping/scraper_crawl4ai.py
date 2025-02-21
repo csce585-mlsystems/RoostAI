@@ -11,21 +11,11 @@ import os
 from pathlib import Path
 import json
 
-abs_data_path = "/home/cc/scraped_data"
-
 
 class CustomAsyncScraper:
     def __init__(self, max_threads=1):
-        # Configure browser with proper settings
-        browser_config = BrowserConfig(
-            verbose=True,
-        )
-
-        crawler_config = CrawlerRunConfig(
-            timeout=30000,  # 30 second timeout
-        )
-
-        self.crawler = AsyncWebCrawler(config=browser_config, run_config=crawler_config)
+        # Simplified configuration
+        self.crawler = AsyncWebCrawler(config=BrowserConfig(verbose=True))
 
         self.visited_paths: Set[str] = set()
         self.queue = asyncio.Queue()
@@ -54,7 +44,8 @@ class CustomAsyncScraper:
 
             while not self.queue.empty():
                 batch_tasks = []
-                batch_size = min(5, self.queue.qsize())
+                # Reduced batch size for better stability
+                batch_size = min(3, self.queue.qsize())
 
                 for _ in range(batch_size):
                     if self.queue.empty():
@@ -68,7 +59,8 @@ class CustomAsyncScraper:
                     except Exception as e:
                         logger.error(f"Batch processing error: {e}")
 
-                await asyncio.sleep(0.5)
+                # Increased delay between batches
+                await asyncio.sleep(1.0)
 
         except Exception as e:
             logger.error(f"Scraper error: {e}")
@@ -101,12 +93,14 @@ class CustomAsyncScraper:
                     logger.warning(
                         f"Attempt {attempt + 1} failed: {result.error_message}"
                     )
-                    await asyncio.sleep(1 * (attempt + 1))
+                    await asyncio.sleep(
+                        2 * (attempt + 1)
+                    )  # Increased delay between retries
                 except Exception as e:
                     if attempt == 2:
                         raise
                     logger.warning(f"Attempt {attempt + 1} failed: {e}")
-                    await asyncio.sleep(1 * (attempt + 1))
+                    await asyncio.sleep(2 * (attempt + 1))
 
             if not result.success:
                 logger.error(f"Failed to process {url} after 3 attempts")
@@ -119,7 +113,7 @@ class CustomAsyncScraper:
                     clean_link = self.clean(link["href"])
                     if clean_link not in self.visited_paths:
                         await self.queue.put(link["href"])
-                        await asyncio.sleep(0.1)
+                        await asyncio.sleep(0.2)  # Increased delay for URL adding
 
         except Exception as e:
             logger.error(f"Error processing URL {url}: {e}")
