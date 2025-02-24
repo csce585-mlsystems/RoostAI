@@ -35,6 +35,8 @@ langsmith = "^0.2.3"
 langchain-huggingface = "^0.1.2"
 crawl4ai = "^0.4.247"
 loguru = "^0.7.3"
+markdown2 = "^2.5.3"
+langchain-text-splitters = "^0.3.6"
 
 [tool.poetry.group.backend.dependencies]
 # The backend dependency group
