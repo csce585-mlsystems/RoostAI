@@ -98,34 +98,7 @@ if st.session_state.survey_mode:
         save_overall_survey(
             config.responses_dir, st.session_state.session_id, responses
         )
-
-        st.success(
-            """
-        Thank You for Completing the Survey! Your Feedback Will Help Us Improve 
-        The RoostAI System.
-        """
-        )
-        st.balloons()
-
-        # Reset session state after a brief delay
-        with st.spinner("Resetting Session..."):
-            time.sleep(2)
-
-        # Reset all session state variables
-        for key in list(st.session_state.keys()):
-            del st.session_state[key]
-
-        # Initialize new session
-        st.session_state.session_id = str(uuid.uuid4())
-        st.session_state.interaction_num = 0
-        st.session_state.chatbot = asyncio.run(initialize_chatbot())
-        st.session_state.survey_mode = False
-        st.session_state.chat_history = []
-        st.session_state.config = SurveyConfig()
-        st.session_state.draft_survey_responses = {}
-
-        # Rerun the app to show the start page
-        st.rerun()
+        st.rerun()  # Just rerun to show the thank you message and reset button
 
 else:
     # Show chat interface

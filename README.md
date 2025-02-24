@@ -1,6 +1,4 @@
-# RoostAI: A University-Centered Chatbot
-
-![RoostAI Logo](https://github.com/user-attachments/assets/dc626e71-e946-4065-a818-1b7ed0148417)
+![logo-no-background](https://github.com/user-attachments/assets/0b910813-de26-464e-b504-09e6902c7651)
 
 ## Overview
 _RoostAI_ is an intelligent chatbot specifically designed to provide information about the University of South Carolina (USC). It uses advanced RAG (Retrieval-Augmented Generation) techniques to deliver accurate, context-aware responses to university-related queries.
